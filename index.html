@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+    <title>BNNERTNJ | Gerador de Banners TNJ</title>
+    <script src="https://cdn.tailwindcss.com">
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js">
+    </script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        tnj: { azul: '#1a237e', escuro: '#0f0f0f', dourado: '#ffc107', claro: '#283593' }
+                    },
+                    fontFamily: { principal: ['Arial', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        .grad-tnj {
+            background: linear-gradient(to right, #1a237e, #283593);
+        }
+        .btn-padrao {
+            @apply px-4 py-2 rounded font-bold transition-all duration-200 cursor-pointer;
+        }
+        .btn-dourado {
+            @apply btn-padrao bg-tnj-dourado text-black hover:brightness-110;
+        }
+        .btn-azul {
+            @apply btn-padrao bg-tnj-azul text-white hover:bg-tnj-claro;
+        }
+        .caixa {
+            @apply bg-gray-800/60 backdrop-blur-sm rounded-lg p-4 border border-gray-700;
+        }
+        .miniatura-galeria {
+            @apply w-full h-16 object-cover rounded cursor-pointer border-2 border-transparent hover:border-tnj-dourado transition-all;
+        }
+        .miniatura-galeria.ativa {
+            @apply border-tnj-dourado shadow-lg shadow-tnj-dourado/40;
+        }
+        video::-webkit-media-controls {
+            display: none !important;
+        }
+        video {
+            pointer-events: none;
+        }
+
+        /* ===== BOTÕES RETANGULARES PADRÃO ===== */
+        .site-grid,
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+        .download-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        .site-grid .btn-site,
+        .download-grid .btn-download,
+        .btn-adicionar-url,
+        .btn-upload,
+        .btn-formato,
+        .btn-jogo,
+        .btn-adicionar-logo,
+        .btn-adicionar-contato {
+            @apply btn-padrao text-sm font-bold text-center transition-all duration-200;
+            border-radius: 12px;
+            padding: 12px 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+        .site-grid .btn-site:hover,
+        .download-grid .btn-download:hover,
+        .btn-adicionar-url:hover,
+        .btn-upload:hover,
+        .btn-formato:hover,
+        .btn-jogo:hover,
+        .btn-adicionar-logo:hover,
+        .btn-adicionar-contato:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .btn-pinterest {
+            background: linear-gradient(135deg, #e60023, #b3001a);
+        }
+        .btn-pinterest:hover {
+            background: linear-gradient(135deg, #ff1a33, #e60023);
+        }
+        .btn-twitter {
+            background: linear-gradient(135deg, #1da1f2, #0d7fc0);
+        }
+        .btn-twitter:hover {
+            background: linear-gradient(135deg, #3db8ff, #1da1f2);
+        }
+        .btn-google {
+            background: linear-gradient(135deg, #4285f4, #2a5bb5);
+        }
+        .btn-google:hover {
+            background: linear-gradient(135deg, #5a9df4, #4285f4);
+        }
+        .btn-cinema {
+            background: linear-gradient(135deg, #8b1a4a, #5a0f2f);
+        }
+        .btn-cinema:hover {
+            background: linear-gradient(135deg, #b0245e, #8b1a4a);
+        }
+
+        .btn-png {
+            background: linear-gradient(135deg, #2d7d46, #1a4a2a);
+        }
+        .btn-png:hover {
+            background: linear-gradient(135deg, #3a9e5a, #2d7d46);
+        }
+        .btn-jpeg {
+            background: linear-gradient(135deg, #c77d1e, #8a5512);
+        }
+        .btn-jpeg:hover {
+            background: linear-gradient(135deg, #e6952e, #c77d1e);
+        }
+        .btn-webp {
+            background: linear-gradient(135deg, #2a6f8f, #154a61);
+        }
+        .btn-webp:hover {
+            background: linear-gradient(135deg, #3a8faf, #2a6f8f);
+        }
+
+        .btn-adicionar-url {
+            background: linear-gradient(135deg, #6a1b9a, #4a148c);
+        }
+        .btn-adicionar-url:hover {
+            background: linear-gradient(135deg, #8e24aa, #6a1b9a);
+        }
+
+        .btn-upload {
+            background: linear-gradient(135deg, #2e7d32, #1b5e20);
+        }
+        .btn-upload:hover {
+            background: linear-gradient(135deg, #388e3c, #2e7d32);
+        }
+
+        .btn-formato {
+            background: linear-gradient(135deg, #00838f, #006064);
+        }
+        .btn-formato:hover {
+            background: linear-gradient(135deg, #00acc1, #00838f);
+        }
+
+        .btn-jogo {
+            background: linear-gradient(135deg, #e65100, #bf360c);
+        }
+        .btn-jogo:hover {
+            background: linear-gradient(135deg, #f57c00, #e65100);
+        }
+
+        .btn-adicionar-logo {
+            background: linear-gradient(135deg, #2a3eb1, #1a237e);
+        }
+        .btn-adicionar-logo:hover {
+            background: linear-gradient(135deg, #3f51b5, #2a3eb1);
+        }
+
+        .btn-adicionar-contato {
+            background: linear-gradient(135deg, #00897b, #00695c);
+        }
+        .btn-adicionar-contato:hover {
+            background: linear-gradient(135deg, #26a69a, #00897b);
+        }
+
+        .btn-limpar {
+            background: linear-gradient(135deg, #b71c1c, #7f0000);
+        }
+        .btn-limpar:hover {
+            background: linear-gradient(135deg, #d32f2f, #b71c1c);
+        }
+
+        /* ===== BANNER ===== */
+        #areaBanner {
+            position: relative;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+            touch-action: none;
+            width: 100%;
+            background: #0f0f0f;
+            border-radius: 12px;
+            border: 2px solid #374151;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            transition: aspect-ratio 0.3s ease;
+            aspect-ratio: 16 / 9;
+        }
+
+        #fundoBanner,
+        #videoBanner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.25;
+        }
+        #videoBanner {
+            display: none;
+        }
+        #sobreposicao {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.4) 60%, transparent);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .arrastavel {
+            position: absolute;
+            z-index: 10;
+            cursor: grab;
+            touch-action: none;
+            user-select: none;
+            -webkit-user-select: none;
+            padding: 6px 12px;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: box-shadow 0.2s, background 0.2s;
+            min-width: 30px;
+            min-height: 24px;
+        }
+        .arrastavel:active {
+            cursor: grabbing;
+            background: rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 30px rgba(255, 193, 7, 0.15);
+            z-index: 15;
+        }
+
+        #tituloBanner {
+            font-size: 48px;
+            font-weight: 900;
+            text-transform: uppercase;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+            letter-spacing: 2px;
+            line-height: 1.2;
+            color: #fff;
+            text-align: center;
+            top: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: transparent;
+            border: none;
+            backdrop-filter: none;
+            padding: 0;
+        }
+        #subtituloBanner {
+            font-size: 28px;
+            font-weight: 700;
+            text-shadow: 0 3px 15px rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-align: center;
+            top: 35%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: transparent;
+            border: none;
+            backdrop-filter: none;
+            padding: 0;
+        }
+        #tituloSecundario {
+            font-size: 22px;
+            font-weight: 700;
+            text-shadow: 0 3px 15px rgba(0, 0, 0, 0.7);
+            color: #fff;
+            text-align: center;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: transparent;
+            border: none;
+            backdrop-filter: none;
+            padding: 0;
+        }
+        #descricaoBanner {
+            font-size: 18px;
+            font-weight: 500;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+            color: #fff;
+            text-align: center;
+            top: 65%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: transparent;
+            border: none;
+            backdrop-filter: none;
+            padding: 0;
+        }
+
+        #logoTNJ {
+            top: 20px;
+            left: 20px;
+            z-index: 20;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(4px);
+            padding: 8px 14px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        #logoConteudo {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #ffc107;
+            text-shadow: 0 0 20px rgba(255, 193, 7, 0.3);
+            line-height: 1.2;
+        }
+        #logoConteudo img {
+            max-height: 48px;
+            width: auto;
+            display: inline-block;
+        }
+
+        #telefoneContainer {
+            top: 20px;
+            right: 20px;
+            z-index: 20;
+            background: #25d366;
+            padding: 8px 18px;
+            border-radius: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+        #telefoneLogoDisplay {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+
+        .elemento-jogo {
+            position: absolute;
+            z-index: 12;
+            cursor: grab;
+            touch-action: none;
+            user-select: none;
+            -webkit-user-select: none;
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(4px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 6px 14px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transition: box-shadow 0.2s, background 0.2s;
+            display: none;
+        }
+        .elemento-jogo:active {
+            cursor: grabbing;
+            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 30px rgba(255, 193, 7, 0.2);
+            z-index: 15;
+        }
+        .elemento-jogo.visivel {
+            display: block;
+        }
+        .logo-time {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            display: block;
+            padding: 4px;
+            background: transparent;
+        }
+        .nome-time {
+            font-size: 18px;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+        #placarJogo {
+            font-size: 56px;
+            font-weight: 900;
+            color: #ffc107;
+            text-shadow: 0 4px 20px rgba(255, 193, 7, 0.3);
+            letter-spacing: 4px;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            padding: 6px 24px;
+            border-radius: 20px;
+            border: 2px solid rgba(255, 193, 7, 0.2);
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            line-height: 1.2;
+        }
+        #dataHoraJogo {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+            bottom: 70px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(4px);
+            padding: 6px 16px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        #canalJogo {
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+            bottom: 70px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(4px);
+            padding: 6px 16px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .dispositivos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
+            padding: 8px 18px;
+            background: rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(6px);
+            border-radius: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+            pointer-events: none;
+        }
+        .dispositivos span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.65rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.7);
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+        }
+        .dispositivos i {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.6);
+            filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.2));
+            transition: all 0.2s;
+        }
+        .dispositivos .separador {
+            color: rgba(255, 255, 255, 0.15);
+            font-size: 0.7rem;
+            font-weight: 100;
+        }
+
+        @media (max-width: 640px) {
+            .site-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .download-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .btn-upload,
+            .btn-formato,
+            .btn-jogo,
+            .btn-adicionar-logo,
+            .btn-adicionar-contato {
+                padding: 12px 8px;
+                font-size: 0.7rem;
+            }
+            .dispositivos {
+                gap: 8px;
+                padding: 6px 12px;
+                border-radius: 30px;
+                bottom: 10px;
+            }
+            .dispositivos span {
+                font-size: 0.5rem;
+                gap: 3px;
+            }
+            .dispositivos i {
+                font-size: 0.8rem;
+            }
+            .dispositivos .separador {
+                font-size: 0.5rem;
+            }
+            #logoTNJ {
+                top: 10px;
+                left: 10px;
+                padding: 4px 10px;
+            }
+            #logoConteudo {
+                font-size: 1.2rem;
+            }
+            #telefoneContainer {
+                top: 10px;
+                right: 10px;
+                padding: 4px 14px;
+            }
+            #telefoneLogoDisplay {
+                font-size: 0.8rem;
+            }
+            #tituloBanner {
+                font-size: 32px;
+            }
+            #subtituloBanner {
+                font-size: 20px;
+            }
+            #tituloSecundario {
+                font-size: 16px;
+            }
+            #descricaoBanner {
+                font-size: 14px;
+            }
+            .logo-time {
+                width: 60px;
+                height: 60px;
+            }
+            #placarJogo {
+                font-size: 36px;
+                padding: 4px 16px;
+            }
+            #dataHoraJogo,
+            #canalJogo {
+                font-size: 14px;
+                padding: 4px 12px;
+                bottom: 50px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-tnj-escuro text-white font-principal min-h-screen">
+
+    <header class="grad-tnj py-4 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <span class="text-2xl font-black text-tnj-dourado">🎨 BNNERTNJ</span>
+                <span class="text-sm opacity-80">Gerador Oficial TNJ</span>
+            </div>
+            <div class="hidden md:flex items-center gap-2">
+                <span class="text-xs bg-tnj-dourado text-black px-2 py-1 rounded font-bold">LEVE & RÁPIDO</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 py-6">
+
+        <!-- BUSCA -->
+        <section class="mb-8 caixa">
+            <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+                <i class="fa fa-search text-tnj-dourado"></i> BUSCAR IMAGENS E VÍDEOS
+            </h3>
+            <div class="flex flex-col sm:flex-row gap-2 mb-4">
+                <input type="text" id="campoBusca" placeholder="Ex: praia, futebol, cinema..." list="sugestoesFilmes"
+                class="flex-1 px-4 py-3 rounded bg-gray-900 border border-gray-600 focus:border-tnj-dourado outline-none" />
+                <datalist id="sugestoesFilmes">
+                    <option value="Avatar: O Caminho da Água"></option>
+                    <option value="Velozes e Furiosos 10"></option>
+                    <option value="Barbie"></option>
+                    <option value="Oppenheimer"></option>
+                    <option value="Missão Impossível 7"></option>
+                    <option value="Homem-Aranha: Através do Aranhaverso"></option>
+                    <option value="John Wick 4"></option>
+                    <option value="Indiana Jones e o Chamado do Destino"></option>
+                    <option value="Elementos"></option>
+                    <option value="Transformers: O Despertar das Feras"></option>
+                    <option value="A Pequena Sereia"></option>
+                    <option value="The Flash"></option>
+                    <option value="Besouro Azul"></option>
+                    <option value="Megalopolis"></option>
+                    <option value="Furiosa: Uma Saga Mad Max"></option>
+                    <option value="Deadpool 3"></option>
+                    <option value="Divertida Mente 2"></option>
+                    <option value="Meu Malvado Favorito 4"></option>
+                    <option value="Twisters"></option>
+                    <option value="Gladiador 2"></option>
+                    <option value="Wicked"></option>
+                    <option value="Moana 2"></option>
+                    <option value="Sonic 3"></option>
+                    <option value="Mufasa: O Rei Leão"></option>
+                </datalist>
+
+                <select id="tipoBusca" class="bg-gray-900 border border-gray-600 rounded px-3 py-2 text-white">
+                    <option value="image">Imagens</option>
+                    <option value="video">Vídeos (Pexels)</option>
+                </select>
+
+                <button onclick="buscarConteudo()" class="btn-dourado flex items-center justify-center gap-2">
+                    <i class="fa fa-search"></i> PESQUISAR
+                </button>
+            </div>
+
+            <div class="site-grid mb-3">
+                <a href="https://pin.it/41OiFenQz" target="_blank" class="btn-site btn-pinterest">
+                    <i class="fa fa-pinterest-p"></i> Pinterest
+                </a>
+                <a href="https://x.com/Rafael26113445" target="_blank" class="btn-site btn-twitter">
+                    <i class="fa fa-twitter"></i> X (Twitter)
+                </a>
+                <a href="https://www.google.com/search?q=fotos+de+filmes&oq=fotos+de+filmes&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQRRg7MgYIAhBFGDsyBggDEEUYOzIGCAQQRRg70gEINzM5NGowajSoAgKwAgE&client=ms-android-samsung-ss&sourceid=chrome-mobile&source=chrome.ob&ie=UTF-8" target="_blank" class="btn-site btn-google">
+                    <i class="fa fa-google"></i> Google Fotos
+                </a>
+                <a href="https://www.adorocinema.com/filmes/numero-cinemas/" target="_blank" class="btn-site btn-cinema">
+                    <i class="fa fa-film"></i> AdoroCinema
+                </a>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-2 mb-2">
+                <input type="text" id="urlImagem" placeholder="Cole o LINK DIRETO da imagem" class="flex-1 px-3 py-2 rounded bg-gray-900 border border-gray-600 focus:border-tnj-dourado outline-none text-sm" />
+                <button onclick="adicionarPorURL()" class="btn-adicionar-url">
+                    <i class="fa fa-plus-circle"></i> Adicionar
+                </button>
+            </div>
+            <p class="text-xs text-gray-400 mt-1">💡 No Pinterest, X ou Google, clique com o botão direito na imagem e selecione "Copiar endereço da imagem".</p>
+
+            <div id="carregando" class="hidden text-center py-3 text-tnj-dourado animate-pulse">
+                <i class="fa fa-spinner fa-spin"></i> Buscando...
+            </div>
+
+            <div id="gradeResultados" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 max-h-52 overflow-y-auto p-1">
+                <p class="col-span-full text-center text-gray-400 py-4">Digite o que procura e clique em Pesquisar</p>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-3 mt-4 pt-3 border-t border-gray-700">
+                <span class="text-sm font-semibold"><i class="fa fa-upload"></i> Adicionar do celular:</span>
+                <input type="file" id="uploadArquivo" accept="image/*,video/*" multiple class="text-sm text-gray-300 file:mr-2 file:py-1 file:px-3 file:rounded file:border-0 file:bg-tnj-dourado file:text-black file:font-bold hover:file:brightness-110" />
+                <button onclick="uploadArquivos()" class="btn-upload">
+                    <i class="fa fa-folder-open"></i> Adicionar
+                </button>
+            </div>
+        </section>
+
+        <div class="grid md:grid-cols-4 gap-6">
+
+            <!-- FERRAMENTAS LATERAIS -->
+            <div class="md:col-span-1 space-y-4">
+
+                <!-- TEXTOS -->
+                <div class="caixa">
+                    <h3 class="font-bold mb-3 text-tnj-dourado">📝 TEXTOS</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <label class="text-xs text-tnj-dourado font-semibold">TÍTULO</label>
+                            <input type="text" id="texto1" placeholder="Digite o título..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" />
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="text-xs text-gray-400">Tam:</span>
+                                <input type="range" id="tamTitulo" min="20" max="100" value="48" class="flex-1 h-1" />
+                                <span id="tamTituloDisplay" class="text-xs w-7">48</span>
+                                <button onclick="ajustarFonteTexto('titulo',-2)" class="btn-azul text-xs px-2 py-0.5">−</button>
+                                <button onclick="ajustarFonteTexto('titulo',2)" class="btn-azul text-xs px-2 py-0.5">+</button>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">👆 Arraste • Dois dedos para aumentar</p>
+                        </div>
+
+                        <div>
+                            <label class="text-xs text-tnj-dourado font-semibold">SUBTÍTULO</label>
+                            <input type="text" id="texto2" placeholder="Digite o subtítulo..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" />
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="text-xs text-gray-400">Tam:</span>
+                                <input type="range" id="tamSubtitulo" min="14" max="70" value="28" class="flex-1 h-1" />
+                                <span id="tamSubtituloDisplay" class="text-xs w-7">28</span>
+                                <button onclick="ajustarFonteTexto('subtitulo',-2)" class="btn-azul text-xs px-2 py-0.5">−</button>
+                                <button onclick="ajustarFonteTexto('subtitulo',2)" class="btn-azul text-xs px-2 py-0.5">+</button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="text-xs text-tnj-dourado font-semibold">TÍTULO SECUNDÁRIO</label>
+                            <input type="text" id="texto3" placeholder="Digite o título secundário..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" />
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="text-xs text-gray-400">Tam:</span>
+                                <input type="range" id="tamTituloSec" min="14" max="70" value="22" class="flex-1 h-1" />
+                                <span id="tamTituloSecDisplay" class="text-xs w-7">22</span>
+                                <button onclick="ajustarFonteTexto('tituloSec',-2)" class="btn-azul text-xs px-2 py-0.5">−</button>
+                                <button onclick="ajustarFonteTexto('tituloSec',2)" class="btn-azul text-xs px-2 py-0.5">+</button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="text-xs text-tnj-dourado font-semibold">DESCRIÇÃO</label>
+                            <input type="text" id="texto4" placeholder="Digite a descrição..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" />
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="text-xs text-gray-400">Tam:</span>
+                                <input type="range" id="tamDescricao" min="12" max="50" value="18" class="flex-1 h-1" />
+                                <span id="tamDescricaoDisplay" class="text-xs w-7">18</span>
+                                <button onclick="ajustarFonteTexto('descricao',-2)" class="btn-azul text-xs px-2 py-0.5">−</button>
+                                <button onclick="ajustarFonteTexto('descricao',2)" class="btn-azul text-xs px-2 py-0.5">+</button>
+                            </div>
+                        </div>
+
+                        <button onclick="aplicarTexto()" class="btn-dourado w-full mt-2">APLICAR TEXTOS</button>
+                    </div>
+                </div>
+
+                <!-- CONFIGURAÇÃO DE JOGO -->
+                <div class="caixa">
+                    <h3 class="font-bold mb-3 text-tnj-dourado">⚽ BANNER DE JOGO</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <label class="text-xs text-tnj-dourado font-semibold">TIME DA CASA</label>
+                            <input type="text" id="timeCasaNome" placeholder="Ex: Flamengo" class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" />
+                            <div class="flex items-center gap-2 mt-1">
+                                <label class="text-xs text-gray-400">Logo:</label>
+                                <input type="file" id="logoCasaInput" accept="image/*" class="hidden" />
+                                <button onclick="document.getElementById('logoCasaInput').click()" class="btn-adicionar-logo text-xs">
+                                    <i class="fa fa-upload"></i> Adicionar Logo Casa
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-xs text-tnj-dourado font-semibold">TIME VISITANTE</label>
+                            <input type="text" id="timeVisitanteNome" placeholder="Ex: Corinthians" class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" />
+                            <div class="flex items-center gap-2 mt-1">
+                                <label class="text-xs text-gray-400">Logo:</label>
+                                <input type="file" id="logoVisitanteInput" accept="image/*" class="hidden" />
+                                <button onclick="document.getElementById('logoVisitanteInput').click()" class="btn-adicionar-logo text-xs">
+                                    <i class="fa fa-upload"></i> Adicionar Logo Visitante
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-xs text-tnj-dourado font-semibold">PLACAR</label>
+                            <div class="flex items-center gap-2 mt-1">
+                                <button onclick="alterarPlacar('casa', -1)" class="btn-azul text-xs px-2 py-1">−</button>
+                                <span id="placarCasaDisplay" class="text-lg font-bold w-8 text-center">0</span>
+                                <span class="text-tnj-dourado font-bold">x</span>
+                                <span id="placarVisitanteDisplay" class="text-lg font-bold w-8 text-center">0</span>
+                                <button onclick="alterarPlacar('visitante', 1)" class="btn-azul text-xs px-2 py-1">+</button>
+                            </div>
+                            <div class="flex gap-1 mt-1">
+                                <button onclick="alterarPlacar('casa', 1)" class="btn-azul text-xs px-2 py-1 flex-1">Casa +</button>
+                                <button onclick="alterarPlacar('visitante', -1)" class="btn-azul text-xs px-2 py-1 flex-1">Visitante −</button>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-xs text-tnj-dourado font-semibold">DATA E HORA</label>
+                            <input type="datetime-local" id="dataHoraJogoInput" class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm text-white" />
+                        </div>
+                        <div>
+                            <label class="text-xs text-tnj-dourado font-semibold">CANAL DE TRANSMISSÃO</label>
+                            <input type="text" id="canalJogoInput" placeholder="Ex: TV Globo, SporTV" class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" />
+                        </div>
+                        <button onclick="aplicarJogo()" class="btn-jogo w-full">⚡ APLICAR JOGO</button>
+                        <!-- BOTÃO LIMPAR JOGO - REMOVE TODAS AS INFORMAÇÕES DE FUTEBOL -->
+                        <button onclick="limparJogo()" class="btn-limpar btn-padrao w-full text-sm" style="border-radius:12px;">🗑️ Limpar Jogo</button>
+                    </div>
+                </div>
+
+                <!-- ESTILO, LOGO E CONTATO -->
+                <div class="caixa">
+                    <h3 class="font-bold mb-3 text-tnj-dourado">🎨 ESTILO & CONTATO</h3>
+                    <div class="space-y-2">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm">Cor do Texto:</span>
+                            <input type="color" id="corTexto" value="#ffffff" class="w-10 h-8 cursor-pointer" />
+                        </div>
+                        <hr class="border-gray-700" />
+
+                        <div>
+                            <label class="text-xs text-tnj-dourado font-semibold">TELEFONE / CONTATO</label>
+                            <div class="flex gap-1 mt-1">
+                                <input type="text" id="telefoneLogo" placeholder="(83) 99999-9999" class="flex-1 px-2 py-1 rounded bg-gray-900 border border-gray-700 text-sm" />
+                                <button onclick="adicionarContato()" class="btn-adicionar-contato text-sm px-3 py-1">
+                                    <i class="fa fa-phone"></i> Adicionar
+                                </button>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">👆 Arraste o número</p>
+                        </div>
+
+                        <div>
+                            <label class="text-xs text-tnj-dourado font-semibold">LOGO PERSONALIZADA</label>
+                            <div class="flex items-center gap-2 mt-1">
+                                <input type="file" id="uploadLogo" accept="image/png,image/webp" class="text-xs text-gray-300 file:mr-1 file:py-0.5 file:px-2 file:rounded file:border-0 file:bg-tnj-dourado file:text-black file:font-bold" />
+                                <button onclick="carregarLogoPersonalizada()" class="btn-azul text-xs">Carregar</button>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">👆 Arraste • Dois dedos para aumentar</p>
+                        </div>
+
+                        <div class="flex gap-2 mt-1">
+                            <button onclick="toggleLogo()" class="btn-azul text-sm flex-1">👁️ Logo</button>
+                            <button onclick="resetarPosicoes()" class="btn-dourado text-sm flex-1">↕ Resetar Posições</button>
+                        </div>
+
+                        <button onclick="limparEdicao()" class="btn-limpar btn-padrao w-full text-sm" style="border-radius:12px;">🗑️ LIMPAR TUDO</button>
+                    </div>
+                </div>
+
+                <!-- FORMATO -->
+                <div class="caixa">
+                    <h3 class="font-bold mb-3 text-tnj-dourado">📐 FORMATO</h3>
+                    <select id="formatoBanner" class="w-full bg-gray-900 border border-gray-700 rounded px-3 py-2">
+                        <option value="16-9">16:9 (Widescreen)</option>
+                        <option value="1-1">1:1 (Quadrado)</option>
+                        <option value="4-3">4:3 (Clássico)</option>
+                        <option value="3-2">3:2 (Foto)</option>
+                        <option value="9-16">9:16 (Vertical)</option>
+                        <option value="2-3">2:3 (Retrato)</option>
+                        <option value="21-9">21:9 (Ultrawide)</option>
+                    </select>
+                    <button onclick="aplicarFormato()" class="btn-formato w-full mt-2">
+                        <i class="fa fa-arrows-alt"></i> Aplicar Formato
+                    </button>
+                </div>
+
+                <!-- DOWNLOAD -->
+                <div class="caixa">
+                    <h3 class="font-bold mb-3 text-tnj-dourado">⬇️ BAIXAR BANNER</h3>
+                    <div class="download-grid">
+                        <button onclick="baixarBanner('png')" class="btn-download btn-png">
+                            <i class="fa fa-file-image-o"></i> PNG
+                        </button>
+                        <button onclick="baixarBanner('jpeg')" class="btn-download btn-jpeg">
+                            <i class="fa fa-file-image-o"></i> JPEG
+                        </button>
+                        <button onclick="baixarBanner('webp')" class="btn-download btn-webp">
+                            <i class="fa fa-file-image-o"></i> WebP
+                        </button>
+                    </div>
+                    <p class="text-xs text-gray-400 text-center mt-2">Clique no formato desejado</p>
+                </div>
+            </div>
+
+            <!-- ÁREA DO BANNER -->
+            <div class="md:col-span-3">
+                <div class="caixa">
+                    <h3 class="font-bold mb-3 text-center text-tnj-dourado">📺 SEU BANNER</h3>
+                    <div id="areaBanner" class="w-full rounded-lg overflow-hidden relative bg-gray-900 border-2 border-gray-700 shadow-xl mx-auto max-w-4xl" style="aspect-ratio: 16/9;">
+                        <!-- Fundo -->
+                        <img id="fundoBanner" class="absolute w-full h-full object-cover opacity-25" src="" alt="Fundo" />
+                        <video id="videoBanner" class="absolute w-full h-full object-cover opacity-25 hidden" loop muted playsinline autoplay></video>
+                        <div id="sobreposicao" class="absolute w-full h-full bg-gradient-to-t from-black/85 via-black/40 to-transparent"></div>
+
+                        <!-- Logo TNJ -->
+                        <div id="logoTNJ" class="arrastavel" style="z-index:20; background:rgba(0,0,0,0.3); backdrop-filter:blur(4px); padding:8px 14px; border-radius:12px; border:1px solid rgba(255,255,255,0.1);">
+                            <div id="logoConteudo" class="text-2xl font-black text-tnj-dourado drop-shadow-[0_0_8px_rgba(255,193,7,0.5)]">
+                                TV NOVA JUAREZ
+                            </div>
+                        </div>
+
+                        <!-- Telefone -->
+                        <div id="telefoneContainer" class="arrastavel" style="background:#25d366; border-radius:40px; padding:8px 18px; border:2px solid rgba(255,255,255,0.2); box-shadow:0 4px 15px rgba(37,211,102,0.3);">
+                            <div id="telefoneLogoDisplay" class="text-sm text-white font-semibold"></div>
+                        </div>
+
+                        <!-- Textos -->
+                        <div id="tituloBanner" class="arrastavel" style="background:transparent; border:none; backdrop-filter:none; padding:0; font-size:48px; font-weight:900; text-transform:uppercase; text-shadow:0 4px 20px rgba(0,0,0,0.8); letter-spacing:2px; line-height:1.2; color:#fff; text-align:center; top:15%; left:50%; transform:translateX(-50%);">
+                        </div>
+                        <div id="subtituloBanner" class="arrastavel" style="background:transparent; border:none; backdrop-filter:none; padding:0; font-size:28px; font-weight:700; text-shadow:0 3px 15px rgba(0,0,0,0.7); color:#fff; text-align:center; top:35%; left:50%; transform:translateX(-50%);">
+                        </div>
+                        <div id="tituloSecundario" class="arrastavel" style="background:transparent; border:none; backdrop-filter:none; padding:0; font-size:22px; font-weight:700; text-shadow:0 3px 15px rgba(0,0,0,0.7); color:#fff; text-align:center; top:50%; left:50%; transform:translateX(-50%);">
+                        </div>
+                        <div id="descricaoBanner" class="arrastavel" style="background:transparent; border:none; backdrop-filter:none; padding:0; font-size:18px; font-weight:500; text-shadow:0 2px 10px rgba(0,0,0,0.6); color:#fff; text-align:center; top:65%; left:50%; transform:translateX(-50%);">
+                        </div>
+
+                        <!-- ELEMENTOS DE JOGO (ocultos por padrão) -->
+                        <div id="logoCasa" class="elemento-jogo" style="top:25%; left:8%;">
+                            <img id="logoCasaImg" class="logo-time" src="" alt="Time Casa" />
+                            <div id="logoCasaPlaceholder" class="text-xs text-gray-400">Logo Casa</div>
+                        </div>
+                        <div id="nomeCasa" class="elemento-jogo nome-time" style="top:55%; left:8%; font-size:18px; font-weight:700; color:#fff; text-shadow:0 2px 10px rgba(0,0,0,0.7); text-align:center; min-width:80px;">Time Casa</div>
+
+                        <div id="logoVisitante" class="elemento-jogo" style="top:25%; right:8%;">
+                            <img id="logoVisitanteImg" class="logo-time" src="" alt="Time Visitante" />
+                            <div id="logoVisitantePlaceholder" class="text-xs text-gray-400">Logo Visitante</div>
+                        </div>
+                        <div id="nomeVisitante" class="elemento-jogo nome-time" style="top:55%; right:8%; font-size:18px; font-weight:700; color:#fff; text-shadow:0 2px 10px rgba(0,0,0,0.7); text-align:center; min-width:80px;">Time Visitante</div>
+
+                        <div id="placarJogo" class="elemento-jogo" style="font-size:56px; font-weight:900; color:#ffc107; text-shadow:0 4px 20px rgba(255,193,7,0.3); letter-spacing:4px; background:rgba(0,0,0,0.4); backdrop-filter:blur(8px); padding:6px 24px; border-radius:20px; border:2px solid rgba(255,193,7,0.2); top:45%; left:50%; transform:translate(-50%, -50%); text-align:center; line-height:1.2;">0 x 0</div>
+
+                        <div id="dataHoraJogo" class="elemento-jogo" style="font-size:18px; font-weight:600; color:#fff; text-shadow:0 2px 8px rgba(0,0,0,0.6); bottom:70px; left:20px; background:rgba(0,0,0,0.3); backdrop-filter:blur(4px); padding:6px 16px; border-radius:30px; border:1px solid rgba(255,255,255,0.08);">Data e Hora</div>
+
+                        <div id="canalJogo" class="elemento-jogo" style="font-size:18px; font-weight:600; color:#fff; text-shadow:0 2px 8px rgba(0,0,0,0.6); bottom:70px; right:20px; background:rgba(0,0,0,0.3); backdrop-filter:blur(4px); padding:6px 16px; border-radius:30px; border:1px solid rgba(255,255,255,0.08);">Canal</div>
+
+                        <!-- Dispositivos -->
+                        <div class="dispositivos">
+                            <span><i class="fa fa-mobile"></i> Celular</span>
+                            <span class="separador">|</span>
+                            <span><i class="fa fa-laptop"></i> Computador</span>
+                            <span class="separador">|</span>
+                            <span><i class="fa fa-television"></i> TV</span>
+                            <span class="separador">|</span>
+                            <span><i class="fa fa-archive"></i> TV Box</span>
+                        </div>
+                    </div>
+
+                    <p class="text-xs text-gray-400 mt-2 text-center">
+                        <i class="fa fa-arrows"></i> Arraste qualquer elemento • Dois dedos para aumentar
+                    </p>
+                    <p class="text-xs text-gray-400 text-center">
+                        <i class="fa fa-mouse-pointer"></i> Clique na miniatura para usar como fundo • Duplo clique para remover
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="mt-10 py-4 text-center text-xs text-gray-500 border-t border-gray-800">
+        © 2026 BNNERTNJ • Ferramenta Oficial TNJ / TV Nova Juarez • Versão 9.1
+    </footer>
+
+    <script>
+        // ===== CONFIG =====
+        const chavePexels = 'YOUR_PEXELS_API_KEY';
+
+        let imagensGaleria = [];
+        let fundoAtual = null;
+        let logoPersonalizada = null;
+        let placarCasa = 0;
+        let placarVisitante = 0;
+        let jogoAplicado = false;
+
+        // ===== PERSISTÊNCIA =====
+        function salvarGaleria() {
+            try {
+                localStorage.setItem('tnj_galeria', JSON.stringify(imagensGaleria));
+                if (fundoAtual) localStorage.setItem('tnj_fundo', JSON.stringify(fundoAtual));
+                else localStorage.removeItem('tnj_fundo');
+                salvarPosicoesElementos();
+                salvarDadosJogo();
+            } catch (e) {}
+        }
+
+        function salvarDadosJogo() {
+            const dados = {
+                placarCasa,
+                placarVisitante,
+                timeCasa: document.getElementById('timeCasaNome').value,
+                timeVisitante: document.getElementById('timeVisitanteNome').value,
+                dataHora: document.getElementById('dataHoraJogoInput').value,
+                canal: document.getElementById('canalJogoInput').value,
+                aplicado: jogoAplicado
+            };
+            localStorage.setItem('tnj_jogo', JSON.stringify(dados));
+        }
+
+        function carregarDadosJogo() {
+            try {
+                const dados = localStorage.getItem('tnj_jogo');
+                if (!dados) return;
+                const jogo = JSON.parse(dados);
+                placarCasa = jogo.placarCasa || 0;
+                placarVisitante = jogo.placarVisitante || 0;
+                document.getElementById('timeCasaNome').value = jogo.timeCasa || '';
+                document.getElementById('timeVisitanteNome').value = jogo.timeVisitante || '';
+                document.getElementById('dataHoraJogoInput').value = jogo.dataHora || '';
+                document.getElementById('canalJogoInput').value = jogo.canal || '';
+                document.getElementById('placarCasaDisplay').innerText = placarCasa;
+                document.getElementById('placarVisitanteDisplay').innerText = placarVisitante;
+                jogoAplicado = jogo.aplicado || false;
+                if (jogoAplicado) {
+                    document.querySelectorAll('.elemento-jogo').forEach(el => el.classList.add('visivel'));
+                    document.getElementById('nomeCasa').innerText = jogo.timeCasa || 'Time Casa';
+                    document.getElementById('nomeVisitante').innerText = jogo.timeVisitante || 'Time Visitante';
+                    document.getElementById('placarJogo').innerText = `${placarCasa} x ${placarVisitante}`;
+                    if (jogo.dataHora) {
+                        const d = new Date(jogo.dataHora);
+                        document.getElementById('dataHoraJogo').innerText = `📅 ${d.toLocaleString('pt-BR')}`;
+                    }
+                    if (jogo.canal) document.getElementById('canalJogo').innerText = `📺 ${jogo.canal}`;
+                }
+            } catch (e) {}
+        }
+
+        function salvarPosicoesElementos() {
+            const elementos = ['tituloBanner', 'subtituloBanner', 'tituloSecundario', 'descricaoBanner', 'logoTNJ',
+                'telefoneContainer',
+                'logoCasa', 'nomeCasa', 'logoVisitante', 'nomeVisitante', 'placarJogo', 'dataHoraJogo', 'canalJogo'
+            ];
+            const pos = {};
+            elementos.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    const rect = el.getBoundingClientRect();
+                    const parentRect = el.parentElement.getBoundingClientRect();
+                    pos[id] = { left: rect.left - parentRect.left, top: rect.top - parentRect.top };
+                    if (id.includes('Banner') && id !== 'logoTNJ' && id !== 'telefoneContainer') {
+                        pos[id].fontSize = window.getComputedStyle(el).fontSize;
+                    }
+                    if (id === 'logoTNJ') {
+                        pos[id].logoFontSize = window.getComputedStyle(document.getElementById('logoConteudo')).fontSize;
+                    }
+                    if (id === 'placarJogo') pos[id].fontSize = window.getComputedStyle(el).fontSize;
+                }
+            });
+            localStorage.setItem('tnj_pos_elementos', JSON.stringify(pos));
+        }
+
+        function carregarPosicoesElementos() {
+            try {
+                const dados = localStorage.getItem('tnj_pos_elementos');
+                if (!dados) return;
+                const pos = JSON.parse(dados);
+                const elementos = ['tituloBanner', 'subtituloBanner', 'tituloSecundario', 'descricaoBanner', 'logoTNJ',
+                    'telefoneContainer',
+                    'logoCasa', 'nomeCasa', 'logoVisitante', 'nomeVisitante', 'placarJogo', 'dataHoraJogo', 'canalJogo'
+                ];
+                elementos.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el && pos[id]) {
+                        el.style.left = pos[id].left + 'px';
+                        el.style.top = pos[id].top + 'px';
+                        el.style.transform = 'none';
+                        if (id === 'logoTNJ' && pos[id].logoFontSize) {
+                            document.getElementById('logoConteudo').style.fontSize = pos[id].logoFontSize;
+                        }
+                        if (id.includes('Banner') && id !== 'logoTNJ' && id !== 'telefoneContainer' && pos[id]
+                            .fontSize) {
+                            el.style.fontSize = pos[id].fontSize;
+                            const sliderId = id === 'tituloBanner' ? 'tamTitulo' :
+                                id === 'subtituloBanner' ? 'tamSubtitulo' :
+                                id === 'tituloSecundario' ? 'tamTituloSec' : 'tamDescricao';
+                            const slider = document.getElementById(sliderId);
+                            if (slider) {
+                                const size = parseFloat(pos[id].fontSize);
+                                if (!isNaN(size)) {
+                                    slider.value = size;
+                                    document.getElementById(sliderId + 'Display').innerText = Math.round(size);
+                                }
+                            }
+                        }
+                        if (id === 'placarJogo' && pos[id].fontSize) el.style.fontSize = pos[id].fontSize;
+                        if (id === 'telefoneContainer') { el.style.right = 'auto';
+                            el.style.bottom = 'auto'; }
+                    }
+                });
+            } catch (e) {}
+        }
+
+        function carregarGaleria() {
+            try {
+                const dados = localStorage.getItem('tnj_galeria');
+                if (dados) imagensGaleria = JSON.parse(dados);
+                const fundo = localStorage.getItem('tnj_fundo');
+                if (fundo) fundoAtual = JSON.parse(fundo);
+            } catch (e) {}
+        }
+
+        function restaurarGaleria() {
+            carregarGaleria();
+            carregarDadosJogo();
+            const grade = document.getElementById('gradeResultados');
+            grade.innerHTML = '';
+            if (imagensGaleria.length === 0) {
+                grade.innerHTML = `<p class="col-span-full text-center text-gray-400 py-4">Nenhuma imagem. Adicione uma!</p>`;
+                return;
+            }
+            imagensGaleria.forEach(item => criarMiniatura(item, grade));
+            if (fundoAtual) {
+                const existe = imagensGaleria.some(i => i.url === fundoAtual.url);
+                if (existe) usarComoFundo(fundoAtual);
+                else { fundoAtual = null;
+                    localStorage.removeItem('tnj_fundo'); if (imagensGaleria.length > 0) usarComoFundo(imagensGaleria[
+                        0]); }
+            } else if (imagensGaleria.length > 0) usarComoFundo(imagensGaleria[0]);
+            carregarPosicoesElementos();
+            aplicarTexto();
+            const telSalvo = localStorage.getItem('tnj_telefone');
+            if (telSalvo) {
+                document.getElementById('telefoneLogoDisplay').innerText = `📞 ${telSalvo}`;
+                document.getElementById('telefoneLogo').value = telSalvo;
+                document.getElementById('telefoneContainer').style.display = 'block';
+            } else {
+                document.getElementById('telefoneContainer').style.display = 'none';
+            }
+            // Restaurar logos se houver dados salvos
+            const logoCasa = localStorage.getItem('logoCasaData');
+            if (logoCasa) {
+                document.getElementById('logoCasaImg').src = logoCasa;
+                document.getElementById('logoCasaImg').style.display = 'block';
+                document.getElementById('logoCasaPlaceholder').style.display = 'none';
+            }
+            const logoVisitante = localStorage.getItem('logoVisitanteData');
+            if (logoVisitante) {
+                document.getElementById('logoVisitanteImg').src = logoVisitante;
+                document.getElementById('logoVisitanteImg').style.display = 'block';
+                document.getElementById('logoVisitantePlaceholder').style.display = 'none';
+            }
+        }
+
+        // ===== BUSCA =====
+        async function buscarConteudo() {
+            const termo = document.getElementById('campoBusca').value.trim();
+            if (!termo) return;
+            const tipo = document.getElementById('tipoBusca').value;
+            const carregando = document.getElementById('carregando');
+            const grade = document.getElementById('gradeResultados');
+            carregando.classList.remove('hidden');
+            grade.innerHTML = '';
+            try {
+                let resultados = [];
+                if (tipo === 'image') resultados = await buscarPexelsImagens(termo);
+                else resultados = await buscarPexelsVideos(termo);
+                carregando.classList.add('hidden');
+                if (resultados.length === 0) { grade.innerHTML =
+                        `<p class="col-span-full text-center text-gray-400">Nenhum resultado.</p>`; return; }
+                let adicionados = 0;
+                resultados.forEach(item => {
+                    if (!imagensGaleria.some(i => i.url === item.url)) {
+                        imagensGaleria.push(item);
+                        criarMiniatura(item, grade);
+                        adicionados++;
+                    }
+                });
+                salvarGaleria();
+                if (!fundoAtual && imagensGaleria.length > 0) usarComoFundo(imagensGaleria[0]);
+                if (adicionados === 0) grade.innerHTML =
+                    `<p class="col-span-full text-center text-gray-400">Nenhuma imagem nova.</p>`;
+            } catch (erro) {
+                carregando.classList.add('hidden');
+                grade.innerHTML = `<p class="col-span-full text-center text-red-400">Erro: ${erro.message}</p>`;
+            }
+        }
+
+        async function buscarPexelsImagens(termo) {
+            const resp = await fetch(
+                `https://api.pexels.com/v1/search?query=${encodeURIComponent(termo)}&per_page=20&size=small`, {
+                    headers: { Authorization: chavePexels }
+                });
+            const dados = await resp.json();
+            return dados.photos.map(foto => ({ url: foto.src.large2x, thumbnail: foto.src.tiny, type: 'image' }));
+        }
+
+        async function buscarPexelsVideos(termo) {
+            const resp = await fetch(
+                `https://api.pexels.com/videos/search?query=${encodeURIComponent(termo)}&per_page=10&size=small`, {
+                    headers: { Authorization: chavePexels }
+                });
+            const dados = await resp.json();
+            return dados.videos.map(video => {
+                const vf = video.video_files.find(f => f.quality === 'hd') || video.video_files[0];
+                return { url: vf.link, thumbnail: video.image, type: 'video' };
+            });
+        }
+
+        // ===== ADICIONAR URL =====
+        function adicionarPorURL() {
+            const url = document.getElementById('urlImagem').value.trim();
+            if (!url) { alert('Cole uma URL.'); return; }
+            if (imagensGaleria.some(i => i.url === url)) { alert('Já existe.'); return; }
+            const isVideo = url.match(/\.(mp4|webm|mov|avi|mkv)$/i);
+            const item = { url, thumbnail: url, type: isVideo ? 'video' : 'image' };
+            if (!isVideo) {
+                const imgTest = new Image();
+                imgTest.crossOrigin = 'anonymous';
+                imgTest.onload = function() { item.thumbnail = url;
+                    adicionarItemGaleria(item); };
+                imgTest.onerror = function() {
+                    const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(url)}`;
+                    const imgProxy = new Image();
+                    imgProxy.crossOrigin = 'anonymous';
+                    imgProxy.onload = function() { item.thumbnail = proxyUrl;
+                        adicionarItemGaleria(item); };
+                    imgProxy.onerror = function() { alert('❌ Falha ao carregar a imagem.'); };
+                    imgProxy.src = proxyUrl;
+                };
+                imgTest.src = url;
+            } else {
+                adicionarItemGaleria(item);
+            }
+        }
+
+        function adicionarItemGaleria(item) {
+            imagensGaleria.push(item);
+            const grade = document.getElementById('gradeResultados');
+            const msg = grade.querySelector('.col-span-full');
+            if (msg && msg.tagName === 'P') msg.remove();
+            criarMiniatura(item, grade);
+            salvarGaleria();
+            if (!fundoAtual) usarComoFundo(item);
+            document.getElementById('urlImagem').value = '';
+        }
+
+        // ===== MINIATURA =====
+        function criarMiniatura(item, container) {
+            const div = document.createElement('div');
+            div.className = 'relative';
+            const img = document.createElement('img');
+            img.src = item.thumbnail;
+            img.loading = 'lazy';
+            img.className = 'miniatura-galeria';
+            img.dataset.url = item.url;
+            img.dataset.type = item.type;
+            img.onerror = function() { this.src =
+                    'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="%23666" stroke-width="2"%3E%3Crect x="3" y="3" width="18" height="18" rx="2"/%3E%3Ccircle cx="8.5" cy="8.5" r="1.5"/%3E%3Cpath d="M21 15l-5-5L5 21"/%3E%3C/svg%3E'; };
+            img.addEventListener('click', () => usarComoFundo(item));
+            img.addEventListener('dblclick', () => removerItemGaleria(item.url));
+            div.appendChild(img);
+            if (item.type === 'video') {
+                const icone = document.createElement('div');
+                icone.className = 'absolute inset-0 flex items-center justify-center pointer-events-none';
+                icone.innerHTML = '<i class="fa fa-play-circle text-white text-2xl drop-shadow-lg"></i>';
+                div.appendChild(icone);
+            }
+            container.appendChild(div);
+        }
+
+        function usarComoFundo(item) {
+            const img = document.getElementById('fundoBanner');
+            const video = document.getElementById('videoBanner');
+            img.classList.remove('hidden');
+            video.classList.add('hidden');
+            if (item.type === 'image') {
+                img.src = item.url;
+                img.classList.remove('hidden');
+                video.classList.add('hidden');
+            } else {
+                video.src = item.url;
+                video.load();
+                video.play().catch(e => console.log('Autoplay bloqueado'));
+                video.classList.remove('hidden');
+                img.classList.add('hidden');
+            }
+            fundoAtual = item;
+            salvarGaleria();
+            document.querySelectorAll('.miniatura-galeria').forEach(el => {
+                el.classList.toggle('ativa', el.dataset.url === item.url);
+            });
+        }
+
+        function removerItemGaleria(url) {
+            if (!confirm('Remover esta imagem da galeria?')) return;
+            imagensGaleria = imagensGaleria.filter(item => item.url !== url);
+            const grade = document.getElementById('gradeResultados');
+            grade.querySelectorAll('.relative').forEach(el => {
+                const img = el.querySelector('img');
+                if (img && img.dataset.url === url) el.remove();
+            });
+            if (fundoAtual && fundoAtual.url === url) {
+                document.getElementById('fundoBanner').classList.add('hidden');
+                document.getElementById('videoBanner').classList.add('hidden');
+                fundoAtual = null;
+                if (imagensGaleria.length > 0) usarComoFundo(imagensGaleria[0]);
+            }
+            salvarGaleria();
+            if (imagensGaleria.length === 0) grade.innerHTML =
+                `<p class="col-span-full text-center text-gray-400 py-4">Nenhuma imagem.</p>`;
+        }
+
+        function uploadArquivos() {
+            const input = document.getElementById('uploadArquivo');
+            const files = input.files;
+            if (files.length === 0) return;
+            const grade = document.getElementById('gradeResultados');
+            const msg = grade.querySelector('.col-span-full');
+            if (msg && msg.tagName === 'P') msg.remove();
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const dataUrl = e.target.result;
+                    const type = file.type.startsWith('video') ? 'video' : 'image';
+                    const item = { url: dataUrl, thumbnail: dataUrl, type };
+                    if (!imagensGaleria.some(i => i.url === dataUrl)) {
+                        imagensGaleria.push(item);
+                        criarMiniatura(item, grade);
+                        if (!fundoAtual) usarComoFundo(item);
+                        salvarGaleria();
+                    }
+                };
+                reader.readAsDataURL(file);
+            });
+            input.value = '';
+        }
+
+        // ===== LOGO PERSONALIZADA =====
+        function carregarLogoPersonalizada() {
+            const input = document.getElementById('uploadLogo');
+            const file = input.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                logoPersonalizada = e.target.result;
+                document.getElementById('logoConteudo').innerHTML =
+                    `<img src="${logoPersonalizada}" class="max-h-12 w-auto" style="display:inline-block;" />`;
+                document.getElementById('logoTNJ').style.display = 'block';
+                salvarPosicoesElementos();
+            };
+            reader.readAsDataURL(file);
+            input.value = '';
+        }
+
+        function toggleLogo() {
+            const logo = document.getElementById('logoTNJ');
+            logo.style.display = logo.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function adicionarContato() {
+            const telefone = document.getElementById('telefoneLogo').value.trim();
+            if (!telefone) { alert('Digite um número.'); return; }
+            document.getElementById('telefoneLogoDisplay').innerText = `📞 ${telefone}`;
+            document.getElementById('telefoneContainer').style.display = 'block';
+            localStorage.setItem('tnj_telefone', telefone);
+            salvarPosicoesElementos();
+        }
+
+        function resetarPosicoes() {
+            const defaults = {
+                tituloBanner: { top: '15%', left: '50%', transform: 'translateX(-50%)' },
+                subtituloBanner: { top: '35%', left: '50%', transform: 'translateX(-50%)' },
+                tituloSecundario: { top: '50%', left: '50%', transform: 'translateX(-50%)' },
+                descricaoBanner: { top: '65%', left: '50%', transform: 'translateX(-50%)' },
+                logoTNJ: { top: '20px', left: '20px' },
+                telefoneContainer: { top: '20px', right: '20px', left: 'auto' },
+                logoCasa: { top: '25%', left: '8%' },
+                nomeCasa: { top: '55%', left: '8%' },
+                logoVisitante: { top: '25%', right: '8%', left: 'auto' },
+                nomeVisitante: { top: '55%', right: '8%', left: 'auto' },
+                placarJogo: { top: '45%', left: '50%', transform: 'translate(-50%, -50%)' },
+                dataHoraJogo: { bottom: '70px', left: '20px', top: 'auto', right: 'auto' },
+                canalJogo: { bottom: '70px', right: '20px', top: 'auto', left: 'auto' }
+            };
+            Object.keys(defaults).forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    const d = defaults[id];
+                    Object.keys(d).forEach(prop => { el.style[prop] = d[prop]; });
+                    if (!d.transform) el.style.transform = 'none';
+                }
+            });
+            salvarPosicoesElementos();
+        }
+
+        // ===== TEXTOS =====
+        function aplicarTexto() {
+            const t1 = document.getElementById('texto1').value;
+            const t2 = document.getElementById('texto2').value;
+            const t3 = document.getElementById('texto3').value;
+            const t4 = document.getElementById('texto4').value;
+            const cor = document.getElementById('corTexto').value;
+
+            document.getElementById('tituloBanner').innerText = t1;
+            document.getElementById('subtituloBanner').innerText = t2;
+            document.getElementById('tituloSecundario').innerText = t3;
+            document.getElementById('descricaoBanner').innerText = t4;
+
+            const elementos = {
+                titulo: 'tituloBanner',
+                subtitulo: 'subtituloBanner',
+                tituloSec: 'tituloSecundario',
+                descricao: 'descricaoBanner'
+            };
+            Object.keys(elementos).forEach(id => {
+                const el = document.getElementById(elementos[id]);
+                el.style.color = cor;
+                const slider = document.getElementById(id === 'titulo' ? 'tamTitulo' :
+                    id === 'subtitulo' ? 'tamSubtitulo' :
+                    id === 'tituloSec' ? 'tamTituloSec' : 'tamDescricao');
+                if (slider) el.style.fontSize = `${slider.value}px`;
+            });
+            salvarPosicoesElementos();
+        }
+
+        function ajustarFonteTexto(tipo, delta) {
+            const sliderId = tipo === 'titulo' ? 'tamTitulo' :
+                tipo === 'subtitulo' ? 'tamSubtitulo' :
+                tipo === 'tituloSec' ? 'tamTituloSec' : 'tamDescricao';
+            const slider = document.getElementById(sliderId);
+            if (!slider) return;
+            let val = parseInt(slider.value) + delta;
+            val = Math.min(parseInt(slider.max), Math.max(parseInt(slider.min), val));
+            slider.value = val;
+            document.getElementById(sliderId + 'Display').innerText = val;
+            aplicarTexto();
+        }
+
+        // ===== JOGO =====
+        function alterarPlacar(time, delta) {
+            if (time === 'casa') { placarCasa = Math.max(0, placarCasa + delta);
+                document.getElementById('placarCasaDisplay').innerText = placarCasa; } else { placarVisitante = Math.max(0,
+                    placarVisitante + delta);
+                document.getElementById('placarVisitanteDisplay').innerText = placarVisitante; }
+            if (jogoAplicado) document.getElementById('placarJogo').innerText = `${placarCasa} x ${placarVisitante}`;
+            salvarDadosJogo();
+        }
+
+        function aplicarJogo() {
+            const timeCasa = document.getElementById('timeCasaNome').value.trim();
+            const timeVisitante = document.getElementById('timeVisitanteNome').value.trim();
+            const dataHora = document.getElementById('dataHoraJogoInput').value;
+            const canal = document.getElementById('canalJogoInput').value.trim();
+
+            document.querySelectorAll('.elemento-jogo').forEach(el => el.classList.add('visivel'));
+
+            document.getElementById('nomeCasa').innerText = timeCasa || 'Time Casa';
+            document.getElementById('nomeVisitante').innerText = timeVisitante || 'Time Visitante';
+            document.getElementById('placarJogo').innerText = `${placarCasa} x ${placarVisitante}`;
+
+            if (dataHora) {
+                const d = new Date(dataHora);
+                document.getElementById('dataHoraJogo').innerText = `📅 ${d.toLocaleString('pt-BR')}`;
+            } else {
+                document.getElementById('dataHoraJogo').innerText = 'Data e Hora';
+            }
+            document.getElementById('canalJogo').innerText = canal ? `📺 ${canal}` : 'Canal';
+
+            jogoAplicado = true;
+            salvarDadosJogo();
+            salvarPosicoesElementos();
+        }
+
+        // ===== LIMPAR JOGO (remove todas as informações de futebol) =====
+        function limparJogo() {
+            document.getElementById('timeCasaNome').value = '';
+            document.getElementById('timeVisitanteNome').value = '';
+            document.getElementById('dataHoraJogoInput').value = '';
+            document.getElementById('canalJogoInput').value = '';
+            placarCasa = 0;
+            placarVisitante = 0;
+            document.getElementById('placarCasaDisplay').innerText = '0';
+            document.getElementById('placarVisitanteDisplay').innerText = '0';
+            document.getElementById('logoCasaInput').value = '';
+            document.getElementById('logoVisitanteInput').value = '';
+            document.getElementById('logoCasaImg').style.display = 'none';
+            document.getElementById('logoVisitanteImg').style.display = 'none';
+            document.getElementById('logoCasaPlaceholder').style.display = 'block';
+            document.getElementById('logoVisitantePlaceholder').style.display = 'block';
+            document.getElementById('nomeCasa').innerText = 'Time Casa';
+            document.getElementById('nomeVisitante').innerText = 'Time Visitante';
+            document.getElementById('placarJogo').innerText = '0 x 0';
+            document.getElementById('dataHoraJogo').innerText = 'Data e Hora';
+            document.getElementById('canalJogo').innerText = 'Canal';
+            // Oculta todos os elementos de jogo
+            document.querySelectorAll('.elemento-jogo').forEach(el => el.classList.remove('visivel'));
+            jogoAplicado = false;
+            localStorage.removeItem('tnj_jogo');
+            localStorage.removeItem('logoCasaData');
+            localStorage.removeItem('logoVisitanteData');
+            salvarPosicoesElementos();
+        }
+
+        // ===== FORMATO =====
+        function aplicarFormato() {
+            const valor = document.getElementById('formatoBanner').value;
+            const area = document.getElementById('areaBanner');
+            const partes = valor.split('-');
+            if (partes.length === 2) {
+                area.style.aspectRatio = `${partes[0]} / ${partes[1]}`;
+            } else {
+                area.style.aspectRatio = '16 / 9';
+            }
+            void area.offsetWidth;
+        }
+
+        // ===== LIMPAR EDIÇÃO =====
+        function limparEdicao() {
+            if (!confirm('Limpar textos, logo e fundo? (Imagens da galeria permanecem)')) return;
+            document.getElementById('fundoBanner').src = '';
+            document.getElementById('fundoBanner').classList.add('hidden');
+            document.getElementById('videoBanner').src = '';
+            document.getElementById('videoBanner').classList.add('hidden');
+            document.getElementById('tituloBanner').innerText = '';
+            document.getElementById('subtituloBanner').innerText = '';
+            document.getElementById('tituloSecundario').innerText = '';
+            document.getElementById('descricaoBanner').innerText = '';
+            document.getElementById('texto1').value = '';
+            document.getElementById('texto2').value = '';
+            document.getElementById('texto3').value = '';
+            document.getElementById('texto4').value = '';
+            document.getElementById('telefoneLogo').value = '';
+            document.getElementById('telefoneLogoDisplay').innerText = '';
+            document.getElementById('telefoneContainer').style.display = 'none';
+            document.getElementById('logoTNJ').style.display = 'block';
+            document.getElementById('logoConteudo').innerHTML = 'TV NOVA JUAREZ';
+            document.getElementById('logoConteudo').style.fontSize = '1.5rem';
+            fundoAtual = null;
+            logoPersonalizada = null;
+            localStorage.removeItem('tnj_fundo');
+            localStorage.removeItem('tnj_telefone');
+            document.getElementById('corTexto').value = '#ffffff';
+            ['tamTitulo', 'tamSubtitulo', 'tamTituloSec', 'tamDescricao'].forEach(id => {
+                const s = document.getElementById(id);
+                if (s) {
+                    s.value = id === 'tamTitulo' ? '48' : id === 'tamSubtitulo' ? '28' : id === 'tamTituloSec' ? '22' :
+                        '18';
+                    document.getElementById(id + 'Display').innerText = s.value;
+                }
+            });
+            resetarPosicoes();
+            limparJogo();
+            aplicarTexto();
+            if (imagensGaleria.length > 0) usarComoFundo(imagensGaleria[0]);
+        }
+
+        // ===== ZOOM COM DOIS DEDOS =====
+        let zoomData = null;
+        document.addEventListener('touchstart', function(e) {
+            if (e.touches.length === 2) {
+                const target = e.target.closest('.arrastavel, .elemento-jogo');
+                if (!target) return;
+                const isText = target.id.includes('Banner');
+                const isLogo = target.id === 'logoTNJ';
+                const isPlacar = target.id === 'placarJogo';
+                if (!isText && !isLogo && !isPlacar) return;
+                const t1 = e.touches[0],
+                    t2 = e.touches[1];
+                const dist = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
+                let initialSize;
+                if (isText || isPlacar) initialSize = parseFloat(window.getComputedStyle(target).fontSize);
+                else if (isLogo) initialSize = parseFloat(window.getComputedStyle(document.getElementById('logoConteudo'))
+                    .fontSize);
+                zoomData = { target, isText, isLogo, isPlacar, initialDist: dist, initialSize, logoContent: isLogo ?
+                        document.getElementById('logoConteudo') : null };
+                e.preventDefault();
+            }
+        }, { passive: false });
+
+        document.addEventListener('touchmove', function(e) {
+            if (!zoomData || e.touches.length !== 2) return;
+            e.preventDefault();
+            const t1 = e.touches[0],
+                t2 = e.touches[1];
+            const dist = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
+            const scale = dist / zoomData.initialDist;
+            let newSize = zoomData.initialSize * scale;
+
+            if (zoomData.isText || zoomData.isPlacar) {
+                const target = zoomData.target;
+                const id = target.id;
+                let min, max;
+                if (id === 'tituloBanner') { min = 20;
+                    max = 100; } else if (id === 'subtituloBanner') { min = 14;
+                    max = 70; } else if (id === 'tituloSecundario') { min = 14;
+                    max = 70; } else if (id === 'descricaoBanner') { min = 12;
+                    max = 50; } else if (id === 'placarJogo') { min = 24;
+                    max = 100; } else return;
+                newSize = Math.min(max, Math.max(min, newSize));
+                target.style.fontSize = newSize + 'px';
+                if (id !== 'placarJogo') {
+                    const sliderId = id === 'tituloBanner' ? 'tamTitulo' :
+                        id === 'subtituloBanner' ? 'tamSubtitulo' :
+                        id === 'tituloSecundario' ? 'tamTituloSec' : 'tamDescricao';
+                    const slider = document.getElementById(sliderId);
+                    if (slider) { slider.value = Math.round(newSize);
+                        document.getElementById(sliderId + 'Display').innerText = Math.round(newSize); }
+                }
+            } else if (zoomData.isLogo) {
+                const logoContent = zoomData.logoContent;
+                newSize = Math.min(60, Math.max(14, newSize));
+                logoContent.style.fontSize = newSize + 'px';
+                const img = logoContent.querySelector('img');
+                if (img) img.style.maxHeight = (newSize * 1.2) + 'px';
+            }
+            salvarPosicoesElementos();
+        }, { passive: false });
+
+        document.addEventListener('touchend', function() { zoomData = null; });
+
+        // ===== DRAG & DROP =====
+        function makeDraggable(el) {
+            let startX, startY, origLeft, origTop, dragging = false;
+
+            function onStart(e) {
+                e.preventDefault();
+                const touch = e.touches ? e.touches[0] : e;
+                startX = touch.clientX;
+                startY = touch.clientY;
+                const rect = el.getBoundingClientRect(),
+                    parentRect = el.parentElement.getBoundingClientRect();
+                origLeft = rect.left - parentRect.left;
+                origTop = rect.top - parentRect.top;
+                dragging = true;
+                el.style.cursor = 'grabbing';
+                el.style.transition = 'none';
+                el.style.zIndex = 15;
+            }
+
+            function onMove(e) {
+                if (!dragging) return;
+                e.preventDefault();
+                const touch = e.touches ? e.touches[0] : e;
+                let newX = origLeft + (touch.clientX - startX);
+                let newY = origTop + (touch.clientY - startY);
+                const parent = el.parentElement;
+                newX = Math.max(0, Math.min(parent.clientWidth - (el.offsetWidth || 40), newX));
+                newY = Math.max(0, Math.min(parent.clientHeight - (el.offsetHeight || 24), newY));
+                el.style.left = newX + 'px';
+                el.style.top = newY + 'px';
+                el.style.right = 'auto';
+                el.style.bottom = 'auto';
+                el.style.transform = 'none';
+            }
+
+            function onEnd() {
+                if (dragging) {
+                    dragging = false;
+                    el.style.cursor = 'grab';
+                    el.style.transition = '';
+                    el.style.zIndex = 10;
+                    salvarPosicoesElementos();
+                }
+            }
+            el.addEventListener('mousedown', onStart);
+            document.addEventListener('mousemove', onMove);
+            document.addEventListener('mouseup', onEnd);
+            el.addEventListener('touchstart', onStart, { passive: false });
+            document.addEventListener('touchmove', onMove, { passive: false });
+            document.addEventListener('touchend', onEnd);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.arrastavel, .elemento-jogo').forEach(el => makeDraggable(el));
+        });
+
+        // ===== EVENTOS PARA LOGOS DOS TIMES =====
+        document.getElementById('logoCasaInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const dataUrl = ev.target.result;
+                document.getElementById('logoCasaImg').src = dataUrl;
+                document.getElementById('logoCasaImg').style.display = 'block';
+                document.getElementById('logoCasaPlaceholder').style.display = 'none';
+                localStorage.setItem('logoCasaData', dataUrl);
+                salvarPosicoesElementos();
+            };
+            reader.readAsDataURL(file);
+        });
+
+        document.getElementById('logoVisitanteInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const dataUrl = ev.target.result;
+                document.getElementById('logoVisitanteImg').src = dataUrl;
+                document.getElementById('logoVisitanteImg').style.display = 'block';
+                document.getElementById('logoVisitantePlaceholder').style.display = 'none';
+                localStorage.setItem('logoVisitanteData', dataUrl);
+                salvarPosicoesElementos();
+            };
+            reader.readAsDataURL(file);
+        });
+
+        // ===== BAIXAR =====
+        async function baixarBanner(formato) {
+            if (!fundoAtual) { alert('⚠️ Escolha um fundo na galeria!'); return; }
+            const area = document.getElementById('areaBanner');
+            const canvas = await html2canvas(area, { scale: 2, useCORS: true, logging: false,
+                backgroundColor: '#0f0f0f', allowTaint: true });
+            const link = document.createElement('a');
+            link.download = `BANNER-TNJ-${Date.now()}.${formato}`;
+            link.href = canvas.toDataURL(`image/${formato}`, 0.96);
+            link.click();
+        }
+
+        // ===== INICIALIZAÇÃO =====
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('areaBanner').style.aspectRatio = '16 / 9';
+            const telSalvo = localStorage.getItem('tnj_telefone');
+            if (telSalvo) {
+                document.getElementById('telefoneLogoDisplay').innerText = `📞 ${telSalvo}`;
+                document.getElementById('telefoneLogo').value = telSalvo;
+                document.getElementById('telefoneContainer').style.display = 'block';
+            }
+            restaurarGaleria();
+            ['tamTitulo', 'tamSubtitulo', 'tamTituloSec', 'tamDescricao'].forEach(id => {
+                const s = document.getElementById(id);
+                if (s) {
+                    s.addEventListener('input', function() {
+                        document.getElementById(id + 'Display').innerText = this.value;
+                        aplicarTexto();
+                    });
+                }
+            });
+            setTimeout(() => carregarPosicoesElementos(), 200);
+        });
+    </script>
+
+</body>
+</html>
