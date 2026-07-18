@@ -307,6 +307,7 @@
             padding: 0;
         }
 
+        /* LOGO TNJ - arrastável e com zoom */
         #logoTNJ {
             top: 20px;
             left: 20px;
@@ -316,6 +317,13 @@
             padding: 8px 14px;
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            cursor: grab;
+            touch-action: none;
+            user-select: none;
+        }
+        #logoTNJ:active {
+            cursor: grabbing;
+            box-shadow: 0 0 30px rgba(255, 193, 7, 0.2);
         }
         #logoConteudo {
             font-size: 1.5rem;
@@ -323,22 +331,40 @@
             color: #ffc107;
             text-shadow: 0 0 20px rgba(255, 193, 7, 0.3);
             line-height: 1.2;
+            transition: font-size 0.1s;
         }
         #logoConteudo img {
             max-height: 48px;
             width: auto;
             display: inline-block;
+            transition: max-height 0.1s;
         }
 
+        /* TELEFONE - sem borda verde, com ícone do WhatsApp */
         #telefoneContainer {
             top: 20px;
             right: 20px;
             z-index: 20;
-            background: #25d366;
-            padding: 8px 18px;
+            background: rgba(0, 0, 0, 0.25);
+            backdrop-filter: blur(4px);
+            padding: 6px 14px;
             border-radius: 40px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: grab;
+            touch-action: none;
+            user-select: none;
+        }
+        #telefoneContainer:active {
+            cursor: grabbing;
+            box-shadow: 0 0 30px rgba(37, 211, 102, 0.15);
+        }
+        #telefoneContainer .fa-whatsapp {
+            font-size: 1.2rem;
+            color: #25d366;
+            text-shadow: 0 0 12px rgba(37, 211, 102, 0.3);
         }
         #telefoneLogoDisplay {
             font-size: 1rem;
@@ -517,7 +543,11 @@
             #telefoneContainer {
                 top: 10px;
                 right: 10px;
-                padding: 4px 14px;
+                padding: 4px 12px;
+                gap: 4px;
+            }
+            #telefoneContainer .fa-whatsapp {
+                font-size: 1rem;
             }
             #telefoneLogoDisplay {
                 font-size: 0.8rem;
@@ -763,7 +793,6 @@
                             <input type="text" id="canalJogoInput" placeholder="Ex: TV Globo, SporTV" class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" />
                         </div>
                         <button onclick="aplicarJogo()" class="btn-jogo w-full">⚡ APLICAR JOGO</button>
-                        <!-- BOTÃO LIMPAR JOGO - REMOVE TODAS AS INFORMAÇÕES DE FUTEBOL -->
                         <button onclick="limparJogo()" class="btn-limpar btn-padrao w-full text-sm" style="border-radius:12px;">🗑️ Limpar Jogo</button>
                     </div>
                 </div>
@@ -795,7 +824,7 @@
                                 <input type="file" id="uploadLogo" accept="image/png,image/webp" class="text-xs text-gray-300 file:mr-1 file:py-0.5 file:px-2 file:rounded file:border-0 file:bg-tnj-dourado file:text-black file:font-bold" />
                                 <button onclick="carregarLogoPersonalizada()" class="btn-azul text-xs">Carregar</button>
                             </div>
-                            <p class="text-xs text-gray-500 mt-1">👆 Arraste • Dois dedos para aumentar</p>
+                            <p class="text-xs text-gray-500 mt-1">👆 Arraste • Dois dedos para aumentar/diminuir</p>
                         </div>
 
                         <div class="flex gap-2 mt-1">
@@ -852,15 +881,16 @@
                         <video id="videoBanner" class="absolute w-full h-full object-cover opacity-25 hidden" loop muted playsinline autoplay></video>
                         <div id="sobreposicao" class="absolute w-full h-full bg-gradient-to-t from-black/85 via-black/40 to-transparent"></div>
 
-                        <!-- Logo TNJ -->
+                        <!-- Logo TNJ com zoom por pinça -->
                         <div id="logoTNJ" class="arrastavel" style="z-index:20; background:rgba(0,0,0,0.3); backdrop-filter:blur(4px); padding:8px 14px; border-radius:12px; border:1px solid rgba(255,255,255,0.1);">
                             <div id="logoConteudo" class="text-2xl font-black text-tnj-dourado drop-shadow-[0_0_8px_rgba(255,193,7,0.5)]">
                                 TV NOVA JUAREZ
                             </div>
                         </div>
 
-                        <!-- Telefone -->
-                        <div id="telefoneContainer" class="arrastavel" style="background:#25d366; border-radius:40px; padding:8px 18px; border:2px solid rgba(255,255,255,0.2); box-shadow:0 4px 15px rgba(37,211,102,0.3);">
+                        <!-- Telefone com ícone do WhatsApp -->
+                        <div id="telefoneContainer" class="arrastavel" style="background:rgba(0,0,0,0.25); backdrop-filter:blur(4px); padding:6px 14px; border-radius:40px; border:1px solid rgba(255,255,255,0.08); display:flex; align-items:center; gap:8px;">
+                            <i class="fa fa-whatsapp" style="font-size:1.2rem; color:#25d366; text-shadow:0 0 12px rgba(37,211,102,0.3);"></i>
                             <div id="telefoneLogoDisplay" class="text-sm text-white font-semibold"></div>
                         </div>
 
@@ -906,7 +936,7 @@
                     </div>
 
                     <p class="text-xs text-gray-400 mt-2 text-center">
-                        <i class="fa fa-arrows"></i> Arraste qualquer elemento • Dois dedos para aumentar
+                        <i class="fa fa-arrows"></i> Arraste qualquer elemento • Dois dedos sobre a logo ou textos para aumentar/diminuir
                     </p>
                     <p class="text-xs text-gray-400 text-center">
                         <i class="fa fa-mouse-pointer"></i> Clique na miniatura para usar como fundo • Duplo clique para remover
@@ -917,7 +947,7 @@
     </div>
 
     <footer class="mt-10 py-4 text-center text-xs text-gray-500 border-t border-gray-800">
-        © 2026 BNNERTNJ • Ferramenta Oficial TNJ / TV Nova Juarez • Versão 9.1
+        © 2026 BNNERTNJ • Ferramenta Oficial TNJ / TV Nova Juarez • Versão 9.2
     </footer>
 
     <script>
@@ -999,7 +1029,11 @@
                         pos[id].fontSize = window.getComputedStyle(el).fontSize;
                     }
                     if (id === 'logoTNJ') {
-                        pos[id].logoFontSize = window.getComputedStyle(document.getElementById('logoConteudo')).fontSize;
+                        const logoSize = window.getComputedStyle(document.getElementById('logoConteudo')).fontSize;
+                        pos[id].logoFontSize = logoSize;
+                        // também salvar max-height da imagem se houver
+                        const img = document.getElementById('logoConteudo').querySelector('img');
+                        if (img) pos[id].logoImgHeight = img.style.maxHeight || '48px';
                     }
                     if (id === 'placarJogo') pos[id].fontSize = window.getComputedStyle(el).fontSize;
                 }
@@ -1022,8 +1056,14 @@
                         el.style.left = pos[id].left + 'px';
                         el.style.top = pos[id].top + 'px';
                         el.style.transform = 'none';
-                        if (id === 'logoTNJ' && pos[id].logoFontSize) {
-                            document.getElementById('logoConteudo').style.fontSize = pos[id].logoFontSize;
+                        if (id === 'logoTNJ') {
+                            if (pos[id].logoFontSize) {
+                                document.getElementById('logoConteudo').style.fontSize = pos[id].logoFontSize;
+                            }
+                            const img = document.getElementById('logoConteudo').querySelector('img');
+                            if (img && pos[id].logoImgHeight) {
+                                img.style.maxHeight = pos[id].logoImgHeight;
+                            }
                         }
                         if (id.includes('Banner') && id !== 'logoTNJ' && id !== 'telefoneContainer' && pos[id]
                             .fontSize) {
@@ -1078,13 +1118,12 @@
             aplicarTexto();
             const telSalvo = localStorage.getItem('tnj_telefone');
             if (telSalvo) {
-                document.getElementById('telefoneLogoDisplay').innerText = `📞 ${telSalvo}`;
-                document.getElementById('telefoneLogo').value = telSalvo;
-                document.getElementById('telefoneContainer').style.display = 'block';
+                document.getElementById('telefoneLogoDisplay').innerText = telSalvo;
+                document.getElementById('telefoneContainer').style.display = 'flex';
             } else {
                 document.getElementById('telefoneContainer').style.display = 'none';
             }
-            // Restaurar logos se houver dados salvos
+            // Restaurar logos dos times
             const logoCasa = localStorage.getItem('logoCasaData');
             if (logoCasa) {
                 document.getElementById('logoCasaImg').src = logoCasa;
@@ -1292,7 +1331,7 @@
             reader.onload = function(e) {
                 logoPersonalizada = e.target.result;
                 document.getElementById('logoConteudo').innerHTML =
-                    `<img src="${logoPersonalizada}" class="max-h-12 w-auto" style="display:inline-block;" />`;
+                    `<img src="${logoPersonalizada}" style="max-height:48px; width:auto; display:inline-block;" />`;
                 document.getElementById('logoTNJ').style.display = 'block';
                 salvarPosicoesElementos();
             };
@@ -1308,8 +1347,8 @@
         function adicionarContato() {
             const telefone = document.getElementById('telefoneLogo').value.trim();
             if (!telefone) { alert('Digite um número.'); return; }
-            document.getElementById('telefoneLogoDisplay').innerText = `📞 ${telefone}`;
-            document.getElementById('telefoneContainer').style.display = 'block';
+            document.getElementById('telefoneLogoDisplay').innerText = telefone;
+            document.getElementById('telefoneContainer').style.display = 'flex';
             localStorage.setItem('tnj_telefone', telefone);
             salvarPosicoesElementos();
         }
@@ -1338,6 +1377,13 @@
                     if (!d.transform) el.style.transform = 'none';
                 }
             });
+            // Resetar tamanho da logo
+            const logoContent = document.getElementById('logoConteudo');
+            if (logoContent) {
+                logoContent.style.fontSize = '1.5rem';
+                const img = logoContent.querySelector('img');
+                if (img) img.style.maxHeight = '48px';
+            }
             salvarPosicoesElementos();
         }
 
@@ -1419,7 +1465,7 @@
             salvarPosicoesElementos();
         }
 
-        // ===== LIMPAR JOGO (remove todas as informações de futebol) =====
+        // ===== LIMPAR JOGO =====
         function limparJogo() {
             document.getElementById('timeCasaNome').value = '';
             document.getElementById('timeVisitanteNome').value = '';
@@ -1440,7 +1486,6 @@
             document.getElementById('placarJogo').innerText = '0 x 0';
             document.getElementById('dataHoraJogo').innerText = 'Data e Hora';
             document.getElementById('canalJogo').innerText = 'Canal';
-            // Oculta todos os elementos de jogo
             document.querySelectorAll('.elemento-jogo').forEach(el => el.classList.remove('visivel'));
             jogoAplicado = false;
             localStorage.removeItem('tnj_jogo');
@@ -1483,6 +1528,8 @@
             document.getElementById('logoTNJ').style.display = 'block';
             document.getElementById('logoConteudo').innerHTML = 'TV NOVA JUAREZ';
             document.getElementById('logoConteudo').style.fontSize = '1.5rem';
+            const img = document.getElementById('logoConteudo').querySelector('img');
+            if (img) img.style.maxHeight = '48px';
             fundoAtual = null;
             logoPersonalizada = null;
             localStorage.removeItem('tnj_fundo');
@@ -1506,21 +1553,41 @@
         let zoomData = null;
         document.addEventListener('touchstart', function(e) {
             if (e.touches.length === 2) {
-                const target = e.target.closest('.arrastavel, .elemento-jogo');
+                const target = e.target.closest('.arrastavel') || e.target.closest('#logoTNJ') || e.target.closest(
+                    '.elemento-jogo');
                 if (!target) return;
                 const isText = target.id.includes('Banner');
-                const isLogo = target.id === 'logoTNJ';
+                const isLogo = target.id === 'logoTNJ' || target.closest('#logoTNJ') !== null;
                 const isPlacar = target.id === 'placarJogo';
                 if (!isText && !isLogo && !isPlacar) return;
+
+                // Para logo, pega o conteúdo da logo
+                let logoContent = null;
+                let targetElement = target;
+                if (isLogo) {
+                    logoContent = document.getElementById('logoConteudo');
+                    if (!logoContent) return;
+                }
+
                 const t1 = e.touches[0],
                     t2 = e.touches[1];
                 const dist = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
                 let initialSize;
-                if (isText || isPlacar) initialSize = parseFloat(window.getComputedStyle(target).fontSize);
-                else if (isLogo) initialSize = parseFloat(window.getComputedStyle(document.getElementById('logoConteudo'))
-                    .fontSize);
-                zoomData = { target, isText, isLogo, isPlacar, initialDist: dist, initialSize, logoContent: isLogo ?
-                        document.getElementById('logoConteudo') : null };
+                if (isText || isPlacar) {
+                    initialSize = parseFloat(window.getComputedStyle(target).fontSize);
+                } else if (isLogo) {
+                    initialSize = parseFloat(window.getComputedStyle(logoContent).fontSize);
+                }
+                zoomData = {
+                    target: target,
+                    isText: isText,
+                    isLogo: isLogo,
+                    isPlacar: isPlacar,
+                    initialDist: dist,
+                    initialSize: initialSize,
+                    logoContent: logoContent,
+                    targetElement: targetElement
+                };
                 e.preventDefault();
             }
         }, { passive: false });
@@ -1556,10 +1623,16 @@
                 }
             } else if (zoomData.isLogo) {
                 const logoContent = zoomData.logoContent;
+                // Aumenta/diminui a fonte da logo
                 newSize = Math.min(60, Math.max(14, newSize));
                 logoContent.style.fontSize = newSize + 'px';
+                // Se tiver imagem, ajusta o max-height proporcional
                 const img = logoContent.querySelector('img');
-                if (img) img.style.maxHeight = (newSize * 1.2) + 'px';
+                if (img) {
+                    const baseSize = 48; // tamanho base em px
+                    const newHeight = (newSize / 24) * baseSize; // 24 é o tamanho base da fonte (1.5rem)
+                    img.style.maxHeight = Math.min(80, Math.max(20, newHeight)) + 'px';
+                }
             }
             salvarPosicoesElementos();
         }, { passive: false });
@@ -1619,7 +1692,8 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.arrastavel, .elemento-jogo').forEach(el => makeDraggable(el));
+            document.querySelectorAll('.arrastavel, .elemento-jogo, #logoTNJ, #telefoneContainer').forEach(el =>
+                makeDraggable(el));
         });
 
         // ===== EVENTOS PARA LOGOS DOS TIMES =====
@@ -1670,9 +1744,11 @@
             document.getElementById('areaBanner').style.aspectRatio = '16 / 9';
             const telSalvo = localStorage.getItem('tnj_telefone');
             if (telSalvo) {
-                document.getElementById('telefoneLogoDisplay').innerText = `📞 ${telSalvo}`;
+                document.getElementById('telefoneLogoDisplay').innerText = telSalvo;
+                document.getElementById('telefoneContainer').style.display = 'flex';
                 document.getElementById('telefoneLogo').value = telSalvo;
-                document.getElementById('telefoneContainer').style.display = 'block';
+            } else {
+                document.getElementById('telefoneContainer').style.display = 'none';
             }
             restaurarGaleria();
             ['tamTitulo', 'tamSubtitulo', 'tamTituloSec', 'tamDescricao'].forEach(id => {
