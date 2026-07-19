@@ -9,27 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js">
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700;900&family=Anton&family=Bebas+Neue&family=Righteous&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet" />
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        tnj: { azul: '#1a237e', escuro: '#0f0f0f', dourado: '#ffc107', claro: '#283593' }
-                    },
-                    fontFamily: {
-                        principal: ['Arial', 'sans-serif'],
-                        oswald: ['Oswald', 'sans-serif'],
-                        anton: ['Anton', 'sans-serif'],
-                        bebas: ['Bebas Neue', 'sans-serif'],
-                        righteous: ['Righteous', 'sans-serif'],
-                        montserrat: ['Montserrat', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
     <style>
+        /* ===== ESTILOS GERAIS ===== */
         .grad-tnj {
             background: linear-gradient(to right, #1a237e, #283593);
         }
@@ -51,165 +32,125 @@
         .miniatura-galeria.ativa {
             @apply border-tnj-dourado shadow-lg shadow-tnj-dourado/40;
         }
-        video::-webkit-media-controls {
-            display: none !important;
-        }
-        video {
-            pointer-events: none;
-        }
 
+        /* ===== BOTÕES COM BORDAS COLORIDAS ===== */
         .site-grid,
         .download-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
             gap: 8px;
+        }
+        .site-grid {
+            grid-template-columns: repeat(4, 1fr);
         }
         .download-grid {
             grid-template-columns: repeat(3, 1fr);
         }
-        .site-grid .btn-site,
-        .download-grid .btn-download,
+
+        .btn-site,
+        .btn-download,
         .btn-adicionar-url,
         .btn-upload,
         .btn-formato,
-        .btn-jogo,
-        .btn-adicionar-logo,
         .btn-adicionar-contato,
-        .btn-canal {
+        .btn-carregar-logo,
+        .btn-aplicar-texto {
             @apply btn-padrao text-sm font-bold text-center transition-all duration-200;
             border-radius: 12px;
             padding: 12px 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
             color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 6px;
         }
-        .site-grid .btn-site:hover,
-        .download-grid .btn-download:hover,
+        .btn-site:hover,
+        .btn-download:hover,
         .btn-adicionar-url:hover,
         .btn-upload:hover,
         .btn-formato:hover,
-        .btn-jogo:hover,
-        .btn-adicionar-logo:hover,
         .btn-adicionar-contato:hover,
-        .btn-canal:hover {
+        .btn-carregar-logo:hover,
+        .btn-aplicar-texto:hover {
             transform: scale(1.03);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+            border-color: #ffc107;
         }
 
         .btn-pinterest {
             background: linear-gradient(135deg, #e60023, #b3001a);
         }
-        .btn-pinterest:hover {
-            background: linear-gradient(135deg, #ff1a33, #e60023);
-        }
         .btn-twitter {
             background: linear-gradient(135deg, #1da1f2, #0d7fc0);
-        }
-        .btn-twitter:hover {
-            background: linear-gradient(135deg, #3db8ff, #1da1f2);
         }
         .btn-google {
             background: linear-gradient(135deg, #4285f4, #2a5bb5);
         }
-        .btn-google:hover {
-            background: linear-gradient(135deg, #5a9df4, #4285f4);
-        }
         .btn-cinema {
             background: linear-gradient(135deg, #8b1a4a, #5a0f2f);
-        }
-        .btn-cinema:hover {
-            background: linear-gradient(135deg, #b0245e, #8b1a4a);
         }
 
         .btn-png {
             background: linear-gradient(135deg, #2d7d46, #1a4a2a);
         }
-        .btn-png:hover {
-            background: linear-gradient(135deg, #3a9e5a, #2d7d46);
-        }
         .btn-jpeg {
             background: linear-gradient(135deg, #c77d1e, #8a5512);
-        }
-        .btn-jpeg:hover {
-            background: linear-gradient(135deg, #e6952e, #c77d1e);
         }
         .btn-webp {
             background: linear-gradient(135deg, #2a6f8f, #154a61);
         }
-        .btn-webp:hover {
-            background: linear-gradient(135deg, #3a8faf, #2a6f8f);
-        }
 
         .btn-adicionar-url {
             background: linear-gradient(135deg, #6a1b9a, #4a148c);
-        }
-        .btn-adicionar-url:hover {
-            background: linear-gradient(135deg, #8e24aa, #6a1b9a);
+            border-color: #b39ddb;
         }
 
         .btn-upload {
             background: linear-gradient(135deg, #2e7d32, #1b5e20);
-        }
-        .btn-upload:hover {
-            background: linear-gradient(135deg, #388e3c, #2e7d32);
+            border-color: #81c784;
         }
 
         .btn-formato {
             background: linear-gradient(135deg, #00838f, #006064);
-        }
-        .btn-formato:hover {
-            background: linear-gradient(135deg, #00acc1, #00838f);
-        }
-
-        .btn-jogo {
-            background: linear-gradient(135deg, #e65100, #bf360c);
-        }
-        .btn-jogo:hover {
-            background: linear-gradient(135deg, #f57c00, #e65100);
-        }
-
-        .btn-adicionar-logo {
-            background: linear-gradient(135deg, #2a3eb1, #1a237e);
-        }
-        .btn-adicionar-logo:hover {
-            background: linear-gradient(135deg, #3f51b5, #2a3eb1);
+            border-color: #4dd0e1;
         }
 
         .btn-adicionar-contato {
             background: linear-gradient(135deg, #00897b, #00695c);
+            border-color: #4db6ac;
         }
-        .btn-adicionar-contato:hover {
-            background: linear-gradient(135deg, #26a69a, #00897b);
+
+        .btn-carregar-logo {
+            background: linear-gradient(135deg, #6a1b9a, #4a148c);
+            border-color: #b39ddb;
+        }
+
+        .btn-aplicar-texto {
+            background: linear-gradient(135deg, #f9a825, #f57f17);
+            border-color: #ffd54f;
+            color: #000;
+        }
+        .btn-aplicar-texto:hover {
+            border-color: #ffc107;
         }
 
         .btn-limpar {
             background: linear-gradient(135deg, #b71c1c, #7f0000);
+            border: 2px solid #ef9a9a;
+            border-radius: 12px;
+            padding: 12px 8px;
+            color: #fff;
+            font-weight: bold;
+            transition: all 0.2s;
         }
         .btn-limpar:hover {
-            background: linear-gradient(135deg, #d32f2f, #b71c1c);
+            transform: scale(1.03);
+            border-color: #ffc107;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
         }
 
-        .btn-canal {
-            background: linear-gradient(135deg, #2c3e50, #1a252f);
-            padding: 6px 10px;
-            font-size: 0.65rem;
-            border-radius: 8px;
-        }
-        .btn-canal:hover {
-            background: linear-gradient(135deg, #34495e, #2c3e50);
-            transform: scale(1.05);
-        }
-        .btn-canal img {
-            width: 28px;
-            height: 28px;
-            object-fit: contain;
-            border-radius: 4px;
-        }
-
+        /* ===== BANNER COM FUNDO REGGAE ===== */
         #areaBanner {
             position: relative;
             overflow: hidden;
@@ -217,12 +158,19 @@
             -webkit-user-select: none;
             touch-action: none;
             width: 100%;
-            background: #0f0f0f;
             border-radius: 12px;
             border: 2px solid #374151;
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
             transition: aspect-ratio 0.3s ease;
             aspect-ratio: 16 / 9;
+            background: linear-gradient(135deg, #009E3D 0%, #FEDB00 50%, #EF1A2D 100%);
+            background-size: 300% 300%;
+            animation: reggaeMove 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes reggaeMove {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
         }
 
         #fundoBanner,
@@ -233,7 +181,8 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 1;
+            opacity: 0.65;
+            mix-blend-mode: overlay;
         }
         #videoBanner {
             display: none;
@@ -244,7 +193,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.2) 50%, transparent);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1) 50%, transparent);
             pointer-events: none;
             z-index: 1;
         }
@@ -261,7 +210,6 @@
             background: transparent;
             border: none;
             backdrop-filter: none;
-            transition: box-shadow 0.2s;
             min-width: 30px;
             min-height: 24px;
         }
@@ -279,33 +227,7 @@
             line-height: 1.2;
             color: #fff;
             text-align: center;
-            top: 15%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: transparent;
-            border: none;
-            padding: 0;
-        }
-        #subtituloBanner {
-            font-size: 28px;
-            font-weight: 700;
-            text-shadow: 0 3px 15px rgba(0, 0, 0, 0.7);
-            color: #fff;
-            text-align: center;
-            top: 35%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: transparent;
-            border: none;
-            padding: 0;
-        }
-        #tituloSecundario {
-            font-size: 22px;
-            font-weight: 700;
-            text-shadow: 0 3px 15px rgba(0, 0, 0, 0.7);
-            color: #fff;
-            text-align: center;
-            top: 50%;
+            top: 25%;
             left: 50%;
             transform: translateX(-50%);
             background: transparent;
@@ -313,12 +235,12 @@
             padding: 0;
         }
         #descricaoBanner {
-            font-size: 18px;
-            font-weight: 500;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+            font-size: 28px;
+            font-weight: 700;
+            text-shadow: 0 3px 15px rgba(0, 0, 0, 0.7);
             color: #fff;
             text-align: center;
-            top: 65%;
+            top: 60%;
             left: 50%;
             transform: translateX(-50%);
             background: transparent;
@@ -326,7 +248,6 @@
             padding: 0;
         }
 
-        /* LOGO - SEM FUNDO TRANSPARENTE */
         #logoTNJ {
             top: 20px;
             left: 20px;
@@ -336,7 +257,6 @@
             user-select: none;
             background: transparent;
             border: none;
-            backdrop-filter: none;
             padding: 0;
         }
         #logoTNJ:active {
@@ -391,131 +311,6 @@
             white-space: nowrap;
         }
 
-        .elemento-jogo {
-            position: absolute;
-            z-index: 12;
-            cursor: grab;
-            touch-action: none;
-            user-select: none;
-            -webkit-user-select: none;
-            background: rgba(0, 0, 0, 0.25);
-            backdrop-filter: blur(4px);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 6px 14px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            transition: box-shadow 0.2s, background 0.2s;
-            display: none;
-        }
-        .elemento-jogo:active {
-            cursor: grabbing;
-            background: rgba(0, 0, 0, 0.4);
-            box-shadow: 0 0 30px rgba(255, 193, 7, 0.15);
-            z-index: 15;
-        }
-        .elemento-jogo.visivel {
-            display: block;
-        }
-        .logo-time {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
-            display: block;
-            padding: 4px;
-            background: transparent;
-        }
-        .nome-time {
-            font-size: 18px;
-            font-weight: 700;
-            color: #fff;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
-            text-align: center;
-            letter-spacing: 0.5px;
-        }
-        #placarJogo {
-            font-size: 56px;
-            font-weight: 900;
-            color: #ffc107;
-            text-shadow: 0 4px 20px rgba(255, 193, 7, 0.3);
-            letter-spacing: 4px;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(8px);
-            padding: 6px 24px;
-            border-radius: 20px;
-            border: 2px solid rgba(255, 193, 7, 0.2);
-            top: 45%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            line-height: 1.2;
-        }
-        #dataHoraJogo {
-            font-size: 18px;
-            font-weight: 600;
-            color: #fff;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-            bottom: 70px;
-            left: 20px;
-            background: rgba(0, 0, 0, 0.25);
-            backdrop-filter: blur(4px);
-            padding: 6px 16px;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        #canalJogo {
-            font-size: 18px;
-            font-weight: 600;
-            color: #fff;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-            bottom: 70px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.25);
-            backdrop-filter: blur(4px);
-            padding: 6px 16px;
-            border-radius: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .canais-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 4px;
-            max-height: 160px;
-            overflow-y: auto;
-            padding: 4px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .canais-grid .btn-canal {
-            padding: 4px 6px;
-            font-size: 0.55rem;
-            border-radius: 6px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.2s;
-        }
-        .canais-grid .btn-canal:hover {
-            background: rgba(255, 193, 7, 0.15);
-            border-color: #ffc107;
-            transform: scale(1.02);
-        }
-        .canais-grid .btn-canal img {
-            width: 24px;
-            height: 24px;
-            object-fit: contain;
-        }
-        .canais-grid .btn-canal span {
-            font-size: 0.5rem;
-            font-weight: 600;
-            color: #ccc;
-        }
-        .canais-grid .btn-canal.ativo {
-            background: rgba(255, 193, 7, 0.2);
-            border-color: #ffc107;
-            box-shadow: 0 0 15px rgba(255, 193, 7, 0.1);
-        }
-
         .dispositivos {
             display: flex;
             justify-content: center;
@@ -557,41 +352,6 @@
             font-weight: 100;
         }
 
-        .fonte-oswald {
-            font-family: 'Oswald', sans-serif;
-        }
-        .fonte-anton {
-            font-family: 'Anton', sans-serif;
-        }
-        .fonte-bebas {
-            font-family: 'Bebas Neue', sans-serif;
-        }
-        .fonte-righteous {
-            font-family: 'Righteous', sans-serif;
-        }
-        .fonte-montserrat {
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .fonte-opcao {
-            padding: 6px 12px;
-            border-radius: 8px;
-            border: 2px solid transparent;
-            cursor: pointer;
-            transition: all 0.2s;
-            background: rgba(255, 255, 255, 0.05);
-            text-align: center;
-        }
-        .fonte-opcao:hover {
-            background: rgba(255, 193, 7, 0.1);
-            border-color: rgba(255, 193, 7, 0.3);
-        }
-        .fonte-opcao.ativa {
-            border-color: #ffc107;
-            background: rgba(255, 193, 7, 0.15);
-            box-shadow: 0 0 20px rgba(255, 193, 7, 0.1);
-        }
-
         @media (max-width: 640px) {
             .site-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -599,40 +359,9 @@
             .download-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
-            .btn-upload,
-            .btn-formato,
-            .btn-jogo,
-            .btn-adicionar-logo,
-            .btn-adicionar-contato {
-                padding: 12px 8px;
-                font-size: 0.7rem;
-            }
-            .canais-grid {
-                grid-template-columns: repeat(3, 1fr);
-                max-height: 120px;
-            }
-            .dispositivos {
-                gap: 8px;
-                padding: 6px 12px;
-                border-radius: 30px;
-                bottom: 10px;
-            }
-            .dispositivos span {
-                font-size: 0.5rem;
-                gap: 3px;
-            }
-            .dispositivos i {
-                font-size: 0.8rem;
-            }
-            .dispositivos .separador {
-                font-size: 0.5rem;
-            }
             #logoTNJ {
                 top: 10px;
                 left: 10px;
-            }
-            #logoConteudo {
-                font-size: 1.2rem;
             }
             #telefoneContainer {
                 top: 10px;
@@ -640,37 +369,13 @@
                 padding: 4px 12px;
                 gap: 4px;
             }
-            #telefoneContainer .fa-whatsapp {
-                font-size: 1rem;
-            }
-            #telefoneLogoDisplay {
-                font-size: 0.8rem;
-            }
             #tituloBanner {
                 font-size: 32px;
-            }
-            #subtituloBanner {
-                font-size: 20px;
-            }
-            #tituloSecundario {
-                font-size: 16px;
+                top: 20%;
             }
             #descricaoBanner {
-                font-size: 14px;
-            }
-            .logo-time {
-                width: 60px;
-                height: 60px;
-            }
-            #placarJogo {
-                font-size: 36px;
-                padding: 4px 16px;
-            }
-            #dataHoraJogo,
-            #canalJogo {
-                font-size: 14px;
-                padding: 4px 12px;
-                bottom: 50px;
+                font-size: 20px;
+                top: 55%;
             }
         }
     </style>
@@ -697,8 +402,7 @@
                 <i class="fa fa-search text-tnj-dourado"></i> BUSCAR IMAGENS E VÍDEOS
             </h3>
             <div class="flex flex-col sm:flex-row gap-2 mb-4">
-                <input type="text" id="campoBusca" placeholder="Ex: praia, futebol, cinema..." list="sugestoesFilmes"
-                class="flex-1 px-4 py-3 rounded bg-gray-900 border border-gray-600 focus:border-tnj-dourado outline-none" />
+                <input type="text" id="campoBusca" placeholder="Ex: praia, futebol, cinema..." list="sugestoesFilmes" class="flex-1 px-4 py-3 rounded bg-gray-900 border border-gray-600 focus:border-tnj-dourado outline-none" />
                 <datalist id="sugestoesFilmes">
                     <option value="Avatar: O Caminho da Água"></option>
                     <option value="Velozes e Furiosos 10"></option>
@@ -737,25 +441,15 @@
             </div>
 
             <div class="site-grid mb-3">
-                <a href="https://pin.it/41OiFenQz" target="_blank" class="btn-site btn-pinterest">
-                    <i class="fa fa-pinterest-p"></i> Pinterest
-                </a>
-                <a href="https://x.com/Rafael26113445" target="_blank" class="btn-site btn-twitter">
-                    <i class="fa fa-twitter"></i> X (Twitter)
-                </a>
-                <a href="https://www.google.com/search?q=fotos+de+filmes&oq=fotos+de+filmes&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQRRg7MgYIAhBFGDsyBggDEEUYOzIGCAQQRRg70gEINzM5NGowajSoAgKwAgE&client=ms-android-samsung-ss&sourceid=chrome-mobile&source=chrome.ob&ie=UTF-8" target="_blank" class="btn-site btn-google">
-                    <i class="fa fa-google"></i> Google Fotos
-                </a>
-                <a href="https://www.adorocinema.com/filmes/numero-cinemas/" target="_blank" class="btn-site btn-cinema">
-                    <i class="fa fa-film"></i> AdoroCinema
-                </a>
+                <a href="https://pin.it/41OiFenQz" target="_blank" class="btn-site btn-pinterest"><i class="fa fa-pinterest-p"></i> Pinterest</a>
+                <a href="https://x.com/Rafael26113445" target="_blank" class="btn-site btn-twitter"><i class="fa fa-twitter"></i> X (Twitter)</a>
+                <a href="https://www.google.com/search?q=fotos+de+filmes&oq=fotos+de+filmes&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQRRg7MgYIAhBFGDsyBggDEEUYOzIGCAQQRRg70gEINzM5NGowajSoAgKwAgE&client=ms-android-samsung-ss&sourceid=chrome-mobile&source=chrome.ob&ie=UTF-8" target="_blank" class="btn-site btn-google"><i class="fa fa-google"></i> Google Fotos</a>
+                <a href="https://www.adorocinema.com/filmes/numero-cinemas/" target="_blank" class="btn-site btn-cinema"><i class="fa fa-film"></i> AdoroCinema</a>
             </div>
 
             <div class="flex flex-col sm:flex-row gap-2 mb-2">
                 <input type="text" id="urlImagem" placeholder="Cole o LINK DIRETO da imagem ou vídeo" class="flex-1 px-3 py-2 rounded bg-gray-900 border border-gray-600 focus:border-tnj-dourado outline-none text-sm" />
-                <button onclick="adicionarPorURL()" class="btn-adicionar-url">
-                    <i class="fa fa-plus-circle"></i> Adicionar
-                </button>
+                <button onclick="adicionarPorURL()" class="btn-adicionar-url"><i class="fa fa-plus-circle"></i> Adicionar</button>
             </div>
             <p class="text-xs text-gray-400 mt-1">💡 Suporta imagens (JPG, PNG, WebP) e vídeos (MP4, WebM, MOV, AVI)</p>
 
@@ -770,9 +464,7 @@
             <div class="flex flex-wrap items-center gap-3 mt-4 pt-3 border-t border-gray-700">
                 <span class="text-sm font-semibold"><i class="fa fa-upload"></i> Adicionar do celular:</span>
                 <input type="file" id="uploadArquivo" accept="image/*,video/*" multiple class="text-sm text-gray-300 file:mr-2 file:py-1 file:px-3 file:rounded file:border-0 file:bg-tnj-dourado file:text-black file:font-bold hover:file:brightness-110" />
-                <button onclick="uploadArquivos()" class="btn-upload">
-                    <i class="fa fa-folder-open"></i> Adicionar
-                </button>
+                <button onclick="uploadArquivos()" class="btn-upload"><i class="fa fa-folder-open"></i> Adicionar</button>
             </div>
         </section>
 
@@ -781,7 +473,7 @@
             <!-- FERRAMENTAS LATERAIS -->
             <div class="md:col-span-1 space-y-4">
 
-                <!-- TEXTOS -->
+                <!-- TEXTOS (apenas Título e Descrição) -->
                 <div class="caixa">
                     <h3 class="font-bold mb-3 text-tnj-dourado">📝 TEXTOS</h3>
                     <div class="space-y-3">
@@ -795,31 +487,7 @@
                                 <button onclick="ajustarFonteTexto('titulo',-2)" class="btn-azul text-xs px-2 py-0.5">−</button>
                                 <button onclick="ajustarFonteTexto('titulo',2)" class="btn-azul text-xs px-2 py-0.5">+</button>
                             </div>
-                            <p class="text-xs text-gray-500 mt-1">👆 Arraste • Dois dedos para aumentar até 200%</p>
-                        </div>
-
-                        <div>
-                            <label class="text-xs text-tnj-dourado font-semibold">SUBTÍTULO</label>
-                            <input type="text" id="texto2" placeholder="Digite o subtítulo..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" />
-                            <div class="flex items-center gap-2 mt-1">
-                                <span class="text-xs text-gray-400">Tam:</span>
-                                <input type="range" id="tamSubtitulo" min="14" max="100" value="28" class="flex-1 h-1" />
-                                <span id="tamSubtituloDisplay" class="text-xs w-7">28</span>
-                                <button onclick="ajustarFonteTexto('subtitulo',-2)" class="btn-azul text-xs px-2 py-0.5">−</button>
-                                <button onclick="ajustarFonteTexto('subtitulo',2)" class="btn-azul text-xs px-2 py-0.5">+</button>
-                            </div>
-                        </div>
-
-                        <div>
-                            <label class="text-xs text-tnj-dourado font-semibold">TÍTULO SECUNDÁRIO</label>
-                            <input type="text" id="texto3" placeholder="Digite o título secundário..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" />
-                            <div class="flex items-center gap-2 mt-1">
-                                <span class="text-xs text-gray-400">Tam:</span>
-                                <input type="range" id="tamTituloSec" min="14" max="100" value="22" class="flex-1 h-1" />
-                                <span id="tamTituloSecDisplay" class="text-xs w-7">22</span>
-                                <button onclick="ajustarFonteTexto('tituloSec',-2)" class="btn-azul text-xs px-2 py-0.5">−</button>
-                                <button onclick="ajustarFonteTexto('tituloSec',2)" class="btn-azul text-xs px-2 py-0.5">+</button>
-                            </div>
+                            <p class="text-xs text-gray-500 mt-1">👆 Arraste • Dois dedos para aumentar</p>
                         </div>
 
                         <div>
@@ -827,93 +495,15 @@
                             <input type="text" id="texto4" placeholder="Digite a descrição..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" />
                             <div class="flex items-center gap-2 mt-1">
                                 <span class="text-xs text-gray-400">Tam:</span>
-                                <input type="range" id="tamDescricao" min="12" max="80" value="18" class="flex-1 h-1" />
-                                <span id="tamDescricaoDisplay" class="text-xs w-7">18</span>
+                                <input type="range" id="tamDescricao" min="12" max="80" value="28" class="flex-1 h-1" />
+                                <span id="tamDescricaoDisplay" class="text-xs w-7">28</span>
                                 <button onclick="ajustarFonteTexto('descricao',-2)" class="btn-azul text-xs px-2 py-0.5">−</button>
                                 <button onclick="ajustarFonteTexto('descricao',2)" class="btn-azul text-xs px-2 py-0.5">+</button>
                             </div>
+                            <p class="text-xs text-gray-500 mt-1">👆 Arraste • Dois dedos para aumentar</p>
                         </div>
 
-                        <button onclick="aplicarTexto()" class="btn-dourado w-full mt-2">APLICAR TEXTOS</button>
-                    </div>
-                </div>
-
-                <!-- ESTILOS DE FONTE -->
-                <div class="caixa">
-                    <h3 class="font-bold mb-3 text-tnj-dourado">🖌️ ESTILO DE FONTE</h3>
-                    <div class="grid grid-cols-2 gap-2">
-                        <div onclick="aplicarFonte('fonte-oswald')" class="fonte-opcao ativa" id="fonte-oswald">
-                            <span class="font-oswald text-lg font-bold text-white">Oswald</span>
-                        </div>
-                        <div onclick="aplicarFonte('fonte-anton')" class="fonte-opcao" id="fonte-anton">
-                            <span class="font-anton text-lg text-white">Anton</span>
-                        </div>
-                        <div onclick="aplicarFonte('fonte-bebas')" class="fonte-opcao" id="fonte-bebas">
-                            <span class="font-bebas text-lg font-bold text-white">Bebas</span>
-                        </div>
-                        <div onclick="aplicarFonte('fonte-righteous')" class="fonte-opcao" id="fonte-righteous">
-                            <span class="font-righteous text-lg text-white">Righteous</span>
-                        </div>
-                        <div onclick="aplicarFonte('fonte-montserrat')" class="fonte-opcao" id="fonte-montserrat">
-                            <span class="font-montserrat text-lg font-bold text-white">Montserrat</span>
-                        </div>
-                    </div>
-                    <p class="text-xs text-gray-400 mt-2">Clique para aplicar a fonte a todos os textos</p>
-                </div>
-
-                <!-- CONFIGURAÇÃO DE JOGO -->
-                <div class="caixa">
-                    <h3 class="font-bold mb-3 text-tnj-dourado">⚽ BANNER DE JOGO</h3>
-                    <div class="space-y-3">
-                        <div>
-                            <label class="text-xs text-tnj-dourado font-semibold">TIME DA CASA</label>
-                            <input type="text" id="timeCasaNome" placeholder="Ex: Flamengo" class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" />
-                            <div class="flex items-center gap-2 mt-1">
-                                <label class="text-xs text-gray-400">Logo:</label>
-                                <input type="file" id="logoCasaInput" accept="image/*" class="hidden" />
-                                <button onclick="document.getElementById('logoCasaInput').click()" class="btn-adicionar-logo text-xs">
-                                    <i class="fa fa-upload"></i> Adicionar Logo Casa
-                                </button>
-                                <span id="logoCasaStatus" class="text-xs text-green-400 hidden">✓</span>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="text-xs text-tnj-dourado font-semibold">TIME VISITANTE</label>
-                            <input type="text" id="timeVisitanteNome" placeholder="Ex: Corinthians" class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" />
-                            <div class="flex items-center gap-2 mt-1">
-                                <label class="text-xs text-gray-400">Logo:</label>
-                                <input type="file" id="logoVisitanteInput" accept="image/*" class="hidden" />
-                                <button onclick="document.getElementById('logoVisitanteInput').click()" class="btn-adicionar-logo text-xs">
-                                    <i class="fa fa-upload"></i> Adicionar Logo Visitante
-                                </button>
-                                <span id="logoVisitanteStatus" class="text-xs text-green-400 hidden">✓</span>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="text-xs text-tnj-dourado font-semibold">PLACAR</label>
-                            <div class="flex items-center gap-2 mt-1">
-                                <button onclick="alterarPlacar('casa', -1)" class="btn-azul text-xs px-2 py-1">−</button>
-                                <span id="placarCasaDisplay" class="text-lg font-bold w-8 text-center">0</span>
-                                <span class="text-tnj-dourado font-bold">x</span>
-                                <span id="placarVisitanteDisplay" class="text-lg font-bold w-8 text-center">0</span>
-                                <button onclick="alterarPlacar('visitante', 1)" class="btn-azul text-xs px-2 py-1">+</button>
-                            </div>
-                            <div class="flex gap-1 mt-1">
-                                <button onclick="alterarPlacar('casa', 1)" class="btn-azul text-xs px-2 py-1 flex-1">Casa +</button>
-                                <button onclick="alterarPlacar('visitante', -1)" class="btn-azul text-xs px-2 py-1 flex-1">Visitante −</button>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="text-xs text-tnj-dourado font-semibold">DATA E HORA</label>
-                            <input type="datetime-local" id="dataHoraJogoInput" class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm text-white" />
-                        </div>
-                        <div>
-                            <label class="text-xs text-tnj-dourado font-semibold">CANAL DE TRANSMISSÃO</label>
-                            <div class="canais-grid" id="canaisGrid"></div>
-                            <input type="text" id="canalJogoInput" placeholder="Ou digite o canal..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" />
-                        </div>
-                        <button onclick="aplicarJogo()" class="btn-jogo w-full">⚡ APLICAR JOGO</button>
-                        <button onclick="limparJogo()" class="btn-limpar btn-padrao w-full text-sm" style="border-radius:12px;">🗑️ Limpar Jogo</button>
+                        <button onclick="aplicarTexto()" class="btn-aplicar-texto w-full mt-2">APLICAR TEXTOS</button>
                     </div>
                 </div>
 
@@ -931,9 +521,7 @@
                             <label class="text-xs text-tnj-dourado font-semibold">TELEFONE / CONTATO</label>
                             <div class="flex gap-1 mt-1">
                                 <input type="text" id="telefoneLogo" placeholder="(83) 99999-9999" class="flex-1 px-2 py-1 rounded bg-gray-900 border border-gray-700 text-sm" />
-                                <button onclick="adicionarContato()" class="btn-adicionar-contato text-sm px-3 py-1">
-                                    <i class="fa fa-phone"></i> Adicionar
-                                </button>
+                                <button onclick="adicionarContato()" class="btn-adicionar-contato text-sm px-3 py-1"><i class="fa fa-phone"></i> Adicionar</button>
                             </div>
                             <p class="text-xs text-gray-500 mt-1">👆 Arraste o número</p>
                         </div>
@@ -942,9 +530,9 @@
                             <label class="text-xs text-tnj-dourado font-semibold">LOGO PERSONALIZADA</label>
                             <div class="flex items-center gap-2 mt-1">
                                 <input type="file" id="uploadLogo" accept="image/png,image/webp,image/jpeg" class="text-xs text-gray-300 file:mr-1 file:py-0.5 file:px-2 file:rounded file:border-0 file:bg-tnj-dourado file:text-black file:font-bold" />
-                                <button onclick="carregarLogoPersonalizada()" class="btn-azul text-xs">Carregar</button>
+                                <button onclick="carregarLogoPersonalizada()" class="btn-carregar-logo text-xs"><i class="fa fa-upload"></i> Carregar</button>
                             </div>
-                            <p class="text-xs text-gray-500 mt-1">👆 Arraste • Dois dedos para aumentar até 200%</p>
+                            <p class="text-xs text-gray-500 mt-1">👆 Arraste • Dois dedos para aumentar</p>
                         </div>
 
                         <div class="flex gap-2 mt-1">
@@ -952,7 +540,7 @@
                             <button onclick="resetarPosicoes()" class="btn-dourado text-sm flex-1">↕ Resetar Posições</button>
                         </div>
 
-                        <button onclick="limparEdicao()" class="btn-limpar btn-padrao w-full text-sm" style="border-radius:12px;">🗑️ LIMPAR TUDO</button>
+                        <button onclick="limparEdicao()" class="btn-limpar w-full text-sm">🗑️ LIMPAR TUDO</button>
                     </div>
                 </div>
 
@@ -968,24 +556,16 @@
                         <option value="2-3">2:3 (Retrato)</option>
                         <option value="21-9">21:9 (Ultrawide)</option>
                     </select>
-                    <button onclick="aplicarFormato()" class="btn-formato w-full mt-2">
-                        <i class="fa fa-arrows-alt"></i> Aplicar Formato
-                    </button>
+                    <button onclick="aplicarFormato()" class="btn-formato w-full mt-2"><i class="fa fa-arrows-alt"></i> Aplicar Formato</button>
                 </div>
 
                 <!-- DOWNLOAD -->
                 <div class="caixa">
                     <h3 class="font-bold mb-3 text-tnj-dourado">⬇️ BAIXAR BANNER</h3>
                     <div class="download-grid">
-                        <button onclick="baixarBanner('png')" class="btn-download btn-png">
-                            <i class="fa fa-file-image-o"></i> PNG
-                        </button>
-                        <button onclick="baixarBanner('jpeg')" class="btn-download btn-jpeg">
-                            <i class="fa fa-file-image-o"></i> JPEG
-                        </button>
-                        <button onclick="baixarBanner('webp')" class="btn-download btn-webp">
-                            <i class="fa fa-file-image-o"></i> WebP
-                        </button>
+                        <button onclick="baixarBanner('png')" class="btn-download btn-png"><i class="fa fa-file-image-o"></i> PNG</button>
+                        <button onclick="baixarBanner('jpeg')" class="btn-download btn-jpeg"><i class="fa fa-file-image-o"></i> JPEG</button>
+                        <button onclick="baixarBanner('webp')" class="btn-download btn-webp"><i class="fa fa-file-image-o"></i> WebP</button>
                     </div>
                     <p class="text-xs text-gray-400 text-center mt-2">Clique no formato desejado</p>
                 </div>
@@ -995,16 +575,14 @@
             <div class="md:col-span-3">
                 <div class="caixa">
                     <h3 class="font-bold mb-3 text-center text-tnj-dourado">📺 SEU BANNER</h3>
-                    <div id="areaBanner" class="w-full rounded-lg overflow-hidden relative bg-gray-900 border-2 border-gray-700 shadow-xl mx-auto max-w-4xl" style="aspect-ratio: 16/9;">
+                    <div id="areaBanner" class="w-full">
                         <img id="fundoBanner" class="absolute w-full h-full object-cover" src="" alt="Fundo" />
                         <video id="videoBanner" class="absolute w-full h-full object-cover hidden" loop muted playsinline autoplay></video>
-                        <div id="sobreposicao" class="absolute w-full h-full bg-gradient-to-t from-black/70 via-black/20 to-transparent pointer-events-none z-1"></div>
+                        <div id="sobreposicao" class="absolute w-full h-full"></div>
 
-                        <!-- Logo TNJ - sem fundo -->
+                        <!-- Logo TNJ -->
                         <div id="logoTNJ" class="arrastavel" style="z-index:20; background:transparent; border:none; backdrop-filter:none; padding:0;">
-                            <div id="logoConteudo" class="text-2xl font-black text-tnj-dourado drop-shadow-[0_0_8px_rgba(255,193,7,0.5)]">
-                                TV NOVA JUAREZ
-                            </div>
+                            <div id="logoConteudo" class="text-2xl font-black text-tnj-dourado drop-shadow-[0_0_8px_rgba(255,193,7,0.5)]">TV NOVA JUAREZ</div>
                         </div>
 
                         <!-- Telefone -->
@@ -1013,34 +591,9 @@
                             <div id="telefoneLogoDisplay" class="text-sm text-white font-semibold"></div>
                         </div>
 
-                        <!-- Textos -->
-                        <div id="tituloBanner" class="arrastavel" style="background:transparent; border:none; backdrop-filter:none; padding:0; font-size:48px; font-weight:900; text-transform:uppercase; text-shadow:0 4px 20px rgba(0,0,0,0.8); letter-spacing:2px; line-height:1.2; color:#fff; text-align:center; top:15%; left:50%; transform:translateX(-50%);">
-                        </div>
-                        <div id="subtituloBanner" class="arrastavel" style="background:transparent; border:none; backdrop-filter:none; padding:0; font-size:28px; font-weight:700; text-shadow:0 3px 15px rgba(0,0,0,0.7); color:#fff; text-align:center; top:35%; left:50%; transform:translateX(-50%);">
-                        </div>
-                        <div id="tituloSecundario" class="arrastavel" style="background:transparent; border:none; backdrop-filter:none; padding:0; font-size:22px; font-weight:700; text-shadow:0 3px 15px rgba(0,0,0,0.7); color:#fff; text-align:center; top:50%; left:50%; transform:translateX(-50%);">
-                        </div>
-                        <div id="descricaoBanner" class="arrastavel" style="background:transparent; border:none; backdrop-filter:none; padding:0; font-size:18px; font-weight:500; text-shadow:0 2px 10px rgba(0,0,0,0.6); color:#fff; text-align:center; top:65%; left:50%; transform:translateX(-50%);">
-                        </div>
-
-                        <!-- ELEMENTOS DE JOGO -->
-                        <div id="logoCasa" class="elemento-jogo" style="top:25%; left:8%;">
-                            <img id="logoCasaImg" class="logo-time" src="" alt="Time Casa" />
-                            <div id="logoCasaPlaceholder" class="text-xs text-gray-400">Logo Casa</div>
-                        </div>
-                        <div id="nomeCasa" class="elemento-jogo nome-time" style="top:55%; left:8%; font-size:18px; font-weight:700; color:#fff; text-shadow:0 2px 10px rgba(0,0,0,0.7); text-align:center; min-width:80px;">Time Casa</div>
-
-                        <div id="logoVisitante" class="elemento-jogo" style="top:25%; right:8%;">
-                            <img id="logoVisitanteImg" class="logo-time" src="" alt="Time Visitante" />
-                            <div id="logoVisitantePlaceholder" class="text-xs text-gray-400">Logo Visitante</div>
-                        </div>
-                        <div id="nomeVisitante" class="elemento-jogo nome-time" style="top:55%; right:8%; font-size:18px; font-weight:700; color:#fff; text-shadow:0 2px 10px rgba(0,0,0,0.7); text-align:center; min-width:80px;">Time Visitante</div>
-
-                        <div id="placarJogo" class="elemento-jogo" style="font-size:56px; font-weight:900; color:#ffc107; text-shadow:0 4px 20px rgba(255,193,7,0.3); letter-spacing:4px; background:rgba(0,0,0,0.4); backdrop-filter:blur(8px); padding:6px 24px; border-radius:20px; border:2px solid rgba(255,193,7,0.2); top:45%; left:50%; transform:translate(-50%, -50%); text-align:center; line-height:1.2;">0 x 0</div>
-
-                        <div id="dataHoraJogo" class="elemento-jogo" style="font-size:18px; font-weight:600; color:#fff; text-shadow:0 2px 8px rgba(0,0,0,0.6); bottom:70px; left:20px; background:rgba(0,0,0,0.25); backdrop-filter:blur(4px); padding:6px 16px; border-radius:30px; border:1px solid rgba(255,255,255,0.08);">Data e Hora</div>
-
-                        <div id="canalJogo" class="elemento-jogo" style="font-size:18px; font-weight:600; color:#fff; text-shadow:0 2px 8px rgba(0,0,0,0.6); bottom:70px; right:20px; background:rgba(0,0,0,0.25); backdrop-filter:blur(4px); padding:6px 16px; border-radius:30px; border:1px solid rgba(255,255,255,0.08);">Canal</div>
+                        <!-- Textos (apenas Título e Descrição) -->
+                        <div id="tituloBanner" class="arrastavel" style="background:transparent; border:none; backdrop-filter:none; padding:0; font-size:48px; font-weight:900; text-transform:uppercase; text-shadow:0 4px 20px rgba(0,0,0,0.8); letter-spacing:2px; line-height:1.2; color:#fff; text-align:center; top:25%; left:50%; transform:translateX(-50%);"></div>
+                        <div id="descricaoBanner" class="arrastavel" style="background:transparent; border:none; backdrop-filter:none; padding:0; font-size:28px; font-weight:700; text-shadow:0 3px 15px rgba(0,0,0,0.7); color:#fff; text-align:center; top:60%; left:50%; transform:translateX(-50%);"></div>
 
                         <!-- Dispositivos -->
                         <div class="dispositivos">
@@ -1066,7 +619,7 @@
     </div>
 
     <footer class="mt-10 py-4 text-center text-xs text-gray-500 border-t border-gray-800">
-        © 2026 BNNERTNJ • Ferramenta Oficial TNJ / TV Nova Juarez • Versão 10.1 • Profissional
+        © 2026 BNNERTNJ • Ferramenta Oficial TNJ / TV Nova Juarez • Versão 12.1
     </footer>
 
     <script>
@@ -1076,25 +629,6 @@
         let imagensGaleria = [];
         let fundoAtual = null;
         let logoPersonalizada = null;
-        let placarCasa = 0;
-        let placarVisitante = 0;
-        let jogoAplicado = false;
-        let fonteAtual = 'fonte-oswald';
-
-        const canaisTV = [
-            { nome: 'TV Globo', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Rede_Globo_2021.svg/1200px-Rede_Globo_2021.svg.png' },
-            { nome: 'SporTV', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/SporTV_logo.svg/1200px-SporTV_logo.svg.png' },
-            { nome: 'ESPN', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/ESPN_wordmark.svg/1200px-ESPN_wordmark.svg.png' },
-            { nome: 'Fox Sports', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Fox_Sports_logo.svg/1200px-Fox_Sports_logo.svg.png' },
-            { nome: 'Band', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Rede_Bandeirantes_logo_2018.svg/1200px-Rede_Bandeirantes_logo_2018.svg.png' },
-            { nome: 'SBT', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/SBT_Logo_2021.svg/1200px-SBT_Logo_2021.svg.png' },
-            { nome: 'Record', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/RecordTV_logo_2016.svg/1200px-RecordTV_logo_2016.svg.png' },
-            { nome: 'Premiere', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Premiere_Futebol_Clube_Logo.svg/1200px-Premiere_Futebol_Clube_Logo.svg.png' },
-            { nome: 'TNT Sports', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/TNT_Sports_logo.svg/1200px-TNT_Sports_logo.svg.png' },
-            { nome: 'Amazon Prime', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Amazon_Prime_Video_logo.svg/1200px-Amazon_Prime_Video_logo.svg.png' },
-            { nome: 'HBO Max', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/HBO_Max_Logo.svg/1200px-HBO_Max_Logo.svg.png' },
-            { nome: 'Disney+', logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Disney%2B_logo.svg/1200px-Disney%2B_logo.svg.png' }
-        ];
 
         // ===== PERSISTÊNCIA =====
         function salvarGaleria() {
@@ -1103,57 +637,11 @@
                 if (fundoAtual) localStorage.setItem('tnj_fundo', JSON.stringify(fundoAtual));
                 else localStorage.removeItem('tnj_fundo');
                 salvarPosicoesElementos();
-                salvarDadosJogo();
-                localStorage.setItem('tnj_fonte', fonteAtual);
-            } catch (e) {}
-        }
-
-        function salvarDadosJogo() {
-            const dados = {
-                placarCasa,
-                placarVisitante,
-                timeCasa: document.getElementById('timeCasaNome').value,
-                timeVisitante: document.getElementById('timeVisitanteNome').value,
-                dataHora: document.getElementById('dataHoraJogoInput').value,
-                canal: document.getElementById('canalJogoInput').value,
-                aplicado: jogoAplicado
-            };
-            localStorage.setItem('tnj_jogo', JSON.stringify(dados));
-        }
-
-        function carregarDadosJogo() {
-            try {
-                const dados = localStorage.getItem('tnj_jogo');
-                if (!dados) return;
-                const jogo = JSON.parse(dados);
-                placarCasa = jogo.placarCasa || 0;
-                placarVisitante = jogo.placarVisitante || 0;
-                document.getElementById('timeCasaNome').value = jogo.timeCasa || '';
-                document.getElementById('timeVisitanteNome').value = jogo.timeVisitante || '';
-                document.getElementById('dataHoraJogoInput').value = jogo.dataHora || '';
-                document.getElementById('canalJogoInput').value = jogo.canal || '';
-                document.getElementById('placarCasaDisplay').innerText = placarCasa;
-                document.getElementById('placarVisitanteDisplay').innerText = placarVisitante;
-                jogoAplicado = jogo.aplicado || false;
-                if (jogoAplicado) {
-                    document.querySelectorAll('.elemento-jogo').forEach(el => el.classList.add('visivel'));
-                    document.getElementById('nomeCasa').innerText = jogo.timeCasa || 'Time Casa';
-                    document.getElementById('nomeVisitante').innerText = jogo.timeVisitante || 'Time Visitante';
-                    document.getElementById('placarJogo').innerText = `${placarCasa} x ${placarVisitante}`;
-                    if (jogo.dataHora) {
-                        const d = new Date(jogo.dataHora);
-                        document.getElementById('dataHoraJogo').innerText = `📅 ${d.toLocaleString('pt-BR')}`;
-                    }
-                    if (jogo.canal) document.getElementById('canalJogo').innerText = `📺 ${jogo.canal}`;
-                }
             } catch (e) {}
         }
 
         function salvarPosicoesElementos() {
-            const elementos = ['tituloBanner', 'subtituloBanner', 'tituloSecundario', 'descricaoBanner', 'logoTNJ',
-                'telefoneContainer',
-                'logoCasa', 'nomeCasa', 'logoVisitante', 'nomeVisitante', 'placarJogo', 'dataHoraJogo', 'canalJogo'
-            ];
+            const elementos = ['tituloBanner', 'descricaoBanner', 'logoTNJ', 'telefoneContainer'];
             const pos = {};
             elementos.forEach(id => {
                 const el = document.getElementById(id);
@@ -1161,7 +649,7 @@
                     const rect = el.getBoundingClientRect();
                     const parentRect = el.parentElement.getBoundingClientRect();
                     pos[id] = { left: rect.left - parentRect.left, top: rect.top - parentRect.top };
-                    if (id.includes('Banner') && id !== 'logoTNJ' && id !== 'telefoneContainer') {
+                    if (id === 'tituloBanner' || id === 'descricaoBanner') {
                         pos[id].fontSize = window.getComputedStyle(el).fontSize;
                     }
                     if (id === 'logoTNJ') {
@@ -1170,7 +658,6 @@
                         const img = document.getElementById('logoConteudo').querySelector('img');
                         if (img) pos[id].logoImgHeight = img.style.maxHeight || '48px';
                     }
-                    if (id === 'placarJogo') pos[id].fontSize = window.getComputedStyle(el).fontSize;
                 }
             });
             localStorage.setItem('tnj_pos_elementos', JSON.stringify(pos));
@@ -1181,10 +668,7 @@
                 const dados = localStorage.getItem('tnj_pos_elementos');
                 if (!dados) return;
                 const pos = JSON.parse(dados);
-                const elementos = ['tituloBanner', 'subtituloBanner', 'tituloSecundario', 'descricaoBanner', 'logoTNJ',
-                    'telefoneContainer',
-                    'logoCasa', 'nomeCasa', 'logoVisitante', 'nomeVisitante', 'placarJogo', 'dataHoraJogo', 'canalJogo'
-                ];
+                const elementos = ['tituloBanner', 'descricaoBanner', 'logoTNJ', 'telefoneContainer'];
                 elementos.forEach(id => {
                     const el = document.getElementById(id);
                     if (el && pos[id]) {
@@ -1200,12 +684,9 @@
                                 img.style.maxHeight = pos[id].logoImgHeight;
                             }
                         }
-                        if (id.includes('Banner') && id !== 'logoTNJ' && id !== 'telefoneContainer' && pos[id]
-                            .fontSize) {
+                        if ((id === 'tituloBanner' || id === 'descricaoBanner') && pos[id].fontSize) {
                             el.style.fontSize = pos[id].fontSize;
-                            const sliderId = id === 'tituloBanner' ? 'tamTitulo' :
-                                id === 'subtituloBanner' ? 'tamSubtitulo' :
-                                id === 'tituloSecundario' ? 'tamTituloSec' : 'tamDescricao';
+                            const sliderId = id === 'tituloBanner' ? 'tamTitulo' : 'tamDescricao';
                             const slider = document.getElementById(sliderId);
                             if (slider) {
                                 const size = parseFloat(pos[id].fontSize);
@@ -1215,7 +696,6 @@
                                 }
                             }
                         }
-                        if (id === 'placarJogo' && pos[id].fontSize) el.style.fontSize = pos[id].fontSize;
                         if (id === 'telefoneContainer') { el.style.right = 'auto';
                             el.style.bottom = 'auto'; }
                     }
@@ -1229,19 +709,11 @@
                 if (dados) imagensGaleria = JSON.parse(dados);
                 const fundo = localStorage.getItem('tnj_fundo');
                 if (fundo) fundoAtual = JSON.parse(fundo);
-                const fonte = localStorage.getItem('tnj_fonte');
-                if (fonte) fonteAtual = fonte;
             } catch (e) {}
         }
 
         function restaurarGaleria() {
             carregarGaleria();
-            carregarDadosJogo();
-            document.querySelectorAll('.fonte-opcao').forEach(el => el.classList.remove('ativa'));
-            const fonteEl = document.getElementById(fonteAtual);
-            if (fonteEl) fonteEl.classList.add('ativa');
-            aplicarFonte(fonteAtual, true);
-
             const grade = document.getElementById('gradeResultados');
             grade.innerHTML = '';
             if (imagensGaleria.length === 0) {
@@ -1265,37 +737,6 @@
             } else {
                 document.getElementById('telefoneContainer').style.display = 'none';
             }
-            const logoCasa = localStorage.getItem('logoCasaData');
-            if (logoCasa) {
-                document.getElementById('logoCasaImg').src = logoCasa;
-                document.getElementById('logoCasaImg').style.display = 'block';
-                document.getElementById('logoCasaPlaceholder').style.display = 'none';
-                document.getElementById('logoCasaStatus').classList.remove('hidden');
-            }
-            const logoVisitante = localStorage.getItem('logoVisitanteData');
-            if (logoVisitante) {
-                document.getElementById('logoVisitanteImg').src = logoVisitante;
-                document.getElementById('logoVisitanteImg').style.display = 'block';
-                document.getElementById('logoVisitantePlaceholder').style.display = 'none';
-                document.getElementById('logoVisitanteStatus').classList.remove('hidden');
-            }
-            renderizarCanais();
-        }
-
-        function renderizarCanais() {
-            const grid = document.getElementById('canaisGrid');
-            grid.innerHTML = '';
-            canaisTV.forEach(canal => {
-                const btn = document.createElement('button');
-                btn.className = 'btn-canal';
-                btn.innerHTML = `<img src="${canal.logo}" alt="${canal.nome}" onerror="this.style.display='none'" /><span>${canal.nome}</span>`;
-                btn.onclick = function() {
-                    document.getElementById('canalJogoInput').value = canal.nome;
-                    document.querySelectorAll('.canais-grid .btn-canal').forEach(b => b.classList.remove('ativo'));
-                    this.classList.add('ativo');
-                };
-                grid.appendChild(btn);
-            });
         }
 
         // ===== BUSCA =====
@@ -1512,19 +953,10 @@
 
         function resetarPosicoes() {
             const defaults = {
-                tituloBanner: { top: '15%', left: '50%', transform: 'translateX(-50%)' },
-                subtituloBanner: { top: '35%', left: '50%', transform: 'translateX(-50%)' },
-                tituloSecundario: { top: '50%', left: '50%', transform: 'translateX(-50%)' },
-                descricaoBanner: { top: '65%', left: '50%', transform: 'translateX(-50%)' },
+                tituloBanner: { top: '25%', left: '50%', transform: 'translateX(-50%)' },
+                descricaoBanner: { top: '60%', left: '50%', transform: 'translateX(-50%)' },
                 logoTNJ: { top: '20px', left: '20px' },
-                telefoneContainer: { top: '20px', right: '20px', left: 'auto' },
-                logoCasa: { top: '25%', left: '8%' },
-                nomeCasa: { top: '55%', left: '8%' },
-                logoVisitante: { top: '25%', right: '8%', left: 'auto' },
-                nomeVisitante: { top: '55%', right: '8%', left: 'auto' },
-                placarJogo: { top: '45%', left: '50%', transform: 'translate(-50%, -50%)' },
-                dataHoraJogo: { bottom: '70px', left: '20px', top: 'auto', right: 'auto' },
-                canalJogo: { bottom: '70px', right: '20px', top: 'auto', left: 'auto' }
+                telefoneContainer: { top: '20px', right: '20px', left: 'auto' }
             };
             Object.keys(defaults).forEach(id => {
                 const el = document.getElementById(id);
@@ -1534,7 +966,6 @@
                     if (!d.transform) el.style.transform = 'none';
                 }
             });
-            // Resetar tamanho da logo
             const logoContent = document.getElementById('logoConteudo');
             if (logoContent) {
                 logoContent.style.fontSize = '1.5rem';
@@ -1544,58 +975,30 @@
             salvarPosicoesElementos();
         }
 
-        // ===== FONTES =====
-        function aplicarFonte(fonte, silencioso = false) {
-            fonteAtual = fonte;
-            document.querySelectorAll('.fonte-opcao').forEach(el => el.classList.remove('ativa'));
-            const el = document.getElementById(fonte);
-            if (el) el.classList.add('ativa');
-            const textos = ['tituloBanner', 'subtituloBanner', 'tituloSecundario', 'descricaoBanner'];
-            const classe = fonte;
-            textos.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) {
-                    el.className = el.className.replace(/fonte-\w+/g, '').trim();
-                    el.classList.add('arrastavel', classe);
-                }
-            });
-            if (!silencioso) salvarPosicoesElementos();
-        }
-
         // ===== TEXTOS =====
         function aplicarTexto() {
             const t1 = document.getElementById('texto1').value;
-            const t2 = document.getElementById('texto2').value;
-            const t3 = document.getElementById('texto3').value;
             const t4 = document.getElementById('texto4').value;
             const cor = document.getElementById('corTexto').value;
 
             document.getElementById('tituloBanner').innerText = t1;
-            document.getElementById('subtituloBanner').innerText = t2;
-            document.getElementById('tituloSecundario').innerText = t3;
             document.getElementById('descricaoBanner').innerText = t4;
 
             const elementos = {
                 titulo: 'tituloBanner',
-                subtitulo: 'subtituloBanner',
-                tituloSec: 'tituloSecundario',
                 descricao: 'descricaoBanner'
             };
             Object.keys(elementos).forEach(id => {
                 const el = document.getElementById(elementos[id]);
                 el.style.color = cor;
-                const slider = document.getElementById(id === 'titulo' ? 'tamTitulo' :
-                    id === 'subtitulo' ? 'tamSubtitulo' :
-                    id === 'tituloSec' ? 'tamTituloSec' : 'tamDescricao');
+                const slider = document.getElementById(id === 'titulo' ? 'tamTitulo' : 'tamDescricao');
                 if (slider) el.style.fontSize = `${slider.value}px`;
             });
             salvarPosicoesElementos();
         }
 
         function ajustarFonteTexto(tipo, delta) {
-            const sliderId = tipo === 'titulo' ? 'tamTitulo' :
-                tipo === 'subtitulo' ? 'tamSubtitulo' :
-                tipo === 'tituloSec' ? 'tamTituloSec' : 'tamDescricao';
+            const sliderId = tipo === 'titulo' ? 'tamTitulo' : 'tamDescricao';
             const slider = document.getElementById(sliderId);
             if (!slider) return;
             let val = parseInt(slider.value) + delta;
@@ -1603,72 +1006,6 @@
             slider.value = val;
             document.getElementById(sliderId + 'Display').innerText = val;
             aplicarTexto();
-        }
-
-        // ===== JOGO =====
-        function alterarPlacar(time, delta) {
-            if (time === 'casa') { placarCasa = Math.max(0, placarCasa + delta);
-                document.getElementById('placarCasaDisplay').innerText = placarCasa; } else { placarVisitante = Math.max(0,
-                    placarVisitante + delta);
-                document.getElementById('placarVisitanteDisplay').innerText = placarVisitante; }
-            if (jogoAplicado) document.getElementById('placarJogo').innerText = `${placarCasa} x ${placarVisitante}`;
-            salvarDadosJogo();
-        }
-
-        function aplicarJogo() {
-            const timeCasa = document.getElementById('timeCasaNome').value.trim();
-            const timeVisitante = document.getElementById('timeVisitanteNome').value.trim();
-            const dataHora = document.getElementById('dataHoraJogoInput').value;
-            const canal = document.getElementById('canalJogoInput').value.trim();
-
-            document.querySelectorAll('.elemento-jogo').forEach(el => el.classList.add('visivel'));
-
-            document.getElementById('nomeCasa').innerText = timeCasa || 'Time Casa';
-            document.getElementById('nomeVisitante').innerText = timeVisitante || 'Time Visitante';
-            document.getElementById('placarJogo').innerText = `${placarCasa} x ${placarVisitante}`;
-
-            if (dataHora) {
-                const d = new Date(dataHora);
-                document.getElementById('dataHoraJogo').innerText = `📅 ${d.toLocaleString('pt-BR')}`;
-            } else {
-                document.getElementById('dataHoraJogo').innerText = 'Data e Hora';
-            }
-            document.getElementById('canalJogo').innerText = canal ? `📺 ${canal}` : 'Canal';
-
-            jogoAplicado = true;
-            salvarDadosJogo();
-            salvarPosicoesElementos();
-        }
-
-        function limparJogo() {
-            document.getElementById('timeCasaNome').value = '';
-            document.getElementById('timeVisitanteNome').value = '';
-            document.getElementById('dataHoraJogoInput').value = '';
-            document.getElementById('canalJogoInput').value = '';
-            placarCasa = 0;
-            placarVisitante = 0;
-            document.getElementById('placarCasaDisplay').innerText = '0';
-            document.getElementById('placarVisitanteDisplay').innerText = '0';
-            document.getElementById('logoCasaInput').value = '';
-            document.getElementById('logoVisitanteInput').value = '';
-            document.getElementById('logoCasaImg').style.display = 'none';
-            document.getElementById('logoVisitanteImg').style.display = 'none';
-            document.getElementById('logoCasaPlaceholder').style.display = 'block';
-            document.getElementById('logoVisitantePlaceholder').style.display = 'block';
-            document.getElementById('logoCasaStatus').classList.add('hidden');
-            document.getElementById('logoVisitanteStatus').classList.add('hidden');
-            document.getElementById('nomeCasa').innerText = 'Time Casa';
-            document.getElementById('nomeVisitante').innerText = 'Time Visitante';
-            document.getElementById('placarJogo').innerText = '0 x 0';
-            document.getElementById('dataHoraJogo').innerText = 'Data e Hora';
-            document.getElementById('canalJogo').innerText = 'Canal';
-            document.querySelectorAll('.elemento-jogo').forEach(el => el.classList.remove('visivel'));
-            jogoAplicado = false;
-            localStorage.removeItem('tnj_jogo');
-            localStorage.removeItem('logoCasaData');
-            localStorage.removeItem('logoVisitanteData');
-            document.querySelectorAll('.canais-grid .btn-canal').forEach(b => b.classList.remove('ativo'));
-            salvarPosicoesElementos();
         }
 
         // ===== FORMATO =====
@@ -1692,12 +1029,8 @@
             document.getElementById('videoBanner').src = '';
             document.getElementById('videoBanner').classList.add('hidden');
             document.getElementById('tituloBanner').innerText = '';
-            document.getElementById('subtituloBanner').innerText = '';
-            document.getElementById('tituloSecundario').innerText = '';
             document.getElementById('descricaoBanner').innerText = '';
             document.getElementById('texto1').value = '';
-            document.getElementById('texto2').value = '';
-            document.getElementById('texto3').value = '';
             document.getElementById('texto4').value = '';
             document.getElementById('telefoneLogo').value = '';
             document.getElementById('telefoneLogoDisplay').innerText = '';
@@ -1712,28 +1045,25 @@
             localStorage.removeItem('tnj_fundo');
             localStorage.removeItem('tnj_telefone');
             document.getElementById('corTexto').value = '#ffffff';
-            ['tamTitulo', 'tamSubtitulo', 'tamTituloSec', 'tamDescricao'].forEach(id => {
+            ['tamTitulo', 'tamDescricao'].forEach(id => {
                 const s = document.getElementById(id);
                 if (s) {
-                    s.value = id === 'tamTitulo' ? '48' : id === 'tamSubtitulo' ? '28' : id === 'tamTituloSec' ? '22' :
-                        '18';
+                    s.value = id === 'tamTitulo' ? '48' : '28';
                     document.getElementById(id + 'Display').innerText = s.value;
                 }
             });
             resetarPosicoes();
-            limparJogo();
             aplicarTexto();
             if (imagensGaleria.length > 0) usarComoFundo(imagensGaleria[0]);
         }
 
-        // ===== ZOOM COM DOIS DEDOS PARA LOGO E TEXTOS =====
+        // ===== ZOOM COM DOIS DEDOS =====
         let zoomData = null;
 
         document.addEventListener('touchstart', function(e) {
             if (e.touches.length === 2) {
                 const target = e.target.closest('#logoTNJ') || e.target.closest('#logoConteudo') ||
-                    e.target.closest('#tituloBanner') || e.target.closest('#subtituloBanner') ||
-                    e.target.closest('#tituloSecundario') || e.target.closest('#descricaoBanner');
+                    e.target.closest('#tituloBanner') || e.target.closest('#descricaoBanner');
                 if (!target) return;
 
                 let logoContent = null;
@@ -1745,13 +1075,12 @@
                     logoContent = document.getElementById('logoConteudo');
                     if (!logoContent) return;
                     isLogo = true;
-                } else if (target.id.includes('Banner')) {
+                } else if (target.id === 'tituloBanner' || target.id === 'descricaoBanner') {
                     textElement = target;
                     isText = true;
                 } else {
-                    // Se for filho de algum texto, pega o elemento pai
                     const parent = target.closest('.arrastavel');
-                    if (parent && parent.id.includes('Banner')) {
+                    if (parent && (parent.id === 'tituloBanner' || parent.id === 'descricaoBanner')) {
                         textElement = parent;
                         isText = true;
                     }
@@ -1791,7 +1120,6 @@
             let newSize = zoomData.initialSize * scale;
 
             if (zoomData.isLogo) {
-                // Logo: limite de 200% (máximo 60px, mínimo 14px)
                 newSize = Math.min(60, Math.max(14, newSize));
                 zoomData.logoContent.style.fontSize = newSize + 'px';
                 const img = zoomData.logoContent.querySelector('img');
@@ -1800,22 +1128,16 @@
                     const newHeight = (newSize / 24) * baseSize;
                     img.style.maxHeight = Math.min(96, Math.max(20, newHeight)) + 'px';
                 }
-                // Atualizar slider? Não há slider para logo, apenas texto.
             } else if (zoomData.isText) {
                 const el = zoomData.textElement;
                 const id = el.id;
                 let min, max;
                 if (id === 'tituloBanner') { min = 20;
-                    max = 120; } else if (id === 'subtituloBanner') { min = 14;
-                    max = 100; } else if (id === 'tituloSecundario') { min = 14;
-                    max = 100; } else if (id === 'descricaoBanner') { min = 12;
+                    max = 120; } else if (id === 'descricaoBanner') { min = 12;
                     max = 80; } else return;
                 newSize = Math.min(max, Math.max(min, newSize));
                 el.style.fontSize = newSize + 'px';
-                // Atualizar slider correspondente
-                const sliderId = id === 'tituloBanner' ? 'tamTitulo' :
-                    id === 'subtituloBanner' ? 'tamSubtitulo' :
-                    id === 'tituloSecundario' ? 'tamTituloSec' : 'tamDescricao';
+                const sliderId = id === 'tituloBanner' ? 'tamTitulo' : 'tamDescricao';
                 const slider = document.getElementById(sliderId);
                 if (slider) {
                     slider.value = Math.round(newSize);
@@ -1880,41 +1202,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.arrastavel, .elemento-jogo, #logoTNJ, #telefoneContainer').forEach(el =>
-                makeDraggable(el));
-        });
-
-        // ===== EVENTOS PARA LOGOS DOS TIMES =====
-        document.getElementById('logoCasaInput').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(ev) {
-                const dataUrl = ev.target.result;
-                document.getElementById('logoCasaImg').src = dataUrl;
-                document.getElementById('logoCasaImg').style.display = 'block';
-                document.getElementById('logoCasaPlaceholder').style.display = 'none';
-                document.getElementById('logoCasaStatus').classList.remove('hidden');
-                localStorage.setItem('logoCasaData', dataUrl);
-                salvarPosicoesElementos();
-            };
-            reader.readAsDataURL(file);
-        });
-
-        document.getElementById('logoVisitanteInput').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(ev) {
-                const dataUrl = ev.target.result;
-                document.getElementById('logoVisitanteImg').src = dataUrl;
-                document.getElementById('logoVisitanteImg').style.display = 'block';
-                document.getElementById('logoVisitantePlaceholder').style.display = 'none';
-                document.getElementById('logoVisitanteStatus').classList.remove('hidden');
-                localStorage.setItem('logoVisitanteData', dataUrl);
-                salvarPosicoesElementos();
-            };
-            reader.readAsDataURL(file);
+            document.querySelectorAll('.arrastavel, #logoTNJ, #telefoneContainer').forEach(el => makeDraggable(el));
         });
 
         // ===== BAIXAR =====
@@ -1941,7 +1229,7 @@
                 document.getElementById('telefoneContainer').style.display = 'none';
             }
             restaurarGaleria();
-            ['tamTitulo', 'tamSubtitulo', 'tamTituloSec', 'tamDescricao'].forEach(id => {
+            ['tamTitulo', 'tamDescricao'].forEach(id => {
                 const s = document.getElementById(id);
                 if (s) {
                     s.addEventListener('input', function() {
