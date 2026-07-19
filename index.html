@@ -56,6 +56,9 @@
         .btn-carregar-logo,
         .btn-aplicar-texto,
         .btn-pesquisar,
+        .btn-aplicar-video,
+        .btn-enviar-video,
+        .btn-aplicar-mosaico,
         .font-btn {
             @apply btn-padrao text-sm font-bold text-center transition-all duration-200;
             border-radius: 12px;
@@ -77,6 +80,9 @@
         .btn-carregar-logo:hover,
         .btn-aplicar-texto:hover,
         .btn-pesquisar:hover,
+        .btn-aplicar-video:hover,
+        .btn-enviar-video:hover,
+        .btn-aplicar-mosaico:hover,
         .font-btn:hover {
             transform: scale(1.03);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
@@ -102,6 +108,43 @@
             100% { background-position: 100% 100%; }
         }
 
+        .btn-aplicar-video {
+            background: linear-gradient(135deg, #009E3D 0%, #FEDB00 50%, #EF1A2D 100%);
+            background-size: 200% 200%;
+            animation: reggaeBtn 3s ease-in-out infinite alternate;
+            color: #000;
+            font-weight: 900;
+            border-color: #FEDB00;
+        }
+        .btn-aplicar-video:hover {
+            animation-play-state: paused;
+            border-color: #fff;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        .btn-aplicar-mosaico {
+            background: linear-gradient(135deg, #e65100, #bf360c);
+            border-color: #ffb74d;
+        }
+        .btn-aplicar-mosaico:hover {
+            border-color: #ffc107;
+        }
+
+        .btn-enviar-video {
+            background: linear-gradient(135deg, #6a1b9a, #4a148c);
+            background-size: 200% 200%;
+            animation: reggaeBtn 4s ease-in-out infinite alternate;
+            color: #fff;
+            border-color: #b39ddb;
+        }
+        .btn-enviar-video:hover {
+            animation-play-state: paused;
+            border-color: #ffc107;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
         .btn-pinterest {
             background: linear-gradient(135deg, #e60023, #b3001a);
         }
@@ -117,12 +160,19 @@
 
         .btn-png {
             background: linear-gradient(135deg, #2d7d46, #1a4a2a);
+            animation: brilho 3s infinite alternate;
         }
         .btn-jpeg {
             background: linear-gradient(135deg, #c77d1e, #8a5512);
+            animation: brilho 3.5s infinite alternate;
         }
         .btn-webp {
             background: linear-gradient(135deg, #2a6f8f, #154a61);
+            animation: brilho 4s infinite alternate;
+        }
+        @keyframes brilho {
+            0% { box-shadow: 0 0 10px rgba(255,255,255,0.1); }
+            100% { box-shadow: 0 0 30px rgba(255,255,255,0.3), 0 0 60px rgba(255,215,0,0.1); }
         }
 
         .btn-adicionar-url {
@@ -187,7 +237,6 @@
             flex-direction: column;
             gap: 2px;
             font-size: 0.7rem;
-            /* Fundo Reggae animado */
             background: linear-gradient(135deg, #009E3D 0%, #FEDB00 50%, #EF1A2D 100%);
             background-size: 200% 200%;
             animation: reggaeFontBtn 4s ease-in-out infinite alternate;
@@ -235,54 +284,18 @@
             100% { background-position: 100% 100%; }
         }
 
-        /* Cores das bordas específicas de cada estilo mantidas */
-        #fonte-marvel {
-            border-color: #e53935;
-        }
-        #fonte-marvel:hover,
-        #fonte-marvel.ativa {
-            border-color: #ffc107 !important;
-        }
-
-        #fonte-dc {
-            border-color: #1e88e5;
-        }
-        #fonte-dc:hover,
-        #fonte-dc.ativa {
-            border-color: #ffc107 !important;
-        }
-
-        #fonte-cinema {
-            border-color: #ffd54f;
-        }
-        #fonte-cinema:hover,
-        #fonte-cinema.ativa {
-            border-color: #ffc107 !important;
-        }
-
-        #fonte-neon {
-            border-color: #00e5ff;
-        }
-        #fonte-neon:hover,
-        #fonte-neon.ativa {
-            border-color: #ffc107 !important;
-        }
-
-        #fonte-classico {
-            border-color: #8d6e63;
-        }
-        #fonte-classico:hover,
-        #fonte-classico.ativa {
-            border-color: #ffc107 !important;
-        }
-
-        #fonte-moderno {
-            border-color: #7b1fa2;
-        }
-        #fonte-moderno:hover,
-        #fonte-moderno.ativa {
-            border-color: #ffc107 !important;
-        }
+        #fonte-marvel { border-color: #e53935; }
+        #fonte-marvel:hover, #fonte-marvel.ativa { border-color: #ffc107 !important; }
+        #fonte-dc { border-color: #1e88e5; }
+        #fonte-dc:hover, #fonte-dc.ativa { border-color: #ffc107 !important; }
+        #fonte-cinema { border-color: #ffd54f; }
+        #fonte-cinema:hover, #fonte-cinema.ativa { border-color: #ffc107 !important; }
+        #fonte-neon { border-color: #00e5ff; }
+        #fonte-neon:hover, #fonte-neon.ativa { border-color: #ffc107 !important; }
+        #fonte-classico { border-color: #8d6e63; }
+        #fonte-classico:hover, #fonte-classico.ativa { border-color: #ffc107 !important; }
+        #fonte-moderno { border-color: #7b1fa2; }
+        #fonte-moderno:hover, #fonte-moderno.ativa { border-color: #ffc107 !important; }
 
         /* ===== BANNER COM FUNDO REGGAE ===== */
         #areaBanner {
@@ -320,6 +333,8 @@
         }
         #videoBanner {
             display: none;
+            opacity: 0.65;
+            mix-blend-mode: overlay;
         }
         #sobreposicao {
             position: absolute;
@@ -330,6 +345,21 @@
             background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1) 50%, transparent);
             pointer-events: none;
             z-index: 1;
+        }
+
+        /* ===== LOGO REPETIDA (MOSAICO) - inicialmente oculta ===== */
+        #logoMosaico {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 6;
+            pointer-events: none;
+            display: none;
+            background-repeat: repeat;
+            background-size: 120px 120px;
+            opacity: 0.15;
         }
 
         .arrastavel {
@@ -414,6 +444,84 @@
             font-family: 'Montserrat', 'Arial', sans-serif;
             letter-spacing: 1px;
             text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+        }
+
+        /* ===== VÍDEOS ===== */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+        }
+        .video-grid .video-item {
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            position: relative;
+            aspect-ratio: 16/9;
+            background: #1a1a2e;
+        }
+        .video-grid .video-item:hover {
+            transform: scale(1.02);
+            border-color: rgba(255, 193, 7, 0.3);
+        }
+        .video-grid .video-item.selecionado {
+            border-color: #ffc107;
+            box-shadow: 0 0 20px rgba(255, 193, 7, 0.2);
+        }
+        .video-grid .video-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+        .video-grid .video-item .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(0,0,0,0.5);
+            opacity: 0.8;
+            pointer-events: none;
+        }
+        .video-grid .video-item .video-nome {
+            position: absolute;
+            bottom: 4px;
+            left: 4px;
+            right: 4px;
+            background: rgba(0,0,0,0.6);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.5rem;
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .video-grid .video-item .delete-icon {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background: rgba(255,0,0,0.7);
+            color: #fff;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+            z-index: 5;
+        }
+        .video-grid .video-item:hover .delete-icon {
+            opacity: 1;
         }
 
         /* ===== AUTOCOMPLETE ===== */
@@ -508,18 +616,52 @@
             font-weight: 100;
         }
 
+        /* Botão de áudio */
+        .audio-btn {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+            border: 2px solid rgba(255,255,255,0.2);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+            z-index: 30;
+        }
+        .audio-btn:hover {
+            background: rgba(255,193,7,0.3);
+            border-color: #ffc107;
+            transform: translateX(-50%) scale(1.1);
+        }
+        .audio-btn.ativo {
+            border-color: #ffc107;
+            color: #ffc107;
+        }
+
         @media (max-width: 640px) {
             .site-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
             .download-grid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(2, 1fr);
             }
             .font-selector-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
             .font-btn .preview {
                 font-size: 0.9rem;
+            }
+            .video-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
             #logoTNJ {
                 top: 10px;
@@ -546,6 +688,12 @@
             .suggestions-box .item .tipo {
                 font-size: 0.5rem;
                 padding: 1px 6px;
+            }
+            .audio-btn {
+                width: 24px;
+                height: 24px;
+                font-size: 12px;
+                bottom: -24px;
             }
         }
     </style>
@@ -655,7 +803,6 @@
                             <p class="text-xs text-gray-500 mt-1">👆 Arraste • Dois dedos para aumentar</p>
                         </div>
 
-                        <!-- SELETOR DE ESTILOS DE FONTE -->
                         <div>
                             <label class="text-xs text-tnj-dourado font-semibold">🎬 ESTILO DE FONTE</label>
                             <div class="font-selector-grid">
@@ -716,8 +863,9 @@
                             <p class="text-xs text-gray-500 mt-1">👆 Arraste o número</p>
                         </div>
 
+                        <!-- LOGO ÚNICA (em cima) -->
                         <div>
-                            <label class="text-xs text-tnj-dourado font-semibold">LOGO PERSONALIZADA</label>
+                            <label class="text-xs text-tnj-dourado font-semibold">LOGO ÚNICA</label>
                             <div class="flex items-center gap-2 mt-1">
                                 <input type="file" id="uploadLogo" accept="image/png,image/webp,image/jpeg" class="text-xs text-gray-300 file:mr-1 file:py-0.5 file:px-2 file:rounded file:border-0 file:bg-tnj-dourado file:text-black file:font-bold" />
                                 <button onclick="carregarLogoPersonalizada()" class="btn-carregar-logo text-xs"><i class="fa fa-upload"></i> Carregar</button>
@@ -725,12 +873,49 @@
                             <p class="text-xs text-gray-500 mt-1">👆 Arraste • Dois dedos para aumentar</p>
                         </div>
 
+                        <!-- LOGO REPETIDA (MOSAICO) - com botão Aplicar estilizado -->
+                        <div>
+                            <label class="text-xs text-tnj-dourado font-semibold">LOGO REPETIDA (MOSAICO)</label>
+                            <div class="flex items-center gap-2 mt-1">
+                                <input type="file" id="uploadLogoMosaico" accept="image/png,image/webp,image/jpeg" class="text-xs text-gray-300 file:mr-1 file:py-0.5 file:px-2 file:rounded file:border-0 file:bg-tnj-dourado file:text-black file:font-bold" />
+                                <button onclick="carregarLogoMosaico()" class="btn-carregar-logo text-xs"><i class="fa fa-upload"></i> Carregar</button>
+                            </div>
+                            <div class="flex items-center gap-2 mt-1">
+                                <span class="text-xs text-gray-400">Opacidade:</span>
+                                <input type="range" id="opacidadeMosaico" min="0" max="100" value="15" class="flex-1" />
+                                <span id="opacidadeMosaicoDisplay" class="text-xs w-7">15%</span>
+                            </div>
+                            <div class="flex gap-1 mt-1">
+                                <button onclick="aplicarMosaico()" class="btn-aplicar-mosaico text-xs flex-1"><i class="fa fa-check"></i> Aplicar</button>
+                                <button onclick="toggleMosaico()" class="btn-azul text-xs flex-1">👁️ Mostrar/Ocultar</button>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-1">Carregue a imagem e clique em "Aplicar" para exibir no banner</p>
+                        </div>
+
                         <div class="flex gap-2 mt-1">
-                            <button onclick="toggleLogo()" class="btn-azul text-sm flex-1">👁️ Logo</button>
+                            <button onclick="toggleLogo()" class="btn-azul text-sm flex-1">👁️ Logo Única</button>
                             <button onclick="resetarPosicoes()" class="btn-dourado text-sm flex-1">↕ Resetar Posições</button>
                         </div>
 
                         <button onclick="limparEdicao()" class="btn-limpar w-full text-sm">🗑️ LIMPAR TUDO</button>
+                    </div>
+                </div>
+
+                <!-- VÍDEOS -->
+                <div class="caixa">
+                    <h3 class="font-bold mb-3 text-tnj-dourado">🎬 VÍDEOS</h3>
+                    <div class="space-y-2">
+                        <div class="video-grid" id="videoGrid"></div>
+                        <div class="flex gap-2 mt-2">
+                            <input type="file" id="uploadVideo" accept="video/*" class="hidden" />
+                            <button onclick="document.getElementById('uploadVideo').click()" class="btn-upload text-xs flex-1">
+                                <i class="fa fa-upload"></i> Adicionar Vídeo
+                            </button>
+                            <button onclick="aplicarVideo()" class="btn-aplicar-video text-xs flex-1">
+                                <i class="fa fa-play"></i> Aplicar Vídeo
+                            </button>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-1">👆 1 clique aplica • 🗑️ X ou duplo clique remove permanentemente</p>
                     </div>
                 </div>
 
@@ -749,33 +934,39 @@
                     <button onclick="aplicarFormato()" class="btn-formato w-full mt-2"><i class="fa fa-arrows-alt"></i> Aplicar Formato</button>
                 </div>
 
-                <!-- DOWNLOAD -->
+                <!-- DOWNLOAD E ENVIO -->
                 <div class="caixa">
-                    <h3 class="font-bold mb-3 text-tnj-dourado">⬇️ BAIXAR BANNER</h3>
+                    <h3 class="font-bold mb-3 text-tnj-dourado">⬇️ BAIXAR / ENVIAR</h3>
                     <div class="download-grid">
                         <button onclick="baixarBanner('png')" class="btn-download btn-png"><i class="fa fa-file-image-o"></i> PNG</button>
                         <button onclick="baixarBanner('jpeg')" class="btn-download btn-jpeg"><i class="fa fa-file-image-o"></i> JPEG</button>
                         <button onclick="baixarBanner('webp')" class="btn-download btn-webp"><i class="fa fa-file-image-o"></i> WebP</button>
+                        <button onclick="enviarVideoBanner()" class="btn-download btn-enviar-video" style="grid-column: span 3;">
+                            <i class="fa fa-download"></i> Enviar Vídeo (salvar no dispositivo)
+                        </button>
                     </div>
-                    <p class="text-xs text-gray-400 text-center mt-2">Clique no formato desejado</p>
+                    <p class="text-xs text-gray-400 text-center mt-2">Clique para baixar imagem ou salvar vídeo no dispositivo</p>
                 </div>
             </div>
 
             <!-- ÁREA DO BANNER -->
             <div class="md:col-span-3">
-                <div class="caixa">
+                <div class="caixa" style="position:relative;">
                     <h3 class="font-bold mb-3 text-center text-tnj-dourado">📺 SEU BANNER</h3>
-                    <div id="areaBanner" class="w-full">
+                    <div id="areaBanner" class="w-full relative">
                         <img id="fundoBanner" class="absolute w-full h-full object-cover" src="" alt="Fundo" />
-                        <video id="videoBanner" class="absolute w-full h-full object-cover hidden" loop muted playsinline autoplay></video>
+                        <video id="videoBanner" class="absolute w-full h-full object-cover hidden" loop playsinline autoplay></video>
                         <div id="sobreposicao" class="absolute w-full h-full"></div>
 
-                        <!-- Logo TNJ -->
+                        <!-- Logo Mosaico (inicialmente oculta) -->
+                        <div id="logoMosaico" style="display:none;"></div>
+
+                        <!-- Logo TNJ (única) -->
                         <div id="logoTNJ" class="arrastavel" style="z-index:20; background:transparent; border:none; backdrop-filter:none; padding:0;">
                             <div id="logoConteudo" class="text-2xl font-black text-tnj-dourado drop-shadow-[0_0_8px_rgba(255,193,7,0.5)]">TV NOVA JUAREZ</div>
                         </div>
 
-                        <!-- Telefone -->
+                        <!-- Telefone (sempre visível quando adicionado) -->
                         <div id="telefoneContainer" class="arrastavel" style="background:rgba(0,0,0,0.25); backdrop-filter:blur(4px); padding:6px 14px; border-radius:40px; border:1px solid rgba(255,255,255,0.08); display:flex; align-items:center; gap:8px;">
                             <i class="fa fa-whatsapp" style="font-size:1.2rem; color:#25d366; text-shadow:0 0 12px rgba(37,211,102,0.3);"></i>
                             <div id="telefoneLogoDisplay" class="text-sm text-white font-semibold"></div>
@@ -795,6 +986,11 @@
                             <span class="separador">|</span>
                             <span><i class="fa fa-archive"></i> TV Box</span>
                         </div>
+
+                        <!-- Botão de áudio (fone) -->
+                        <div id="audioBtn" class="audio-btn" title="Ativar/desativar som do vídeo">
+                            <i class="fa fa-headphones"></i>
+                        </div>
                     </div>
 
                     <p class="text-xs text-gray-400 mt-2 text-center">
@@ -809,7 +1005,7 @@
     </div>
 
     <footer class="mt-10 py-4 text-center text-xs text-gray-500 border-t border-gray-800">
-        © 2026 BNNERTNJ • Ferramenta Oficial TNJ / TV Nova Juarez • Versão 14.2
+        © 2026 BNNERTNJ • Ferramenta Oficial TNJ / TV Nova Juarez • Versão 17.4
     </footer>
 
     <script>
@@ -822,8 +1018,11 @@
         let fundoAtual = null;
         let logoPersonalizada = null;
         let estiloFonteAtual = 'fonte-marvel';
+        let videoSelecionado = null;
+        let logoMosaicoData = null;
+        let mosaicoAplicado = false;
 
-        // ===== DEBOUNCE =====
+        let videosGaleria = [];
         let debounceTimer = null;
 
         // ===== PERSISTÊNCIA =====
@@ -834,6 +1033,9 @@
                 else localStorage.removeItem('tnj_fundo');
                 salvarPosicoesElementos();
                 localStorage.setItem('tnj_estilo_fonte', estiloFonteAtual);
+                localStorage.setItem('tnj_videos', JSON.stringify(videosGaleria));
+                localStorage.setItem('tnj_mosaico_data', logoMosaicoData || '');
+                localStorage.setItem('tnj_mosaico_aplicado', JSON.stringify(mosaicoAplicado));
             } catch (e) {}
         }
 
@@ -908,21 +1110,26 @@
                 if (fundo) fundoAtual = JSON.parse(fundo);
                 const estilo = localStorage.getItem('tnj_estilo_fonte');
                 if (estilo) estiloFonteAtual = estilo;
+                const videos = localStorage.getItem('tnj_videos');
+                if (videos) videosGaleria = JSON.parse(videos);
+                const mosaico = localStorage.getItem('tnj_mosaico_data');
+                if (mosaico) logoMosaicoData = mosaico;
+                const mosaicoAplic = localStorage.getItem('tnj_mosaico_aplicado');
+                if (mosaicoAplic) mosaicoAplicado = JSON.parse(mosaicoAplic);
             } catch (e) {}
         }
 
         function restaurarGaleria() {
             carregarGaleria();
-            // Aplicar estilo de fonte salvo
             aplicarEstiloFonte(estiloFonteAtual, true);
 
             const grade = document.getElementById('gradeResultados');
             grade.innerHTML = '';
             if (imagensGaleria.length === 0) {
                 grade.innerHTML = `<p class="col-span-full text-center text-gray-400 py-4">Nenhuma imagem. Adicione uma!</p>`;
-                return;
+            } else {
+                imagensGaleria.forEach(item => criarMiniatura(item, grade));
             }
-            imagensGaleria.forEach(item => criarMiniatura(item, grade));
             if (fundoAtual) {
                 const existe = imagensGaleria.some(i => i.url === fundoAtual.url);
                 if (existe) usarComoFundo(fundoAtual);
@@ -939,7 +1146,178 @@
             } else {
                 document.getElementById('telefoneContainer').style.display = 'none';
             }
+            renderizarVideos();
+            if (logoMosaicoData && mosaicoAplicado) {
+                const mosaicEl = document.getElementById('logoMosaico');
+                mosaicEl.style.backgroundImage = `url(${logoMosaicoData})`;
+                mosaicEl.style.display = 'block';
+                const opacidade = localStorage.getItem('tnj_mosaico_opacidade');
+                if (opacidade) {
+                    document.getElementById('opacidadeMosaico').value = opacidade;
+                    document.getElementById('opacidadeMosaicoDisplay').innerText = opacidade + '%';
+                    mosaicEl.style.opacity = opacidade / 100;
+                }
+            } else {
+                document.getElementById('logoMosaico').style.display = 'none';
+            }
+            const audioMuted = localStorage.getItem('tnj_audio_muted');
+            if (audioMuted === 'true') {
+                document.getElementById('videoBanner').muted = true;
+                document.getElementById('audioBtn').classList.remove('ativo');
+                document.getElementById('audioBtn').innerHTML = '<i class="fa fa-headphones"></i>';
+            } else {
+                document.getElementById('videoBanner').muted = false;
+                document.getElementById('audioBtn').classList.add('ativo');
+                document.getElementById('audioBtn').innerHTML = '<i class="fa fa-headphones" style="color:#ffc107;"></i>';
+            }
         }
+
+        // ===== VÍDEOS =====
+        function renderizarVideos() {
+            const grid = document.getElementById('videoGrid');
+            grid.innerHTML = '';
+            if (videosGaleria.length === 0) {
+                grid.innerHTML = `<p class="col-span-full text-center text-gray-400 text-xs py-2">Nenhum vídeo. Adicione um!</p>`;
+                return;
+            }
+            videosGaleria.forEach((video, index) => {
+                const div = document.createElement('div');
+                div.className = 'video-item' + (videoSelecionado === index ? ' selecionado' : '');
+                div.innerHTML = `
+                    <video src="${video.url}" muted playsinline></video>
+                    <div class="play-icon"><i class="fa fa-play-circle"></i></div>
+                    <div class="video-nome">${video.nome}</div>
+                    <div class="delete-icon" onclick="event.stopPropagation(); removerVideo(${index})"><i class="fa fa-times"></i></div>
+                `;
+                div.addEventListener('click', function(e) {
+                    if (e.target.closest('.delete-icon')) return;
+                    document.querySelectorAll('.video-item').forEach(el => el.classList.remove('selecionado'));
+                    this.classList.add('selecionado');
+                    videoSelecionado = index;
+                    aplicarVideo();
+                });
+                div.addEventListener('dblclick', function(e) {
+                    e.stopPropagation();
+                    removerVideo(index);
+                });
+                grid.appendChild(div);
+            });
+        }
+
+        function removerVideo(index) {
+            if (!confirm('Remover este vídeo permanentemente?')) return;
+            videosGaleria.splice(index, 1);
+            if (videoSelecionado === index) videoSelecionado = null;
+            else if (videoSelecionado > index) videoSelecionado--;
+            renderizarVideos();
+            salvarGaleria();
+        }
+
+        function aplicarVideo() {
+            if (videoSelecionado === null) {
+                alert('⚠️ Selecione um vídeo na galeria!');
+                return;
+            }
+            const video = videosGaleria[videoSelecionado];
+            const videoEl = document.getElementById('videoBanner');
+            const imgEl = document.getElementById('fundoBanner');
+            videoEl.src = video.url;
+            videoEl.load();
+            videoEl.play().catch(e => console.log('Autoplay bloqueado'));
+            videoEl.classList.remove('hidden');
+            videoEl.style.display = 'block';
+            videoEl.style.opacity = '0.65';
+            const audioMuted = localStorage.getItem('tnj_audio_muted');
+            if (audioMuted === 'true') {
+                videoEl.muted = true;
+            } else {
+                videoEl.muted = false;
+            }
+            imgEl.classList.add('hidden');
+            fundoAtual = { url: video.url, type: 'video' };
+            salvarGaleria();
+        }
+
+        document.getElementById('uploadVideo').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const dataUrl = ev.target.result;
+                videosGaleria.push({ nome: file.name, url: dataUrl });
+                renderizarVideos();
+                salvarGaleria();
+            };
+            reader.readAsDataURL(file);
+            this.value = '';
+        });
+
+        // ===== CONTROLE DE ÁUDIO =====
+        document.getElementById('audioBtn').addEventListener('click', function() {
+            const video = document.getElementById('videoBanner');
+            if (video.muted) {
+                video.muted = false;
+                this.classList.add('ativo');
+                this.innerHTML = '<i class="fa fa-headphones" style="color:#ffc107;"></i>';
+                localStorage.setItem('tnj_audio_muted', 'false');
+            } else {
+                video.muted = true;
+                this.classList.remove('ativo');
+                this.innerHTML = '<i class="fa fa-headphones"></i>';
+                localStorage.setItem('tnj_audio_muted', 'true');
+            }
+        });
+
+        // ===== MOSAICO =====
+        function carregarLogoMosaico() {
+            const input = document.getElementById('uploadLogoMosaico');
+            const file = input.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                logoMosaicoData = e.target.result;
+                salvarGaleria();
+                alert('Imagem carregada! Clique em "Aplicar" para exibir no banner.');
+            };
+            reader.readAsDataURL(file);
+            input.value = '';
+        }
+
+        function aplicarMosaico() {
+            if (!logoMosaicoData) {
+                alert('⚠️ Primeiro carregue uma imagem em "LOGO REPETIDA (MOSAICO)".');
+                return;
+            }
+            const mosaicEl = document.getElementById('logoMosaico');
+            mosaicEl.style.backgroundImage = `url(${logoMosaicoData})`;
+            mosaicEl.style.display = 'block';
+            const opacidade = document.getElementById('opacidadeMosaico').value;
+            mosaicEl.style.opacity = opacidade / 100;
+            mosaicoAplicado = true;
+            salvarGaleria();
+        }
+
+        function toggleMosaico() {
+            const el = document.getElementById('logoMosaico');
+            if (el.style.display === 'none') {
+                if (logoMosaicoData && mosaicoAplicado) {
+                    el.style.display = 'block';
+                } else {
+                    alert('Nenhum mosaico aplicado. Carregue uma imagem e clique em "Aplicar".');
+                }
+            } else {
+                el.style.display = 'none';
+            }
+        }
+
+        document.getElementById('opacidadeMosaico').addEventListener('input', function() {
+            const val = this.value;
+            document.getElementById('opacidadeMosaicoDisplay').innerText = val + '%';
+            if (mosaicoAplicado && logoMosaicoData) {
+                document.getElementById('logoMosaico').style.opacity = val / 100;
+            }
+            localStorage.setItem('tnj_mosaico_opacidade', val);
+        });
 
         // ===== ESTILOS DE FONTE =====
         function aplicarEstiloFonte(estilo, silencioso = false) {
@@ -955,7 +1333,6 @@
             document.querySelectorAll('.font-btn').forEach(btn => btn.classList.remove('ativa'));
             const btn = document.getElementById(estilo);
             if (btn) btn.classList.add('ativa');
-
             if (!silencioso) salvarPosicoesElementos();
             salvarGaleria();
         }
@@ -971,30 +1348,23 @@
                 document.getElementById('suggestionsBox').style.display = 'none';
                 return;
             }
-
             try {
                 const resp = await fetch(
                     `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(termo)}&language=pt-BR&page=1`
                 );
                 const dados = await resp.json();
-                const resultados = dados.results
-                    .filter(item => item.media_type === 'movie' || item.media_type === 'tv')
+                const resultados = dados.results.filter(item => item.media_type === 'movie' || item.media_type === 'tv')
                     .slice(0, 8);
-
                 const box = document.getElementById('suggestionsBox');
                 box.innerHTML = '';
-                if (resultados.length === 0) {
-                    box.style.display = 'none';
-                    return;
-                }
-
+                if (resultados.length === 0) { box.style.display = 'none'; return; }
                 resultados.forEach(item => {
                     const div = document.createElement('div');
                     div.className = 'item';
                     const titulo = item.title || item.name || 'Sem título';
                     const tipo = item.media_type === 'movie' ? '🎬 Filme' : '📺 Série';
                     const ano = item.release_date ? item.release_date.split('-')[0] :
-                               item.first_air_date ? item.first_air_date.split('-')[0] : '';
+                        item.first_air_date ? item.first_air_date.split('-')[0] : '';
                     div.innerHTML = `
                         <span class="titulo">${titulo} ${ano ? `<span class="ano">(${ano})</span>` : ''}</span>
                         <span class="tipo">${tipo}</span>
@@ -1016,9 +1386,7 @@
         document.getElementById('campoBusca').addEventListener('input', function(e) {
             clearTimeout(debounceTimer);
             const termo = e.target.value.trim();
-            debounceTimer = setTimeout(() => {
-                buscarSugestoes(termo);
-            }, 200);
+            debounceTimer = setTimeout(() => { buscarSugestoes(termo); }, 200);
         });
 
         document.addEventListener('click', function(e) {
@@ -1033,13 +1401,11 @@
             if (!termo) { alert('Digite algo para buscar.'); return; }
             const fonte = document.getElementById('fonteBusca').value;
             const tipo = document.getElementById('tipoBusca').value;
-
             const carregando = document.getElementById('carregando');
             const grade = document.getElementById('gradeResultados');
             carregando.classList.remove('hidden');
             grade.innerHTML = '';
             document.getElementById('suggestionsBox').style.display = 'none';
-
             try {
                 let resultados = [];
                 if (fonte === 'tmdb') {
@@ -1047,20 +1413,14 @@
                         `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(termo)}&language=pt-BR&page=1`
                     );
                     const dados = await resp.json();
-                    resultados = dados.results
-                        .filter(item => item.media_type === 'movie' || item.media_type === 'tv')
+                    resultados = dados.results.filter(item => item.media_type === 'movie' || item.media_type === 'tv')
                         .slice(0, 20)
                         .map(item => {
                             const titulo = item.title || item.name || 'Sem título';
                             const posterPath = item.poster_path;
                             const url = posterPath ? `${TMDB_IMAGE_BASE}${posterPath}` : '';
                             const thumb = posterPath ? `${TMDB_IMAGE_BASE}${posterPath}` : '';
-                            return {
-                                url: url,
-                                thumbnail: thumb,
-                                type: 'image',
-                                title: titulo
-                            };
+                            return { url: url, thumbnail: thumb, type: 'image', title: titulo };
                         });
                 } else {
                     if (tipo === 'image') {
@@ -1069,13 +1429,11 @@
                         resultados = await buscarPexelsVideos(termo);
                     }
                 }
-
                 carregando.classList.add('hidden');
                 if (resultados.length === 0) {
                     grade.innerHTML = `<p class="col-span-full text-center text-gray-400">Nenhum resultado encontrado.</p>`;
                     return;
                 }
-
                 let adicionados = 0;
                 resultados.forEach(item => {
                     if (item.url && !imagensGaleria.some(i => i.url === item.url)) {
@@ -1132,9 +1490,7 @@
                 imgTest.crossOrigin = 'anonymous';
                 imgTest.onload = function() { item.thumbnail = url;
                     adicionarItemGaleria(item); };
-                imgTest.onerror = function() {
-                    adicionarItemGaleria(item);
-                };
+                imgTest.onerror = function() { adicionarItemGaleria(item); };
                 imgTest.src = url;
             } else {
                 adicionarItemGaleria(item);
@@ -1191,7 +1547,15 @@
                 video.load();
                 video.play().catch(e => console.log('Autoplay bloqueado'));
                 video.classList.remove('hidden');
+                video.style.display = 'block';
+                video.style.opacity = '0.65';
                 img.classList.add('hidden');
+                const audioMuted = localStorage.getItem('tnj_audio_muted');
+                if (audioMuted === 'true') {
+                    video.muted = true;
+                } else {
+                    video.muted = false;
+                }
             }
             fundoAtual = item;
             salvarGaleria();
@@ -1219,7 +1583,6 @@
                 `<p class="col-span-full text-center text-gray-400 py-4">Nenhuma imagem.</p>`;
         }
 
-        // ===== UPLOAD =====
         function uploadArquivos() {
             const input = document.getElementById('uploadArquivo');
             const files = input.files;
@@ -1245,7 +1608,7 @@
             input.value = '';
         }
 
-        // ===== LOGO PERSONALIZADA =====
+        // ===== LOGO PERSONALIZADA (ÚNICA) =====
         function carregarLogoPersonalizada() {
             const input = document.getElementById('uploadLogo');
             const file = input.files[0];
@@ -1267,12 +1630,19 @@
             logo.style.display = logo.style.display === 'none' ? 'block' : 'none';
         }
 
+        // ===== ADICIONAR CONTATO (CORRIGIDO PARA APARECER IMEDIATAMENTE) =====
         function adicionarContato() {
             const telefone = document.getElementById('telefoneLogo').value.trim();
             if (!telefone) { alert('Digite um número.'); return; }
+            // Define o texto
             document.getElementById('telefoneLogoDisplay').innerText = telefone;
-            document.getElementById('telefoneContainer').style.display = 'flex';
+            // Força a exibição do container
+            const container = document.getElementById('telefoneContainer');
+            container.style.display = 'flex';
+            container.style.visibility = 'visible';
+            // Salva no localStorage
             localStorage.setItem('tnj_telefone', telefone);
+            // Salva posições
             salvarPosicoesElementos();
         }
 
@@ -1300,19 +1670,13 @@
             salvarPosicoesElementos();
         }
 
-        // ===== TEXTOS =====
         function aplicarTexto() {
             const t1 = document.getElementById('texto1').value;
             const t4 = document.getElementById('texto4').value;
             const cor = document.getElementById('corTexto').value;
-
             document.getElementById('tituloBanner').innerText = t1;
             document.getElementById('descricaoBanner').innerText = t4;
-
-            const elementos = {
-                titulo: 'tituloBanner',
-                descricao: 'descricaoBanner'
-            };
+            const elementos = { titulo: 'tituloBanner', descricao: 'descricaoBanner' };
             Object.keys(elementos).forEach(id => {
                 const el = document.getElementById(elementos[id]);
                 el.style.color = cor;
@@ -1333,7 +1697,6 @@
             aplicarTexto();
         }
 
-        // ===== FORMATO =====
         function aplicarFormato() {
             const valor = document.getElementById('formatoBanner').value;
             const area = document.getElementById('areaBanner');
@@ -1346,7 +1709,6 @@
             void area.offsetWidth;
         }
 
-        // ===== LIMPAR EDIÇÃO =====
         function limparEdicao() {
             if (!confirm('Limpar textos, logo e fundo? (Imagens da galeria permanecem)')) return;
             document.getElementById('fundoBanner').src = '';
@@ -1383,20 +1745,17 @@
             if (imagensGaleria.length > 0) usarComoFundo(imagensGaleria[0]);
         }
 
-        // ===== ZOOM COM DOIS DEDOS =====
+        // ===== ZOOM =====
         let zoomData = null;
-
         document.addEventListener('touchstart', function(e) {
             if (e.touches.length === 2) {
                 const target = e.target.closest('#logoTNJ') || e.target.closest('#logoConteudo') ||
                     e.target.closest('#tituloBanner') || e.target.closest('#descricaoBanner');
                 if (!target) return;
-
-                let logoContent = null;
-                let textElement = null;
-                let isLogo = false;
-                let isText = false;
-
+                let logoContent = null,
+                    textElement = null,
+                    isLogo = false,
+                    isText = false;
                 if (target.closest('#logoTNJ') || target.closest('#logoConteudo')) {
                     logoContent = document.getElementById('logoConteudo');
                     if (!logoContent) return;
@@ -1411,9 +1770,7 @@
                         isText = true;
                     }
                 }
-
                 if (!isLogo && !isText) return;
-
                 const t1 = e.touches[0],
                     t2 = e.touches[1];
                 const dist = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
@@ -1423,15 +1780,7 @@
                 } else if (isText) {
                     initialSize = parseFloat(window.getComputedStyle(textElement).fontSize);
                 }
-
-                zoomData = {
-                    logoContent: logoContent,
-                    textElement: textElement,
-                    isLogo: isLogo,
-                    isText: isText,
-                    initialDist: dist,
-                    initialSize: initialSize
-                };
+                zoomData = { logoContent, textElement, isLogo, isText, initialDist: dist, initialSize: initialSize };
                 e.preventDefault();
             }
         }, { passive: false });
@@ -1444,7 +1793,6 @@
             const dist = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
             const scale = dist / zoomData.initialDist;
             let newSize = zoomData.initialSize * scale;
-
             if (zoomData.isLogo) {
                 newSize = Math.min(60, Math.max(14, newSize));
                 zoomData.logoContent.style.fontSize = newSize + 'px';
@@ -1531,7 +1879,7 @@
             document.querySelectorAll('.arrastavel, #logoTNJ, #telefoneContainer').forEach(el => makeDraggable(el));
         });
 
-        // ===== BAIXAR =====
+        // ===== BAIXAR IMAGEM =====
         async function baixarBanner(formato) {
             if (!fundoAtual) { alert('⚠️ Escolha um fundo na galeria!'); return; }
             const area = document.getElementById('areaBanner');
@@ -1541,6 +1889,47 @@
             link.download = `BANNER-TNJ-${Date.now()}.${formato}`;
             link.href = canvas.toDataURL(`image/${formato}`, 0.96);
             link.click();
+        }
+
+        // ===== ENVIAR VÍDEO (salvar no dispositivo) =====
+        async function enviarVideoBanner() {
+            if (!fundoAtual || fundoAtual.type !== 'video') {
+                alert('⚠️ Primeiro aplique um vídeo no banner!');
+                return;
+            }
+            const area = document.getElementById('areaBanner');
+            if (!area.captureStream) {
+                alert('⚠️ Seu navegador não suporta captura de vídeo. Use Chrome ou Edge.');
+                return;
+            }
+            try {
+                const videoEl = document.getElementById('videoBanner');
+                if (videoEl.paused) {
+                    await videoEl.play().catch(e => console.log('Tentando reproduzir...'));
+                }
+                await new Promise(r => setTimeout(r, 300));
+
+                const stream = area.captureStream(30);
+                const recorder = new MediaRecorder(stream, {
+                    mimeType: 'video/webm;codecs=vp9,opus',
+                    videoBitsPerSecond: 2500000
+                });
+                const chunks = [];
+                recorder.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
+                recorder.onstop = () => {
+                    const blob = new Blob(chunks, { type: 'video/webm' });
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.download = `BANNER-TNJ-VIDEO-${Date.now()}.webm`;
+                    link.href = url;
+                    link.click();
+                    URL.revokeObjectURL(url);
+                };
+                recorder.start();
+                setTimeout(() => { recorder.stop(); }, 4000);
+            } catch (e) {
+                alert('Erro ao gravar vídeo: ' + e.message);
+            }
         }
 
         // ===== INICIALIZAÇÃO =====
