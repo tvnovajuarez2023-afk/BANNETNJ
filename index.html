@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js">
     </script>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700;900&family=Anton&family=Bebas+Neue&family=Righteous&family=Orbitron:wght@400;700;900&family=Cinzel:wght@400;700;900&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet" />
     <style>
         /* ===== ESTILOS GERAIS ===== */
         .grad-tnj {
@@ -53,7 +54,9 @@
         .btn-formato,
         .btn-adicionar-contato,
         .btn-carregar-logo,
-        .btn-aplicar-texto {
+        .btn-aplicar-texto,
+        .btn-pesquisar,
+        .font-btn {
             @apply btn-padrao text-sm font-bold text-center transition-all duration-200;
             border-radius: 12px;
             padding: 12px 8px;
@@ -72,10 +75,31 @@
         .btn-formato:hover,
         .btn-adicionar-contato:hover,
         .btn-carregar-logo:hover,
-        .btn-aplicar-texto:hover {
+        .btn-aplicar-texto:hover,
+        .btn-pesquisar:hover,
+        .font-btn:hover {
             transform: scale(1.03);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
             border-color: #ffc107;
+        }
+
+        .btn-pesquisar {
+            background: linear-gradient(135deg, #009E3D 0%, #FEDB00 50%, #EF1A2D 100%);
+            background-size: 200% 200%;
+            animation: reggaeBtn 3s ease-in-out infinite alternate;
+            color: #000;
+            font-weight: 900;
+            border-color: #FEDB00;
+        }
+        .btn-pesquisar:hover {
+            animation-play-state: paused;
+            border-color: #fff;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+        @keyframes reggaeBtn {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
         }
 
         .btn-pinterest {
@@ -148,6 +172,116 @@
             transform: scale(1.03);
             border-color: #ffc107;
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        /* ===== BOTÕES DE FONTE COM FUNDO REGGAE ===== */
+        .font-selector-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+            margin-top: 6px;
+        }
+        .font-btn {
+            padding: 8px 4px;
+            border-radius: 12px;
+            flex-direction: column;
+            gap: 2px;
+            font-size: 0.7rem;
+            /* Fundo Reggae animado */
+            background: linear-gradient(135deg, #009E3D 0%, #FEDB00 50%, #EF1A2D 100%);
+            background-size: 200% 200%;
+            animation: reggaeFontBtn 4s ease-in-out infinite alternate;
+            color: #000;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            min-height: 60px;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+        }
+        .font-btn:hover {
+            transform: scale(1.03);
+            border-color: #ffc107;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+        .font-btn.ativa {
+            border-color: #ffc107 !important;
+            box-shadow: 0 0 30px rgba(255, 193, 7, 0.3);
+        }
+        .font-btn .preview {
+            font-size: 1.1rem;
+            font-weight: 900;
+            line-height: 1.2;
+            color: #000;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.2);
+        }
+        .font-btn .nome {
+            font-size: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: rgba(0,0,0,0.7);
+            font-weight: 700;
+        }
+        .font-btn .badge {
+            font-size: 0.45rem;
+            background: rgba(0,0,0,0.2);
+            padding: 1px 6px;
+            border-radius: 10px;
+            color: #000;
+        }
+
+        @keyframes reggaeFontBtn {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+
+        /* Cores das bordas específicas de cada estilo mantidas */
+        #fonte-marvel {
+            border-color: #e53935;
+        }
+        #fonte-marvel:hover,
+        #fonte-marvel.ativa {
+            border-color: #ffc107 !important;
+        }
+
+        #fonte-dc {
+            border-color: #1e88e5;
+        }
+        #fonte-dc:hover,
+        #fonte-dc.ativa {
+            border-color: #ffc107 !important;
+        }
+
+        #fonte-cinema {
+            border-color: #ffd54f;
+        }
+        #fonte-cinema:hover,
+        #fonte-cinema.ativa {
+            border-color: #ffc107 !important;
+        }
+
+        #fonte-neon {
+            border-color: #00e5ff;
+        }
+        #fonte-neon:hover,
+        #fonte-neon.ativa {
+            border-color: #ffc107 !important;
+        }
+
+        #fonte-classico {
+            border-color: #8d6e63;
+        }
+        #fonte-classico:hover,
+        #fonte-classico.ativa {
+            border-color: #ffc107 !important;
+        }
+
+        #fonte-moderno {
+            border-color: #7b1fa2;
+        }
+        #fonte-moderno:hover,
+        #fonte-moderno.ativa {
+            border-color: #ffc107 !important;
         }
 
         /* ===== BANNER COM FUNDO REGGAE ===== */
@@ -233,6 +367,7 @@
             background: transparent;
             border: none;
             padding: 0;
+            transition: font-family 0.3s;
         }
         #descricaoBanner {
             font-size: 28px;
@@ -246,69 +381,90 @@
             background: transparent;
             border: none;
             padding: 0;
+            transition: font-family 0.3s;
         }
 
-        #logoTNJ {
-            top: 20px;
-            left: 20px;
-            z-index: 20;
-            cursor: grab;
-            touch-action: none;
-            user-select: none;
-            background: transparent;
-            border: none;
-            padding: 0;
+        /* ===== ESTILOS DE FONTE ===== */
+        .fonte-marvel {
+            font-family: 'Bebas Neue', 'Impact', sans-serif;
+            letter-spacing: 3px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 0, 0, 0.2);
         }
-        #logoTNJ:active {
-            cursor: grabbing;
+        .fonte-dc {
+            font-family: 'Oswald', 'Futura', sans-serif;
+            letter-spacing: 2px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 100, 255, 0.2);
         }
-        #logoConteudo {
-            font-size: 1.5rem;
-            font-weight: 900;
-            color: #ffc107;
-            text-shadow: 0 0 20px rgba(255, 193, 7, 0.3);
-            line-height: 1.2;
-            transition: font-size 0.1s;
+        .fonte-cinema {
+            font-family: 'Cinzel', 'Times New Roman', serif;
+            letter-spacing: 4px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 0 40px rgba(255, 215, 0, 0.15);
         }
-        #logoConteudo img {
-            max-height: 48px;
-            width: auto;
-            display: inline-block;
-            transition: max-height 0.1s;
+        .fonte-neon {
+            font-family: 'Orbitron', 'Arial', sans-serif;
+            letter-spacing: 3px;
+            text-shadow: 0 0 20px rgba(0, 255, 255, 0.4), 0 0 60px rgba(0, 255, 255, 0.1);
+        }
+        .fonte-classico {
+            font-family: 'Times New Roman', serif;
+            letter-spacing: 1px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+        }
+        .fonte-moderno {
+            font-family: 'Montserrat', 'Arial', sans-serif;
+            letter-spacing: 1px;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
         }
 
-        #telefoneContainer {
-            top: 20px;
-            right: 20px;
-            z-index: 20;
-            background: rgba(0, 0, 0, 0.25);
-            backdrop-filter: blur(4px);
-            padding: 6px 14px;
-            border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: grab;
-            touch-action: none;
-            user-select: none;
+        /* ===== AUTOCOMPLETE ===== */
+        .suggestions-box {
+            position: absolute;
+            background: #1a1a2e;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            max-height: 240px;
+            overflow-y: auto;
+            width: 100%;
+            z-index: 100;
+            display: none;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
         }
-        #telefoneContainer:active {
-            cursor: grabbing;
-            box-shadow: 0 0 30px rgba(37, 211, 102, 0.15);
-        }
-        #telefoneContainer .fa-whatsapp {
-            font-size: 1.2rem;
-            color: #25d366;
-            text-shadow: 0 0 12px rgba(37, 211, 102, 0.3);
-        }
-        #telefoneLogoDisplay {
-            font-size: 1rem;
-            font-weight: 600;
+        .suggestions-box .item {
+            padding: 10px 14px;
+            cursor: pointer;
             color: #fff;
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+            border-bottom: 1px solid #333;
+            transition: background 0.2s, transform 0.1s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .suggestions-box .item:hover {
+            background: #2a2a4a;
+            transform: scale(1.01);
+        }
+        .suggestions-box .item:last-child {
+            border-bottom: none;
+        }
+        .suggestions-box .item .tipo {
+            font-size: 0.65rem;
+            background: rgba(255, 193, 7, 0.2);
+            padding: 2px 10px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            color: #ffc107;
+            font-weight: 600;
+            text-transform: uppercase;
             letter-spacing: 0.5px;
-            white-space: nowrap;
+        }
+        .suggestions-box .item .titulo {
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        .suggestions-box .item .ano {
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-left: 8px;
         }
 
         .dispositivos {
@@ -359,6 +515,12 @@
             .download-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
+            .font-selector-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .font-btn .preview {
+                font-size: 0.9rem;
+            }
             #logoTNJ {
                 top: 10px;
                 left: 10px;
@@ -376,6 +538,14 @@
             #descricaoBanner {
                 font-size: 20px;
                 top: 55%;
+            }
+            .suggestions-box .item {
+                padding: 8px 12px;
+                flex-wrap: wrap;
+            }
+            .suggestions-box .item .tipo {
+                font-size: 0.5rem;
+                padding: 1px 6px;
             }
         }
     </style>
@@ -402,40 +572,22 @@
                 <i class="fa fa-search text-tnj-dourado"></i> BUSCAR IMAGENS E VÍDEOS
             </h3>
             <div class="flex flex-col sm:flex-row gap-2 mb-4">
-                <input type="text" id="campoBusca" placeholder="Ex: praia, futebol, cinema..." list="sugestoesFilmes" class="flex-1 px-4 py-3 rounded bg-gray-900 border border-gray-600 focus:border-tnj-dourado outline-none" />
-                <datalist id="sugestoesFilmes">
-                    <option value="Avatar: O Caminho da Água"></option>
-                    <option value="Velozes e Furiosos 10"></option>
-                    <option value="Barbie"></option>
-                    <option value="Oppenheimer"></option>
-                    <option value="Missão Impossível 7"></option>
-                    <option value="Homem-Aranha: Através do Aranhaverso"></option>
-                    <option value="John Wick 4"></option>
-                    <option value="Indiana Jones e o Chamado do Destino"></option>
-                    <option value="Elementos"></option>
-                    <option value="Transformers: O Despertar das Feras"></option>
-                    <option value="A Pequena Sereia"></option>
-                    <option value="The Flash"></option>
-                    <option value="Besouro Azul"></option>
-                    <option value="Megalopolis"></option>
-                    <option value="Furiosa: Uma Saga Mad Max"></option>
-                    <option value="Deadpool 3"></option>
-                    <option value="Divertida Mente 2"></option>
-                    <option value="Meu Malvado Favorito 4"></option>
-                    <option value="Twisters"></option>
-                    <option value="Gladiador 2"></option>
-                    <option value="Wicked"></option>
-                    <option value="Moana 2"></option>
-                    <option value="Sonic 3"></option>
-                    <option value="Mufasa: O Rei Leão"></option>
-                </datalist>
+                <div class="flex-1 relative">
+                    <input type="text" id="campoBusca" placeholder="Digite o nome do filme, série ou desenho..." class="w-full px-4 py-3 rounded bg-gray-900 border border-gray-600 focus:border-tnj-dourado outline-none" />
+                    <div id="suggestionsBox" class="suggestions-box"></div>
+                </div>
+
+                <select id="fonteBusca" class="bg-gray-900 border border-gray-600 rounded px-3 py-2 text-white">
+                    <option value="tmdb">TMDB (Filmes/Séries)</option>
+                    <option value="pexels">Pexels (Fotos/Vídeos)</option>
+                </select>
 
                 <select id="tipoBusca" class="bg-gray-900 border border-gray-600 rounded px-3 py-2 text-white">
                     <option value="image">Imagens</option>
                     <option value="video">Vídeos</option>
                 </select>
 
-                <button onclick="buscarConteudo()" class="btn-dourado flex items-center justify-center gap-2">
+                <button onclick="buscarConteudo()" class="btn-pesquisar flex items-center justify-center gap-2">
                     <i class="fa fa-search"></i> PESQUISAR
                 </button>
             </div>
@@ -473,7 +625,7 @@
             <!-- FERRAMENTAS LATERAIS -->
             <div class="md:col-span-1 space-y-4">
 
-                <!-- TEXTOS (apenas Título e Descrição) -->
+                <!-- TEXTOS E ESTILOS DE FONTE -->
                 <div class="caixa">
                     <h3 class="font-bold mb-3 text-tnj-dourado">📝 TEXTOS</h3>
                     <div class="space-y-3">
@@ -501,6 +653,44 @@
                                 <button onclick="ajustarFonteTexto('descricao',2)" class="btn-azul text-xs px-2 py-0.5">+</button>
                             </div>
                             <p class="text-xs text-gray-500 mt-1">👆 Arraste • Dois dedos para aumentar</p>
+                        </div>
+
+                        <!-- SELETOR DE ESTILOS DE FONTE -->
+                        <div>
+                            <label class="text-xs text-tnj-dourado font-semibold">🎬 ESTILO DE FONTE</label>
+                            <div class="font-selector-grid">
+                                <div onclick="aplicarEstiloFonte('fonte-marvel')" class="font-btn ativa" id="fonte-marvel">
+                                    <span class="preview" style="font-family:'Bebas Neue',sans-serif;">MARVEL</span>
+                                    <span class="nome">Marvel</span>
+                                    <span class="badge">⚡</span>
+                                </div>
+                                <div onclick="aplicarEstiloFonte('fonte-dc')" class="font-btn" id="fonte-dc">
+                                    <span class="preview" style="font-family:'Oswald',sans-serif;">DC</span>
+                                    <span class="nome">DC Comics</span>
+                                    <span class="badge">🦇</span>
+                                </div>
+                                <div onclick="aplicarEstiloFonte('fonte-cinema')" class="font-btn" id="fonte-cinema">
+                                    <span class="preview" style="font-family:'Cinzel',serif;">CINEMA</span>
+                                    <span class="nome">Cinema</span>
+                                    <span class="badge">🎞️</span>
+                                </div>
+                                <div onclick="aplicarEstiloFonte('fonte-neon')" class="font-btn" id="fonte-neon">
+                                    <span class="preview" style="font-family:'Orbitron',sans-serif;">NEON</span>
+                                    <span class="nome">Neon</span>
+                                    <span class="badge">💡</span>
+                                </div>
+                                <div onclick="aplicarEstiloFonte('fonte-classico')" class="font-btn" id="fonte-classico">
+                                    <span class="preview" style="font-family:'Times New Roman',serif;">CLÁSSICO</span>
+                                    <span class="nome">Clássico</span>
+                                    <span class="badge">📜</span>
+                                </div>
+                                <div onclick="aplicarEstiloFonte('fonte-moderno')" class="font-btn" id="fonte-moderno">
+                                    <span class="preview" style="font-family:'Montserrat',sans-serif;">MODERNO</span>
+                                    <span class="nome">Moderno</span>
+                                    <span class="badge">✨</span>
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-400 mt-1">Clique para aplicar ao título e descrição</p>
                         </div>
 
                         <button onclick="aplicarTexto()" class="btn-aplicar-texto w-full mt-2">APLICAR TEXTOS</button>
@@ -591,9 +781,9 @@
                             <div id="telefoneLogoDisplay" class="text-sm text-white font-semibold"></div>
                         </div>
 
-                        <!-- Textos (apenas Título e Descrição) -->
-                        <div id="tituloBanner" class="arrastavel" style="background:transparent; border:none; backdrop-filter:none; padding:0; font-size:48px; font-weight:900; text-transform:uppercase; text-shadow:0 4px 20px rgba(0,0,0,0.8); letter-spacing:2px; line-height:1.2; color:#fff; text-align:center; top:25%; left:50%; transform:translateX(-50%);"></div>
-                        <div id="descricaoBanner" class="arrastavel" style="background:transparent; border:none; backdrop-filter:none; padding:0; font-size:28px; font-weight:700; text-shadow:0 3px 15px rgba(0,0,0,0.7); color:#fff; text-align:center; top:60%; left:50%; transform:translateX(-50%);"></div>
+                        <!-- Textos -->
+                        <div id="tituloBanner" class="arrastavel fonte-marvel" style="background:transparent; border:none; backdrop-filter:none; padding:0; font-size:48px; font-weight:900; text-transform:uppercase; text-shadow:0 4px 20px rgba(0,0,0,0.8); letter-spacing:2px; line-height:1.2; color:#fff; text-align:center; top:25%; left:50%; transform:translateX(-50%);"></div>
+                        <div id="descricaoBanner" class="arrastavel fonte-marvel" style="background:transparent; border:none; backdrop-filter:none; padding:0; font-size:28px; font-weight:700; text-shadow:0 3px 15px rgba(0,0,0,0.7); color:#fff; text-align:center; top:60%; left:50%; transform:translateX(-50%);"></div>
 
                         <!-- Dispositivos -->
                         <div class="dispositivos">
@@ -619,16 +809,22 @@
     </div>
 
     <footer class="mt-10 py-4 text-center text-xs text-gray-500 border-t border-gray-800">
-        © 2026 BNNERTNJ • Ferramenta Oficial TNJ / TV Nova Juarez • Versão 12.1
+        © 2026 BNNERTNJ • Ferramenta Oficial TNJ / TV Nova Juarez • Versão 14.2
     </footer>
 
     <script>
-        // ===== CONFIG =====
-        const chavePexels = 'YOUR_PEXELS_API_KEY';
+        // ===== CHAVES DA API =====
+        const TMDB_API_KEY = 'ec8237f367023fbadd38ab6a1596b40c';
+        const TMDB_IMAGE_BASE = 'https://image.tmdb.org/t/p/w500';
+        const PEXELS_API_KEY = 'YOUR_PEXELS_API_KEY';
 
         let imagensGaleria = [];
         let fundoAtual = null;
         let logoPersonalizada = null;
+        let estiloFonteAtual = 'fonte-marvel';
+
+        // ===== DEBOUNCE =====
+        let debounceTimer = null;
 
         // ===== PERSISTÊNCIA =====
         function salvarGaleria() {
@@ -637,6 +833,7 @@
                 if (fundoAtual) localStorage.setItem('tnj_fundo', JSON.stringify(fundoAtual));
                 else localStorage.removeItem('tnj_fundo');
                 salvarPosicoesElementos();
+                localStorage.setItem('tnj_estilo_fonte', estiloFonteAtual);
             } catch (e) {}
         }
 
@@ -709,11 +906,16 @@
                 if (dados) imagensGaleria = JSON.parse(dados);
                 const fundo = localStorage.getItem('tnj_fundo');
                 if (fundo) fundoAtual = JSON.parse(fundo);
+                const estilo = localStorage.getItem('tnj_estilo_fonte');
+                if (estilo) estiloFonteAtual = estilo;
             } catch (e) {}
         }
 
         function restaurarGaleria() {
             carregarGaleria();
+            // Aplicar estilo de fonte salvo
+            aplicarEstiloFonte(estiloFonteAtual, true);
+
             const grade = document.getElementById('gradeResultados');
             grade.innerHTML = '';
             if (imagensGaleria.length === 0) {
@@ -739,28 +941,144 @@
             }
         }
 
-        // ===== BUSCA =====
+        // ===== ESTILOS DE FONTE =====
+        function aplicarEstiloFonte(estilo, silencioso = false) {
+            estiloFonteAtual = estilo;
+            const textos = ['tituloBanner', 'descricaoBanner'];
+            textos.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.className = el.className.replace(/fonte-\w+/g, '').trim();
+                    el.classList.add('arrastavel', estilo);
+                }
+            });
+            document.querySelectorAll('.font-btn').forEach(btn => btn.classList.remove('ativa'));
+            const btn = document.getElementById(estilo);
+            if (btn) btn.classList.add('ativa');
+
+            if (!silencioso) salvarPosicoesElementos();
+            salvarGaleria();
+        }
+
+        // ===== AUTOCOMPLETE =====
+        async function buscarSugestoes(termo) {
+            if (!termo || termo.length < 1) {
+                document.getElementById('suggestionsBox').style.display = 'none';
+                return;
+            }
+            const fonte = document.getElementById('fonteBusca').value;
+            if (fonte !== 'tmdb') {
+                document.getElementById('suggestionsBox').style.display = 'none';
+                return;
+            }
+
+            try {
+                const resp = await fetch(
+                    `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(termo)}&language=pt-BR&page=1`
+                );
+                const dados = await resp.json();
+                const resultados = dados.results
+                    .filter(item => item.media_type === 'movie' || item.media_type === 'tv')
+                    .slice(0, 8);
+
+                const box = document.getElementById('suggestionsBox');
+                box.innerHTML = '';
+                if (resultados.length === 0) {
+                    box.style.display = 'none';
+                    return;
+                }
+
+                resultados.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'item';
+                    const titulo = item.title || item.name || 'Sem título';
+                    const tipo = item.media_type === 'movie' ? '🎬 Filme' : '📺 Série';
+                    const ano = item.release_date ? item.release_date.split('-')[0] :
+                               item.first_air_date ? item.first_air_date.split('-')[0] : '';
+                    div.innerHTML = `
+                        <span class="titulo">${titulo} ${ano ? `<span class="ano">(${ano})</span>` : ''}</span>
+                        <span class="tipo">${tipo}</span>
+                    `;
+                    div.onclick = function() {
+                        document.getElementById('campoBusca').value = titulo;
+                        box.style.display = 'none';
+                        buscarConteudo();
+                    };
+                    box.appendChild(div);
+                });
+                box.style.display = 'block';
+            } catch (e) {
+                console.warn('Erro ao buscar sugestões:', e);
+                document.getElementById('suggestionsBox').style.display = 'none';
+            }
+        }
+
+        document.getElementById('campoBusca').addEventListener('input', function(e) {
+            clearTimeout(debounceTimer);
+            const termo = e.target.value.trim();
+            debounceTimer = setTimeout(() => {
+                buscarSugestoes(termo);
+            }, 200);
+        });
+
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.relative')) {
+                document.getElementById('suggestionsBox').style.display = 'none';
+            }
+        });
+
+        // ===== BUSCA PRINCIPAL =====
         async function buscarConteudo() {
             const termo = document.getElementById('campoBusca').value.trim();
-            if (!termo) return;
+            if (!termo) { alert('Digite algo para buscar.'); return; }
+            const fonte = document.getElementById('fonteBusca').value;
             const tipo = document.getElementById('tipoBusca').value;
+
             const carregando = document.getElementById('carregando');
             const grade = document.getElementById('gradeResultados');
             carregando.classList.remove('hidden');
             grade.innerHTML = '';
+            document.getElementById('suggestionsBox').style.display = 'none';
+
             try {
                 let resultados = [];
-                if (tipo === 'image') {
-                    resultados = await buscarPexelsImagens(termo);
+                if (fonte === 'tmdb') {
+                    const resp = await fetch(
+                        `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(termo)}&language=pt-BR&page=1`
+                    );
+                    const dados = await resp.json();
+                    resultados = dados.results
+                        .filter(item => item.media_type === 'movie' || item.media_type === 'tv')
+                        .slice(0, 20)
+                        .map(item => {
+                            const titulo = item.title || item.name || 'Sem título';
+                            const posterPath = item.poster_path;
+                            const url = posterPath ? `${TMDB_IMAGE_BASE}${posterPath}` : '';
+                            const thumb = posterPath ? `${TMDB_IMAGE_BASE}${posterPath}` : '';
+                            return {
+                                url: url,
+                                thumbnail: thumb,
+                                type: 'image',
+                                title: titulo
+                            };
+                        });
                 } else {
-                    resultados = await buscarPexelsVideos(termo);
+                    if (tipo === 'image') {
+                        resultados = await buscarPexelsImagens(termo);
+                    } else {
+                        resultados = await buscarPexelsVideos(termo);
+                    }
                 }
+
                 carregando.classList.add('hidden');
-                if (resultados.length === 0) { grade.innerHTML =
-                        `<p class="col-span-full text-center text-gray-400">Nenhum resultado.</p>`; return; }
+                if (resultados.length === 0) {
+                    grade.innerHTML = `<p class="col-span-full text-center text-gray-400">Nenhum resultado encontrado.</p>`;
+                    return;
+                }
+
                 let adicionados = 0;
                 resultados.forEach(item => {
-                    if (!imagensGaleria.some(i => i.url === item.url)) {
+                    if (item.url && !imagensGaleria.some(i => i.url === item.url)) {
                         imagensGaleria.push(item);
                         criarMiniatura(item, grade);
                         adicionados++;
@@ -768,27 +1086,32 @@
                 });
                 salvarGaleria();
                 if (!fundoAtual && imagensGaleria.length > 0) usarComoFundo(imagensGaleria[0]);
-                if (adicionados === 0) grade.innerHTML =
-                    `<p class="col-span-full text-center text-gray-400">Nenhuma imagem nova.</p>`;
+                if (adicionados === 0) {
+                    grade.innerHTML =
+                        `<p class="col-span-full text-center text-gray-400">Nenhuma imagem nova. A galeria já contém esses itens.</p>`;
+                }
             } catch (erro) {
                 carregando.classList.add('hidden');
                 grade.innerHTML = `<p class="col-span-full text-center text-red-400">Erro: ${erro.message}</p>`;
             }
         }
 
+        // ===== PEXELS =====
         async function buscarPexelsImagens(termo) {
+            if (!PEXELS_API_KEY || PEXELS_API_KEY === 'YOUR_PEXELS_API_KEY') return [];
             const resp = await fetch(
                 `https://api.pexels.com/v1/search?query=${encodeURIComponent(termo)}&per_page=20&size=small`, {
-                    headers: { Authorization: chavePexels }
+                    headers: { Authorization: PEXELS_API_KEY }
                 });
             const dados = await resp.json();
             return dados.photos.map(foto => ({ url: foto.src.large2x, thumbnail: foto.src.tiny, type: 'image' }));
         }
 
         async function buscarPexelsVideos(termo) {
+            if (!PEXELS_API_KEY || PEXELS_API_KEY === 'YOUR_PEXELS_API_KEY') return [];
             const resp = await fetch(
                 `https://api.pexels.com/videos/search?query=${encodeURIComponent(termo)}&per_page=10&size=small`, {
-                    headers: { Authorization: chavePexels }
+                    headers: { Authorization: PEXELS_API_KEY }
                 });
             const dados = await resp.json();
             return dados.videos.map(video => {
@@ -850,6 +1173,7 @@
                 icone.innerHTML = '<i class="fa fa-play-circle text-white text-2xl drop-shadow-lg"></i>';
                 div.appendChild(icone);
             }
+            if (item.title) div.title = item.title;
             container.appendChild(div);
         }
 
@@ -895,6 +1219,7 @@
                 `<p class="col-span-full text-center text-gray-400 py-4">Nenhuma imagem.</p>`;
         }
 
+        // ===== UPLOAD =====
         function uploadArquivos() {
             const input = document.getElementById('uploadArquivo');
             const files = input.files;
@@ -1053,6 +1378,7 @@
                 }
             });
             resetarPosicoes();
+            aplicarEstiloFonte('fonte-marvel', true);
             aplicarTexto();
             if (imagensGaleria.length > 0) usarComoFundo(imagensGaleria[0]);
         }
