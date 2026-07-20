@@ -34,9 +34,10 @@
             @apply border-tnj-dourado shadow-lg shadow-tnj-dourado/40;
         }
 
-        /* ===== BOTÕES COM BORDAS COLORIDAS ===== */
+        /* ===== BOTÕES ===== */
         .site-grid,
-        .download-grid {
+        .download-grid,
+        .esportes-grid {
             display: grid;
             gap: 8px;
         }
@@ -45,6 +46,9 @@
         }
         .download-grid {
             grid-template-columns: repeat(3, 1fr);
+        }
+        .esportes-grid {
+            grid-template-columns: repeat(2, 1fr);
         }
 
         .btn-site,
@@ -59,6 +63,8 @@
         .btn-aplicar-video,
         .btn-enviar-video,
         .btn-aplicar-mosaico,
+        .btn-esporte,
+        .btn-aplicar-jogo,
         .font-btn {
             @apply btn-padrao text-sm font-bold text-center transition-all duration-200;
             border-radius: 12px;
@@ -83,10 +89,26 @@
         .btn-aplicar-video:hover,
         .btn-enviar-video:hover,
         .btn-aplicar-mosaico:hover,
+        .btn-esporte:hover,
+        .btn-aplicar-jogo:hover,
         .font-btn:hover {
             transform: scale(1.03);
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
             border-color: #ffc107;
+        }
+
+        .btn-aplicar-jogo {
+            background: linear-gradient(135deg, #1a8a3a, #0d5c26);
+            border-color: #4caf50;
+        }
+
+        .btn-esporte-futebol-hoje {
+            background: linear-gradient(135deg, #1a8a3a, #0d5c26);
+            border-color: #4caf50;
+        }
+        .btn-esporte-futebol-amanha {
+            background: linear-gradient(135deg, #2a6f8f, #154a61);
+            border-color: #4dd0e1;
         }
 
         .btn-pesquisar {
@@ -200,15 +222,6 @@
             border-color: #b39ddb;
         }
 
-        .btn-aplicar-texto {
-            background: linear-gradient(135deg, #f9a825, #f57f17);
-            border-color: #ffd54f;
-            color: #000;
-        }
-        .btn-aplicar-texto:hover {
-            border-color: #ffc107;
-        }
-
         .btn-limpar {
             background: linear-gradient(135deg, #b71c1c, #7f0000);
             border: 2px solid #ef9a9a;
@@ -224,7 +237,7 @@
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
         }
 
-        /* ===== BOTÕES DE FONTE COM FUNDO REGGAE ===== */
+        /* ===== BOTÕES DE FONTE ===== */
         .font-selector-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -297,7 +310,94 @@
         #fonte-moderno { border-color: #7b1fa2; }
         #fonte-moderno:hover, #fonte-moderno.ativa { border-color: #ffc107 !important; }
 
-        /* ===== BANNER COM FUNDO REGGAE ===== */
+        /* ===== BANNER PRINCIPAL PROFISSIONAL ===== */
+        .banner-wrapper {
+            background: linear-gradient(145deg, #0c0c1a, #1a1a2e);
+            border-radius: 24px;
+            padding: 20px;
+            border: 1px solid rgba(255, 193, 7, 0.15);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 215, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        .banner-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 26px;
+            background: linear-gradient(45deg, #ffc107, #ff6f00, #ffc107, #ff8f00);
+            background-size: 400% 400%;
+            z-index: -1;
+            animation: borderGlow 4s ease-in-out infinite alternate;
+            opacity: 0.6;
+        }
+        .banner-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 1px;
+            left: 1px;
+            right: 1px;
+            bottom: 1px;
+            border-radius: 23px;
+            background: linear-gradient(145deg, #0c0c1a, #1a1a2e);
+            z-index: -1;
+        }
+        @keyframes borderGlow {
+            0% { background-position: 0% 50%; opacity: 0.4; }
+            100% { background-position: 100% 50%; opacity: 0.8; }
+        }
+
+        .banner-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 4px 12px 4px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 14px;
+        }
+        .banner-header .titulo {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .banner-header .titulo i {
+            color: #ffc107;
+        }
+        .banner-header .badge-live {
+            background: #e53935;
+            color: #fff;
+            font-size: 0.6rem;
+            font-weight: 900;
+            padding: 2px 8px;
+            border-radius: 30px;
+            letter-spacing: 1px;
+            animation: pulseLive 1.5s ease-in-out infinite;
+            box-shadow: 0 0 15px rgba(229, 57, 53, 0.3);
+        }
+        @keyframes pulseLive {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(0.95); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        .banner-header .badge-tnj {
+            background: rgba(255, 193, 7, 0.15);
+            border: 1px solid rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+            font-size: 0.55rem;
+            padding: 2px 12px;
+            border-radius: 30px;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
         #areaBanner {
             position: relative;
             overflow: hidden;
@@ -305,9 +405,9 @@
             -webkit-user-select: none;
             touch-action: none;
             width: 100%;
-            border-radius: 12px;
-            border: 2px solid #374151;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border-radius: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.06);
+            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.7), 0 10px 30px rgba(0, 0, 0, 0.5);
             transition: aspect-ratio 0.3s ease;
             aspect-ratio: 16 / 9;
             background: linear-gradient(135deg, #009E3D 0%, #FEDB00 50%, #EF1A2D 100%);
@@ -342,12 +442,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1) 50%, transparent);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1) 50%, transparent);
             pointer-events: none;
             z-index: 1;
         }
 
-        /* ===== LOGO REPETIDA (MOSAICO) - inicialmente oculta ===== */
+        /* ===== LOGO REPETIDA (MOSAICO) ===== */
         #logoMosaico {
             position: absolute;
             top: 0;
@@ -524,57 +624,7 @@
             opacity: 1;
         }
 
-        /* ===== AUTOCOMPLETE ===== */
-        .suggestions-box {
-            position: absolute;
-            background: #1a1a2e;
-            border: 2px solid #ffc107;
-            border-radius: 8px;
-            max-height: 240px;
-            overflow-y: auto;
-            width: 100%;
-            z-index: 100;
-            display: none;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
-        }
-        .suggestions-box .item {
-            padding: 10px 14px;
-            cursor: pointer;
-            color: #fff;
-            border-bottom: 1px solid #333;
-            transition: background 0.2s, transform 0.1s;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .suggestions-box .item:hover {
-            background: #2a2a4a;
-            transform: scale(1.01);
-        }
-        .suggestions-box .item:last-child {
-            border-bottom: none;
-        }
-        .suggestions-box .item .tipo {
-            font-size: 0.65rem;
-            background: rgba(255, 193, 7, 0.2);
-            padding: 2px 10px;
-            border-radius: 20px;
-            border: 1px solid rgba(255, 193, 7, 0.3);
-            color: #ffc107;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .suggestions-box .item .titulo {
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
-        .suggestions-box .item .ano {
-            font-size: 0.7rem;
-            color: #aaa;
-            margin-left: 8px;
-        }
-
+        /* ===== DISPOSITIVOS ===== */
         .dispositivos {
             display: flex;
             justify-content: center;
@@ -647,6 +697,439 @@
             color: #ffc107;
         }
 
+        /* ===== AGENDA DE JOGOS ===== */
+        .esportes-resultados {
+            max-height: 500px;
+            overflow-y: auto;
+            margin-top: 8px;
+            border-radius: 8px;
+            background: rgba(0,0,0,0.2);
+            padding: 8px;
+        }
+        .esportes-resultados .partida-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            border-left: 3px solid #ffc107;
+            transition: all 0.2s;
+        }
+        .esportes-resultados .partida-card:hover {
+            background: rgba(255,255,255,0.08);
+        }
+        .esportes-resultados .partida-card .cabecalho {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        .esportes-resultados .partida-card .cabecalho .liga {
+            font-size: 0.65rem;
+            background: #ffc107;
+            color: #000;
+            padding: 0 8px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+        .esportes-resultados .partida-card .cabecalho .horario {
+            font-size: 0.7rem;
+            color: #aaa;
+        }
+        .esportes-resultados .partida-card .times {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            padding: 4px 0;
+        }
+        .esportes-resultados .partida-card .times .time-logo {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .esportes-resultados .partida-card .times .time-logo img {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+            border-radius: 4px;
+        }
+        .esportes-resultados .partida-card .times .gols {
+            font-weight: 900;
+            font-size: 1.2rem;
+            min-width: 50px;
+            text-align: center;
+            color: #ffc107;
+        }
+        .esportes-resultados .partida-card .info-extra {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            font-size: 0.7rem;
+            color: #aaa;
+            margin-top: 4px;
+            flex-wrap: wrap;
+        }
+        .esportes-resultados .partida-card .info-extra span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .esportes-resultados .partida-card .botoes-partida {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+            justify-content: flex-end;
+        }
+        .esportes-resultados .partida-card .botoes-partida .btn-aplicar-jogo {
+            font-size: 0.6rem;
+            padding: 4px 12px;
+            border-radius: 8px;
+        }
+        .esportes-resultados .vazio {
+            text-align: center;
+            color: #666;
+            padding: 20px;
+            font-size: 0.8rem;
+        }
+        .esportes-resultados .carregando-esporte {
+            text-align: center;
+            color: #ffc107;
+            padding: 20px;
+            font-size: 0.8rem;
+        }
+
+        /* ===== PLAYER SLIDESHOW (TOPO) ===== */
+        .player-topo {
+            background: #0a0a16;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 193, 7, 0.2);
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.5);
+        }
+        .player-topo .slideshow {
+            position: relative;
+            aspect-ratio: 16/9;
+            width: 100%;
+        }
+        .player-topo .slideshow .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .player-topo .slideshow .slide.active {
+            opacity: 1;
+        }
+        .player-topo .slideshow .overlay-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 3.5rem;
+            color: rgba(255, 255, 255, 0.3);
+            text-shadow: 0 0 30px rgba(0,0,0,0.8);
+            pointer-events: none;
+            z-index: 2;
+        }
+        .player-topo .controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 8px 16px;
+            background: rgba(0,0,0,0.7);
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .player-topo .controls button {
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            padding: 4px 10px;
+        }
+        .player-topo .controls button:hover {
+            transform: scale(1.15);
+            color: #ffc107;
+        }
+        .player-topo .controls .dots {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        .player-topo .controls .dots .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #444;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .player-topo .controls .dots .dot.active {
+            background: #ffc107;
+            transform: scale(1.3);
+            box-shadow: 0 0 12px rgba(255, 193, 7, 0.5);
+        }
+        .player-topo .controls .dots .dot:hover {
+            background: #ffc107;
+        }
+        .player-topo .controls #slideCounter {
+            font-size: 0.7rem;
+            color: #888;
+        }
+
+        /* ===== GALERIA ===== */
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 8px 0;
+        }
+        .galeria-grid .item-galeria {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            aspect-ratio: 16/9;
+            background: #1a1a2e;
+        }
+        .galeria-grid .item-galeria:hover {
+            border-color: #ffc107;
+            transform: scale(1.02);
+        }
+        .galeria-grid .item-galeria img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .galeria-grid .item-galeria .tipo-badge {
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            background: rgba(0,0,0,0.6);
+            color: #fff;
+            font-size: 0.5rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+        .galeria-grid .item-galeria .delete-btn {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: rgba(255,0,0,0.7);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 10px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .galeria-grid .item-galeria:hover .delete-btn {
+            opacity: 1;
+        }
+
+        /* ===== BUSCA UNIFICADA ===== */
+        .busca-unificada .grade-resultados {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 8px 0;
+        }
+        .busca-unificada .grade-resultados .item-resultado {
+            background: #1a1a2e;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            text-align: center;
+            padding: 4px;
+        }
+        .busca-unificada .grade-resultados .item-resultado:hover {
+            border-color: #ffc107;
+            transform: scale(1.03);
+        }
+        .busca-unificada .grade-resultados .item-resultado img {
+            width: 100%;
+            aspect-ratio: 2/3;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+        .busca-unificada .grade-resultados .item-resultado div {
+            padding: 4px 0;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #eee;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .busca-unificada .grade-resultados .item-resultado div span {
+            display: block;
+            font-size: 0.6rem;
+            color: #999;
+            font-weight: 400;
+        }
+
+        /* Botão Pinterest personalizado com borda retangular colorida */
+        .btn-pinterest-side {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #e60023, #b3001a);
+            color: #fff;
+            padding: 10px 16px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+            border: 2px solid #ffc107;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(230, 0, 35, 0.3);
+            width: 100%;
+            text-decoration: none;
+        }
+        .btn-pinterest-side:hover {
+            transform: scale(1.03);
+            box-shadow: 0 6px 25px rgba(230, 0, 35, 0.5);
+            border-color: #fff;
+        }
+        .btn-pinterest-side i {
+            font-size: 1.2rem;
+        }
+
+        .info-chave-unificada {
+            font-size: 0.65rem;
+            color: #888;
+            margin-top: 8px;
+            padding: 6px 10px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 6px;
+            border-left: 3px solid #ffc107;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        .info-chave-unificada a {
+            color: #ffc107;
+            text-decoration: underline;
+        }
+
+        /* ===== GERADOR DE VÍDEO ===== */
+        .gerador-video {
+            margin-top: 12px;
+            padding: 12px;
+            background: #1a1a2a;
+            border-radius: 10px;
+            border: 1px solid #333;
+        }
+        .gerador-video h4 {
+            color: #ffc107;
+            margin: 0 0 10px 0;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .gerador-video select {
+            flex: 1;
+            padding: 8px;
+            border-radius: 4px;
+            background: #222;
+            color: #fff;
+            border: none;
+            font-size: 0.85rem;
+        }
+        .gerador-video .barra-progresso {
+            display: none;
+            margin-bottom: 10px;
+        }
+        .gerador-video .barra-progresso .progress-track {
+            width: 100%;
+            height: 6px;
+            background: #333;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .gerador-video .barra-progresso .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: #ffc107;
+            transition: 0.1s;
+        }
+        .gerador-video .barra-progresso p {
+            font-size: 12px;
+            margin: 5px 0 0;
+            text-align: center;
+            color: #aaa;
+        }
+        .gerador-video .btn-gerar-video {
+            width: 100%;
+            padding: 10px;
+            background: #28a745;
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .gerador-video .btn-gerar-video:hover {
+            background: #218838;
+        }
+        .gerador-video .btn-gerar-video:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .gerador-video .link-download-vid {
+            display: block;
+            margin-top: 8px;
+            padding: 10px;
+            background: #ffc107;
+            color: #000;
+            text-align: center;
+            font-weight: bold;
+            border-radius: 6px;
+            text-decoration: none;
+            display: none;
+        }
+        .gerador-video .link-download-vid:hover {
+            background: #e0a800;
+        }
+        .gerador-video .controles-vid {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        .gerador-video .controles-vid select {
+            flex: 1;
+            padding: 8px;
+            border-radius: 4px;
+            background: #222;
+            color: #fff;
+            border: none;
+        }
+
         @media (max-width: 640px) {
             .site-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -662,6 +1145,13 @@
             }
             .video-grid {
                 grid-template-columns: repeat(2, 1fr);
+            }
+            .esportes-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .esportes-resultados .partida-card .times {
+                flex-wrap: wrap;
+                gap: 6px;
             }
             #logoTNJ {
                 top: 10px;
@@ -681,19 +1171,26 @@
                 font-size: 20px;
                 top: 55%;
             }
-            .suggestions-box .item {
-                padding: 8px 12px;
-                flex-wrap: wrap;
-            }
-            .suggestions-box .item .tipo {
-                font-size: 0.5rem;
-                padding: 1px 6px;
-            }
             .audio-btn {
                 width: 24px;
                 height: 24px;
                 font-size: 12px;
                 bottom: -24px;
+            }
+            .galeria-grid {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            }
+            .busca-unificada .grade-resultados {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            }
+            .banner-wrapper {
+                padding: 10px;
+            }
+            .player-topo .slideshow .overlay-icon {
+                font-size: 2.5rem;
+            }
+            .gerador-video .controles-vid {
+                flex-direction: column;
             }
         }
     </style>
@@ -714,57 +1211,60 @@
 
     <div class="container mx-auto px-4 py-6">
 
-        <!-- BUSCA -->
+        <!-- ===== PLAYER SLIDESHOW (TOPO) ===== -->
+        <section class="mb-8 caixa" style="padding: 12px; background: #0d0d1f; border-color: rgba(255,193,7,0.2);">
+            <div class="flex items-center justify-between mb-3 px-1">
+                <span class="text-sm font-bold text-tnj-dourado flex items-center gap-2"><i class="fa fa-play-circle"></i> LANÇAMENTOS EM DESTAQUE</span>
+                <span class="text-[0.55rem] bg-tnj-dourado text-black px-2 py-0.5 rounded-full font-bold">AUTO</span>
+            </div>
+            <div class="player-topo" id="playerTopo">
+                <div class="slideshow" id="slideshowTopo">
+                    <div class="overlay-icon"><i class="fa fa-play-circle"></i></div>
+                </div>
+                <div class="controls">
+                    <button id="playPauseBtnTopo" onclick="togglePlayPauseTopo()"><i class="fa fa-pause"></i></button>
+                    <div class="dots" id="dotsContainerTopo"></div>
+                    <span id="slideCounterTopo" class="text-xs text-gray-400"></span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ===== BUSCA UNIFICADA ===== -->
+        <section class="mb-8 caixa busca-unificada">
+            <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+                <i class="fa fa-search text-tnj-dourado"></i> BUSCA UNIFICADA
+            </h3>
+            <div class="flex flex-wrap gap-2 items-center">
+                <input type="text" id="campoBuscaUnificada" placeholder="Digite o nome do filme, série ou desenho..." class="flex-1 min-w-[180px] px-4 py-2 rounded bg-gray-900 border border-gray-600 focus:border-tnj-dourado outline-none text-sm" />
+                <select id="fonteBuscaUnificada" class="bg-gray-900 border border-gray-600 rounded px-3 py-2 text-white text-sm">
+                    <option value="tvmaze">TVmaze (Sem chave)</option>
+                    <option value="omdb">OMDb (Com chave)</option>
+                </select>
+                <button onclick="buscarUnificada()" class="btn-pesquisar px-6 py-2 text-sm">PESQUISAR</button>
+                <span id="carregandoBuscaUnificada" style="display:none" class="text-tnj-dourado text-sm">Buscando...</span>
+            </div>
+            <div id="resultadosBuscaUnificada" class="grade-resultados">
+                <p class="col-span-full text-center text-gray-400 py-4">Pesquise um título para ver os resultados</p>
+            </div>
+            <div class="info-chave-unificada">
+                <span>💡 Clique no cartaz para usar como fundo e preencher título/ano</span>
+                <span>🔑 OMDb: <a href="https://www.omdbapi.com/apikey.aspx" target="_blank">Obter chave grátis</a> | Cole em CHAVE_OMDB no script</span>
+            </div>
+        </section>
+
+        <!-- ===== GALERIA DE IMAGENS ===== -->
         <section class="mb-8 caixa">
             <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
-                <i class="fa fa-search text-tnj-dourado"></i> BUSCAR IMAGENS E VÍDEOS
+                <i class="fa fa-image text-tnj-dourado"></i> GALERIA DE IMAGENS
             </h3>
-            <div class="flex flex-col sm:flex-row gap-2 mb-4">
-                <div class="flex-1 relative">
-                    <input type="text" id="campoBusca" placeholder="Digite o nome do filme, série ou desenho..." class="w-full px-4 py-3 rounded bg-gray-900 border border-gray-600 focus:border-tnj-dourado outline-none" />
-                    <div id="suggestionsBox" class="suggestions-box"></div>
-                </div>
-
-                <select id="fonteBusca" class="bg-gray-900 border border-gray-600 rounded px-3 py-2 text-white">
-                    <option value="tmdb">TMDB (Filmes/Séries)</option>
-                    <option value="pexels">Pexels (Fotos/Vídeos)</option>
-                </select>
-
-                <select id="tipoBusca" class="bg-gray-900 border border-gray-600 rounded px-3 py-2 text-white">
-                    <option value="image">Imagens</option>
-                    <option value="video">Vídeos</option>
-                </select>
-
-                <button onclick="buscarConteudo()" class="btn-pesquisar flex items-center justify-center gap-2">
-                    <i class="fa fa-search"></i> PESQUISAR
-                </button>
-            </div>
-
-            <div class="site-grid mb-3">
-                <a href="https://pin.it/41OiFenQz" target="_blank" class="btn-site btn-pinterest"><i class="fa fa-pinterest-p"></i> Pinterest</a>
-                <a href="https://x.com/Rafael26113445" target="_blank" class="btn-site btn-twitter"><i class="fa fa-twitter"></i> X (Twitter)</a>
-                <a href="https://www.google.com/search?q=fotos+de+filmes&oq=fotos+de+filmes&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIGCAEQRRg7MgYIAhBFGDsyBggDEEUYOzIGCAQQRRg70gEINzM5NGowajSoAgKwAgE&client=ms-android-samsung-ss&sourceid=chrome-mobile&source=chrome.ob&ie=UTF-8" target="_blank" class="btn-site btn-google"><i class="fa fa-google"></i> Google Fotos</a>
-                <a href="https://www.adorocinema.com/filmes/numero-cinemas/" target="_blank" class="btn-site btn-cinema"><i class="fa fa-film"></i> AdoroCinema</a>
-            </div>
-
-            <div class="flex flex-col sm:flex-row gap-2 mb-2">
-                <input type="text" id="urlImagem" placeholder="Cole o LINK DIRETO da imagem ou vídeo" class="flex-1 px-3 py-2 rounded bg-gray-900 border border-gray-600 focus:border-tnj-dourado outline-none text-sm" />
-                <button onclick="adicionarPorURL()" class="btn-adicionar-url"><i class="fa fa-plus-circle"></i> Adicionar</button>
-            </div>
-            <p class="text-xs text-gray-400 mt-1">💡 Suporta imagens (JPG, PNG, WebP) e vídeos (MP4, WebM, MOV, AVI)</p>
-
-            <div id="carregando" class="hidden text-center py-3 text-tnj-dourado animate-pulse">
-                <i class="fa fa-spinner fa-spin"></i> Buscando...
-            </div>
-
-            <div id="gradeResultados" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3 max-h-52 overflow-y-auto p-1">
-                <p class="col-span-full text-center text-gray-400 py-4">Digite o que procura e clique em Pesquisar</p>
-            </div>
-
-            <div class="flex flex-wrap items-center gap-3 mt-4 pt-3 border-t border-gray-700">
+            <div class="flex flex-wrap items-center gap-3 mb-4">
                 <span class="text-sm font-semibold"><i class="fa fa-upload"></i> Adicionar do celular:</span>
                 <input type="file" id="uploadArquivo" accept="image/*,video/*" multiple class="text-sm text-gray-300 file:mr-2 file:py-1 file:px-3 file:rounded file:border-0 file:bg-tnj-dourado file:text-black file:font-bold hover:file:brightness-110" />
                 <button onclick="uploadArquivos()" class="btn-upload"><i class="fa fa-folder-open"></i> Adicionar</button>
+                <span class="text-xs text-gray-400 ml-auto">Clique na miniatura para usar como fundo</span>
+            </div>
+            <div id="gradeResultados" class="galeria-grid">
+                <p class="col-span-full text-center text-gray-400 py-4">Nenhuma imagem. Adicione uma ou use a busca acima.</p>
             </div>
         </section>
 
@@ -844,6 +1344,23 @@
                     </div>
                 </div>
 
+                <!-- ===== AGENDA DE JOGOS (SEM IFRAMES) ===== -->
+                <div class="caixa">
+                    <h3 class="font-bold mb-3 text-tnj-dourado">⚽ AGENDA DE JOGOS</h3>
+                    <div class="esportes-grid">
+                        <button onclick="buscarJogosHoje()" class="btn-esporte btn-esporte-futebol-hoje">
+                            <i class="fa fa-futbol-o"></i> Hoje
+                        </button>
+                        <button onclick="buscarJogosAmanha()" class="btn-esporte btn-esporte-futebol-amanha">
+                            <i class="fa fa-calendar"></i> Amanhã
+                        </button>
+                    </div>
+
+                    <div id="esportesResultados" class="esportes-resultados">
+                        <div class="vazio">Clique em "Hoje" ou "Amanhã" para ver os jogos</div>
+                    </div>
+                </div>
+
                 <!-- ESTILO, LOGO E CONTATO -->
                 <div class="caixa">
                     <h3 class="font-bold mb-3 text-tnj-dourado">🎨 ESTILO & CONTATO</h3>
@@ -863,7 +1380,7 @@
                             <p class="text-xs text-gray-500 mt-1">👆 Arraste o número</p>
                         </div>
 
-                        <!-- LOGO ÚNICA (em cima) -->
+                        <!-- LOGO ÚNICA -->
                         <div>
                             <label class="text-xs text-tnj-dourado font-semibold">LOGO ÚNICA</label>
                             <div class="flex items-center gap-2 mt-1">
@@ -873,7 +1390,7 @@
                             <p class="text-xs text-gray-500 mt-1">👆 Arraste • Dois dedos para aumentar</p>
                         </div>
 
-                        <!-- LOGO REPETIDA (MOSAICO) - com botão Aplicar estilizado -->
+                        <!-- LOGO REPETIDA (MOSAICO) -->
                         <div>
                             <label class="text-xs text-tnj-dourado font-semibold">LOGO REPETIDA (MOSAICO)</label>
                             <div class="flex items-center gap-2 mt-1">
@@ -919,7 +1436,12 @@
                     </div>
                 </div>
 
-                <!-- FORMATO -->
+                <!-- ===== BOTÃO PINTEREST ===== -->
+                <a href="https://pin.it/2Fmwl0JQA" target="_blank" class="btn-pinterest-side">
+                    <i class="fa fa-pinterest-p"></i> PINTEREST
+                </a>
+
+                <!-- FORMATO DO BANNER PRINCIPAL -->
                 <div class="caixa">
                     <h3 class="font-bold mb-3 text-tnj-dourado">📐 FORMATO</h3>
                     <select id="formatoBanner" class="w-full bg-gray-900 border border-gray-700 rounded px-3 py-2">
@@ -947,26 +1469,63 @@
                     </div>
                     <p class="text-xs text-gray-400 text-center mt-2">Clique para baixar imagem ou salvar vídeo no dispositivo</p>
                 </div>
+
+                <!-- ===== GERADOR DE VÍDEO ===== -->
+                <div class="caixa gerador-video">
+                    <h4><i class="fa fa-film"></i> GERAR VÍDEO DO BANNER</h4>
+                    <div class="controles-vid">
+                        <select id="duracaoVid">
+                            <option value="3000">3s</option>
+                            <option value="5000" selected>5s</option>
+                            <option value="8000">8s</option>
+                            <option value="10000">10s</option>
+                        </select>
+                        <select id="efeitoVid">
+                            <option value="fade">Aparecer</option>
+                            <option value="slide">Deslizar</option>
+                            <option value="statico">Fixo</option>
+                        </select>
+                    </div>
+
+                    <div class="barra-progresso" id="barraProgressoVid">
+                        <div class="progress-track">
+                            <div class="progress-fill" id="progressoVid"></div>
+                        </div>
+                        <p id="textoStatusVid"></p>
+                    </div>
+
+                    <button class="btn-gerar-video" id="btnGerarVid" onclick="iniciarGeracaoVideo()">GERAR VÍDEO 16:9</button>
+                    <a class="link-download-vid" id="linkDownloadVid" href="#" download>⬇️ BAIXAR MP4</a>
+                </div>
+
             </div>
 
-            <!-- ÁREA DO BANNER -->
+            <!-- ===== ÁREA DO BANNER (PROFISSIONAL) ===== -->
             <div class="md:col-span-3">
-                <div class="caixa" style="position:relative;">
-                    <h3 class="font-bold mb-3 text-center text-tnj-dourado">📺 SEU BANNER</h3>
+                <div class="banner-wrapper">
+                    <div class="banner-header">
+                        <div class="titulo">
+                            <i class="fa fa-tv"></i> Gerador de Banners
+                            <span class="badge-live">● LIVE</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="badge-tnj">TNJ PRODUCTION</span>
+                        </div>
+                    </div>
                     <div id="areaBanner" class="w-full relative">
                         <img id="fundoBanner" class="absolute w-full h-full object-cover" src="" alt="Fundo" />
                         <video id="videoBanner" class="absolute w-full h-full object-cover hidden" loop playsinline autoplay></video>
                         <div id="sobreposicao" class="absolute w-full h-full"></div>
 
-                        <!-- Logo Mosaico (inicialmente oculta) -->
+                        <!-- Logo Mosaico -->
                         <div id="logoMosaico" style="display:none;"></div>
 
-                        <!-- Logo TNJ (única) -->
+                        <!-- Logo TNJ -->
                         <div id="logoTNJ" class="arrastavel" style="z-index:20; background:transparent; border:none; backdrop-filter:none; padding:0;">
                             <div id="logoConteudo" class="text-2xl font-black text-tnj-dourado drop-shadow-[0_0_8px_rgba(255,193,7,0.5)]">TV NOVA JUAREZ</div>
                         </div>
 
-                        <!-- Telefone (sempre visível quando adicionado) -->
+                        <!-- Telefone -->
                         <div id="telefoneContainer" class="arrastavel" style="background:rgba(0,0,0,0.25); backdrop-filter:blur(4px); padding:6px 14px; border-radius:40px; border:1px solid rgba(255,255,255,0.08); display:flex; align-items:center; gap:8px;">
                             <i class="fa fa-whatsapp" style="font-size:1.2rem; color:#25d366; text-shadow:0 0 12px rgba(37,211,102,0.3);"></i>
                             <div id="telefoneLogoDisplay" class="text-sm text-white font-semibold"></div>
@@ -987,13 +1546,13 @@
                             <span><i class="fa fa-archive"></i> TV Box</span>
                         </div>
 
-                        <!-- Botão de áudio (fone) -->
+                        <!-- Botão de áudio -->
                         <div id="audioBtn" class="audio-btn" title="Ativar/desativar som do vídeo">
                             <i class="fa fa-headphones"></i>
                         </div>
                     </div>
 
-                    <p class="text-xs text-gray-400 mt-2 text-center">
+                    <p class="text-xs text-gray-400 mt-3 text-center">
                         <i class="fa fa-arrows"></i> Arraste qualquer elemento • Dois dedos para aumentar/diminuir (logo e textos)
                     </p>
                     <p class="text-xs text-gray-400 text-center">
@@ -1005,15 +1564,26 @@
     </div>
 
     <footer class="mt-10 py-4 text-center text-xs text-gray-500 border-t border-gray-800">
-        © 2026 BNNERTNJ • Ferramenta Oficial TNJ / TV Nova Juarez • Versão 17.4
+        © 2026 BNNERTNJ • Ferramenta Oficial TNJ / TV Nova Juarez • Versão 20.1
     </footer>
 
+    <!-- Canvas oculto para gravação -->
+    <canvas id="telaGravacao" width="1920" height="1080" style="display:none"></canvas>
+
     <script>
-        // ===== CHAVES DA API =====
+        // =========================================================
+        // CONFIGURAÇÕES
+        // =========================================================
+        // 🔑 Para OMDb, pegue sua chave grátis em: https://www.omdbapi.com/apikey.aspx
+        const CHAVE_OMDB = "SUA_CHAVE_OMDB"; // <-- COLOQUE SUA CHAVE AQUI
+
+        // ===== CHAVES DAS APIS (mantidas) =====
         const TMDB_API_KEY = 'ec8237f367023fbadd38ab6a1596b40c';
         const TMDB_IMAGE_BASE = 'https://image.tmdb.org/t/p/w500';
         const PEXELS_API_KEY = 'YOUR_PEXELS_API_KEY';
+        const API_FOOTBALL_KEY = 'COLOQUE_SUA_CHAVE_API_FOOTBALL_AQUI';
 
+        // ===== VARIÁVEIS GLOBAIS =====
         let imagensGaleria = [];
         let fundoAtual = null;
         let logoPersonalizada = null;
@@ -1025,7 +1595,91 @@
         let videosGaleria = [];
         let debounceTimer = null;
 
-        // ===== PERSISTÊNCIA =====
+        // =========================================================
+        // SLIDESHOW (TOPO)
+        // =========================================================
+        const imagensSlideshow = [
+            "https://i.postimg.cc/fkbLgg4j/11f73e58-baa1-4f74-a654-d3e627b39b9b.jpg",
+            "https://i.postimg.cc/ThPwHH8Q/40dac294-cdc1-4bb7-98bf-3aa40f10c55a.jpg",
+            "https://i.postimg.cc/V5N6HHyh/4ea4e05f-57a9-4975-bcf2-d3df454048f4.jpg",
+            "https://i.postimg.cc/vDmBSSRq/5da6741a-a63f-4718-917a-e8184b0ccacb.jpg",
+            "https://i.postimg.cc/kD54hhrY/b8c18a3c-40cc-4507-a801-2b8207d4b9d9.jpg",
+            "https://i.postimg.cc/YjS9yycb/c6588bb7-03d3-4f3e-9694-cfb9ca1f0d17.jpg",
+            "https://i.postimg.cc/Wt43ffR5/d2378fcb-3675-4fb1-ab35-7ab74c29c9af.jpg"
+        ];
+
+        let slideAtualTopo = 0;
+        let intervaloSlidesTopo = null;
+        let slidesPausadoTopo = false;
+
+        function iniciarSlideshowTopo() {
+            const container = document.getElementById('slideshowTopo');
+            const dotsContainer = document.getElementById('dotsContainerTopo');
+            container.innerHTML = '<div class="overlay-icon"><i class="fa fa-play-circle"></i></div>';
+
+            imagensSlideshow.forEach((url, index) => {
+                const img = document.createElement('img');
+                img.src = url;
+                img.className = 'slide' + (index === 0 ? ' active' : '');
+                img.dataset.index = index;
+                container.appendChild(img);
+
+                const dot = document.createElement('span');
+                dot.className = 'dot' + (index === 0 ? ' active' : '');
+                dot.dataset.index = index;
+                dot.addEventListener('click', function() {
+                    irParaSlideTopo(parseInt(this.dataset.index));
+                });
+                dotsContainer.appendChild(dot);
+            });
+
+            atualizarContadorTopo();
+            iniciarAutoPlayTopo();
+        }
+
+        function iniciarAutoPlayTopo() {
+            if (intervaloSlidesTopo) clearInterval(intervaloSlidesTopo);
+            intervaloSlidesTopo = setInterval(() => {
+                if (!slidesPausadoTopo) {
+                    proximoSlideTopo();
+                }
+            }, 4000);
+        }
+
+        function proximoSlideTopo() {
+            const total = imagensSlideshow.length;
+            irParaSlideTopo((slideAtualTopo + 1) % total);
+        }
+
+        function irParaSlideTopo(index) {
+            const slides = document.querySelectorAll('#slideshowTopo .slide');
+            const dots = document.querySelectorAll('#dotsContainerTopo .dot');
+            slides.forEach((el, i) => {
+                el.classList.toggle('active', i === index);
+            });
+            dots.forEach((el, i) => {
+                el.classList.toggle('active', i === index);
+            });
+            slideAtualTopo = index;
+            atualizarContadorTopo();
+        }
+
+        function atualizarContadorTopo() {
+            document.getElementById('slideCounterTopo').innerText = `${slideAtualTopo+1}/${imagensSlideshow.length}`;
+        }
+
+        function togglePlayPauseTopo() {
+            slidesPausadoTopo = !slidesPausadoTopo;
+            const btn = document.getElementById('playPauseBtnTopo');
+            btn.innerHTML = slidesPausadoTopo ? '<i class="fa fa-play"></i>' : '<i class="fa fa-pause"></i>';
+            if (!slidesPausadoTopo) {
+                iniciarAutoPlayTopo();
+            }
+        }
+
+        // =========================================================
+        // PERSISTÊNCIA
+        // =========================================================
         function salvarGaleria() {
             try {
                 localStorage.setItem('tnj_galeria', JSON.stringify(imagensGaleria));
@@ -1170,9 +1824,12 @@
                 document.getElementById('audioBtn').classList.add('ativo');
                 document.getElementById('audioBtn').innerHTML = '<i class="fa fa-headphones" style="color:#ffc107;"></i>';
             }
+            document.getElementById('esportesResultados').innerHTML = `<div class="vazio">Clique em "Hoje" ou "Amanhã" para ver os jogos</div>`;
         }
 
-        // ===== VÍDEOS =====
+        // =========================================================
+        // VÍDEOS
+        // =========================================================
         function renderizarVideos() {
             const grid = document.getElementById('videoGrid');
             grid.innerHTML = '';
@@ -1268,7 +1925,9 @@
             }
         });
 
-        // ===== MOSAICO =====
+        // =========================================================
+        // MOSAICO
+        // =========================================================
         function carregarLogoMosaico() {
             const input = document.getElementById('uploadLogoMosaico');
             const file = input.files[0];
@@ -1319,7 +1978,9 @@
             localStorage.setItem('tnj_mosaico_opacidade', val);
         });
 
-        // ===== ESTILOS DE FONTE =====
+        // =========================================================
+        // ESTILOS DE FONTE
+        // =========================================================
         function aplicarEstiloFonte(estilo, silencioso = false) {
             estiloFonteAtual = estilo;
             const textos = ['tituloBanner', 'descricaoBanner'];
@@ -1337,150 +1998,154 @@
             salvarGaleria();
         }
 
-        // ===== AUTOCOMPLETE =====
-        async function buscarSugestoes(termo) {
-            if (!termo || termo.length < 1) {
-                document.getElementById('suggestionsBox').style.display = 'none';
-                return;
-            }
-            const fonte = document.getElementById('fonteBusca').value;
-            if (fonte !== 'tmdb') {
-                document.getElementById('suggestionsBox').style.display = 'none';
-                return;
-            }
-            try {
-                const resp = await fetch(
-                    `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(termo)}&language=pt-BR&page=1`
-                );
-                const dados = await resp.json();
-                const resultados = dados.results.filter(item => item.media_type === 'movie' || item.media_type === 'tv')
-                    .slice(0, 8);
-                const box = document.getElementById('suggestionsBox');
-                box.innerHTML = '';
-                if (resultados.length === 0) { box.style.display = 'none'; return; }
-                resultados.forEach(item => {
-                    const div = document.createElement('div');
-                    div.className = 'item';
-                    const titulo = item.title || item.name || 'Sem título';
-                    const tipo = item.media_type === 'movie' ? '🎬 Filme' : '📺 Série';
-                    const ano = item.release_date ? item.release_date.split('-')[0] :
-                        item.first_air_date ? item.first_air_date.split('-')[0] : '';
-                    div.innerHTML = `
-                        <span class="titulo">${titulo} ${ano ? `<span class="ano">(${ano})</span>` : ''}</span>
-                        <span class="tipo">${tipo}</span>
-                    `;
-                    div.onclick = function() {
-                        document.getElementById('campoBusca').value = titulo;
-                        box.style.display = 'none';
-                        buscarConteudo();
-                    };
-                    box.appendChild(div);
-                });
-                box.style.display = 'block';
-            } catch (e) {
-                console.warn('Erro ao buscar sugestões:', e);
-                document.getElementById('suggestionsBox').style.display = 'none';
-            }
+        // =========================================================
+        // JOGOS (API-Football)
+        // =========================================================
+        function buscarJogosHoje() {
+            const data = new Date().toISOString().split('T')[0];
+            buscarJogosPorData(data, 'HOJE');
         }
 
-        document.getElementById('campoBusca').addEventListener('input', function(e) {
-            clearTimeout(debounceTimer);
-            const termo = e.target.value.trim();
-            debounceTimer = setTimeout(() => { buscarSugestoes(termo); }, 200);
-        });
+        function buscarJogosAmanha() {
+            const data = new Date(Date.now() + 86400000).toISOString().split('T')[0];
+            buscarJogosPorData(data, 'AMANHÃ');
+        }
 
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.relative')) {
-                document.getElementById('suggestionsBox').style.display = 'none';
-            }
-        });
+        async function buscarJogosPorData(data, rotulo) {
+            const container = document.getElementById('esportesResultados');
+            container.innerHTML = `<div class="carregando-esporte"><i class="fa fa-spinner fa-spin"></i> Buscando partidas...</div>`;
 
-        // ===== BUSCA PRINCIPAL =====
-        async function buscarConteudo() {
-            const termo = document.getElementById('campoBusca').value.trim();
-            if (!termo) { alert('Digite algo para buscar.'); return; }
-            const fonte = document.getElementById('fonteBusca').value;
-            const tipo = document.getElementById('tipoBusca').value;
-            const carregando = document.getElementById('carregando');
-            const grade = document.getElementById('gradeResultados');
-            carregando.classList.remove('hidden');
-            grade.innerHTML = '';
-            document.getElementById('suggestionsBox').style.display = 'none';
             try {
-                let resultados = [];
-                if (fonte === 'tmdb') {
-                    const resp = await fetch(
-                        `https://api.themoviedb.org/3/search/multi?api_key=${TMDB_API_KEY}&query=${encodeURIComponent(termo)}&language=pt-BR&page=1`
-                    );
-                    const dados = await resp.json();
-                    resultados = dados.results.filter(item => item.media_type === 'movie' || item.media_type === 'tv')
-                        .slice(0, 20)
-                        .map(item => {
-                            const titulo = item.title || item.name || 'Sem título';
-                            const posterPath = item.poster_path;
-                            const url = posterPath ? `${TMDB_IMAGE_BASE}${posterPath}` : '';
-                            const thumb = posterPath ? `${TMDB_IMAGE_BASE}${posterPath}` : '';
-                            return { url: url, thumbnail: thumb, type: 'image', title: titulo };
-                        });
-                } else {
-                    if (tipo === 'image') {
-                        resultados = await buscarPexelsImagens(termo);
-                    } else {
-                        resultados = await buscarPexelsVideos(termo);
-                    }
-                }
-                carregando.classList.add('hidden');
-                if (resultados.length === 0) {
-                    grade.innerHTML = `<p class="col-span-full text-center text-gray-400">Nenhum resultado encontrado.</p>`;
+                if (API_FOOTBALL_KEY === 'COLOQUE_SUA_CHAVE_API_FOOTBALL_AQUI') {
+                    container.innerHTML = gerarCardsExemplo(rotulo);
                     return;
                 }
-                let adicionados = 0;
-                resultados.forEach(item => {
-                    if (item.url && !imagensGaleria.some(i => i.url === item.url)) {
-                        imagensGaleria.push(item);
-                        criarMiniatura(item, grade);
-                        adicionados++;
-                    }
+
+                const LIGAS = '71,72,39,13,45';
+                const TEMPORADA = new Date().getFullYear();
+
+                const resposta = await fetch(`https://v3.football.api-sports.io/fixtures?date=${data}&leagues=${LIGAS}&season=${TEMPORADA}`, {
+                    headers: { 'x-apisports-key': API_FOOTBALL_KEY }
                 });
-                salvarGaleria();
-                if (!fundoAtual && imagensGaleria.length > 0) usarComoFundo(imagensGaleria[0]);
-                if (adicionados === 0) {
-                    grade.innerHTML =
-                        `<p class="col-span-full text-center text-gray-400">Nenhuma imagem nova. A galeria já contém esses itens.</p>`;
+
+                if (!resposta.ok) throw new Error('Falha na requisição');
+
+                const dados = await resposta.json();
+                if (!dados.response || dados.response.length === 0) {
+                    container.innerHTML = `<div class="vazio">Nenhuma partida marcada para ${rotulo.toLowerCase()}.</div>`;
+                    return;
                 }
+
+                let html = `<div style="font-size:0.7rem; color:#ffc107; margin-bottom:6px; font-weight:600;">${dados.response.length} partidas</div>`;
+
+                dados.response.forEach(partida => {
+                    const timeCasa = partida.teams.home.name;
+                    const timeFora = partida.teams.away.name;
+                    const logoCasa = partida.teams.home.logo || '';
+                    const logoFora = partida.teams.away.logo || '';
+                    const liga = partida.league.name;
+                    const horario = partida.fixture.date.split('T')[1].substr(0,5);
+                    const dataCompleta = partida.fixture.date.split('T')[0];
+                    const golsCasa = partida.goals.home ?? '-';
+                    const golsFora = partida.goals.away ?? '-';
+                    const local = partida.fixture.venue?.name || 'Local a definir';
+                    const canal = partida.fixture.venue?.name || 'Canal não informado';
+                    const status = partida.fixture.status?.long || '';
+
+                    const tituloJogo = `${timeCasa} vs ${timeFora}`;
+                    const descricaoJogo = `${liga} | ${dataCompleta} | ${horario}h | ${local}${status ? ' | ' + status : ''}`;
+
+                    html += `
+                        <div class="partida-card">
+                            <div class="cabecalho">
+                                <span class="liga">${liga}</span>
+                                <span class="horario"><i class="fa fa-clock-o"></i> ${horario}h</span>
+                            </div>
+                            <div class="times">
+                                <div class="time-logo">
+                                    ${logoCasa ? `<img src="${logoCasa}" alt="${timeCasa}" onerror="this.style.display='none'" />` : ''}
+                                    <span>${timeCasa}</span>
+                                </div>
+                                <span class="gols">${golsCasa} x ${golsFora}</span>
+                                <div class="time-logo">
+                                    ${logoFora ? `<img src="${logoFora}" alt="${timeFora}" onerror="this.style.display='none'" />` : ''}
+                                    <span>${timeFora}</span>
+                                </div>
+                            </div>
+                            <div class="info-extra">
+                                <span><i class="fa fa-calendar"></i> ${dataCompleta}</span>
+                                <span><i class="fa fa-map-marker"></i> ${local}</span>
+                                <span><i class="fa fa-tv"></i> ${canal}</span>
+                                ${status ? `<span><i class="fa fa-info-circle"></i> ${status}</span>` : ''}
+                            </div>
+                            <div class="botoes-partida">
+                                <button onclick="aplicarJogoAoBanner('${tituloJogo.replace(/'/g, "\\'")}', '${descricaoJogo.replace(/'/g, "\\'")}', '${logoCasa}')" class="btn-aplicar-jogo">
+                                    <i class="fa fa-arrow-right"></i> Aplicar ao Banner
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                container.innerHTML = html;
+
             } catch (erro) {
-                carregando.classList.add('hidden');
-                grade.innerHTML = `<p class="col-span-full text-center text-red-400">Erro: ${erro.message}</p>`;
+                container.innerHTML = `<div class="vazio" style="color:#ff5722;">Erro: ${erro.message}. Usando dados de exemplo.</div>`;
+                container.innerHTML += gerarCardsExemplo(rotulo);
             }
         }
 
-        // ===== PEXELS =====
-        async function buscarPexelsImagens(termo) {
-            if (!PEXELS_API_KEY || PEXELS_API_KEY === 'YOUR_PEXELS_API_KEY') return [];
-            const resp = await fetch(
-                `https://api.pexels.com/v1/search?query=${encodeURIComponent(termo)}&per_page=20&size=small`, {
-                    headers: { Authorization: PEXELS_API_KEY }
-                });
-            const dados = await resp.json();
-            return dados.photos.map(foto => ({ url: foto.src.large2x, thumbnail: foto.src.tiny, type: 'image' }));
+        function gerarCardsExemplo(rotulo) {
+            return `
+                <div class="partida-card">
+                    <div class="cabecalho"><span class="liga">Brasileirão Série A</span><span class="horario">20:00h</span></div>
+                    <div class="times">
+                        <div class="time-logo"><span>Flamengo</span></div>
+                        <span class="gols">- x -</span>
+                        <div class="time-logo"><span>Palmeiras</span></div>
+                    </div>
+                    <div class="info-extra">
+                        <span><i class="fa fa-calendar"></i> 2026-07-19</span>
+                        <span><i class="fa fa-map-marker"></i> Maracanã</span>
+                        <span><i class="fa fa-tv"></i> TV Globo</span>
+                    </div>
+                    <div class="botoes-partida">
+                        <button onclick="alert('Configure sua chave API-Football para usar dados reais.')" class="btn-aplicar-jogo">
+                            <i class="fa fa-arrow-right"></i> Aplicar ao Banner
+                        </button>
+                    </div>
+                </div>
+                <div style="text-align:center;font-size:0.7rem;color:#888;margin-top:8px;">
+                    💡 Substitua a chave API no código para dados reais
+                </div>
+            `;
         }
 
-        async function buscarPexelsVideos(termo) {
-            if (!PEXELS_API_KEY || PEXELS_API_KEY === 'YOUR_PEXELS_API_KEY') return [];
-            const resp = await fetch(
-                `https://api.pexels.com/videos/search?query=${encodeURIComponent(termo)}&per_page=10&size=small`, {
-                    headers: { Authorization: PEXELS_API_KEY }
-                });
-            const dados = await resp.json();
-            return dados.videos.map(video => {
-                const vf = video.video_files.find(f => f.quality === 'hd') || video.video_files[0];
-                return { url: vf.link, thumbnail: video.image, type: 'video' };
-            });
+        function aplicarJogoAoBanner(titulo, descricao, logoUrl) {
+            document.getElementById('texto1').value = titulo;
+            document.getElementById('texto4').value = descricao;
+            aplicarTexto();
+
+            if (logoUrl) {
+                const item = { url: logoUrl, thumbnail: logoUrl, type: 'image' };
+                if (!imagensGaleria.some(i => i.url === logoUrl)) {
+                    imagensGaleria.push(item);
+                    const grade = document.getElementById('gradeResultados');
+                    const msg = grade.querySelector('.col-span-full');
+                    if (msg && msg.tagName === 'P') msg.remove();
+                    criarMiniatura(item, grade);
+                }
+                usarComoFundo(item);
+            }
+
+            alert('✅ Jogo aplicado ao banner! Você pode editar os textos e a posição dos elementos.');
         }
 
-        // ===== ADICIONAR URL =====
+        // =========================================================
+        // GALERIA E MINIATURAS
+        // =========================================================
         function adicionarPorURL() {
-            const url = document.getElementById('urlImagem').value.trim();
+            const url = document.getElementById('urlImagem')?.value?.trim();
             if (!url) { alert('Cole uma URL.'); return; }
             if (imagensGaleria.some(i => i.url === url)) { alert('Já existe.'); return; }
             const isVideo = url.match(/\.(mp4|webm|mov|avi|mkv)$/i);
@@ -1505,17 +2170,14 @@
             criarMiniatura(item, grade);
             salvarGaleria();
             if (!fundoAtual) usarComoFundo(item);
-            document.getElementById('urlImagem').value = '';
         }
 
-        // ===== MINIATURA =====
         function criarMiniatura(item, container) {
             const div = document.createElement('div');
-            div.className = 'relative';
+            div.className = 'item-galeria';
             const img = document.createElement('img');
-            img.src = item.thumbnail;
+            img.src = item.thumbnail || item.url;
             img.loading = 'lazy';
-            img.className = 'miniatura-galeria';
             img.dataset.url = item.url;
             img.dataset.type = item.type;
             img.onerror = function() { this.src =
@@ -1524,11 +2186,19 @@
             img.addEventListener('dblclick', () => removerItemGaleria(item.url));
             div.appendChild(img);
             if (item.type === 'video') {
-                const icone = document.createElement('div');
-                icone.className = 'absolute inset-0 flex items-center justify-center pointer-events-none';
-                icone.innerHTML = '<i class="fa fa-play-circle text-white text-2xl drop-shadow-lg"></i>';
-                div.appendChild(icone);
+                const badge = document.createElement('span');
+                badge.className = 'tipo-badge';
+                badge.innerHTML = '<i class="fa fa-play"></i> vídeo';
+                div.appendChild(badge);
             }
+            const del = document.createElement('button');
+            del.className = 'delete-btn';
+            del.innerHTML = '<i class="fa fa-times"></i>';
+            del.addEventListener('click', function(e) {
+                e.stopPropagation();
+                removerItemGaleria(item.url);
+            });
+            div.appendChild(del);
             if (item.title) div.title = item.title;
             container.appendChild(div);
         }
@@ -1559,7 +2229,7 @@
             }
             fundoAtual = item;
             salvarGaleria();
-            document.querySelectorAll('.miniatura-galeria').forEach(el => {
+            document.querySelectorAll('.item-galeria img').forEach(el => {
                 el.classList.toggle('ativa', el.dataset.url === item.url);
             });
         }
@@ -1568,7 +2238,7 @@
             if (!confirm('Remover esta imagem da galeria?')) return;
             imagensGaleria = imagensGaleria.filter(item => item.url !== url);
             const grade = document.getElementById('gradeResultados');
-            grade.querySelectorAll('.relative').forEach(el => {
+            grade.querySelectorAll('.item-galeria').forEach(el => {
                 const img = el.querySelector('img');
                 if (img && img.dataset.url === url) el.remove();
             });
@@ -1608,7 +2278,9 @@
             input.value = '';
         }
 
-        // ===== LOGO PERSONALIZADA (ÚNICA) =====
+        // =========================================================
+        // LOGO PERSONALIZADA
+        // =========================================================
         function carregarLogoPersonalizada() {
             const input = document.getElementById('uploadLogo');
             const file = input.files[0];
@@ -1630,19 +2302,17 @@
             logo.style.display = logo.style.display === 'none' ? 'block' : 'none';
         }
 
-        // ===== ADICIONAR CONTATO (CORRIGIDO PARA APARECER IMEDIATAMENTE) =====
+        // =========================================================
+        // CONTATO
+        // =========================================================
         function adicionarContato() {
             const telefone = document.getElementById('telefoneLogo').value.trim();
             if (!telefone) { alert('Digite um número.'); return; }
-            // Define o texto
             document.getElementById('telefoneLogoDisplay').innerText = telefone;
-            // Força a exibição do container
             const container = document.getElementById('telefoneContainer');
             container.style.display = 'flex';
             container.style.visibility = 'visible';
-            // Salva no localStorage
             localStorage.setItem('tnj_telefone', telefone);
-            // Salva posições
             salvarPosicoesElementos();
         }
 
@@ -1745,7 +2415,9 @@
             if (imagensGaleria.length > 0) usarComoFundo(imagensGaleria[0]);
         }
 
-        // ===== ZOOM =====
+        // =========================================================
+        // ZOOM
+        // =========================================================
         let zoomData = null;
         document.addEventListener('touchstart', function(e) {
             if (e.touches.length === 2) {
@@ -1823,7 +2495,9 @@
 
         document.addEventListener('touchend', function() { zoomData = null; });
 
-        // ===== DRAG & DROP =====
+        // =========================================================
+        // DRAG & DROP
+        // =========================================================
         function makeDraggable(el) {
             let startX, startY, origLeft, origTop, dragging = false;
 
@@ -1879,7 +2553,9 @@
             document.querySelectorAll('.arrastavel, #logoTNJ, #telefoneContainer').forEach(el => makeDraggable(el));
         });
 
-        // ===== BAIXAR IMAGEM =====
+        // =========================================================
+        // DOWNLOAD E ENVIO
+        // =========================================================
         async function baixarBanner(formato) {
             if (!fundoAtual) { alert('⚠️ Escolha um fundo na galeria!'); return; }
             const area = document.getElementById('areaBanner');
@@ -1891,7 +2567,6 @@
             link.click();
         }
 
-        // ===== ENVIAR VÍDEO (salvar no dispositivo) =====
         async function enviarVideoBanner() {
             if (!fundoAtual || fundoAtual.type !== 'video') {
                 alert('⚠️ Primeiro aplique um vídeo no banner!');
@@ -1932,7 +2607,181 @@
             }
         }
 
-        // ===== INICIALIZAÇÃO =====
+        // =========================================================
+        // BUSCA UNIFICADA
+        // =========================================================
+        async function buscarUnificada() {
+            const termo = document.getElementById('campoBuscaUnificada').value.trim();
+            if (!termo) { alert('Digite algo!'); return; }
+
+            const fonte = document.getElementById('fonteBuscaUnificada').value;
+            const carregando = document.getElementById('carregandoBuscaUnificada');
+            const resultadosDiv = document.getElementById('resultadosBuscaUnificada');
+            carregando.style.display = 'inline';
+            resultadosDiv.innerHTML = '';
+
+            try {
+                let dados = [];
+                if (fonte === 'omdb') {
+                    if (!CHAVE_OMDB || CHAVE_OMDB === 'SUA_CHAVE_OMDB') {
+                        alert('⚠️ Coloque sua chave OMDb no código (CHAVE_OMDB) ou use a opção TVmaze.');
+                        carregando.style.display = 'none';
+                        return;
+                    }
+                    const res = await fetch(`https://www.omdbapi.com/?apikey=${CHAVE_OMDB}&s=${encodeURIComponent(termo)}&type=movie,series`);
+                    const json = await res.json();
+                    if (json.Response === "True") {
+                        dados = json.Search.filter(item => item.Poster && item.Poster !== "N/A");
+                    } else {
+                        throw new Error(json.Error || 'Nada encontrado');
+                    }
+                } else {
+                    // TVmaze
+                    const res = await fetch(`https://api.tvmaze.com/search/shows?q=${encodeURIComponent(termo)}`);
+                    const json = await res.json();
+                    if (json.length) {
+                        dados = json.map(item => ({
+                            Title: item.show.name,
+                            Year: item.show.premiered ? item.show.premiered.substr(0, 4) : '----',
+                            Poster: item.show.image ? item.show.image.medium : null
+                        })).filter(item => item.Poster);
+                    } else {
+                        throw new Error('Nada encontrado');
+                    }
+                }
+
+                carregando.style.display = 'none';
+
+                if (!dados.length) {
+                    resultadosDiv.innerHTML = `<p class="col-span-full text-center text-gray-400 py-4">Nada encontrado 😕</p>`;
+                    return;
+                }
+
+                resultadosDiv.innerHTML = '';
+                dados.forEach(item => {
+                    const cartaz = document.createElement('div');
+                    cartaz.className = 'item-resultado';
+                    cartaz.innerHTML = `
+                        <img src="${item.Poster}" loading="lazy" alt="${item.Title}" />
+                        <div>
+                            <strong>${item.Title}</strong>
+                            <span>${item.Year}</span>
+                        </div>
+                    `;
+                    cartaz.onclick = function() {
+                        document.getElementById('texto1').value = item.Title.toUpperCase();
+                        document.getElementById('texto4').value = `Ano: ${item.Year}`;
+                        aplicarTexto();
+
+                        const imgUrl = item.Poster;
+                        const itemGaleria = { url: imgUrl, thumbnail: imgUrl, type: 'image' };
+                        if (!imagensGaleria.some(i => i.url === imgUrl)) {
+                            imagensGaleria.push(itemGaleria);
+                            const grade = document.getElementById('gradeResultados');
+                            const msg = grade.querySelector('.col-span-full');
+                            if (msg && msg.tagName === 'P') msg.remove();
+                            criarMiniatura(itemGaleria, grade);
+                        }
+                        usarComoFundo(itemGaleria);
+                        salvarGaleria();
+                    };
+                    resultadosDiv.appendChild(cartaz);
+                });
+
+            } catch (e) {
+                carregando.style.display = 'none';
+                resultadosDiv.innerHTML =
+                    `<p class="col-span-full text-center text-red-400 py-4">Erro: ${e.message}</p>`;
+            }
+        }
+
+        // =========================================================
+        // GERADOR DE VÍDEO
+        // =========================================================
+        let gravador = null,
+            pedacosMidia = [];
+        const tela = document.getElementById('telaGravacao');
+        const ctx = tela.getContext('2d');
+
+        async function iniciarGeracaoVideo() {
+            const areaBanner = document.getElementById('areaBanner');
+            const fundoImg = document.getElementById('fundoBanner');
+            if (!areaBanner || !fundoImg?.src) {
+                alert('⚠️ Monte o banner primeiro!');
+                return;
+            }
+
+            const btn = document.getElementById('btnGerarVid');
+            const link = document.getElementById('linkDownloadVid');
+            link.style.display = 'none';
+            btn.disabled = true;
+            btn.innerText = 'PROCESSANDO...';
+            document.getElementById('barraProgressoVid').style.display = 'block';
+
+            const duracao = parseInt(document.getElementById('duracaoVid').value);
+            const efeito = document.getElementById('efeitoVid').value;
+            const totalQuadros = Math.round(duracao / 33);
+            let quadroAtual = 0;
+            pedacosMidia = [];
+
+            const fluxo = tela.captureStream(30);
+            gravador = new MediaRecorder(fluxo, { mimeType: 'video/webm;codecs=vp9' });
+            gravador.ondataavailable = e => { if (e.data.size > 0) pedacosMidia.push(e.data); };
+            gravador.onstop = finalizarVideo;
+            gravador.start();
+
+            const intervalo = setInterval(async () => {
+                quadroAtual++;
+                const pct = quadroAtual / totalQuadros;
+                document.getElementById('progressoVid').style.width = `${pct * 100}%`;
+                document.getElementById('textoStatusVid').innerText = `${Math.round(pct * 100)}% concluído`;
+
+                await desenharQuadro(areaBanner, pct, efeito);
+
+                if (quadroAtual >= totalQuadros) {
+                    clearInterval(intervalo);
+                    gravador.stop();
+                }
+            }, 33);
+        }
+
+        async function desenharQuadro(el, prog, tipo) {
+            const copia = await html2canvas(el, {
+                scale: 1,
+                useCORS: true,
+                logging: false,
+                width: 1920,
+                height: 1080
+            });
+            ctx.clearRect(0, 0, 1920, 1080);
+            ctx.globalAlpha = 1;
+            if (tipo === 'fade') {
+                ctx.globalAlpha = prog < 0.2 ? prog / 0.2 : (prog > 0.8 ? 1 - ((prog - 0.8) / 0.2) : 1);
+            }
+            if (tipo === 'slide') {
+                const d = prog < 0.2 ? (1 - prog / 0.2) * 200 : (prog > 0.8 ? -(1 - (prog - 0.8) / 0.2) * 200 : 0);
+                ctx.drawImage(copia, d, 0, 1920, 1080);
+                return;
+            }
+            ctx.drawImage(copia, 0, 0, 1920, 1080);
+        }
+
+        function finalizarVideo() {
+            document.getElementById('textoStatusVid').innerText = 'Salvando arquivo...';
+            const blob = new Blob(pedacosMidia, { type: 'video/webm' });
+            const url = URL.createObjectURL(blob);
+            const link = document.getElementById('linkDownloadVid');
+            link.href = url;
+            link.download = `BANNER-TNJ-${Date.now()}.webm`;
+            link.style.display = 'block';
+            document.getElementById('btnGerarVid').disabled = false;
+            document.getElementById('btnGerarVid').innerText = 'GERAR VÍDEO 16:9';
+            document.getElementById('textoStatusVid').innerText = '✅ Pronto para baixar!';
+        }
+
+        // =========================================================
+        // INICIALIZAÇÃO
+        // =========================================================
         document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('areaBanner').style.aspectRatio = '16 / 9';
             const telSalvo = localStorage.getItem('tnj_telefone');
@@ -1954,6 +2803,9 @@
                 }
             });
             setTimeout(() => carregarPosicoesElementos(), 200);
+
+            // Iniciar slideshow no topo
+            iniciarSlideshowTopo();
         });
     </script>
 
