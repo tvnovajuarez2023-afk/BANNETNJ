@@ -84,6 +84,52 @@
             100% { background-position: 100% 50%; }
         }
 
+        /* ===== BOTÕES DE PESQUISA COM BORDA DESTACADA ===== */
+        .btn-pesquisar {
+            position: relative;
+            border: 3px solid transparent;
+            border-radius: 12px;
+            background-clip: padding-box;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            z-index: 1;
+            padding: 12px 20px;
+            font-weight: 900;
+            color: #000;
+            background: #ffc107;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+        .btn-pesquisar::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 12px;
+            padding: 3px;
+            background: linear-gradient(45deg, #ffc107, #ff6f00, #ffc107, #ff8f00, #ff6f00, #ffc107);
+            background-size: 300% 300%;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: bordaPesquisa 2s ease-in-out infinite alternate;
+            z-index: -1;
+        }
+        .btn-pesquisar:hover::before {
+            animation-duration: 0.8s;
+        }
+        .btn-pesquisar:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 40px rgba(255, 193, 7, 0.4);
+        }
+        @keyframes bordaPesquisa {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
         /* ===== BANNER PRINCIPAL (4:5) ===== */
         .banner-tnj-nexxo {
             position: relative;
@@ -1050,7 +1096,7 @@
             text-decoration: underline;
         }
 
-        /* ===== NOVA SEÇÃO DE DOWNLOAD ===== */
+        /* ===== SEÇÃO DE DOWNLOAD ===== */
         .download-container {
             display: flex;
             flex-direction: column;
@@ -1240,7 +1286,7 @@
                     <option value="tvmaze">TVmaze (Sem chave)</option>
                     <option value="omdb">OMDb (Com chave)</option>
                 </select>
-                <button onclick="buscarImagens()" class="btn-pesquisar px-6 py-2 text-sm">PESQUISAR</button>
+                <button onclick="buscarImagens()" class="btn-pesquisar">🔍 PESQUISAR</button>
                 <span id="carregandoBuscaUnificada" style="display:none" class="text-tnj-dourado text-sm">Buscando...</span>
             </div>
             <div id="resultadosBuscaUnificada" class="grade-resultados">
@@ -1265,9 +1311,7 @@
                     <option value="desenho">Desenhos</option>
                 </select>
                 <input type="text" id="palavraChaveVideo" placeholder="Digite o nome..." class="flex-1 p-3 rounded bg-gray-900 border border-gray-700 focus:border-tnj-dourado outline-none text-sm" />
-                <button onclick="iniciarBuscaVideo()" class="bg-tnj-dourado text-black font-bold px-5 rounded hover:brightness-110">
-                    PESQUISAR
-                </button>
+                <button onclick="iniciarBuscaVideo()" class="btn-pesquisar">🔍 PESQUISAR</button>
             </div>
             <p id="avisoVideo" class="text-sm text-yellow-300 hidden"></p>
             <div id="gradeResultadosVideo" class="grade">
@@ -1446,7 +1490,7 @@
                     </div>
                 </div>
 
-                <!-- ===== SEÇÃO DE SALVAR BANNER ===== -->
+                <!-- ===== SALVAR BANNER ===== -->
                 <div class="caixa">
                     <h3 class="font-bold mb-3 text-tnj-dourado">⬇️ SALVAR BANNER</h3>
                     <div class="download-container">
@@ -2388,6 +2432,7 @@
             container.appendChild(iframe);
         }
 
+        // ===== FUNÇÃO USAR NO BANNER (agora fecha o painel) =====
         function usarNoBannerVideo() {
             if (!itemSelecionadoVideo) return;
             const dados = {
@@ -2419,13 +2464,12 @@
             }
 
             alert("✅ Dados aplicados ao banner!");
-            fecharDetalhes();
+            fecharDetalhes(); // Fecha o painel e volta à tela inicial
         }
 
-        // ===== NOVO: SALVAR VÍDEO DO BANNER A PARTIR DO PAINEL DE DETALHES =====
+        // ===== FUNÇÃO SALVAR VÍDEO (agora fecha o painel) =====
         async function salvarVideoBannerDetalhes() {
             if (!fundoAtual) { alert('⚠️ Escolha uma capa na galeria!'); return; }
-            // Adicionar a capa à galeria se ainda não estiver
             if (itemSelecionadoVideo && itemSelecionadoVideo.image?.original) {
                 const imgUrl = itemSelecionadoVideo.image.original;
                 const itemGaleria = { url: imgUrl, thumbnail: imgUrl, type: 'image' };
@@ -2439,8 +2483,23 @@
                     salvarGaleria();
                 }
             }
-            // Baixar vídeo do banner no formato MP4
             await baixarVideoBannerFormatado('mp4');
+            fecharDetalhes(); // Fecha o painel após salvar
+        }
+
+        function copiarLinkCapa() {
+            if (itemSelecionadoVideo?.image?.original) {
+                navigator.clipboard.writeText(itemSelecionadoVideo.image.original).then(() => alert("Link da capa copiado!"));
+            } else {
+                alert("Nenhuma capa disponível.");
+            }
+        }
+
+        function fecharDetalhes() {
+            document.getElementById('painelDetalhes').classList.remove('aberto');
+            document.getElementById('containerVideo').innerHTML =
+                `<div class="text-gray-400 text-center">🔎 Buscando vídeo...</div>`;
+            document.getElementById('capaDetalhe').style.display = 'none';
         }
 
         // =========================================================
