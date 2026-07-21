@@ -9,6 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js">
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.8/dist/hls.min.js">
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700;900&family=Anton&family=Bebas+Neue&family=Righteous&family=Orbitron:wght@400;700;900&family=Cinzel:wght@400;700;900&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet" />
     <style>
         /* ===== ESTILOS GERAIS ===== */
@@ -34,519 +36,323 @@
             @apply border-tnj-dourado shadow-lg shadow-tnj-dourado/40;
         }
 
-        /* ===== BOTÕES ===== */
-        .site-grid,
-        .download-grid,
-        .esportes-grid {
-            display: grid;
-            gap: 8px;
-        }
-        .site-grid {
-            grid-template-columns: repeat(4, 1fr);
-        }
-        .download-grid {
-            grid-template-columns: repeat(3, 1fr);
-        }
-        .esportes-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-
-        .btn-site,
-        .btn-download,
-        .btn-adicionar-url,
-        .btn-upload,
-        .btn-formato,
-        .btn-adicionar-contato,
-        .btn-carregar-logo,
-        .btn-aplicar-texto,
-        .btn-pesquisar,
-        .btn-aplicar-video,
-        .btn-enviar-video,
-        .btn-aplicar-mosaico,
-        .btn-esporte,
-        .btn-aplicar-jogo,
-        .font-btn {
-            @apply btn-padrao text-sm font-bold text-center transition-all duration-200;
+        /* ===== BOTÕES COM BORDA ANIMADA ===== */
+        .btn-com-borda {
+            position: relative;
+            border: 3px solid transparent;
             border-radius: 12px;
-            padding: 12px 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-            border: 2px solid rgba(255, 255, 255, 0.3);
+            background-clip: padding-box;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            z-index: 1;
+            padding: 10px 16px;
+            font-weight: 700;
             color: #fff;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 6px;
-        }
-        .btn-site:hover,
-        .btn-download:hover,
-        .btn-adicionar-url:hover,
-        .btn-upload:hover,
-        .btn-formato:hover,
-        .btn-adicionar-contato:hover,
-        .btn-carregar-logo:hover,
-        .btn-aplicar-texto:hover,
-        .btn-pesquisar:hover,
-        .btn-aplicar-video:hover,
-        .btn-enviar-video:hover,
-        .btn-aplicar-mosaico:hover,
-        .btn-esporte:hover,
-        .btn-aplicar-jogo:hover,
-        .font-btn:hover {
-            transform: scale(1.03);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-            border-color: #ffc107;
-        }
-
-        .btn-aplicar-jogo {
-            background: linear-gradient(135deg, #1a8a3a, #0d5c26);
-            border-color: #4caf50;
-        }
-
-        .btn-esporte-futebol-hoje {
-            background: linear-gradient(135deg, #1a8a3a, #0d5c26);
-            border-color: #4caf50;
-        }
-        .btn-esporte-futebol-amanha {
-            background: linear-gradient(135deg, #2a6f8f, #154a61);
-            border-color: #4dd0e1;
-        }
-
-        .btn-pesquisar {
-            background: linear-gradient(135deg, #009E3D 0%, #FEDB00 50%, #EF1A2D 100%);
-            background-size: 200% 200%;
-            animation: reggaeBtn 3s ease-in-out infinite alternate;
-            color: #000;
-            font-weight: 900;
-            border-color: #FEDB00;
-        }
-        .btn-pesquisar:hover {
-            animation-play-state: paused;
-            border-color: #fff;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
-        }
-        @keyframes reggaeBtn {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 100% 100%; }
-        }
-
-        .btn-aplicar-video {
-            background: linear-gradient(135deg, #009E3D 0%, #FEDB00 50%, #EF1A2D 100%);
-            background-size: 200% 200%;
-            animation: reggaeBtn 3s ease-in-out infinite alternate;
-            color: #000;
-            font-weight: 900;
-            border-color: #FEDB00;
-        }
-        .btn-aplicar-video:hover {
-            animation-play-state: paused;
-            border-color: #fff;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
-        }
-
-        .btn-aplicar-mosaico {
-            background: linear-gradient(135deg, #e65100, #bf360c);
-            border-color: #ffb74d;
-        }
-        .btn-aplicar-mosaico:hover {
-            border-color: #ffc107;
-        }
-
-        .btn-enviar-video {
-            background: linear-gradient(135deg, #6a1b9a, #4a148c);
-            background-size: 200% 200%;
-            animation: reggaeBtn 4s ease-in-out infinite alternate;
-            color: #fff;
-            border-color: #b39ddb;
-        }
-        .btn-enviar-video:hover {
-            animation-play-state: paused;
-            border-color: #ffc107;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255,255,255,0.5);
-        }
-
-        .btn-pinterest {
-            background: linear-gradient(135deg, #e60023, #b3001a);
-        }
-        .btn-twitter {
-            background: linear-gradient(135deg, #1da1f2, #0d7fc0);
-        }
-        .btn-google {
-            background: linear-gradient(135deg, #4285f4, #2a5bb5);
-        }
-        .btn-cinema {
-            background: linear-gradient(135deg, #8b1a4a, #5a0f2f);
-        }
-
-        .btn-png {
-            background: linear-gradient(135deg, #2d7d46, #1a4a2a);
-            animation: brilho 3s infinite alternate;
-        }
-        .btn-jpeg {
-            background: linear-gradient(135deg, #c77d1e, #8a5512);
-            animation: brilho 3.5s infinite alternate;
-        }
-        .btn-webp {
-            background: linear-gradient(135deg, #2a6f8f, #154a61);
-            animation: brilho 4s infinite alternate;
-        }
-        @keyframes brilho {
-            0% { box-shadow: 0 0 10px rgba(255,255,255,0.1); }
-            100% { box-shadow: 0 0 30px rgba(255,255,255,0.3), 0 0 60px rgba(255,215,0,0.1); }
-        }
-
-        .btn-adicionar-url {
-            background: linear-gradient(135deg, #6a1b9a, #4a148c);
-            border-color: #b39ddb;
-        }
-
-        .btn-upload {
-            background: linear-gradient(135deg, #2e7d32, #1b5e20);
-            border-color: #81c784;
-        }
-
-        .btn-formato {
-            background: linear-gradient(135deg, #00838f, #006064);
-            border-color: #4dd0e1;
-        }
-
-        .btn-adicionar-contato {
-            background: linear-gradient(135deg, #00897b, #00695c);
-            border-color: #4db6ac;
-        }
-
-        .btn-carregar-logo {
-            background: linear-gradient(135deg, #6a1b9a, #4a148c);
-            border-color: #b39ddb;
-        }
-
-        .btn-limpar {
-            background: linear-gradient(135deg, #b71c1c, #7f0000);
-            border: 2px solid #ef9a9a;
-            border-radius: 12px;
-            padding: 12px 8px;
-            color: #fff;
-            font-weight: bold;
-            transition: all 0.2s;
-        }
-        .btn-limpar:hover {
-            transform: scale(1.03);
-            border-color: #ffc107;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-        }
-
-        /* ===== BOTÕES DE FONTE ===== */
-        .font-selector-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
-            margin-top: 6px;
-        }
-        .font-btn {
-            padding: 8px 4px;
-            border-radius: 12px;
-            flex-direction: column;
-            gap: 2px;
-            font-size: 0.7rem;
-            background: linear-gradient(135deg, #009E3D 0%, #FEDB00 50%, #EF1A2D 100%);
-            background-size: 200% 200%;
-            animation: reggaeFontBtn 4s ease-in-out infinite alternate;
-            color: #000;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            cursor: pointer;
-            transition: all 0.2s;
-            text-align: center;
-            min-height: 60px;
-            text-shadow: 0 1px 2px rgba(255,255,255,0.3);
-        }
-        .font-btn:hover {
-            transform: scale(1.03);
-            border-color: #ffc107;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-        }
-        .font-btn.ativa {
-            border-color: #ffc107 !important;
-            box-shadow: 0 0 30px rgba(255, 193, 7, 0.3);
-        }
-        .font-btn .preview {
-            font-size: 1.1rem;
-            font-weight: 900;
-            line-height: 1.2;
-            color: #000;
-            text-shadow: 0 1px 2px rgba(255,255,255,0.2);
-        }
-        .font-btn .nome {
-            font-size: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: rgba(0,0,0,0.7);
-            font-weight: 700;
-        }
-        .font-btn .badge {
-            font-size: 0.45rem;
-            background: rgba(0,0,0,0.2);
-            padding: 1px 6px;
-            border-radius: 10px;
-            color: #000;
-        }
-
-        @keyframes reggaeFontBtn {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 100% 100%; }
-        }
-
-        #fonte-marvel { border-color: #e53935; }
-        #fonte-marvel:hover, #fonte-marvel.ativa { border-color: #ffc107 !important; }
-        #fonte-dc { border-color: #1e88e5; }
-        #fonte-dc:hover, #fonte-dc.ativa { border-color: #ffc107 !important; }
-        #fonte-cinema { border-color: #ffd54f; }
-        #fonte-cinema:hover, #fonte-cinema.ativa { border-color: #ffc107 !important; }
-        #fonte-neon { border-color: #00e5ff; }
-        #fonte-neon:hover, #fonte-neon.ativa { border-color: #ffc107 !important; }
-        #fonte-classico { border-color: #8d6e63; }
-        #fonte-classico:hover, #fonte-classico.ativa { border-color: #ffc107 !important; }
-        #fonte-moderno { border-color: #7b1fa2; }
-        #fonte-moderno:hover, #fonte-moderno.ativa { border-color: #ffc107 !important; }
-
-        /* ===== BANNER PRINCIPAL PROFISSIONAL ===== */
-        .banner-wrapper {
-            background: linear-gradient(145deg, #0c0c1a, #1a1a2e);
-            border-radius: 24px;
-            padding: 20px;
-            border: 1px solid rgba(255, 193, 7, 0.15);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), inset 0 1px 0 rgba(255, 215, 0, 0.05);
-            position: relative;
-            overflow: hidden;
-        }
-        .banner-wrapper::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            border-radius: 26px;
-            background: linear-gradient(45deg, #ffc107, #ff6f00, #ffc107, #ff8f00);
-            background-size: 400% 400%;
-            z-index: -1;
-            animation: borderGlow 4s ease-in-out infinite alternate;
-            opacity: 0.6;
-        }
-        .banner-wrapper::after {
-            content: '';
-            position: absolute;
-            top: 1px;
-            left: 1px;
-            right: 1px;
-            bottom: 1px;
-            border-radius: 23px;
-            background: linear-gradient(145deg, #0c0c1a, #1a1a2e);
-            z-index: -1;
-        }
-        @keyframes borderGlow {
-            0% { background-position: 0% 50%; opacity: 0.4; }
-            100% { background-position: 100% 50%; opacity: 0.8; }
-        }
-
-        .banner-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 4px 12px 4px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            margin-bottom: 14px;
-        }
-        .banner-header .titulo {
             font-size: 0.85rem;
-            font-weight: 700;
-            color: #fff;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .banner-header .titulo i {
-            color: #ffc107;
-        }
-        .banner-header .badge-live {
-            background: #e53935;
-            color: #fff;
-            font-size: 0.6rem;
-            font-weight: 900;
-            padding: 2px 8px;
-            border-radius: 30px;
-            letter-spacing: 1px;
-            animation: pulseLive 1.5s ease-in-out infinite;
-            box-shadow: 0 0 15px rgba(229, 57, 53, 0.3);
-        }
-        @keyframes pulseLive {
-            0% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(0.95); }
-            100% { opacity: 1; transform: scale(1); }
-        }
-        .banner-header .badge-tnj {
-            background: rgba(255, 193, 7, 0.15);
-            border: 1px solid rgba(255, 193, 7, 0.2);
-            color: #ffc107;
-            font-size: 0.55rem;
-            padding: 2px 12px;
-            border-radius: 30px;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        #areaBanner {
-            position: relative;
-            overflow: hidden;
-            user-select: none;
-            -webkit-user-select: none;
-            touch-action: none;
             width: 100%;
-            border-radius: 16px;
-            border: 2px solid rgba(255, 255, 255, 0.06);
-            box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.7), 0 10px 30px rgba(0, 0, 0, 0.5);
-            transition: aspect-ratio 0.3s ease;
-            aspect-ratio: 16 / 9;
-            background: linear-gradient(135deg, #009E3D 0%, #FEDB00 50%, #EF1A2D 100%);
+        }
+        .btn-com-borda::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 12px;
+            padding: 3px;
+            background: linear-gradient(45deg, #ffc107, #ff6f00, #ffc107, #ff8f00, #ffc107);
             background-size: 300% 300%;
-            animation: reggaeMove 8s ease-in-out infinite alternate;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: bordaAnimada 3s ease-in-out infinite alternate;
+            z-index: -1;
+        }
+        .btn-com-borda:hover::before {
+            animation-duration: 1.5s;
+        }
+        .btn-com-borda:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 30px rgba(255, 193, 7, 0.2);
+        }
+        @keyframes bordaAnimada {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
 
-        @keyframes reggaeMove {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 100% 100%; }
-        }
-
-        #fundoBanner,
-        #videoBanner {
-            position: absolute;
-            top: 0;
-            left: 0;
+        /* ===== BANNER PRINCIPAL (4:5) ===== */
+        .banner-tnj-nexxo {
+            position: relative;
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.65;
-            mix-blend-mode: overlay;
+            aspect-ratio: 4 / 5;
+            background: #050505;
+            border-radius: 16px;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+            color: #ffffff;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+            transition: aspect-ratio 0.3s ease;
         }
-        #videoBanner {
-            display: none;
-            opacity: 0.65;
-            mix-blend-mode: overlay;
-        }
-        #sobreposicao {
+        .fundo-gradiente {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.1) 50%, transparent);
-            pointer-events: none;
+            inset: 0;
+            background: linear-gradient(to top, #050505 28%, rgba(0, 0, 0, 0.35) 65%, rgba(0, 0, 0, 0.8));
             z-index: 1;
-        }
-
-        /* ===== LOGO REPETIDA (MOSAICO) ===== */
-        #logoMosaico {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 6;
             pointer-events: none;
-            display: none;
+        }
+        
+        /* ===== MOSAICO DE MARCAS ===== */
+        .mosaico-marcas {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
             background-repeat: repeat;
-            background-size: 120px 120px;
+            background-size: 100px 100px;
             opacity: 0.15;
+            display: none;
+        }
+        .mosaico-marcas.ativo {
+            display: block;
         }
 
-        .arrastavel {
+        .logo-cabecalho {
             position: absolute;
+            top: 25px;
+            left: 30px;
             z-index: 10;
             cursor: grab;
             touch-action: none;
             user-select: none;
             -webkit-user-select: none;
-            padding: 6px 12px;
-            border-radius: 12px;
-            background: transparent;
-            border: none;
-            backdrop-filter: none;
-            min-width: 30px;
-            min-height: 24px;
+            padding: 4px 8px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
-        .arrastavel:active {
+        .logo-cabecalho:active {
             cursor: grabbing;
-            z-index: 15;
+            box-shadow: 0 0 30px rgba(255, 193, 7, 0.2);
+        }
+        .logo-cabecalho img {
+            height: 50px;
+            width: auto;
+            display: block;
+            pointer-events: none;
+        }
+        .logo-cabecalho .logo-placeholder {
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: #ffc107;
+            text-shadow: 0 0 20px rgba(255, 193, 7, 0.2);
+            letter-spacing: 1px;
+            white-space: nowrap;
         }
 
-        #tituloBanner {
-            font-size: 48px;
+        /* ===== MARCA D'ÁGUA (única) ===== */
+        .marca-agua {
+            position: absolute;
+            z-index: 8;
+            cursor: grab;
+            touch-action: none;
+            user-select: none;
+            -webkit-user-select: none;
+            padding: 0;
+            background: transparent;
+            border: none;
+            opacity: 0.4;
+            transition: opacity 0.2s;
+            pointer-events: auto;
+        }
+        .marca-agua:active {
+            cursor: grabbing;
+        }
+        .marca-agua img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            pointer-events: none;
+            filter: drop-shadow(0 0 10px rgba(0,0,0,0.3));
+        }
+
+        .imagem-capa {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 15%;
+            opacity: 0.78;
+            z-index: 0;
+        }
+        .area-conteudo {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 40px 30px 50px;
+            z-index: 2;
+        }
+        .titulo-principal {
+            font-size: clamp(30px, 9vw, 54px);
             font-weight: 900;
             text-transform: uppercase;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
-            letter-spacing: 2px;
-            line-height: 1.2;
-            color: #fff;
-            text-align: center;
-            top: 25%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: transparent;
-            border: none;
-            padding: 0;
-            transition: font-family 0.3s;
+            margin: 0 0 18px;
+            line-height: 1.05;
+            text-shadow: 0 4px 20px rgba(0,0,0,0.6);
         }
-        #descricaoBanner {
-            font-size: 28px;
+        .descricao-sinopse {
+            font-size: clamp(15px, 3vw, 19px);
+            line-height: 1.55;
+            margin: 0 0 22px;
+            opacity: 0.88;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+        .caixa-dados {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            margin-bottom: 28px;
+        }
+        .rotulo-info {
+            padding: 9px 15px;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        .rotulo-info.nota { background: #ffc107; color: #000; }
+        .rotulo-info.ano { background: #252525; }
+        .rotulo-info.genero { background: #2b1b42; color: #e0b0ff; }
+        .linha-elenco {
+            font-size: clamp(14px, 2.5vw, 16px);
+            opacity: 0.78;
+            padding-top: 18px;
+            border-top: 1px solid #3a3a3a;
+            text-shadow: 0 1px 8px rgba(0,0,0,0.3);
+        }
+
+        /* ===== TELEFONE ===== */
+        .telefone-container {
+            position: absolute;
+            bottom: 20px;
+            right: 30px;
+            z-index: 10;
+            cursor: grab;
+            touch-action: none;
+            user-select: none;
+            -webkit-user-select: none;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 40px;
+            padding: 6px 18px 6px 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+            transition: box-shadow 0.2s;
+        }
+        .telefone-container:active {
+            cursor: grabbing;
+            box-shadow: 0 0 30px rgba(37, 211, 102, 0.2);
+        }
+        .telefone-container i {
+            font-size: 1.4rem;
+            color: #25d366;
+            text-shadow: 0 0 20px rgba(37, 211, 102, 0.2);
+            pointer-events: none;
+        }
+        .telefone-container .telefone-texto {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #fff;
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.5);
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        /* ===== SELETOR DE FORMATO ===== */
+        .formatos-dropdown {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        .formatos-dropdown select {
+            width: 100%;
+            padding: 10px 14px;
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            border: 3px solid transparent;
+            background-clip: padding-box;
+            color: #fff;
             font-weight: 700;
-            text-shadow: 0 3px 15px rgba(0, 0, 0, 0.7);
+            font-size: 0.85rem;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            outline: none;
+            transition: all 0.3s;
+            position: relative;
+            z-index: 2;
+        }
+        .formatos-dropdown select:focus {
+            border-color: #ffc107;
+            box-shadow: 0 0 30px rgba(255, 193, 7, 0.2);
+        }
+        .formatos-dropdown::before {
+            content: '📐 ';
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 3;
+            font-size: 0.9rem;
+            pointer-events: none;
+        }
+        .formatos-dropdown::after {
+            content: '\f0d7';
+            font-family: 'FontAwesome';
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 3;
+            color: #ffc107;
+            pointer-events: none;
+        }
+        .formatos-dropdown select option {
+            background: #1a1a2e;
             color: #fff;
-            text-align: center;
-            top: 60%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: transparent;
-            border: none;
-            padding: 0;
-            transition: font-family 0.3s;
+            padding: 8px;
+        }
+        .formatos-dropdown .borda-externa {
+            position: absolute;
+            inset: -3px;
+            border-radius: 12px;
+            padding: 3px;
+            background: linear-gradient(45deg, #ffc107, #ff6f00, #ffc107, #ff8f00, #ffc107);
+            background-size: 300% 300%;
+            animation: bordaAnimada 3s ease-in-out infinite alternate;
+            z-index: 0;
+            pointer-events: none;
         }
 
-        /* ===== ESTILOS DE FONTE ===== */
-        .fonte-marvel {
-            font-family: 'Bebas Neue', 'Impact', sans-serif;
-            letter-spacing: 3px;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 0, 0, 0.2);
-        }
-        .fonte-dc {
-            font-family: 'Oswald', 'Futura', sans-serif;
-            letter-spacing: 2px;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 0 30px rgba(0, 100, 255, 0.2);
-        }
-        .fonte-cinema {
-            font-family: 'Cinzel', 'Times New Roman', serif;
-            letter-spacing: 4px;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 0 40px rgba(255, 215, 0, 0.15);
-        }
-        .fonte-neon {
-            font-family: 'Orbitron', 'Arial', sans-serif;
-            letter-spacing: 3px;
-            text-shadow: 0 0 20px rgba(0, 255, 255, 0.4), 0 0 60px rgba(0, 255, 255, 0.1);
-        }
-        .fonte-classico {
-            font-family: 'Times New Roman', serif;
-            letter-spacing: 1px;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
-        }
-        .fonte-moderno {
-            font-family: 'Montserrat', 'Arial', sans-serif;
-            letter-spacing: 1px;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
-        }
-
-        /* ===== VÍDEOS ===== */
+        /* ===== VÍDEOS (GALERIA) ===== */
         .video-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -624,77 +430,270 @@
             opacity: 1;
         }
 
-        /* ===== DISPOSITIVOS ===== */
-        .dispositivos {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 14px;
-            padding: 8px 18px;
-            background: rgba(0, 0, 0, 0.25);
-            backdrop-filter: blur(6px);
-            border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
-            position: absolute;
-            bottom: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 5;
+        /* ===== BUSCA DE VÍDEOS (PEXELS) ===== */
+        .busca-videos .grade-videos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 8px 0;
+        }
+        .busca-videos .grade-videos .item-video {
+            background: #1a1a2e;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            position: relative;
+            aspect-ratio: 16/9;
+        }
+        .busca-videos .grade-videos .item-video:hover {
+            border-color: #ffc107;
+            transform: scale(1.02);
+        }
+        .busca-videos .grade-videos .item-video video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
             pointer-events: none;
         }
-        .dispositivos span {
+        .busca-videos .grade-videos .item-video .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(0,0,0,0.5);
+            opacity: 0.8;
+            pointer-events: none;
+        }
+        .busca-videos .grade-videos .item-video .video-titulo {
+            position: absolute;
+            bottom: 4px;
+            left: 4px;
+            right: 4px;
+            background: rgba(0,0,0,0.6);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.5rem;
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .busca-videos .caixa-busca-video {
             display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
             align-items: center;
-            gap: 5px;
-            font-size: 0.65rem;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.7);
-            letter-spacing: 0.3px;
-            text-transform: uppercase;
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
         }
-        .dispositivos i {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.6);
-            filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.2));
+        .busca-videos .caixa-busca-video input {
+            flex: 1;
+            min-width: 150px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            background: #1a1a2e;
+            border: 2px solid #333;
+            color: #fff;
+            outline: none;
+            transition: border 0.2s;
+        }
+        .busca-videos .caixa-busca-video input:focus {
+            border-color: #ffc107;
+        }
+        .busca-videos .caixa-busca-video button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            background: linear-gradient(135deg, #ffc107, #ff9800);
+            color: #000;
+            font-weight: 900;
+            cursor: pointer;
             transition: all 0.2s;
+            box-shadow: 0 4px 10px rgba(255, 193, 7, 0.2);
         }
-        .dispositivos .separador {
-            color: rgba(255, 255, 255, 0.15);
-            font-size: 0.7rem;
-            font-weight: 100;
+        .busca-videos .caixa-busca-video button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 14px rgba(255, 193, 7, 0.4);
+        }
+        .busca-videos .caixa-busca-video #carregandoVideos {
+            color: #ffc107;
+            font-size: 0.9rem;
+            font-weight: 600;
         }
 
-        /* Botão de áudio */
-        .audio-btn {
-            position: absolute;
-            bottom: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(4px);
-            border: 2px solid rgba(255,255,255,0.2);
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
+        /* ===== BUSCA COM VÍDEOS (TVmaze + YouTube) ===== */
+        .busca-com-videos .grade {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+            max-height: 500px;
+            overflow-y: auto;
+            padding: 8px 0;
+        }
+        .busca-com-videos .grade::-webkit-scrollbar {
+            width: 6px;
+        }
+        .busca-com-videos .grade::-webkit-scrollbar-thumb {
+            background: #ffc107;
+            border-radius: 3px;
+        }
+        .busca-com-videos .item {
+            cursor: pointer;
+            border-radius: 8px;
+            overflow: hidden;
+            background: #1a1a2e;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        .busca-com-videos .item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 193, 7, 0.2);
+            border-color: rgba(255, 193, 7, 0.3);
+        }
+        .busca-com-videos .item img {
+            width: 100%;
+            aspect-ratio: 2/3;
+            object-fit: cover;
+        }
+        .busca-com-videos .item .info {
+            padding: 6px 8px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #eee;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .busca-com-videos .item .ano {
+            font-size: 0.6rem;
+            color: #999;
+            font-weight: 400;
+            padding: 0 8px 8px;
+        }
+        .busca-com-videos .pulsar {
+            animation: carregar 1s infinite;
+        }
+        @keyframes carregar {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+
+        /* Painel de detalhes */
+        .painel-detalhes {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            flex-direction: column;
+        }
+        .painel-detalhes.aberto {
+            display: flex;
+        }
+        .painel-detalhes .cabecalho {
+            background: #1a1a2e;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #333;
+        }
+        .painel-detalhes .cabecalho h3 {
+            font-weight: 700;
+            color: #ffc107;
+            font-size: 1.1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .painel-detalhes .cabecalho button {
+            padding: 4px 16px;
+            background: #e53935;
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        .painel-detalhes .video-container {
+            width: 100%;
+            background: #000;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #fff;
-            font-size: 14px;
+            min-height: 260px;
+            max-height: 50vh;
+        }
+        .painel-detalhes .video-container iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 260px;
+            max-height: 50vh;
+            border: none;
+        }
+        .painel-detalhes .conteudo {
+            padding: 16px;
+            overflow-y: auto;
+            flex: 1;
+        }
+        .painel-detalhes .conteudo .flex-row {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .painel-detalhes .conteudo .flex-row .capa {
+            width: 150px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            display: none;
+        }
+        .painel-detalhes .conteudo .flex-row .info-texto p {
+            font-size: 0.9rem;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        .painel-detalhes .conteudo .flex-row .botoes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        .painel-detalhes .conteudo .flex-row .botoes button {
+            padding: 8px 20px;
+            border-radius: 6px;
+            font-weight: 700;
+            border: none;
             cursor: pointer;
-            transition: all 0.2s;
-            z-index: 30;
+            transition: 0.2s;
         }
-        .audio-btn:hover {
-            background: rgba(255,193,7,0.3);
-            border-color: #ffc107;
-            transform: translateX(-50%) scale(1.1);
+        .painel-detalhes .conteudo .flex-row .botoes .btn-usar {
+            background: #ffc107;
+            color: #000;
         }
-        .audio-btn.ativo {
-            border-color: #ffc107;
-            color: #ffc107;
+        .painel-detalhes .conteudo .flex-row .botoes .btn-usar:hover {
+            background: #e0a800;
+            transform: scale(1.02);
+        }
+        .painel-detalhes .conteudo .flex-row .botoes .btn-salvar-video {
+            background: #28a745;
+            color: #fff;
+        }
+        .painel-detalhes .conteudo .flex-row .botoes .btn-salvar-video:hover {
+            background: #1e7e34;
+            transform: scale(1.02);
+        }
+        .painel-detalhes .conteudo .flex-row .botoes .btn-copiar {
+            background: #444;
+            color: #fff;
+        }
+        .painel-detalhes .conteudo .flex-row .botoes .btn-copiar:hover {
+            background: #555;
         }
 
         /* ===== AGENDA DE JOGOS ===== */
@@ -887,7 +886,7 @@
             color: #888;
         }
 
-        /* ===== GALERIA ===== */
+        /* ===== GALERIA DE IMAGENS ===== */
         .galeria-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
@@ -944,7 +943,7 @@
             opacity: 1;
         }
 
-        /* ===== BUSCA UNIFICADA ===== */
+        /* ===== BUSCA UNIFICADA (IMAGENS) ===== */
         .busca-unificada .grade-resultados {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
@@ -989,7 +988,7 @@
             font-weight: 400;
         }
 
-        /* Botão Pinterest personalizado com borda retangular colorida */
+        /* ===== BOTÃO PINTEREST ===== */
         .btn-pinterest-side {
             display: flex;
             align-items: center;
@@ -1002,16 +1001,32 @@
             font-weight: 700;
             font-size: 0.85rem;
             transition: all 0.2s;
-            border: 2px solid #ffc107;
+            border: 3px solid transparent;
+            background-clip: padding-box;
             cursor: pointer;
             box-shadow: 0 4px 15px rgba(230, 0, 35, 0.3);
             width: 100%;
             text-decoration: none;
+            position: relative;
+            z-index: 1;
+        }
+        .btn-pinterest-side::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 12px;
+            padding: 3px;
+            background: linear-gradient(45deg, #ffc107, #ff6f00, #ffc107, #ff8f00, #ffc107);
+            background-size: 300% 300%;
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: bordaAnimada 3s ease-in-out infinite alternate;
+            z-index: -1;
         }
         .btn-pinterest-side:hover {
             transform: scale(1.03);
             box-shadow: 0 6px 25px rgba(230, 0, 35, 0.5);
-            border-color: #fff;
         }
         .btn-pinterest-side i {
             font-size: 1.2rem;
@@ -1035,101 +1050,66 @@
             text-decoration: underline;
         }
 
-        /* ===== GERADOR DE VÍDEO ===== */
-        .gerador-video {
-            margin-top: 12px;
-            padding: 12px;
-            background: #1a1a2a;
+        /* ===== NOVA SEÇÃO DE DOWNLOAD ===== */
+        .download-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .download-container .grupo {
+            background: rgba(0, 0, 0, 0.2);
             border-radius: 10px;
+            padding: 10px 12px;
             border: 1px solid #333;
         }
-        .gerador-video h4 {
+        .download-container .grupo .label {
+            font-size: 0.7rem;
+            font-weight: 600;
             color: #ffc107;
-            margin: 0 0 10px 0;
-            font-size: 15px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .gerador-video select {
-            flex: 1;
-            padding: 8px;
-            border-radius: 4px;
-            background: #222;
-            color: #fff;
-            border: none;
-            font-size: 0.85rem;
-        }
-        .gerador-video .barra-progresso {
-            display: none;
-            margin-bottom: 10px;
-        }
-        .gerador-video .barra-progresso .progress-track {
-            width: 100%;
-            height: 6px;
-            background: #333;
-            border-radius: 3px;
-            overflow: hidden;
-        }
-        .gerador-video .barra-progresso .progress-fill {
-            width: 0%;
-            height: 100%;
-            background: #ffc107;
-            transition: 0.1s;
-        }
-        .gerador-video .barra-progresso p {
-            font-size: 12px;
-            margin: 5px 0 0;
-            text-align: center;
-            color: #aaa;
-        }
-        .gerador-video .btn-gerar-video {
-            width: 100%;
-            padding: 10px;
-            background: #28a745;
-            color: #fff;
-            font-weight: bold;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .gerador-video .btn-gerar-video:hover {
-            background: #218838;
-        }
-        .gerador-video .btn-gerar-video:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-        .gerador-video .link-download-vid {
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             display: block;
-            margin-top: 8px;
-            padding: 10px;
+            margin-bottom: 4px;
+        }
+        .download-container .grupo .row {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        .download-container .grupo .row select {
+            flex: 1;
+            padding: 8px 10px;
+            border-radius: 8px;
+            background: #1a1a2e;
+            border: 2px solid #444;
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.8rem;
+            outline: none;
+            transition: border-color 0.2s;
+            cursor: pointer;
+        }
+        .download-container .grupo .row select:focus {
+            border-color: #ffc107;
+        }
+        .download-container .grupo .row button {
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
             background: #ffc107;
             color: #000;
-            text-align: center;
-            font-weight: bold;
-            border-radius: 6px;
-            text-decoration: none;
-            display: none;
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: 0.2s;
+            white-space: nowrap;
         }
-        .gerador-video .link-download-vid:hover {
+        .download-container .grupo .row button:hover {
             background: #e0a800;
-        }
-        .gerador-video .controles-vid {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 10px;
-        }
-        .gerador-video .controles-vid select {
-            flex: 1;
-            padding: 8px;
-            border-radius: 4px;
-            background: #222;
-            color: #fff;
-            border: none;
+            transform: scale(1.03);
         }
 
+        /* ===== RESPONSIVIDADE ===== */
         @media (max-width: 640px) {
             .site-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -1153,44 +1133,64 @@
                 flex-wrap: wrap;
                 gap: 6px;
             }
-            #logoTNJ {
-                top: 10px;
-                left: 10px;
-            }
-            #telefoneContainer {
-                top: 10px;
-                right: 10px;
-                padding: 4px 12px;
-                gap: 4px;
-            }
-            #tituloBanner {
-                font-size: 32px;
-                top: 20%;
-            }
-            #descricaoBanner {
-                font-size: 20px;
-                top: 55%;
-            }
-            .audio-btn {
-                width: 24px;
-                height: 24px;
-                font-size: 12px;
-                bottom: -24px;
-            }
             .galeria-grid {
                 grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
             }
             .busca-unificada .grade-resultados {
                 grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
             }
-            .banner-wrapper {
-                padding: 10px;
+            .busca-com-videos .grade {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
             }
-            .player-topo .slideshow .overlay-icon {
-                font-size: 2.5rem;
+            .busca-videos .grade-videos {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
             }
-            .gerador-video .controles-vid {
-                flex-direction: column;
+            .logo-cabecalho {
+                top: 15px;
+                left: 15px;
+            }
+            .logo-cabecalho img {
+                height: 35px;
+            }
+            .area-conteudo {
+                padding: 20px 16px 30px;
+            }
+            .caixa-dados {
+                gap: 8px;
+                margin-bottom: 16px;
+            }
+            .rotulo-info {
+                font-size: 12px;
+                padding: 6px 10px;
+            }
+            .telefone-container {
+                bottom: 12px;
+                right: 16px;
+                padding: 4px 12px 4px 8px;
+            }
+            .telefone-container i {
+                font-size: 1rem;
+            }
+            .telefone-container .telefone-texto {
+                font-size: 0.75rem;
+            }
+            .marca-agua img {
+                max-width: 80px;
+            }
+            .painel-detalhes .video-container {
+                min-height: 200px;
+            }
+            .painel-detalhes .conteudo .flex-row .capa {
+                width: 100px;
+            }
+            .mosaico-marcas {
+                background-size: 60px 60px;
+            }
+            .download-container .grupo .row {
+                flex-wrap: wrap;
+            }
+            .download-container .grupo .row select {
+                min-width: 120px;
             }
         }
     </style>
@@ -1211,7 +1211,7 @@
 
     <div class="container mx-auto px-4 py-6">
 
-        <!-- ===== PLAYER SLIDESHOW (TOPO) ===== -->
+        <!-- ===== PLAYER SLIDESHOW ===== -->
         <section class="mb-8 caixa" style="padding: 12px; background: #0d0d1f; border-color: rgba(255,193,7,0.2);">
             <div class="flex items-center justify-between mb-3 px-1">
                 <span class="text-sm font-bold text-tnj-dourado flex items-center gap-2"><i class="fa fa-play-circle"></i> LANÇAMENTOS EM DESTAQUE</span>
@@ -1229,10 +1229,10 @@
             </div>
         </section>
 
-        <!-- ===== BUSCA UNIFICADA ===== -->
+        <!-- ===== BUSCA UNIFICADA (IMAGENS) ===== -->
         <section class="mb-8 caixa busca-unificada">
             <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
-                <i class="fa fa-search text-tnj-dourado"></i> BUSCA UNIFICADA
+                <i class="fa fa-search text-tnj-dourado"></i> BUSCA DE IMAGENS
             </h3>
             <div class="flex flex-wrap gap-2 items-center">
                 <input type="text" id="campoBuscaUnificada" placeholder="Digite o nome do filme, série ou desenho..." class="flex-1 min-w-[180px] px-4 py-2 rounded bg-gray-900 border border-gray-600 focus:border-tnj-dourado outline-none text-sm" />
@@ -1240,16 +1240,40 @@
                     <option value="tvmaze">TVmaze (Sem chave)</option>
                     <option value="omdb">OMDb (Com chave)</option>
                 </select>
-                <button onclick="buscarUnificada()" class="btn-pesquisar px-6 py-2 text-sm">PESQUISAR</button>
+                <button onclick="buscarImagens()" class="btn-pesquisar px-6 py-2 text-sm">PESQUISAR</button>
                 <span id="carregandoBuscaUnificada" style="display:none" class="text-tnj-dourado text-sm">Buscando...</span>
             </div>
             <div id="resultadosBuscaUnificada" class="grade-resultados">
                 <p class="col-span-full text-center text-gray-400 py-4">Pesquise um título para ver os resultados</p>
             </div>
             <div class="info-chave-unificada">
-                <span>💡 Clique no cartaz para usar como fundo e preencher título/ano</span>
-                <span>🔑 OMDb: <a href="https://www.omdbapi.com/apikey.aspx" target="_blank">Obter chave grátis</a> | Cole em CHAVE_OMDB no script</span>
+                <span>💡 Clique no cartaz para preencher o banner</span>
+                <span>🔑 OMDb: <a href="https://www.omdbapi.com/apikey.aspx" target="_blank">Obter chave grátis</a></span>
             </div>
+        </section>
+
+        <!-- ===== BUSCA COM VÍDEOS (TVMAZE + YOUTUBE) ===== -->
+        <section class="mb-8 caixa busca-com-videos" style="background:#0d0d1f; border-color: rgba(255,193,7,0.2);">
+            <h3 class="text-xl font-bold text-tnj-dourado mb-3 flex items-center gap-2">
+                <i class="fa fa-youtube-play"></i> BUSCAR COM VÍDEOS
+            </h3>
+            <div class="flex flex-col sm:flex-row gap-2 mb-3">
+                <select id="tipoBuscaVideo" class="p-2 rounded bg-gray-900 border border-gray-700 text-white text-sm">
+                    <option value="all">Todos</option>
+                    <option value="movie">Filmes</option>
+                    <option value="series">Séries</option>
+                    <option value="desenho">Desenhos</option>
+                </select>
+                <input type="text" id="palavraChaveVideo" placeholder="Digite o nome..." class="flex-1 p-3 rounded bg-gray-900 border border-gray-700 focus:border-tnj-dourado outline-none text-sm" />
+                <button onclick="iniciarBuscaVideo()" class="bg-tnj-dourado text-black font-bold px-5 rounded hover:brightness-110">
+                    PESQUISAR
+                </button>
+            </div>
+            <p id="avisoVideo" class="text-sm text-yellow-300 hidden"></p>
+            <div id="gradeResultadosVideo" class="grade">
+                <p class="col-span-full text-center text-gray-400 py-8">Faça uma busca acima</p>
+            </div>
+            <p class="text-xs text-gray-400 mt-2">💡 Clique em um resultado para ver trailer + detalhes e aplicar ao banner</p>
         </section>
 
         <!-- ===== GALERIA DE IMAGENS ===== -->
@@ -1261,7 +1285,7 @@
                 <span class="text-sm font-semibold"><i class="fa fa-upload"></i> Adicionar do celular:</span>
                 <input type="file" id="uploadArquivo" accept="image/*,video/*" multiple class="text-sm text-gray-300 file:mr-2 file:py-1 file:px-3 file:rounded file:border-0 file:bg-tnj-dourado file:text-black file:font-bold hover:file:brightness-110" />
                 <button onclick="uploadArquivos()" class="btn-upload"><i class="fa fa-folder-open"></i> Adicionar</button>
-                <span class="text-xs text-gray-400 ml-auto">Clique na miniatura para usar como fundo</span>
+                <span class="text-xs text-gray-400 ml-auto">Clique na miniatura para usar como capa</span>
             </div>
             <div id="gradeResultados" class="galeria-grid">
                 <p class="col-span-full text-center text-gray-400 py-4">Nenhuma imagem. Adicione uma ou use a busca acima.</p>
@@ -1273,166 +1297,56 @@
             <!-- FERRAMENTAS LATERAIS -->
             <div class="md:col-span-1 space-y-4">
 
-                <!-- TEXTOS E ESTILOS DE FONTE -->
+                <!-- EDIÇÃO -->
                 <div class="caixa">
-                    <h3 class="font-bold mb-3 text-tnj-dourado">📝 TEXTOS</h3>
+                    <h3 class="font-bold mb-3 text-tnj-dourado">📝 EDITAR CONTEÚDO</h3>
                     <div class="space-y-3">
-                        <div>
-                            <label class="text-xs text-tnj-dourado font-semibold">TÍTULO</label>
-                            <input type="text" id="texto1" placeholder="Digite o título..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" />
-                            <div class="flex items-center gap-2 mt-1">
-                                <span class="text-xs text-gray-400">Tam:</span>
-                                <input type="range" id="tamTitulo" min="20" max="120" value="48" class="flex-1 h-1" />
-                                <span id="tamTituloDisplay" class="text-xs w-7">48</span>
-                                <button onclick="ajustarFonteTexto('titulo',-2)" class="btn-azul text-xs px-2 py-0.5">−</button>
-                                <button onclick="ajustarFonteTexto('titulo',2)" class="btn-azul text-xs px-2 py-0.5">+</button>
-                            </div>
-                            <p class="text-xs text-gray-500 mt-1">👆 Arraste • Dois dedos para aumentar</p>
-                        </div>
-
-                        <div>
-                            <label class="text-xs text-tnj-dourado font-semibold">DESCRIÇÃO</label>
-                            <input type="text" id="texto4" placeholder="Digite a descrição..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" />
-                            <div class="flex items-center gap-2 mt-1">
-                                <span class="text-xs text-gray-400">Tam:</span>
-                                <input type="range" id="tamDescricao" min="12" max="80" value="28" class="flex-1 h-1" />
-                                <span id="tamDescricaoDisplay" class="text-xs w-7">28</span>
-                                <button onclick="ajustarFonteTexto('descricao',-2)" class="btn-azul text-xs px-2 py-0.5">−</button>
-                                <button onclick="ajustarFonteTexto('descricao',2)" class="btn-azul text-xs px-2 py-0.5">+</button>
-                            </div>
-                            <p class="text-xs text-gray-500 mt-1">👆 Arraste • Dois dedos para aumentar</p>
-                        </div>
-
-                        <div>
-                            <label class="text-xs text-tnj-dourado font-semibold">🎬 ESTILO DE FONTE</label>
-                            <div class="font-selector-grid">
-                                <div onclick="aplicarEstiloFonte('fonte-marvel')" class="font-btn ativa" id="fonte-marvel">
-                                    <span class="preview" style="font-family:'Bebas Neue',sans-serif;">MARVEL</span>
-                                    <span class="nome">Marvel</span>
-                                    <span class="badge">⚡</span>
-                                </div>
-                                <div onclick="aplicarEstiloFonte('fonte-dc')" class="font-btn" id="fonte-dc">
-                                    <span class="preview" style="font-family:'Oswald',sans-serif;">DC</span>
-                                    <span class="nome">DC Comics</span>
-                                    <span class="badge">🦇</span>
-                                </div>
-                                <div onclick="aplicarEstiloFonte('fonte-cinema')" class="font-btn" id="fonte-cinema">
-                                    <span class="preview" style="font-family:'Cinzel',serif;">CINEMA</span>
-                                    <span class="nome">Cinema</span>
-                                    <span class="badge">🎞️</span>
-                                </div>
-                                <div onclick="aplicarEstiloFonte('fonte-neon')" class="font-btn" id="fonte-neon">
-                                    <span class="preview" style="font-family:'Orbitron',sans-serif;">NEON</span>
-                                    <span class="nome">Neon</span>
-                                    <span class="badge">💡</span>
-                                </div>
-                                <div onclick="aplicarEstiloFonte('fonte-classico')" class="font-btn" id="fonte-classico">
-                                    <span class="preview" style="font-family:'Times New Roman',serif;">CLÁSSICO</span>
-                                    <span class="nome">Clássico</span>
-                                    <span class="badge">📜</span>
-                                </div>
-                                <div onclick="aplicarEstiloFonte('fonte-moderno')" class="font-btn" id="fonte-moderno">
-                                    <span class="preview" style="font-family:'Montserrat',sans-serif;">MODERNO</span>
-                                    <span class="nome">Moderno</span>
-                                    <span class="badge">✨</span>
-                                </div>
-                            </div>
-                            <p class="text-xs text-gray-400 mt-1">Clique para aplicar ao título e descrição</p>
-                        </div>
-
-                        <button onclick="aplicarTexto()" class="btn-aplicar-texto w-full mt-2">APLICAR TEXTOS</button>
+                        <div><label class="text-xs text-tnj-dourado font-semibold">TÍTULO</label><input type="text" id="texto1" placeholder="Título..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
+                        <div><label class="text-xs text-tnj-dourado font-semibold">SINOPSE</label><input type="text" id="texto4" placeholder="Sinopse..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
+                        <div><label class="text-xs text-tnj-dourado font-semibold">NOTA (IMDb)</label><input type="text" id="notaIMDB" placeholder="Ex: 8.5" class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
+                        <div><label class="text-xs text-tnj-dourado font-semibold">ANO</label><input type="text" id="anoLancamento" placeholder="Ex: 2025" class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
+                        <div><label class="text-xs text-tnj-dourado font-semibold">GÊNERO</label><input type="text" id="categoria" placeholder="Ex: Ação" class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
+                        <div><label class="text-xs text-tnj-dourado font-semibold">ELENCO</label><input type="text" id="atores" placeholder="Ator 1, Ator 2..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
+                        <button onclick="atualizarBanner()" class="btn-aplicar-texto w-full mt-2">ATUALIZAR BANNER</button>
                     </div>
                 </div>
 
-                <!-- ===== AGENDA DE JOGOS (SEM IFRAMES) ===== -->
+                <!-- ===== VÍDEOS ===== -->
+                <div class="caixa">
+                    <h3 class="font-bold mb-3 text-tnj-dourado">🎬 VÍDEOS</h3>
+                    <div class="space-y-3">
+                        <button onclick="document.getElementById('uploadVideoFile').click()" class="btn-com-borda">
+                            <i class="fa fa-upload"></i> Adicionar Vídeo do Arquivo
+                        </button>
+                        <input type="file" id="uploadVideoFile" accept="video/*" style="display:none;" />
+
+                        <div class="busca-videos">
+                            <div class="caixa-busca-video">
+                                <input type="text" id="campoBuscaVideos" placeholder="Digite o tema do vídeo..." />
+                                <button onclick="buscarVideosPexels()">🔍 Buscar Vídeos</button>
+                                <span id="carregandoVideos" style="display:none">Buscando...</span>
+                            </div>
+                            <div id="resultadosVideos" class="grade-videos">
+                                <p class="col-span-full text-center text-gray-400 py-4">Pesquise um tema para ver vídeos</p>
+                            </div>
+                        </div>
+
+                        <div class="video-grid" id="videoGrid">
+                            <p class="col-span-full text-center text-gray-400 text-xs py-2">Nenhum vídeo. Adicione um!</p>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-1">👆 1 clique = aplicar ao banner • 2 cliques = excluir</p>
+                    </div>
+                </div>
+
+                <!-- ===== AGENDA DE JOGOS ===== -->
                 <div class="caixa">
                     <h3 class="font-bold mb-3 text-tnj-dourado">⚽ AGENDA DE JOGOS</h3>
                     <div class="esportes-grid">
-                        <button onclick="buscarJogosHoje()" class="btn-esporte btn-esporte-futebol-hoje">
-                            <i class="fa fa-futbol-o"></i> Hoje
-                        </button>
-                        <button onclick="buscarJogosAmanha()" class="btn-esporte btn-esporte-futebol-amanha">
-                            <i class="fa fa-calendar"></i> Amanhã
-                        </button>
+                        <button onclick="buscarJogosHoje()" class="btn-esporte btn-esporte-futebol-hoje"><i class="fa fa-futbol-o"></i> Hoje</button>
+                        <button onclick="buscarJogosAmanha()" class="btn-esporte btn-esporte-futebol-amanha"><i class="fa fa-calendar"></i> Amanhã</button>
                     </div>
-
                     <div id="esportesResultados" class="esportes-resultados">
                         <div class="vazio">Clique em "Hoje" ou "Amanhã" para ver os jogos</div>
-                    </div>
-                </div>
-
-                <!-- ESTILO, LOGO E CONTATO -->
-                <div class="caixa">
-                    <h3 class="font-bold mb-3 text-tnj-dourado">🎨 ESTILO & CONTATO</h3>
-                    <div class="space-y-2">
-                        <div class="flex items-center justify-between">
-                            <span class="text-sm">Cor do Texto:</span>
-                            <input type="color" id="corTexto" value="#ffffff" class="w-10 h-8 cursor-pointer" />
-                        </div>
-                        <hr class="border-gray-700" />
-
-                        <div>
-                            <label class="text-xs text-tnj-dourado font-semibold">TELEFONE / CONTATO</label>
-                            <div class="flex gap-1 mt-1">
-                                <input type="text" id="telefoneLogo" placeholder="(83) 99999-9999" class="flex-1 px-2 py-1 rounded bg-gray-900 border border-gray-700 text-sm" />
-                                <button onclick="adicionarContato()" class="btn-adicionar-contato text-sm px-3 py-1"><i class="fa fa-phone"></i> Adicionar</button>
-                            </div>
-                            <p class="text-xs text-gray-500 mt-1">👆 Arraste o número</p>
-                        </div>
-
-                        <!-- LOGO ÚNICA -->
-                        <div>
-                            <label class="text-xs text-tnj-dourado font-semibold">LOGO ÚNICA</label>
-                            <div class="flex items-center gap-2 mt-1">
-                                <input type="file" id="uploadLogo" accept="image/png,image/webp,image/jpeg" class="text-xs text-gray-300 file:mr-1 file:py-0.5 file:px-2 file:rounded file:border-0 file:bg-tnj-dourado file:text-black file:font-bold" />
-                                <button onclick="carregarLogoPersonalizada()" class="btn-carregar-logo text-xs"><i class="fa fa-upload"></i> Carregar</button>
-                            </div>
-                            <p class="text-xs text-gray-500 mt-1">👆 Arraste • Dois dedos para aumentar</p>
-                        </div>
-
-                        <!-- LOGO REPETIDA (MOSAICO) -->
-                        <div>
-                            <label class="text-xs text-tnj-dourado font-semibold">LOGO REPETIDA (MOSAICO)</label>
-                            <div class="flex items-center gap-2 mt-1">
-                                <input type="file" id="uploadLogoMosaico" accept="image/png,image/webp,image/jpeg" class="text-xs text-gray-300 file:mr-1 file:py-0.5 file:px-2 file:rounded file:border-0 file:bg-tnj-dourado file:text-black file:font-bold" />
-                                <button onclick="carregarLogoMosaico()" class="btn-carregar-logo text-xs"><i class="fa fa-upload"></i> Carregar</button>
-                            </div>
-                            <div class="flex items-center gap-2 mt-1">
-                                <span class="text-xs text-gray-400">Opacidade:</span>
-                                <input type="range" id="opacidadeMosaico" min="0" max="100" value="15" class="flex-1" />
-                                <span id="opacidadeMosaicoDisplay" class="text-xs w-7">15%</span>
-                            </div>
-                            <div class="flex gap-1 mt-1">
-                                <button onclick="aplicarMosaico()" class="btn-aplicar-mosaico text-xs flex-1"><i class="fa fa-check"></i> Aplicar</button>
-                                <button onclick="toggleMosaico()" class="btn-azul text-xs flex-1">👁️ Mostrar/Ocultar</button>
-                            </div>
-                            <p class="text-xs text-gray-500 mt-1">Carregue a imagem e clique em "Aplicar" para exibir no banner</p>
-                        </div>
-
-                        <div class="flex gap-2 mt-1">
-                            <button onclick="toggleLogo()" class="btn-azul text-sm flex-1">👁️ Logo Única</button>
-                            <button onclick="resetarPosicoes()" class="btn-dourado text-sm flex-1">↕ Resetar Posições</button>
-                        </div>
-
-                        <button onclick="limparEdicao()" class="btn-limpar w-full text-sm">🗑️ LIMPAR TUDO</button>
-                    </div>
-                </div>
-
-                <!-- VÍDEOS -->
-                <div class="caixa">
-                    <h3 class="font-bold mb-3 text-tnj-dourado">🎬 VÍDEOS</h3>
-                    <div class="space-y-2">
-                        <div class="video-grid" id="videoGrid"></div>
-                        <div class="flex gap-2 mt-2">
-                            <input type="file" id="uploadVideo" accept="video/*" class="hidden" />
-                            <button onclick="document.getElementById('uploadVideo').click()" class="btn-upload text-xs flex-1">
-                                <i class="fa fa-upload"></i> Adicionar Vídeo
-                            </button>
-                            <button onclick="aplicarVideo()" class="btn-aplicar-video text-xs flex-1">
-                                <i class="fa fa-play"></i> Aplicar Vídeo
-                            </button>
-                        </div>
-                        <p class="text-xs text-gray-400 mt-1">👆 1 clique aplica • 🗑️ X ou duplo clique remove permanentemente</p>
                     </div>
                 </div>
 
@@ -1441,123 +1355,207 @@
                     <i class="fa fa-pinterest-p"></i> PINTEREST
                 </a>
 
-                <!-- FORMATO DO BANNER PRINCIPAL -->
-                <div class="caixa">
-                    <h3 class="font-bold mb-3 text-tnj-dourado">📐 FORMATO</h3>
-                    <select id="formatoBanner" class="w-full bg-gray-900 border border-gray-700 rounded px-3 py-2">
-                        <option value="16-9">16:9 (Widescreen)</option>
-                        <option value="1-1">1:1 (Quadrado)</option>
-                        <option value="4-3">4:3 (Clássico)</option>
-                        <option value="3-2">3:2 (Foto)</option>
-                        <option value="9-16">9:16 (Vertical)</option>
-                        <option value="2-3">2:3 (Retrato)</option>
-                        <option value="21-9">21:9 (Ultrawide)</option>
-                    </select>
-                    <button onclick="aplicarFormato()" class="btn-formato w-full mt-2"><i class="fa fa-arrows-alt"></i> Aplicar Formato</button>
+                <!-- ===== LOGO PRINCIPAL ===== -->
+                <div>
+                    <label class="text-xs text-tnj-dourado font-semibold">📌 LOGO PRINCIPAL</label>
+                    <div style="display:flex; gap:6px; margin-top:4px;">
+                        <input type="file" id="uploadLogo" accept="image/png,image/webp,image/svg+xml,image/jpeg" style="display:none;" />
+                        <button onclick="document.getElementById('uploadLogo').click()" class="btn-com-borda" style="flex:1;">
+                            <i class="fa fa-upload"></i> Carregar Logo
+                        </button>
+                        <button onclick="removerLogo()" class="btn-azul text-xs" style="padding:10px 12px;">🗑️</button>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-1">👆 Use PNG transparente • Arraste e dois dedos para zoom</p>
                 </div>
 
-                <!-- DOWNLOAD E ENVIO -->
-                <div class="caixa">
-                    <h3 class="font-bold mb-3 text-tnj-dourado">⬇️ BAIXAR / ENVIAR</h3>
-                    <div class="download-grid">
-                        <button onclick="baixarBanner('png')" class="btn-download btn-png"><i class="fa fa-file-image-o"></i> PNG</button>
-                        <button onclick="baixarBanner('jpeg')" class="btn-download btn-jpeg"><i class="fa fa-file-image-o"></i> JPEG</button>
-                        <button onclick="baixarBanner('webp')" class="btn-download btn-webp"><i class="fa fa-file-image-o"></i> WebP</button>
-                        <button onclick="enviarVideoBanner()" class="btn-download btn-enviar-video" style="grid-column: span 3;">
-                            <i class="fa fa-download"></i> Enviar Vídeo (salvar no dispositivo)
+                <!-- ===== MOSAICO DE MARCAS ===== -->
+                <div style="border-top:1px solid #333; padding-top:12px; margin-top:4px;">
+                    <label class="text-xs text-tnj-dourado font-semibold flex items-center gap-2">
+                        <i class="fa fa-th"></i> MOSAICO DE MARCAS
+                        <button id="btnToggleMosaico" onclick="toggleMosaico()" class="text-xs px-2 py-0.5 rounded" style="background:#ffc107; color:#000; font-weight:700; border:none;">
+                            ATIVAR
+                        </button>
+                    </label>
+                    <div style="display:flex; gap:6px; margin-top:4px; flex-wrap:wrap;">
+                        <input type="file" id="uploadMosaico" accept="image/png,image/webp,image/svg+xml,image/jpeg" style="display:none;" />
+                        <button onclick="document.getElementById('uploadMosaico').click()" class="btn-com-borda" style="flex:1; min-width:100px;">
+                            <i class="fa fa-upload"></i> Logo Mosaico
+                        </button>
+                        <button onclick="removerMosaico()" class="btn-azul text-xs" style="padding:10px 12px;">🗑️</button>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
+                        <span class="text-xs text-gray-400">Tamanho:</span>
+                        <input type="range" id="mosaicoTamanho" min="20" max="200" value="80" class="flex-1 h-1" />
+                        <span id="mosaicoTamanhoDisplay" class="text-xs w-8">80px</span>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
+                        <span class="text-xs text-gray-400">Opacidade:</span>
+                        <input type="range" id="mosaicoOpacidade" min="0" max="100" value="12" class="flex-1 h-1" />
+                        <span id="mosaicoOpacidadeDisplay" class="text-xs w-8">12%</span>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-1">💡 A logo se repetirá em todo o banner como mosaico</p>
+                </div>
+
+                <!-- ===== MARCA D'ÁGUA (única) ===== -->
+                <div>
+                    <label class="text-xs text-tnj-dourado font-semibold">🖋️ MARCA D'ÁGUA (única)</label>
+                    <div style="display:flex; gap:6px; margin-top:4px; flex-wrap:wrap;">
+                        <input type="file" id="uploadMarca" accept="image/png,image/webp,image/svg+xml,image/jpeg" style="display:none;" />
+                        <button onclick="document.getElementById('uploadMarca').click()" class="btn-com-borda" style="flex:1; min-width:120px;">
+                            <i class="fa fa-upload"></i> Adicionar Marca
+                        </button>
+                        <button onclick="removerMarca()" class="btn-azul text-xs" style="padding:10px 12px;">🗑️</button>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
+                        <span class="text-xs text-gray-400">Opacidade:</span>
+                        <input type="range" id="opacidadeMarca" min="0" max="100" value="40" class="flex-1 h-1" />
+                        <span id="opacidadeMarcaDisplay" class="text-xs w-7">40%</span>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-1">👆 Arraste • Dois dedos para zoom • Slider controla opacidade</p>
+                </div>
+
+                <!-- ===== TELEFONE ===== -->
+                <div>
+                    <label class="text-xs text-tnj-dourado font-semibold">📞 TELEFONE (WhatsApp)</label>
+                    <div style="display:flex; gap:6px; margin-top:4px;">
+                        <input type="text" id="inputTelefone" placeholder="(83) 99999-9999" class="flex-1 px-2 py-2 rounded bg-gray-900 border border-gray-700 text-sm" />
+                        <button onclick="adicionarTelefone()" class="btn-com-borda" style="flex-shrink:0;">
+                            <i class="fa fa-whatsapp"></i> Adicionar
                         </button>
                     </div>
-                    <p class="text-xs text-gray-400 text-center mt-2">Clique para baixar imagem ou salvar vídeo no dispositivo</p>
+                    <p class="text-xs text-gray-400 mt-1">👆 Arraste e dois dedos para zoom</p>
                 </div>
 
-                <!-- ===== GERADOR DE VÍDEO ===== -->
-                <div class="caixa gerador-video">
-                    <h4><i class="fa fa-film"></i> GERAR VÍDEO DO BANNER</h4>
-                    <div class="controles-vid">
-                        <select id="duracaoVid">
-                            <option value="3000">3s</option>
-                            <option value="5000" selected>5s</option>
-                            <option value="8000">8s</option>
-                            <option value="10000">10s</option>
-                        </select>
-                        <select id="efeitoVid">
-                            <option value="fade">Aparecer</option>
-                            <option value="slide">Deslizar</option>
-                            <option value="statico">Fixo</option>
+                <!-- ===== FORMATO ===== -->
+                <div>
+                    <label class="text-xs text-tnj-dourado font-semibold">📐 FORMATO DO BANNER</label>
+                    <div class="formatos-dropdown" style="margin-top:4px;">
+                        <div class="borda-externa"></div>
+                        <select id="formatoBanner" onchange="aplicarFormato()">
+                            <option value="4-5">4:5 (Padrão)</option>
+                            <option value="16-9">16:9</option><option value="9-16">9:16</option>
+                            <option value="15-9">15:9</option><option value="9-15">9:15</option>
+                            <option value="14-9">14:9</option><option value="9-14">9:14</option>
+                            <option value="1-1">1:1</option><option value="2-2">2:2</option>
+                            <option value="3-3">3:3</option><option value="4-4">4:4</option>
+                            <option value="5-5">5:5</option><option value="2-1">2:1</option>
+                            <option value="1-2">1:2</option><option value="3-2">3:2</option>
+                            <option value="20-15">20:15</option><option value="4-3">4:3</option>
+                            <option value="4-9">4:9</option><option value="10-8">10:8</option>
                         </select>
                     </div>
+                </div>
 
-                    <div class="barra-progresso" id="barraProgressoVid">
-                        <div class="progress-track">
-                            <div class="progress-fill" id="progressoVid"></div>
+                <!-- ===== SEÇÃO DE SALVAR BANNER ===== -->
+                <div class="caixa">
+                    <h3 class="font-bold mb-3 text-tnj-dourado">⬇️ SALVAR BANNER</h3>
+                    <div class="download-container">
+                        <div class="grupo">
+                            <span class="label">🖼️ Imagem</span>
+                            <div class="row">
+                                <select id="formatoImagem">
+                                    <option value="png">PNG</option>
+                                    <option value="jpeg">JPG</option>
+                                    <option value="webp">WebP</option>
+                                    <option value="bmp">BMP</option>
+                                    <option value="tiff">TIFF</option>
+                                    <option value="gif">GIF</option>
+                                    <option value="avif">AVIF</option>
+                                    <option value="ico">ICO</option>
+                                </select>
+                                <button onclick="baixarBanner()">BAIXAR</button>
+                            </div>
                         </div>
-                        <p id="textoStatusVid"></p>
+                        <div class="grupo">
+                            <span class="label">🎬 Vídeo</span>
+                            <div class="row">
+                                <select id="formatoVideo">
+                                    <option value="mp4">MP4</option>
+                                    <option value="webm">WebM</option>
+                                    <option value="avi">AVI</option>
+                                    <option value="mov">MOV</option>
+                                    <option value="mkv">MKV</option>
+                                    <option value="wmv">WMV</option>
+                                    <option value="flv">FLV</option>
+                                    <option value="gif">GIF (animado)</option>
+                                </select>
+                                <button onclick="baixarVideoBanner()">BAIXAR</button>
+                            </div>
+                        </div>
                     </div>
-
-                    <button class="btn-gerar-video" id="btnGerarVid" onclick="iniciarGeracaoVideo()">GERAR VÍDEO 16:9</button>
-                    <a class="link-download-vid" id="linkDownloadVid" href="#" download>⬇️ BAIXAR MP4</a>
+                    <p class="text-xs text-gray-400 text-center mt-2">Formatos de vídeo dependem do suporte do navegador.<br>WebM e MP4 são os mais confiáveis.</p>
                 </div>
 
             </div>
 
-            <!-- ===== ÁREA DO BANNER (PROFISSIONAL) ===== -->
+            <!-- ===== BANNER ===== -->
             <div class="md:col-span-3">
-                <div class="banner-wrapper">
-                    <div class="banner-header">
-                        <div class="titulo">
-                            <i class="fa fa-tv"></i> Gerador de Banners
-                            <span class="badge-live">● LIVE</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <span class="badge-tnj">TNJ PRODUCTION</span>
-                        </div>
-                    </div>
-                    <div id="areaBanner" class="w-full relative">
-                        <img id="fundoBanner" class="absolute w-full h-full object-cover" src="" alt="Fundo" />
-                        <video id="videoBanner" class="absolute w-full h-full object-cover hidden" loop playsinline autoplay></video>
-                        <div id="sobreposicao" class="absolute w-full h-full"></div>
+                <div style="background:transparent; padding:0; border:none; box-shadow:none;">
+                    <div class="banner-tnj-nexxo" id="previewBanner">
+                        <!-- MOSAICO DE MARCAS -->
+                        <div class="mosaico-marcas" id="mosaicoContainer"></div>
 
-                        <!-- Logo Mosaico -->
-                        <div id="logoMosaico" style="display:none;"></div>
+                        <!-- Logo Principal -->
+                        <div class="logo-cabecalho" id="logoContainer">
+                            <img src="" id="logoImg" style="display:none;" alt="Logo" />
+                            <span class="logo-placeholder" id="logoPlaceholder">TV NOVA JUAREZ</span>
+                        </div>
 
-                        <!-- Logo TNJ -->
-                        <div id="logoTNJ" class="arrastavel" style="z-index:20; background:transparent; border:none; backdrop-filter:none; padding:0;">
-                            <div id="logoConteudo" class="text-2xl font-black text-tnj-dourado drop-shadow-[0_0_8px_rgba(255,193,7,0.5)]">TV NOVA JUAREZ</div>
+                        <!-- Marca d'água (única) -->
+                        <div class="marca-agua" id="marcaContainer" style="display:none; top:50%; left:50%; transform:translate(-50%,-50%); width:150px;">
+                            <img src="" id="marcaImg" alt="Marca" />
+                        </div>
+
+                        <!-- Capa -->
+                        <img src="" alt="Capa" class="imagem-capa" id="campoCapa">
+                        <div class="fundo-gradiente"></div>
+
+                        <!-- Conteúdo -->
+                        <div class="area-conteudo">
+                            <h1 class="titulo-principal" id="campoTitulo">NOME DO FILME</h1>
+                            <p class="descricao-sinopse" id="campoSinopse">Resumo da história do filme ou série aparecerá aqui...</p>
+                            <div class="caixa-dados">
+                                <span class="rotulo-info nota">★ <span id="campoNota">0.0</span></span>
+                                <span class="rotulo-info ano">📅 <span id="campoAno">2025</span></span>
+                                <span class="rotulo-info genero">🏷️ <span id="campoGenero">GÊNERO</span></span>
+                            </div>
+                            <p class="linha-elenco">Estrelando: <span id="campoElenco">Ator 1, Ator 2, Ator 3...</span></p>
                         </div>
 
                         <!-- Telefone -->
-                        <div id="telefoneContainer" class="arrastavel" style="background:rgba(0,0,0,0.25); backdrop-filter:blur(4px); padding:6px 14px; border-radius:40px; border:1px solid rgba(255,255,255,0.08); display:flex; align-items:center; gap:8px;">
-                            <i class="fa fa-whatsapp" style="font-size:1.2rem; color:#25d366; text-shadow:0 0 12px rgba(37,211,102,0.3);"></i>
-                            <div id="telefoneLogoDisplay" class="text-sm text-white font-semibold"></div>
-                        </div>
-
-                        <!-- Textos -->
-                        <div id="tituloBanner" class="arrastavel fonte-marvel" style="background:transparent; border:none; backdrop-filter:none; padding:0; font-size:48px; font-weight:900; text-transform:uppercase; text-shadow:0 4px 20px rgba(0,0,0,0.8); letter-spacing:2px; line-height:1.2; color:#fff; text-align:center; top:25%; left:50%; transform:translateX(-50%);"></div>
-                        <div id="descricaoBanner" class="arrastavel fonte-marvel" style="background:transparent; border:none; backdrop-filter:none; padding:0; font-size:28px; font-weight:700; text-shadow:0 3px 15px rgba(0,0,0,0.7); color:#fff; text-align:center; top:60%; left:50%; transform:translateX(-50%);"></div>
-
-                        <!-- Dispositivos -->
-                        <div class="dispositivos">
-                            <span><i class="fa fa-mobile"></i> Celular</span>
-                            <span class="separador">|</span>
-                            <span><i class="fa fa-laptop"></i> Computador</span>
-                            <span class="separador">|</span>
-                            <span><i class="fa fa-television"></i> TV</span>
-                            <span class="separador">|</span>
-                            <span><i class="fa fa-archive"></i> TV Box</span>
-                        </div>
-
-                        <!-- Botão de áudio -->
-                        <div id="audioBtn" class="audio-btn" title="Ativar/desativar som do vídeo">
-                            <i class="fa fa-headphones"></i>
+                        <div class="telefone-container" id="telefoneContainer" style="display:none;">
+                            <i class="fa fa-whatsapp"></i>
+                            <span class="telefone-texto" id="telefoneDisplay">(83) 99999-9999</span>
                         </div>
                     </div>
-
                     <p class="text-xs text-gray-400 mt-3 text-center">
-                        <i class="fa fa-arrows"></i> Arraste qualquer elemento • Dois dedos para aumentar/diminuir (logo e textos)
+                        <i class="fa fa-arrows"></i> Arraste logo, marca e telefone • Dois dedos para zoom
                     </p>
-                    <p class="text-xs text-gray-400 text-center">
-                        <i class="fa fa-mouse-pointer"></i> Clique na miniatura para usar como fundo • Duplo clique para remover
-                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== PAINEL DE DETALHES ===== -->
+    <div class="painel-detalhes" id="painelDetalhes">
+        <div class="cabecalho">
+            <h3 id="tituloDetalhe">Título</h3>
+            <button onclick="fecharDetalhes()">✕ FECHAR</button>
+        </div>
+        <div class="video-container" id="containerVideo">
+            <div class="text-gray-400 text-center">🔎 Buscando vídeo...</div>
+        </div>
+        <div class="conteudo">
+            <div class="flex-row md:flex-row">
+                <img id="capaDetalhe" class="capa" src="" alt="Capa" />
+                <div class="info-texto">
+                    <p><span class="text-gray-400">📅 Ano:</span> <span id="anoDetalhe"></span> &nbsp;|&nbsp; <span class="text-gray-400">⭐ Nota:</span> <span id="notaDetalhe"></span></p>
+                    <p id="sinopseDetalhe" class="mt-2"></p>
+                    <div class="botoes">
+                        <button class="btn-usar" onclick="usarNoBannerVideo()">✅ USAR NO BANNER</button>
+                        <button class="btn-salvar-video" onclick="salvarVideoBannerDetalhes()">🎬 SALVAR VÍDEO</button>
+                        <button class="btn-copiar" onclick="copiarLinkCapa()">🔗 COPIAR CAPA</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1567,36 +1565,23 @@
         © 2026 BNNERTNJ • Ferramenta Oficial TNJ / TV Nova Juarez • Versão 20.1
     </footer>
 
-    <!-- Canvas oculto para gravação -->
     <canvas id="telaGravacao" width="1920" height="1080" style="display:none"></canvas>
 
     <script>
         // =========================================================
         // CONFIGURAÇÕES
         // =========================================================
-        // 🔑 Para OMDb, pegue sua chave grátis em: https://www.omdbapi.com/apikey.aspx
-        const CHAVE_OMDB = "SUA_CHAVE_OMDB"; // <-- COLOQUE SUA CHAVE AQUI
+        const CHAVE_OMDB = "SUA_CHAVE_OMDB";
+        const API_FOOTBALL_KEY = "COLOQUE_SUA_CHAVE_API_FOOTBALL_AQUI";
+        const PEXELS_API_KEY = "YOUR_PEXELS_API_KEY";
 
-        // ===== CHAVES DAS APIS (mantidas) =====
-        const TMDB_API_KEY = 'ec8237f367023fbadd38ab6a1596b40c';
-        const TMDB_IMAGE_BASE = 'https://image.tmdb.org/t/p/w500';
-        const PEXELS_API_KEY = 'YOUR_PEXELS_API_KEY';
-        const API_FOOTBALL_KEY = 'COLOQUE_SUA_CHAVE_API_FOOTBALL_AQUI';
-
-        // ===== VARIÁVEIS GLOBAIS =====
         let imagensGaleria = [];
         let fundoAtual = null;
-        let logoPersonalizada = null;
-        let estiloFonteAtual = 'fonte-marvel';
         let videoSelecionado = null;
-        let logoMosaicoData = null;
-        let mosaicoAplicado = false;
-
         let videosGaleria = [];
-        let debounceTimer = null;
 
         // =========================================================
-        // SLIDESHOW (TOPO)
+        // SLIDESHOW
         // =========================================================
         const imagensSlideshow = [
             "https://i.postimg.cc/fkbLgg4j/11f73e58-baa1-4f74-a654-d3e627b39b9b.jpg",
@@ -1607,74 +1592,54 @@
             "https://i.postimg.cc/YjS9yycb/c6588bb7-03d3-4f3e-9694-cfb9ca1f0d17.jpg",
             "https://i.postimg.cc/Wt43ffR5/d2378fcb-3675-4fb1-ab35-7ab74c29c9af.jpg"
         ];
-
-        let slideAtualTopo = 0;
-        let intervaloSlidesTopo = null;
-        let slidesPausadoTopo = false;
+        let slideAtualTopo = 0,
+            intervaloSlidesTopo = null,
+            slidesPausadoTopo = false;
 
         function iniciarSlideshowTopo() {
             const container = document.getElementById('slideshowTopo');
             const dotsContainer = document.getElementById('dotsContainerTopo');
             container.innerHTML = '<div class="overlay-icon"><i class="fa fa-play-circle"></i></div>';
-
             imagensSlideshow.forEach((url, index) => {
                 const img = document.createElement('img');
                 img.src = url;
                 img.className = 'slide' + (index === 0 ? ' active' : '');
                 img.dataset.index = index;
                 container.appendChild(img);
-
                 const dot = document.createElement('span');
                 dot.className = 'dot' + (index === 0 ? ' active' : '');
                 dot.dataset.index = index;
-                dot.addEventListener('click', function() {
-                    irParaSlideTopo(parseInt(this.dataset.index));
-                });
+                dot.addEventListener('click', function() { irParaSlideTopo(parseInt(this.dataset.index)); });
                 dotsContainer.appendChild(dot);
             });
-
             atualizarContadorTopo();
             iniciarAutoPlayTopo();
         }
 
         function iniciarAutoPlayTopo() {
             if (intervaloSlidesTopo) clearInterval(intervaloSlidesTopo);
-            intervaloSlidesTopo = setInterval(() => {
-                if (!slidesPausadoTopo) {
-                    proximoSlideTopo();
-                }
-            }, 4000);
+            intervaloSlidesTopo = setInterval(() => { if (!slidesPausadoTopo) proximoSlideTopo(); }, 4000);
         }
 
-        function proximoSlideTopo() {
-            const total = imagensSlideshow.length;
-            irParaSlideTopo((slideAtualTopo + 1) % total);
-        }
+        function proximoSlideTopo() { irParaSlideTopo((slideAtualTopo + 1) % imagensSlideshow.length); }
 
         function irParaSlideTopo(index) {
             const slides = document.querySelectorAll('#slideshowTopo .slide');
             const dots = document.querySelectorAll('#dotsContainerTopo .dot');
-            slides.forEach((el, i) => {
-                el.classList.toggle('active', i === index);
-            });
-            dots.forEach((el, i) => {
-                el.classList.toggle('active', i === index);
-            });
+            slides.forEach((el, i) => el.classList.toggle('active', i === index));
+            dots.forEach((el, i) => el.classList.toggle('active', i === index));
             slideAtualTopo = index;
             atualizarContadorTopo();
         }
 
-        function atualizarContadorTopo() {
-            document.getElementById('slideCounterTopo').innerText = `${slideAtualTopo+1}/${imagensSlideshow.length}`;
-        }
+        function atualizarContadorTopo() { document.getElementById('slideCounterTopo').innerText =
+                `${slideAtualTopo+1}/${imagensSlideshow.length}`; }
 
         function togglePlayPauseTopo() {
             slidesPausadoTopo = !slidesPausadoTopo;
-            const btn = document.getElementById('playPauseBtnTopo');
-            btn.innerHTML = slidesPausadoTopo ? '<i class="fa fa-play"></i>' : '<i class="fa fa-pause"></i>';
-            if (!slidesPausadoTopo) {
-                iniciarAutoPlayTopo();
-            }
+            document.getElementById('playPauseBtnTopo').innerHTML = slidesPausadoTopo ? '<i class="fa fa-play"></i>' :
+                '<i class="fa fa-pause"></i>';
+            if (!slidesPausadoTopo) iniciarAutoPlayTopo();
         }
 
         // =========================================================
@@ -1685,98 +1650,129 @@
                 localStorage.setItem('tnj_galeria', JSON.stringify(imagensGaleria));
                 if (fundoAtual) localStorage.setItem('tnj_fundo', JSON.stringify(fundoAtual));
                 else localStorage.removeItem('tnj_fundo');
-                salvarPosicoesElementos();
-                localStorage.setItem('tnj_estilo_fonte', estiloFonteAtual);
                 localStorage.setItem('tnj_videos', JSON.stringify(videosGaleria));
-                localStorage.setItem('tnj_mosaico_data', logoMosaicoData || '');
-                localStorage.setItem('tnj_mosaico_aplicado', JSON.stringify(mosaicoAplicado));
+                localStorage.setItem('tnj_logo_data', document.getElementById('logoImg').src || '');
+                localStorage.setItem('tnj_marca_data', document.getElementById('marcaImg').src || '');
+                localStorage.setItem('tnj_telefone', document.getElementById('telefoneDisplay').innerText || '');
+                localStorage.setItem('tnj_banner_dados', JSON.stringify({
+                    titulo: document.getElementById('texto1').value,
+                    sinopse: document.getElementById('texto4').value,
+                    nota: document.getElementById('notaIMDB').value,
+                    ano: document.getElementById('anoLancamento').value,
+                    genero: document.getElementById('categoria').value,
+                    elenco: document.getElementById('atores').value
+                }));
+                const logo = document.getElementById('logoContainer');
+                const marca = document.getElementById('marcaContainer');
+                const tel = document.getElementById('telefoneContainer');
+                localStorage.setItem('tnj_logo_pos', JSON.stringify({ left: logo.style.left, top: logo.style.top }));
+                localStorage.setItem('tnj_marca_pos', JSON.stringify({ left: marca.style.left, top: marca.style.top,
+                    width: marca.style.width, opacity: document.getElementById('opacidadeMarca').value }));
+                localStorage.setItem('tnj_tel_pos', JSON.stringify({ right: tel.style.right, bottom: tel.style.bottom }));
+                localStorage.setItem('tnj_formato', document.getElementById('formatoBanner').value);
+                localStorage.setItem('tnj_mosaico_data', document.getElementById('mosaicoContainer').style.backgroundImage ||
+                    '');
+                localStorage.setItem('tnj_mosaico_tamanho', document.getElementById('mosaicoTamanho').value);
+                localStorage.setItem('tnj_mosaico_opacidade', document.getElementById('mosaicoOpacidade').value);
+                localStorage.setItem('tnj_mosaico_ativo', document.getElementById('mosaicoContainer').classList.contains(
+                    'ativo') ? 'true' : 'false');
             } catch (e) {}
         }
 
-        function salvarPosicoesElementos() {
-            const elementos = ['tituloBanner', 'descricaoBanner', 'logoTNJ', 'telefoneContainer'];
-            const pos = {};
-            elementos.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) {
-                    const rect = el.getBoundingClientRect();
-                    const parentRect = el.parentElement.getBoundingClientRect();
-                    pos[id] = { left: rect.left - parentRect.left, top: rect.top - parentRect.top };
-                    if (id === 'tituloBanner' || id === 'descricaoBanner') {
-                        pos[id].fontSize = window.getComputedStyle(el).fontSize;
-                    }
-                    if (id === 'logoTNJ') {
-                        const logoSize = window.getComputedStyle(document.getElementById('logoConteudo')).fontSize;
-                        pos[id].logoFontSize = logoSize;
-                        const img = document.getElementById('logoConteudo').querySelector('img');
-                        if (img) pos[id].logoImgHeight = img.style.maxHeight || '48px';
-                    }
-                }
-            });
-            localStorage.setItem('tnj_pos_elementos', JSON.stringify(pos));
-        }
-
-        function carregarPosicoesElementos() {
+        function carregarDados() {
             try {
-                const dados = localStorage.getItem('tnj_pos_elementos');
-                if (!dados) return;
-                const pos = JSON.parse(dados);
-                const elementos = ['tituloBanner', 'descricaoBanner', 'logoTNJ', 'telefoneContainer'];
-                elementos.forEach(id => {
-                    const el = document.getElementById(id);
-                    if (el && pos[id]) {
-                        el.style.left = pos[id].left + 'px';
-                        el.style.top = pos[id].top + 'px';
-                        el.style.transform = 'none';
-                        if (id === 'logoTNJ') {
-                            if (pos[id].logoFontSize) {
-                                document.getElementById('logoConteudo').style.fontSize = pos[id].logoFontSize;
-                            }
-                            const img = document.getElementById('logoConteudo').querySelector('img');
-                            if (img && pos[id].logoImgHeight) {
-                                img.style.maxHeight = pos[id].logoImgHeight;
-                            }
-                        }
-                        if ((id === 'tituloBanner' || id === 'descricaoBanner') && pos[id].fontSize) {
-                            el.style.fontSize = pos[id].fontSize;
-                            const sliderId = id === 'tituloBanner' ? 'tamTitulo' : 'tamDescricao';
-                            const slider = document.getElementById(sliderId);
-                            if (slider) {
-                                const size = parseFloat(pos[id].fontSize);
-                                if (!isNaN(size)) {
-                                    slider.value = size;
-                                    document.getElementById(sliderId + 'Display').innerText = Math.round(size);
-                                }
-                            }
-                        }
-                        if (id === 'telefoneContainer') { el.style.right = 'auto';
-                            el.style.bottom = 'auto'; }
-                    }
-                });
-            } catch (e) {}
-        }
-
-        function carregarGaleria() {
-            try {
-                const dados = localStorage.getItem('tnj_galeria');
-                if (dados) imagensGaleria = JSON.parse(dados);
+                const galeria = localStorage.getItem('tnj_galeria');
+                if (galeria) imagensGaleria = JSON.parse(galeria);
                 const fundo = localStorage.getItem('tnj_fundo');
                 if (fundo) fundoAtual = JSON.parse(fundo);
-                const estilo = localStorage.getItem('tnj_estilo_fonte');
-                if (estilo) estiloFonteAtual = estilo;
                 const videos = localStorage.getItem('tnj_videos');
                 if (videos) videosGaleria = JSON.parse(videos);
-                const mosaico = localStorage.getItem('tnj_mosaico_data');
-                if (mosaico) logoMosaicoData = mosaico;
-                const mosaicoAplic = localStorage.getItem('tnj_mosaico_aplicado');
-                if (mosaicoAplic) mosaicoAplicado = JSON.parse(mosaicoAplic);
+                const logoData = localStorage.getItem('tnj_logo_data');
+                if (logoData) {
+                    const img = document.getElementById('logoImg');
+                    img.src = logoData;
+                    img.style.display = 'block';
+                    document.getElementById('logoPlaceholder').style.display = 'none';
+                }
+                const marcaData = localStorage.getItem('tnj_marca_data');
+                if (marcaData) {
+                    const img = document.getElementById('marcaImg');
+                    img.src = marcaData;
+                    document.getElementById('marcaContainer').style.display = 'block';
+                }
+                const tel = localStorage.getItem('tnj_telefone');
+                if (tel) {
+                    document.getElementById('telefoneDisplay').innerText = tel;
+                    document.getElementById('telefoneContainer').style.display = 'flex';
+                }
+                const banner = localStorage.getItem('tnj_banner_dados');
+                if (banner) {
+                    const d = JSON.parse(banner);
+                    document.getElementById('texto1').value = d.titulo || '';
+                    document.getElementById('texto4').value = d.sinopse || '';
+                    document.getElementById('notaIMDB').value = d.nota || '';
+                    document.getElementById('anoLancamento').value = d.ano || '';
+                    document.getElementById('categoria').value = d.genero || '';
+                    document.getElementById('atores').value = d.elenco || '';
+                }
+                const formato = localStorage.getItem('tnj_formato');
+                if (formato) { document.getElementById('formatoBanner').value = formato;
+                    aplicarFormato(); }
+                const logoPos = localStorage.getItem('tnj_logo_pos');
+                if (logoPos) {
+                    const p = JSON.parse(logoPos);
+                    const logo = document.getElementById('logoContainer');
+                    if (p.left) logo.style.left = p.left;
+                    if (p.top) logo.style.top = p.top;
+                }
+                const marcaPos = localStorage.getItem('tnj_marca_pos');
+                if (marcaPos) {
+                    const p = JSON.parse(marcaPos);
+                    const marca = document.getElementById('marcaContainer');
+                    if (p.left) marca.style.left = p.left;
+                    if (p.top) marca.style.top = p.top;
+                    if (p.width) marca.style.width = p.width;
+                    if (p.opacity) {
+                        document.getElementById('opacidadeMarca').value = p.opacity;
+                        document.getElementById('opacidadeMarcaDisplay').innerText = p.opacity + '%';
+                        marca.style.opacity = p.opacity / 100;
+                    }
+                }
+                const telPos = localStorage.getItem('tnj_tel_pos');
+                if (telPos) {
+                    const p = JSON.parse(telPos);
+                    const tel = document.getElementById('telefoneContainer');
+                    if (p.right) tel.style.right = p.right;
+                    if (p.bottom) tel.style.bottom = p.bottom;
+                }
+                const mosaicoData = localStorage.getItem('tnj_mosaico_data');
+                const mosaicoTamanho = localStorage.getItem('tnj_mosaico_tamanho');
+                const mosaicoOpacidade = localStorage.getItem('tnj_mosaico_opacidade');
+                const mosaicoAtivo = localStorage.getItem('tnj_mosaico_ativo');
+                if (mosaicoData && mosaicoData !== 'none') {
+                    const container = document.getElementById('mosaicoContainer');
+                    container.style.backgroundImage = mosaicoData;
+                    if (mosaicoTamanho) {
+                        document.getElementById('mosaicoTamanho').value = mosaicoTamanho;
+                        document.getElementById('mosaicoTamanhoDisplay').innerText = mosaicoTamanho + 'px';
+                        container.style.backgroundSize = mosaicoTamanho + 'px ' + mosaicoTamanho + 'px';
+                    }
+                    if (mosaicoOpacidade) {
+                        document.getElementById('mosaicoOpacidade').value = mosaicoOpacidade;
+                        document.getElementById('mosaicoOpacidadeDisplay').innerText = mosaicoOpacidade + '%';
+                        container.style.opacity = mosaicoOpacidade / 100;
+                    }
+                    if (mosaicoAtivo === 'true') {
+                        container.classList.add('ativo');
+                        document.getElementById('btnToggleMosaico').innerText = 'DESATIVAR';
+                        document.getElementById('btnToggleMosaico').style.background = '#e53935';
+                    }
+                }
             } catch (e) {}
         }
 
         function restaurarGaleria() {
-            carregarGaleria();
-            aplicarEstiloFonte(estiloFonteAtual, true);
-
+            carregarDados();
             const grade = document.getElementById('gradeResultados');
             grade.innerHTML = '';
             if (imagensGaleria.length === 0) {
@@ -1788,48 +1784,455 @@
                 const existe = imagensGaleria.some(i => i.url === fundoAtual.url);
                 if (existe) usarComoFundo(fundoAtual);
                 else { fundoAtual = null;
-                    localStorage.removeItem('tnj_fundo'); if (imagensGaleria.length > 0) usarComoFundo(imagensGaleria[
-                        0]); }
+                    localStorage.removeItem('tnj_fundo'); if (imagensGaleria.length > 0) usarComoFundo(imagensGaleria[0]); }
             } else if (imagensGaleria.length > 0) usarComoFundo(imagensGaleria[0]);
-            carregarPosicoesElementos();
-            aplicarTexto();
-            const telSalvo = localStorage.getItem('tnj_telefone');
-            if (telSalvo) {
-                document.getElementById('telefoneLogoDisplay').innerText = telSalvo;
-                document.getElementById('telefoneContainer').style.display = 'flex';
-            } else {
-                document.getElementById('telefoneContainer').style.display = 'none';
-            }
             renderizarVideos();
-            if (logoMosaicoData && mosaicoAplicado) {
-                const mosaicEl = document.getElementById('logoMosaico');
-                mosaicEl.style.backgroundImage = `url(${logoMosaicoData})`;
-                mosaicEl.style.display = 'block';
-                const opacidade = localStorage.getItem('tnj_mosaico_opacidade');
-                if (opacidade) {
-                    document.getElementById('opacidadeMosaico').value = opacidade;
-                    document.getElementById('opacidadeMosaicoDisplay').innerText = opacidade + '%';
-                    mosaicEl.style.opacity = opacidade / 100;
-                }
-            } else {
-                document.getElementById('logoMosaico').style.display = 'none';
-            }
-            const audioMuted = localStorage.getItem('tnj_audio_muted');
-            if (audioMuted === 'true') {
-                document.getElementById('videoBanner').muted = true;
-                document.getElementById('audioBtn').classList.remove('ativo');
-                document.getElementById('audioBtn').innerHTML = '<i class="fa fa-headphones"></i>';
-            } else {
-                document.getElementById('videoBanner').muted = false;
-                document.getElementById('audioBtn').classList.add('ativo');
-                document.getElementById('audioBtn').innerHTML = '<i class="fa fa-headphones" style="color:#ffc107;"></i>';
-            }
+            atualizarBanner();
             document.getElementById('esportesResultados').innerHTML = `<div class="vazio">Clique em "Hoje" ou "Amanhã" para ver os jogos</div>`;
+            const opacidade = document.getElementById('opacidadeMarca').value;
+            document.getElementById('marcaContainer').style.opacity = opacidade / 100;
+            document.getElementById('opacidadeMarcaDisplay').innerText = opacidade + '%';
         }
 
         // =========================================================
-        // VÍDEOS
+        // BANNER
         // =========================================================
+        function atualizarBanner() {
+            const titulo = document.getElementById('texto1').value || 'NOME DO FILME';
+            const sinopse = document.getElementById('texto4').value || 'Resumo da história do filme ou série aparecerá aqui...';
+            const nota = document.getElementById('notaIMDB').value || '0.0';
+            const ano = document.getElementById('anoLancamento').value || '2025';
+            const genero = document.getElementById('categoria').value || 'GÊNERO';
+            const elenco = document.getElementById('atores').value || 'Ator 1, Ator 2, Ator 3...';
+            document.getElementById('campoTitulo').innerText = titulo.toUpperCase();
+            document.getElementById('campoSinopse').innerText = sinopse;
+            document.getElementById('campoNota').innerText = nota;
+            document.getElementById('campoAno').innerText = ano;
+            document.getElementById('campoGenero').innerText = genero.toUpperCase();
+            document.getElementById('campoElenco').innerText = elenco;
+            salvarGaleria();
+        }
+
+        // =========================================================
+        // MOSAICO DE MARCAS
+        // =========================================================
+        document.getElementById('uploadMosaico').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const container = document.getElementById('mosaicoContainer');
+                container.style.backgroundImage = `url(${ev.target.result})`;
+                container.classList.add('ativo');
+                document.getElementById('btnToggleMosaico').innerText = 'DESATIVAR';
+                document.getElementById('btnToggleMosaico').style.background = '#e53935';
+                salvarGaleria();
+            };
+            reader.readAsDataURL(file);
+            this.value = '';
+        });
+
+        function toggleMosaico() {
+            const container = document.getElementById('mosaicoContainer');
+            const btn = document.getElementById('btnToggleMosaico');
+            if (container.classList.contains('ativo')) {
+                container.classList.remove('ativo');
+                btn.innerText = 'ATIVAR';
+                btn.style.background = '#ffc107';
+            } else {
+                if (container.style.backgroundImage && container.style.backgroundImage !== 'none') {
+                    container.classList.add('ativo');
+                    btn.innerText = 'DESATIVAR';
+                    btn.style.background = '#e53935';
+                } else {
+                    alert('⚠️ Primeiro carregue uma imagem para o mosaico!');
+                }
+            }
+            salvarGaleria();
+        }
+
+        function removerMosaico() {
+            const container = document.getElementById('mosaicoContainer');
+            container.style.backgroundImage = '';
+            container.classList.remove('ativo');
+            document.getElementById('btnToggleMosaico').innerText = 'ATIVAR';
+            document.getElementById('btnToggleMosaico').style.background = '#ffc107';
+            salvarGaleria();
+        }
+
+        document.getElementById('mosaicoTamanho').addEventListener('input', function() {
+            const val = this.value;
+            document.getElementById('mosaicoTamanhoDisplay').innerText = val + 'px';
+            document.getElementById('mosaicoContainer').style.backgroundSize = val + 'px ' + val + 'px';
+            salvarGaleria();
+        });
+
+        document.getElementById('mosaicoOpacidade').addEventListener('input', function() {
+            const val = this.value;
+            document.getElementById('mosaicoOpacidadeDisplay').innerText = val + '%';
+            document.getElementById('mosaicoContainer').style.opacity = val / 100;
+            salvarGaleria();
+        });
+
+        // =========================================================
+        // LOGO PRINCIPAL
+        // =========================================================
+        document.getElementById('uploadLogo').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const img = document.getElementById('logoImg');
+                img.src = ev.target.result;
+                img.style.display = 'block';
+                document.getElementById('logoPlaceholder').style.display = 'none';
+                salvarGaleria();
+            };
+            reader.readAsDataURL(file);
+            this.value = '';
+        });
+
+        function removerLogo() {
+            document.getElementById('logoImg').src = '';
+            document.getElementById('logoImg').style.display = 'none';
+            document.getElementById('logoPlaceholder').style.display = 'block';
+            salvarGaleria();
+        }
+
+        const logoEl = document.getElementById('logoContainer');
+        let logoDrag = false,
+            logoStartX, logoStartY, logoOrigX, logoOrigY;
+        logoEl.addEventListener('mousedown', (e) => { iniciarArrasteLogo(e, 'mouse'); });
+        logoEl.addEventListener('touchstart', (e) => { iniciarArrasteLogo(e, 'touch'); }, { passive: true });
+
+        function iniciarArrasteLogo(e, tipo) {
+            const ev = tipo === 'touch' ? e.touches[0] : e;
+            logoDrag = true;
+            logoStartX = ev.clientX;
+            logoStartY = ev.clientY;
+            const rect = logoEl.getBoundingClientRect();
+            const parentRect = logoEl.parentElement.getBoundingClientRect();
+            logoOrigX = rect.left - parentRect.left;
+            logoOrigY = rect.top - parentRect.top;
+            logoEl.style.cursor = 'grabbing';
+            logoEl.style.zIndex = 20;
+        }
+        document.addEventListener('mousemove', (e) => { moverLogo(e, 'mouse'); });
+        document.addEventListener('touchmove', (e) => { moverLogo(e, 'touch'); }, { passive: true });
+
+        function moverLogo(e, tipo) {
+            if (!logoDrag) return;
+            const ev = tipo === 'touch' ? e.touches[0] : e;
+            const parent = logoEl.parentElement;
+            let newX = logoOrigX + (ev.clientX - logoStartX);
+            let newY = logoOrigY + (ev.clientY - logoStartY);
+            newX = Math.max(0, Math.min(parent.clientWidth - logoEl.offsetWidth, newX));
+            newY = Math.max(0, Math.min(parent.clientHeight - logoEl.offsetHeight, newY));
+            logoEl.style.left = newX + 'px';
+            logoEl.style.top = newY + 'px';
+            logoEl.style.right = 'auto';
+            logoEl.style.bottom = 'auto';
+        }
+        document.addEventListener('mouseup', () => { logoDrag = false;
+            logoEl.style.cursor = 'grab';
+            salvarGaleria(); });
+        document.addEventListener('touchend', () => { logoDrag = false;
+            logoEl.style.cursor = 'grab';
+            salvarGaleria(); });
+
+        let logoZoomData = null;
+        logoEl.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 2) {
+                const t1 = e.touches[0],
+                    t2 = e.touches[1];
+                const dist = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
+                const img = document.getElementById('logoImg');
+                const currentSize = img.style.display !== 'none' ? parseFloat(window.getComputedStyle(img).height) || 50 :
+                50;
+                logoZoomData = { initialDist: dist, initialSize: currentSize };
+                e.preventDefault();
+            }
+        }, { passive: false });
+        logoEl.addEventListener('touchmove', (e) => {
+            if (!logoZoomData || e.touches.length !== 2) return;
+            const t1 = e.touches[0],
+                t2 = e.touches[1];
+            const dist = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
+            const scale = dist / logoZoomData.initialDist;
+            let newSize = logoZoomData.initialSize * scale;
+            newSize = Math.min(120, Math.max(20, newSize));
+            const img = document.getElementById('logoImg');
+            if (img.style.display !== 'none') { img.style.height = newSize + 'px';
+                img.style.width = 'auto'; } else {
+                document.getElementById('logoPlaceholder').style.fontSize = (newSize / 50) * 1.2 + 'rem'; }
+            salvarGaleria();
+        }, { passive: false });
+        logoEl.addEventListener('touchend', () => { logoZoomData = null; });
+
+        // =========================================================
+        // MARCA D'ÁGUA (única)
+        // =========================================================
+        document.getElementById('uploadMarca').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const img = document.getElementById('marcaImg');
+                img.src = ev.target.result;
+                document.getElementById('marcaContainer').style.display = 'block';
+                salvarGaleria();
+            };
+            reader.readAsDataURL(file);
+            this.value = '';
+        });
+
+        function removerMarca() {
+            document.getElementById('marcaImg').src = '';
+            document.getElementById('marcaContainer').style.display = 'none';
+            salvarGaleria();
+        }
+
+        document.getElementById('opacidadeMarca').addEventListener('input', function() {
+            const val = this.value;
+            document.getElementById('opacidadeMarcaDisplay').innerText = val + '%';
+            document.getElementById('marcaContainer').style.opacity = val / 100;
+            salvarGaleria();
+        });
+
+        const marcaEl = document.getElementById('marcaContainer');
+        let marcaDrag = false,
+            marcaStartX, marcaStartY, marcaOrigX, marcaOrigY;
+        marcaEl.addEventListener('mousedown', (e) => { iniciarArrasteMarca(e, 'mouse'); });
+        marcaEl.addEventListener('touchstart', (e) => { iniciarArrasteMarca(e, 'touch'); }, { passive: true });
+
+        function iniciarArrasteMarca(e, tipo) {
+            const ev = tipo === 'touch' ? e.touches[0] : e;
+            marcaDrag = true;
+            marcaStartX = ev.clientX;
+            marcaStartY = ev.clientY;
+            const rect = marcaEl.getBoundingClientRect();
+            const parentRect = marcaEl.parentElement.getBoundingClientRect();
+            marcaOrigX = rect.left - parentRect.left;
+            marcaOrigY = rect.top - parentRect.top;
+            marcaEl.style.cursor = 'grabbing';
+            marcaEl.style.zIndex = 15;
+        }
+        document.addEventListener('mousemove', (e) => { moverMarca(e, 'mouse'); });
+        document.addEventListener('touchmove', (e) => { moverMarca(e, 'touch'); }, { passive: true });
+
+        function moverMarca(e, tipo) {
+            if (!marcaDrag) return;
+            const ev = tipo === 'touch' ? e.touches[0] : e;
+            const parent = marcaEl.parentElement;
+            let newX = marcaOrigX + (ev.clientX - marcaStartX);
+            let newY = marcaOrigY + (ev.clientY - marcaStartY);
+            const maxX = parent.clientWidth - marcaEl.offsetWidth;
+            const maxY = parent.clientHeight - marcaEl.offsetHeight;
+            newX = Math.max(0, Math.min(maxX, newX));
+            newY = Math.max(0, Math.min(maxY, newY));
+            marcaEl.style.left = newX + 'px';
+            marcaEl.style.top = newY + 'px';
+            marcaEl.style.right = 'auto';
+            marcaEl.style.bottom = 'auto';
+            marcaEl.style.transform = 'none';
+        }
+        document.addEventListener('mouseup', () => { marcaDrag = false;
+            marcaEl.style.cursor = 'grab';
+            salvarGaleria(); });
+        document.addEventListener('touchend', () => { marcaDrag = false;
+            marcaEl.style.cursor = 'grab';
+            salvarGaleria(); });
+
+        let marcaZoomData = null;
+        marcaEl.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 2) {
+                const t1 = e.touches[0],
+                    t2 = e.touches[1];
+                const dist = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
+                const currentSize = parseFloat(marcaEl.style.width) || 150;
+                marcaZoomData = { initialDist: dist, initialSize: currentSize };
+                e.preventDefault();
+            }
+        }, { passive: false });
+        marcaEl.addEventListener('touchmove', (e) => {
+            if (!marcaZoomData || e.touches.length !== 2) return;
+            const t1 = e.touches[0],
+                t2 = e.touches[1];
+            const dist = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
+            const scale = dist / marcaZoomData.initialDist;
+            let newSize = marcaZoomData.initialSize * scale;
+            newSize = Math.min(300, Math.max(40, newSize));
+            marcaEl.style.width = newSize + 'px';
+            salvarGaleria();
+        }, { passive: false });
+        marcaEl.addEventListener('touchend', () => { marcaZoomData = null; });
+
+        // =========================================================
+        // TELEFONE
+        // =========================================================
+        function adicionarTelefone() {
+            const tel = document.getElementById('inputTelefone').value.trim();
+            if (!tel) { alert('Digite um número!'); return; }
+            document.getElementById('telefoneDisplay').innerText = tel;
+            document.getElementById('telefoneContainer').style.display = 'flex';
+            salvarGaleria();
+        }
+        const telEl = document.getElementById('telefoneContainer');
+        let telDrag = false,
+            telStartX, telStartY, telOrigRight, telOrigBottom;
+        telEl.addEventListener('mousedown', (e) => { iniciarArrasteTel(e, 'mouse'); });
+        telEl.addEventListener('touchstart', (e) => { iniciarArrasteTel(e, 'touch'); }, { passive: true });
+
+        function iniciarArrasteTel(e, tipo) {
+            const ev = tipo === 'touch' ? e.touches[0] : e;
+            telDrag = true;
+            telStartX = ev.clientX;
+            telStartY = ev.clientY;
+            const rect = telEl.getBoundingClientRect();
+            const parentRect = telEl.parentElement.getBoundingClientRect();
+            telOrigRight = parentRect.right - rect.right;
+            telOrigBottom = parentRect.bottom - rect.bottom;
+            telEl.style.cursor = 'grabbing';
+            telEl.style.zIndex = 20;
+        }
+        document.addEventListener('mousemove', (e) => { moverTel(e, 'mouse'); });
+        document.addEventListener('touchmove', (e) => { moverTel(e, 'touch'); }, { passive: true });
+
+        function moverTel(e, tipo) {
+            if (!telDrag) return;
+            const ev = tipo === 'touch' ? e.touches[0] : e;
+            const parent = telEl.parentElement;
+            let newRight = telOrigRight - (ev.clientX - telStartX);
+            let newBottom = telOrigBottom - (ev.clientY - telStartY);
+            newRight = Math.max(0, Math.min(parent.clientWidth - telEl.offsetWidth, newRight));
+            newBottom = Math.max(0, Math.min(parent.clientHeight - telEl.offsetHeight, newBottom));
+            telEl.style.right = newRight + 'px';
+            telEl.style.bottom = newBottom + 'px';
+            telEl.style.left = 'auto';
+            telEl.style.top = 'auto';
+        }
+        document.addEventListener('mouseup', () => { telDrag = false;
+            telEl.style.cursor = 'grab';
+            salvarGaleria(); });
+        document.addEventListener('touchend', () => { telDrag = false;
+            telEl.style.cursor = 'grab';
+            salvarGaleria(); });
+
+        let telZoomData = null;
+        telEl.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 2) {
+                const t1 = e.touches[0],
+                    t2 = e.touches[1];
+                const dist = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
+                const currentSize = parseFloat(window.getComputedStyle(telEl).fontSize) || 16;
+                telZoomData = { initialDist: dist, initialSize: currentSize };
+                e.preventDefault();
+            }
+        }, { passive: false });
+        telEl.addEventListener('touchmove', (e) => {
+            if (!telZoomData || e.touches.length !== 2) return;
+            const t1 = e.touches[0],
+                t2 = e.touches[1];
+            const dist = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
+            const scale = dist / telZoomData.initialDist;
+            let newSize = telZoomData.initialSize * scale;
+            newSize = Math.min(32, Math.max(10, newSize));
+            telEl.style.fontSize = newSize + 'px';
+            const icon = telEl.querySelector('i');
+            if (icon) icon.style.fontSize = (newSize * 1.4) + 'px';
+            salvarGaleria();
+        }, { passive: false });
+        telEl.addEventListener('touchend', () => { telZoomData = null; });
+
+        // =========================================================
+        // FORMATO
+        // =========================================================
+        function aplicarFormato() {
+            const val = document.getElementById('formatoBanner').value;
+            const banner = document.getElementById('previewBanner');
+            const partes = val.split('-');
+            if (partes.length === 2) { banner.style.aspectRatio = `${partes[0]} / ${partes[1]}`; } else { banner.style
+                    .aspectRatio = '4 / 5'; }
+            salvarGaleria();
+        }
+
+        // =========================================================
+        // VÍDEOS (GALERIA + BUSCA PEXELS + UPLOAD)
+        // =========================================================
+        document.getElementById('uploadVideoFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const dataUrl = ev.target.result;
+                videosGaleria.push({ nome: file.name, url: dataUrl });
+                renderizarVideos();
+                salvarGaleria();
+                const capa = document.getElementById('campoCapa');
+                capa.src = dataUrl;
+                capa.style.display = 'block';
+                fundoAtual = { url: dataUrl, type: 'video' };
+                salvarGaleria();
+                alert('Vídeo adicionado à galeria e aplicado como capa!');
+            };
+            reader.readAsDataURL(file);
+            this.value = '';
+        });
+
+        async function buscarVideosPexels() {
+            const termo = document.getElementById('campoBuscaVideos').value.trim();
+            if (!termo) { alert('Digite um tema!'); return; }
+            if (!PEXELS_API_KEY || PEXELS_API_KEY === 'YOUR_PEXELS_API_KEY') {
+                alert('⚠️ Configure sua chave Pexels no código (PEXELS_API_KEY) para buscar vídeos.');
+                return;
+            }
+            const carregando = document.getElementById('carregandoVideos');
+            const resultadosDiv = document.getElementById('resultadosVideos');
+            carregando.style.display = 'inline';
+            resultadosDiv.innerHTML = '';
+            try {
+                const res = await fetch(
+                    `https://api.pexels.com/videos/search?query=${encodeURIComponent(termo)}&per_page=12&size=medium`, {
+                        headers: { Authorization: PEXELS_API_KEY }
+                    });
+                const dados = await res.json();
+                carregando.style.display = 'none';
+                if (!dados.videos || dados.videos.length === 0) {
+                    resultadosDiv.innerHTML = `<p class="col-span-full text-center text-gray-400 py-4">Nenhum vídeo encontrado.</p>`;
+                    return;
+                }
+                resultadosDiv.innerHTML = '';
+                dados.videos.forEach(video => {
+                    const vf = video.video_files.find(f => f.quality === 'hd') || video.video_files[0];
+                    if (!vf) return;
+                    const url = vf.link;
+                    const div = document.createElement('div');
+                    div.className = 'item-video';
+                    div.innerHTML = `
+                        <video src="${url}" muted playsinline></video>
+                        <div class="play-icon"><i class="fa fa-play-circle"></i></div>
+                        <div class="video-titulo">${video.user?.name || 'Vídeo'}</div>
+                    `;
+                    div.addEventListener('click', function() {
+                        const capa = document.getElementById('campoCapa');
+                        capa.src = url;
+                        capa.style.display = 'block';
+                        fundoAtual = { url: url, type: 'video' };
+                        if (!videosGaleria.some(v => v.url === url)) {
+                            videosGaleria.push({ nome: video.user?.name || 'Vídeo', url: url });
+                            renderizarVideos();
+                        }
+                        salvarGaleria();
+                        alert('✅ Vídeo aplicado ao banner e salvo na galeria!');
+                    });
+                    resultadosDiv.appendChild(div);
+                });
+            } catch (e) {
+                carregando.style.display = 'none';
+                resultadosDiv.innerHTML = `<p class="col-span-full text-center text-red-400 py-4">Erro: ${e.message}</p>`;
+            }
+        }
+
         function renderizarVideos() {
             const grid = document.getElementById('videoGrid');
             grid.innerHTML = '';
@@ -1843,7 +2246,7 @@
                 div.innerHTML = `
                     <video src="${video.url}" muted playsinline></video>
                     <div class="play-icon"><i class="fa fa-play-circle"></i></div>
-                    <div class="video-nome">${video.nome}</div>
+                    <div class="video-nome">${video.nome || 'Vídeo ' + (index+1)}</div>
                     <div class="delete-icon" onclick="event.stopPropagation(); removerVideo(${index})"><i class="fa fa-times"></i></div>
                 `;
                 div.addEventListener('click', function(e) {
@@ -1851,7 +2254,11 @@
                     document.querySelectorAll('.video-item').forEach(el => el.classList.remove('selecionado'));
                     this.classList.add('selecionado');
                     videoSelecionado = index;
-                    aplicarVideo();
+                    const capa = document.getElementById('campoCapa');
+                    capa.src = video.url;
+                    capa.style.display = 'block';
+                    fundoAtual = { url: video.url, type: 'video' };
+                    salvarGaleria();
                 });
                 div.addEventListener('dblclick', function(e) {
                     e.stopPropagation();
@@ -1862,7 +2269,7 @@
         }
 
         function removerVideo(index) {
-            if (!confirm('Remover este vídeo permanentemente?')) return;
+            if (!confirm('Excluir este vídeo permanentemente?')) return;
             videosGaleria.splice(index, 1);
             if (videoSelecionado === index) videoSelecionado = null;
             else if (videoSelecionado > index) videoSelecionado--;
@@ -1871,173 +2278,202 @@
         }
 
         function aplicarVideo() {
-            if (videoSelecionado === null) {
-                alert('⚠️ Selecione um vídeo na galeria!');
-                return;
-            }
+            if (videoSelecionado === null) { alert('Selecione um vídeo na galeria!'); return; }
             const video = videosGaleria[videoSelecionado];
-            const videoEl = document.getElementById('videoBanner');
-            const imgEl = document.getElementById('fundoBanner');
-            videoEl.src = video.url;
-            videoEl.load();
-            videoEl.play().catch(e => console.log('Autoplay bloqueado'));
-            videoEl.classList.remove('hidden');
-            videoEl.style.display = 'block';
-            videoEl.style.opacity = '0.65';
-            const audioMuted = localStorage.getItem('tnj_audio_muted');
-            if (audioMuted === 'true') {
-                videoEl.muted = true;
-            } else {
-                videoEl.muted = false;
-            }
-            imgEl.classList.add('hidden');
+            const capa = document.getElementById('campoCapa');
+            capa.src = video.url;
+            capa.style.display = 'block';
             fundoAtual = { url: video.url, type: 'video' };
             salvarGaleria();
+            alert('Vídeo aplicado ao banner!');
         }
-
-        document.getElementById('uploadVideo').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(ev) {
-                const dataUrl = ev.target.result;
-                videosGaleria.push({ nome: file.name, url: dataUrl });
-                renderizarVideos();
-                salvarGaleria();
-            };
-            reader.readAsDataURL(file);
-            this.value = '';
-        });
-
-        // ===== CONTROLE DE ÁUDIO =====
-        document.getElementById('audioBtn').addEventListener('click', function() {
-            const video = document.getElementById('videoBanner');
-            if (video.muted) {
-                video.muted = false;
-                this.classList.add('ativo');
-                this.innerHTML = '<i class="fa fa-headphones" style="color:#ffc107;"></i>';
-                localStorage.setItem('tnj_audio_muted', 'false');
-            } else {
-                video.muted = true;
-                this.classList.remove('ativo');
-                this.innerHTML = '<i class="fa fa-headphones"></i>';
-                localStorage.setItem('tnj_audio_muted', 'true');
-            }
-        });
 
         // =========================================================
-        // MOSAICO
+        // BUSCA COM VÍDEOS (TVMAZE + YOUTUBE)
         // =========================================================
-        function carregarLogoMosaico() {
-            const input = document.getElementById('uploadLogoMosaico');
-            const file = input.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                logoMosaicoData = e.target.result;
-                salvarGaleria();
-                alert('Imagem carregada! Clique em "Aplicar" para exibir no banner.');
-            };
-            reader.readAsDataURL(file);
-            input.value = '';
-        }
+        let listaConteudosVideo = [];
+        let itemSelecionadoVideo = null;
 
-        function aplicarMosaico() {
-            if (!logoMosaicoData) {
-                alert('⚠️ Primeiro carregue uma imagem em "LOGO REPETIDA (MOSAICO)".');
-                return;
-            }
-            const mosaicEl = document.getElementById('logoMosaico');
-            mosaicEl.style.backgroundImage = `url(${logoMosaicoData})`;
-            mosaicEl.style.display = 'block';
-            const opacidade = document.getElementById('opacidadeMosaico').value;
-            mosaicEl.style.opacity = opacidade / 100;
-            mosaicoAplicado = true;
-            salvarGaleria();
-        }
+        async function iniciarBuscaVideo() {
+            const termo = document.getElementById('palavraChaveVideo').value.trim();
+            const tipo = document.getElementById('tipoBuscaVideo').value;
+            const aviso = document.getElementById('avisoVideo');
+            const grade = document.getElementById('gradeResultadosVideo');
 
-        function toggleMosaico() {
-            const el = document.getElementById('logoMosaico');
-            if (el.style.display === 'none') {
-                if (logoMosaicoData && mosaicoAplicado) {
-                    el.style.display = 'block';
-                } else {
-                    alert('Nenhum mosaico aplicado. Carregue uma imagem e clique em "Aplicar".');
+            if (!termo) { alert("Digite algo para buscar!"); return; }
+
+            aviso.textContent = "🔎 Buscando...";
+            aviso.classList.remove('hidden');
+            grade.innerHTML = `<p class="col-span-full text-center text-tnj-dourado pulsar">Carregando...</p>`;
+
+            try {
+                const res = await fetch(`https://api.tvmaze.com/search/shows?q=${encodeURIComponent(termo)}`);
+                let dados = await res.json();
+                aviso.classList.add('hidden');
+
+                if (tipo === 'movie') dados = dados.filter(i => i.show.type === 'Movie');
+                if (tipo === 'series') dados = dados.filter(i => i.show.type === 'Scripted' || i.show.type === 'Series');
+                if (tipo === 'desenho') dados = dados.filter(i => {
+                    const n = (i.show.name + ' ' + i.show.summary).toLowerCase();
+                    return n.includes('desenho') || n.includes('animado') || n.includes('cartoon') || n.includes(
+                    'infantil');
+                });
+
+                if (!dados.length) {
+                    grade.innerHTML = `<p class="col-span-full text-center text-gray-400">Nenhum resultado encontrado 😕</p>`;
+                    return;
                 }
-            } else {
-                el.style.display = 'none';
+
+                listaConteudosVideo = dados;
+                mostrarGradeVideo(dados);
+
+            } catch (e) {
+                aviso.textContent = "Erro: " + e.message;
+                aviso.classList.remove('hidden');
             }
         }
 
-        document.getElementById('opacidadeMosaico').addEventListener('input', function() {
-            const val = this.value;
-            document.getElementById('opacidadeMosaicoDisplay').innerText = val + '%';
-            if (mosaicoAplicado && logoMosaicoData) {
-                document.getElementById('logoMosaico').style.opacity = val / 100;
-            }
-            localStorage.setItem('tnj_mosaico_opacidade', val);
-        });
+        function mostrarGradeVideo(lista) {
+            const grade = document.getElementById('gradeResultadosVideo');
+            grade.innerHTML = "";
 
-        // =========================================================
-        // ESTILOS DE FONTE
-        // =========================================================
-        function aplicarEstiloFonte(estilo, silencioso = false) {
-            estiloFonteAtual = estilo;
-            const textos = ['tituloBanner', 'descricaoBanner'];
-            textos.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) {
-                    el.className = el.className.replace(/fonte-\w+/g, '').trim();
-                    el.classList.add('arrastavel', estilo);
-                }
+            lista.forEach((item, idx) => {
+                const show = item.show;
+                if (!show.image) return;
+                const nome = show.name;
+                const ano = show.premiered ? show.premiered.substr(0, 4) : "----";
+
+                const div = document.createElement('div');
+                div.className = "item";
+                div.innerHTML = `
+                    <img src="${show.image.medium}" alt="${nome}" loading="lazy">
+                    <div class="info">${nome}</div>
+                    <div class="ano">${ano}</div>
+                `;
+                div.onclick = () => abrirDetalhesVideo(idx);
+                grade.appendChild(div);
             });
-            document.querySelectorAll('.font-btn').forEach(btn => btn.classList.remove('ativa'));
-            const btn = document.getElementById(estilo);
-            if (btn) btn.classList.add('ativa');
-            if (!silencioso) salvarPosicoesElementos();
-            salvarGaleria();
+        }
+
+        async function abrirDetalhesVideo(indice) {
+            itemSelecionadoVideo = listaConteudosVideo[indice].show;
+            const nomeBusca = encodeURIComponent(`${itemSelecionadoVideo.name} ${itemSelecionadoVideo.premiered?.substr(0,4)||''} trailer oficial`);
+
+            document.getElementById('tituloDetalhe').textContent = itemSelecionadoVideo.name;
+            document.getElementById('capaDetalhe').src = itemSelecionadoVideo.image?.original || '';
+            document.getElementById('capaDetalhe').style.display = 'block';
+            document.getElementById('anoDetalhe').textContent = itemSelecionadoVideo.premiered ? itemSelecionadoVideo
+                .premiered.substr(0, 4) : "----";
+            document.getElementById('notaDetalhe').textContent = itemSelecionadoVideo.rating?.average || "Sem nota";
+            document.getElementById('sinopseDetalhe').innerHTML = itemSelecionadoVideo.summary || "Sem descrição disponível.";
+
+            document.getElementById('painelDetalhes').classList.add('aberto');
+
+            const container = document.getElementById('containerVideo');
+            container.innerHTML = `<div class="text-gray-400 text-center">🔎 Procurando vídeo...</div>`;
+            await carregarVideoYouTube(nomeBusca);
+        }
+
+        async function carregarVideoYouTube(termo) {
+            const container = document.getElementById('containerVideo');
+            const iframe = document.createElement('iframe');
+            iframe.width = "100%";
+            iframe.height = "100%";
+            iframe.src = `https://www.youtube.com/embed?search=${termo}&autoplay=0`;
+            iframe.frameBorder = "0";
+            iframe.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture";
+            iframe.allowFullscreen = true;
+
+            container.innerHTML = "";
+            container.appendChild(iframe);
+        }
+
+        function usarNoBannerVideo() {
+            if (!itemSelecionadoVideo) return;
+            const dados = {
+                capa: itemSelecionadoVideo.image?.original || '',
+                titulo: itemSelecionadoVideo.name.toUpperCase(),
+                ano: itemSelecionadoVideo.premiered ? itemSelecionadoVideo.premiered.substr(0, 4) : "----",
+                sinopse: itemSelecionadoVideo.summary?.replace(/<[^>]*>/g, '') || "",
+                nota: itemSelecionadoVideo.rating?.average || "0.0"
+            };
+
+            document.getElementById('texto1').value = dados.titulo;
+            document.getElementById('texto4').value = dados.sinopse;
+            document.getElementById('notaIMDB').value = dados.nota;
+            document.getElementById('anoLancamento').value = dados.ano;
+            atualizarBanner();
+
+            if (dados.capa) {
+                const imgUrl = dados.capa;
+                const itemGaleria = { url: imgUrl, thumbnail: imgUrl, type: 'image' };
+                if (!imagensGaleria.some(i => i.url === imgUrl)) {
+                    imagensGaleria.push(itemGaleria);
+                    const grade = document.getElementById('gradeResultados');
+                    const msg = grade.querySelector('.col-span-full');
+                    if (msg && msg.tagName === 'P') msg.remove();
+                    criarMiniatura(itemGaleria, grade);
+                }
+                usarComoFundo(itemGaleria);
+                salvarGaleria();
+            }
+
+            alert("✅ Dados aplicados ao banner!");
+            fecharDetalhes();
+        }
+
+        // ===== NOVO: SALVAR VÍDEO DO BANNER A PARTIR DO PAINEL DE DETALHES =====
+        async function salvarVideoBannerDetalhes() {
+            if (!fundoAtual) { alert('⚠️ Escolha uma capa na galeria!'); return; }
+            // Adicionar a capa à galeria se ainda não estiver
+            if (itemSelecionadoVideo && itemSelecionadoVideo.image?.original) {
+                const imgUrl = itemSelecionadoVideo.image.original;
+                const itemGaleria = { url: imgUrl, thumbnail: imgUrl, type: 'image' };
+                if (!imagensGaleria.some(i => i.url === imgUrl)) {
+                    imagensGaleria.push(itemGaleria);
+                    const grade = document.getElementById('gradeResultados');
+                    const msg = grade.querySelector('.col-span-full');
+                    if (msg && msg.tagName === 'P') msg.remove();
+                    criarMiniatura(itemGaleria, grade);
+                    usarComoFundo(itemGaleria);
+                    salvarGaleria();
+                }
+            }
+            // Baixar vídeo do banner no formato MP4
+            await baixarVideoBannerFormatado('mp4');
         }
 
         // =========================================================
         // JOGOS (API-Football)
         // =========================================================
-        function buscarJogosHoje() {
-            const data = new Date().toISOString().split('T')[0];
-            buscarJogosPorData(data, 'HOJE');
-        }
+        function buscarJogosHoje() { const data = new Date().toISOString().split('T')[0];
+            buscarJogosPorData(data, 'HOJE'); }
 
-        function buscarJogosAmanha() {
-            const data = new Date(Date.now() + 86400000).toISOString().split('T')[0];
-            buscarJogosPorData(data, 'AMANHÃ');
-        }
+        function buscarJogosAmanha() { const data = new Date(Date.now() + 86400000).toISOString().split('T')[0];
+            buscarJogosPorData(data, 'AMANHÃ'); }
 
         async function buscarJogosPorData(data, rotulo) {
             const container = document.getElementById('esportesResultados');
             container.innerHTML = `<div class="carregando-esporte"><i class="fa fa-spinner fa-spin"></i> Buscando partidas...</div>`;
-
             try {
                 if (API_FOOTBALL_KEY === 'COLOQUE_SUA_CHAVE_API_FOOTBALL_AQUI') {
                     container.innerHTML = gerarCardsExemplo(rotulo);
                     return;
                 }
-
                 const LIGAS = '71,72,39,13,45';
                 const TEMPORADA = new Date().getFullYear();
-
-                const resposta = await fetch(`https://v3.football.api-sports.io/fixtures?date=${data}&leagues=${LIGAS}&season=${TEMPORADA}`, {
-                    headers: { 'x-apisports-key': API_FOOTBALL_KEY }
-                });
-
+                const resposta = await fetch(
+                    `https://v3.football.api-sports.io/fixtures?date=${data}&leagues=${LIGAS}&season=${TEMPORADA}`, {
+                        headers: { 'x-apisports-key': API_FOOTBALL_KEY }
+                    });
                 if (!resposta.ok) throw new Error('Falha na requisição');
-
                 const dados = await resposta.json();
                 if (!dados.response || dados.response.length === 0) {
                     container.innerHTML = `<div class="vazio">Nenhuma partida marcada para ${rotulo.toLowerCase()}.</div>`;
                     return;
                 }
-
-                let html = `<div style="font-size:0.7rem; color:#ffc107; margin-bottom:6px; font-weight:600;">${dados.response.length} partidas</div>`;
-
+                let html =
+                    `<div style="font-size:0.7rem; color:#ffc107; margin-bottom:6px; font-weight:600;">${dados.response.length} partidas</div>`;
                 dados.response.forEach(partida => {
                     const timeCasa = partida.teams.home.name;
                     const timeFora = partida.teams.away.name;
@@ -2049,46 +2485,31 @@
                     const golsCasa = partida.goals.home ?? '-';
                     const golsFora = partida.goals.away ?? '-';
                     const local = partida.fixture.venue?.name || 'Local a definir';
-                    const canal = partida.fixture.venue?.name || 'Canal não informado';
                     const status = partida.fixture.status?.long || '';
-
                     const tituloJogo = `${timeCasa} vs ${timeFora}`;
                     const descricaoJogo = `${liga} | ${dataCompleta} | ${horario}h | ${local}${status ? ' | ' + status : ''}`;
-
                     html += `
                         <div class="partida-card">
-                            <div class="cabecalho">
-                                <span class="liga">${liga}</span>
-                                <span class="horario"><i class="fa fa-clock-o"></i> ${horario}h</span>
-                            </div>
+                            <div class="cabecalho"><span class="liga">${liga}</span><span class="horario"><i class="fa fa-clock-o"></i> ${horario}h</span></div>
                             <div class="times">
-                                <div class="time-logo">
-                                    ${logoCasa ? `<img src="${logoCasa}" alt="${timeCasa}" onerror="this.style.display='none'" />` : ''}
-                                    <span>${timeCasa}</span>
-                                </div>
+                                <div class="time-logo">${logoCasa ? `<img src="${logoCasa}" onerror="this.style.display='none'" />` : ''}<span>${timeCasa}</span></div>
                                 <span class="gols">${golsCasa} x ${golsFora}</span>
-                                <div class="time-logo">
-                                    ${logoFora ? `<img src="${logoFora}" alt="${timeFora}" onerror="this.style.display='none'" />` : ''}
-                                    <span>${timeFora}</span>
-                                </div>
+                                <div class="time-logo">${logoFora ? `<img src="${logoFora}" onerror="this.style.display='none'" />` : ''}<span>${timeFora}</span></div>
                             </div>
                             <div class="info-extra">
                                 <span><i class="fa fa-calendar"></i> ${dataCompleta}</span>
                                 <span><i class="fa fa-map-marker"></i> ${local}</span>
-                                <span><i class="fa fa-tv"></i> ${canal}</span>
                                 ${status ? `<span><i class="fa fa-info-circle"></i> ${status}</span>` : ''}
                             </div>
                             <div class="botoes-partida">
-                                <button onclick="aplicarJogoAoBanner('${tituloJogo.replace(/'/g, "\\'")}', '${descricaoJogo.replace(/'/g, "\\'")}', '${logoCasa}')" class="btn-aplicar-jogo">
+                                <button onclick="aplicarJogoAoBanner('${tituloJogo.replace(/'/g, "\\'")}', '${descricaoJogo.replace(/'/g, "\\'")}')" class="btn-aplicar-jogo">
                                     <i class="fa fa-arrow-right"></i> Aplicar ao Banner
                                 </button>
                             </div>
                         </div>
                     `;
                 });
-
                 container.innerHTML = html;
-
             } catch (erro) {
                 container.innerHTML = `<div class="vazio" style="color:#ff5722;">Erro: ${erro.message}. Usando dados de exemplo.</div>`;
                 container.innerHTML += gerarCardsExemplo(rotulo);
@@ -2099,50 +2520,23 @@
             return `
                 <div class="partida-card">
                     <div class="cabecalho"><span class="liga">Brasileirão Série A</span><span class="horario">20:00h</span></div>
-                    <div class="times">
-                        <div class="time-logo"><span>Flamengo</span></div>
-                        <span class="gols">- x -</span>
-                        <div class="time-logo"><span>Palmeiras</span></div>
-                    </div>
-                    <div class="info-extra">
-                        <span><i class="fa fa-calendar"></i> 2026-07-19</span>
-                        <span><i class="fa fa-map-marker"></i> Maracanã</span>
-                        <span><i class="fa fa-tv"></i> TV Globo</span>
-                    </div>
-                    <div class="botoes-partida">
-                        <button onclick="alert('Configure sua chave API-Football para usar dados reais.')" class="btn-aplicar-jogo">
-                            <i class="fa fa-arrow-right"></i> Aplicar ao Banner
-                        </button>
-                    </div>
+                    <div class="times"><div class="time-logo"><span>Flamengo</span></div><span class="gols">- x -</span><div class="time-logo"><span>Palmeiras</span></div></div>
+                    <div class="info-extra"><span><i class="fa fa-calendar"></i> 2026-07-19</span><span><i class="fa fa-map-marker"></i> Maracanã</span></div>
+                    <div class="botoes-partida"><button onclick="alert('Configure sua chave API-Football para usar dados reais.')" class="btn-aplicar-jogo"><i class="fa fa-arrow-right"></i> Aplicar ao Banner</button></div>
                 </div>
-                <div style="text-align:center;font-size:0.7rem;color:#888;margin-top:8px;">
-                    💡 Substitua a chave API no código para dados reais
-                </div>
+                <div style="text-align:center;font-size:0.7rem;color:#888;margin-top:8px;">💡 Substitua a chave API no código para dados reais</div>
             `;
         }
 
-        function aplicarJogoAoBanner(titulo, descricao, logoUrl) {
+        function aplicarJogoAoBanner(titulo, descricao) {
             document.getElementById('texto1').value = titulo;
             document.getElementById('texto4').value = descricao;
-            aplicarTexto();
-
-            if (logoUrl) {
-                const item = { url: logoUrl, thumbnail: logoUrl, type: 'image' };
-                if (!imagensGaleria.some(i => i.url === logoUrl)) {
-                    imagensGaleria.push(item);
-                    const grade = document.getElementById('gradeResultados');
-                    const msg = grade.querySelector('.col-span-full');
-                    if (msg && msg.tagName === 'P') msg.remove();
-                    criarMiniatura(item, grade);
-                }
-                usarComoFundo(item);
-            }
-
-            alert('✅ Jogo aplicado ao banner! Você pode editar os textos e a posição dos elementos.');
+            atualizarBanner();
+            alert('✅ Jogo aplicado ao banner!');
         }
 
         // =========================================================
-        // GALERIA E MINIATURAS
+        // GALERIA DE IMAGENS
         // =========================================================
         function adicionarPorURL() {
             const url = document.getElementById('urlImagem')?.value?.trim();
@@ -2194,39 +2588,17 @@
             const del = document.createElement('button');
             del.className = 'delete-btn';
             del.innerHTML = '<i class="fa fa-times"></i>';
-            del.addEventListener('click', function(e) {
-                e.stopPropagation();
-                removerItemGaleria(item.url);
-            });
+            del.addEventListener('click', function(e) { e.stopPropagation();
+                removerItemGaleria(item.url); });
             div.appendChild(del);
             if (item.title) div.title = item.title;
             container.appendChild(div);
         }
 
         function usarComoFundo(item) {
-            const img = document.getElementById('fundoBanner');
-            const video = document.getElementById('videoBanner');
-            img.classList.remove('hidden');
-            video.classList.add('hidden');
-            if (item.type === 'image') {
-                img.src = item.url;
-                img.classList.remove('hidden');
-                video.classList.add('hidden');
-            } else {
-                video.src = item.url;
-                video.load();
-                video.play().catch(e => console.log('Autoplay bloqueado'));
-                video.classList.remove('hidden');
-                video.style.display = 'block';
-                video.style.opacity = '0.65';
-                img.classList.add('hidden');
-                const audioMuted = localStorage.getItem('tnj_audio_muted');
-                if (audioMuted === 'true') {
-                    video.muted = true;
-                } else {
-                    video.muted = false;
-                }
-            }
+            const capa = document.getElementById('campoCapa');
+            capa.src = item.url;
+            capa.style.display = 'block';
             fundoAtual = item;
             salvarGaleria();
             document.querySelectorAll('.item-galeria img').forEach(el => {
@@ -2243,8 +2615,8 @@
                 if (img && img.dataset.url === url) el.remove();
             });
             if (fundoAtual && fundoAtual.url === url) {
-                document.getElementById('fundoBanner').classList.add('hidden');
-                document.getElementById('videoBanner').classList.add('hidden');
+                document.getElementById('campoCapa').src = '';
+                document.getElementById('campoCapa').style.display = 'none';
                 fundoAtual = null;
                 if (imagensGaleria.length > 0) usarComoFundo(imagensGaleria[0]);
             }
@@ -2279,347 +2651,16 @@
         }
 
         // =========================================================
-        // LOGO PERSONALIZADA
+        // BUSCA DE IMAGENS (UNIFICADA)
         // =========================================================
-        function carregarLogoPersonalizada() {
-            const input = document.getElementById('uploadLogo');
-            const file = input.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                logoPersonalizada = e.target.result;
-                document.getElementById('logoConteudo').innerHTML =
-                    `<img src="${logoPersonalizada}" style="max-height:48px; width:auto; display:inline-block;" />`;
-                document.getElementById('logoTNJ').style.display = 'block';
-                salvarPosicoesElementos();
-            };
-            reader.readAsDataURL(file);
-            input.value = '';
-        }
-
-        function toggleLogo() {
-            const logo = document.getElementById('logoTNJ');
-            logo.style.display = logo.style.display === 'none' ? 'block' : 'none';
-        }
-
-        // =========================================================
-        // CONTATO
-        // =========================================================
-        function adicionarContato() {
-            const telefone = document.getElementById('telefoneLogo').value.trim();
-            if (!telefone) { alert('Digite um número.'); return; }
-            document.getElementById('telefoneLogoDisplay').innerText = telefone;
-            const container = document.getElementById('telefoneContainer');
-            container.style.display = 'flex';
-            container.style.visibility = 'visible';
-            localStorage.setItem('tnj_telefone', telefone);
-            salvarPosicoesElementos();
-        }
-
-        function resetarPosicoes() {
-            const defaults = {
-                tituloBanner: { top: '25%', left: '50%', transform: 'translateX(-50%)' },
-                descricaoBanner: { top: '60%', left: '50%', transform: 'translateX(-50%)' },
-                logoTNJ: { top: '20px', left: '20px' },
-                telefoneContainer: { top: '20px', right: '20px', left: 'auto' }
-            };
-            Object.keys(defaults).forEach(id => {
-                const el = document.getElementById(id);
-                if (el) {
-                    const d = defaults[id];
-                    Object.keys(d).forEach(prop => { el.style[prop] = d[prop]; });
-                    if (!d.transform) el.style.transform = 'none';
-                }
-            });
-            const logoContent = document.getElementById('logoConteudo');
-            if (logoContent) {
-                logoContent.style.fontSize = '1.5rem';
-                const img = logoContent.querySelector('img');
-                if (img) img.style.maxHeight = '48px';
-            }
-            salvarPosicoesElementos();
-        }
-
-        function aplicarTexto() {
-            const t1 = document.getElementById('texto1').value;
-            const t4 = document.getElementById('texto4').value;
-            const cor = document.getElementById('corTexto').value;
-            document.getElementById('tituloBanner').innerText = t1;
-            document.getElementById('descricaoBanner').innerText = t4;
-            const elementos = { titulo: 'tituloBanner', descricao: 'descricaoBanner' };
-            Object.keys(elementos).forEach(id => {
-                const el = document.getElementById(elementos[id]);
-                el.style.color = cor;
-                const slider = document.getElementById(id === 'titulo' ? 'tamTitulo' : 'tamDescricao');
-                if (slider) el.style.fontSize = `${slider.value}px`;
-            });
-            salvarPosicoesElementos();
-        }
-
-        function ajustarFonteTexto(tipo, delta) {
-            const sliderId = tipo === 'titulo' ? 'tamTitulo' : 'tamDescricao';
-            const slider = document.getElementById(sliderId);
-            if (!slider) return;
-            let val = parseInt(slider.value) + delta;
-            val = Math.min(parseInt(slider.max), Math.max(parseInt(slider.min), val));
-            slider.value = val;
-            document.getElementById(sliderId + 'Display').innerText = val;
-            aplicarTexto();
-        }
-
-        function aplicarFormato() {
-            const valor = document.getElementById('formatoBanner').value;
-            const area = document.getElementById('areaBanner');
-            const partes = valor.split('-');
-            if (partes.length === 2) {
-                area.style.aspectRatio = `${partes[0]} / ${partes[1]}`;
-            } else {
-                area.style.aspectRatio = '16 / 9';
-            }
-            void area.offsetWidth;
-        }
-
-        function limparEdicao() {
-            if (!confirm('Limpar textos, logo e fundo? (Imagens da galeria permanecem)')) return;
-            document.getElementById('fundoBanner').src = '';
-            document.getElementById('fundoBanner').classList.add('hidden');
-            document.getElementById('videoBanner').src = '';
-            document.getElementById('videoBanner').classList.add('hidden');
-            document.getElementById('tituloBanner').innerText = '';
-            document.getElementById('descricaoBanner').innerText = '';
-            document.getElementById('texto1').value = '';
-            document.getElementById('texto4').value = '';
-            document.getElementById('telefoneLogo').value = '';
-            document.getElementById('telefoneLogoDisplay').innerText = '';
-            document.getElementById('telefoneContainer').style.display = 'none';
-            document.getElementById('logoTNJ').style.display = 'block';
-            document.getElementById('logoConteudo').innerHTML = 'TV NOVA JUAREZ';
-            document.getElementById('logoConteudo').style.fontSize = '1.5rem';
-            const img = document.getElementById('logoConteudo').querySelector('img');
-            if (img) img.style.maxHeight = '48px';
-            fundoAtual = null;
-            logoPersonalizada = null;
-            localStorage.removeItem('tnj_fundo');
-            localStorage.removeItem('tnj_telefone');
-            document.getElementById('corTexto').value = '#ffffff';
-            ['tamTitulo', 'tamDescricao'].forEach(id => {
-                const s = document.getElementById(id);
-                if (s) {
-                    s.value = id === 'tamTitulo' ? '48' : '28';
-                    document.getElementById(id + 'Display').innerText = s.value;
-                }
-            });
-            resetarPosicoes();
-            aplicarEstiloFonte('fonte-marvel', true);
-            aplicarTexto();
-            if (imagensGaleria.length > 0) usarComoFundo(imagensGaleria[0]);
-        }
-
-        // =========================================================
-        // ZOOM
-        // =========================================================
-        let zoomData = null;
-        document.addEventListener('touchstart', function(e) {
-            if (e.touches.length === 2) {
-                const target = e.target.closest('#logoTNJ') || e.target.closest('#logoConteudo') ||
-                    e.target.closest('#tituloBanner') || e.target.closest('#descricaoBanner');
-                if (!target) return;
-                let logoContent = null,
-                    textElement = null,
-                    isLogo = false,
-                    isText = false;
-                if (target.closest('#logoTNJ') || target.closest('#logoConteudo')) {
-                    logoContent = document.getElementById('logoConteudo');
-                    if (!logoContent) return;
-                    isLogo = true;
-                } else if (target.id === 'tituloBanner' || target.id === 'descricaoBanner') {
-                    textElement = target;
-                    isText = true;
-                } else {
-                    const parent = target.closest('.arrastavel');
-                    if (parent && (parent.id === 'tituloBanner' || parent.id === 'descricaoBanner')) {
-                        textElement = parent;
-                        isText = true;
-                    }
-                }
-                if (!isLogo && !isText) return;
-                const t1 = e.touches[0],
-                    t2 = e.touches[1];
-                const dist = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
-                let initialSize;
-                if (isLogo) {
-                    initialSize = parseFloat(window.getComputedStyle(logoContent).fontSize);
-                } else if (isText) {
-                    initialSize = parseFloat(window.getComputedStyle(textElement).fontSize);
-                }
-                zoomData = { logoContent, textElement, isLogo, isText, initialDist: dist, initialSize: initialSize };
-                e.preventDefault();
-            }
-        }, { passive: false });
-
-        document.addEventListener('touchmove', function(e) {
-            if (!zoomData || e.touches.length !== 2) return;
-            e.preventDefault();
-            const t1 = e.touches[0],
-                t2 = e.touches[1];
-            const dist = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
-            const scale = dist / zoomData.initialDist;
-            let newSize = zoomData.initialSize * scale;
-            if (zoomData.isLogo) {
-                newSize = Math.min(60, Math.max(14, newSize));
-                zoomData.logoContent.style.fontSize = newSize + 'px';
-                const img = zoomData.logoContent.querySelector('img');
-                if (img) {
-                    const baseSize = 48;
-                    const newHeight = (newSize / 24) * baseSize;
-                    img.style.maxHeight = Math.min(96, Math.max(20, newHeight)) + 'px';
-                }
-            } else if (zoomData.isText) {
-                const el = zoomData.textElement;
-                const id = el.id;
-                let min, max;
-                if (id === 'tituloBanner') { min = 20;
-                    max = 120; } else if (id === 'descricaoBanner') { min = 12;
-                    max = 80; } else return;
-                newSize = Math.min(max, Math.max(min, newSize));
-                el.style.fontSize = newSize + 'px';
-                const sliderId = id === 'tituloBanner' ? 'tamTitulo' : 'tamDescricao';
-                const slider = document.getElementById(sliderId);
-                if (slider) {
-                    slider.value = Math.round(newSize);
-                    document.getElementById(sliderId + 'Display').innerText = Math.round(newSize);
-                }
-            }
-            salvarPosicoesElementos();
-        }, { passive: false });
-
-        document.addEventListener('touchend', function() { zoomData = null; });
-
-        // =========================================================
-        // DRAG & DROP
-        // =========================================================
-        function makeDraggable(el) {
-            let startX, startY, origLeft, origTop, dragging = false;
-
-            function onStart(e) {
-                e.preventDefault();
-                const touch = e.touches ? e.touches[0] : e;
-                startX = touch.clientX;
-                startY = touch.clientY;
-                const rect = el.getBoundingClientRect(),
-                    parentRect = el.parentElement.getBoundingClientRect();
-                origLeft = rect.left - parentRect.left;
-                origTop = rect.top - parentRect.top;
-                dragging = true;
-                el.style.cursor = 'grabbing';
-                el.style.transition = 'none';
-                el.style.zIndex = 15;
-            }
-
-            function onMove(e) {
-                if (!dragging) return;
-                e.preventDefault();
-                const touch = e.touches ? e.touches[0] : e;
-                let newX = origLeft + (touch.clientX - startX);
-                let newY = origTop + (touch.clientY - startY);
-                const parent = el.parentElement;
-                newX = Math.max(0, Math.min(parent.clientWidth - (el.offsetWidth || 40), newX));
-                newY = Math.max(0, Math.min(parent.clientHeight - (el.offsetHeight || 24), newY));
-                el.style.left = newX + 'px';
-                el.style.top = newY + 'px';
-                el.style.right = 'auto';
-                el.style.bottom = 'auto';
-                el.style.transform = 'none';
-            }
-
-            function onEnd() {
-                if (dragging) {
-                    dragging = false;
-                    el.style.cursor = 'grab';
-                    el.style.transition = '';
-                    el.style.zIndex = 10;
-                    salvarPosicoesElementos();
-                }
-            }
-            el.addEventListener('mousedown', onStart);
-            document.addEventListener('mousemove', onMove);
-            document.addEventListener('mouseup', onEnd);
-            el.addEventListener('touchstart', onStart, { passive: false });
-            document.addEventListener('touchmove', onMove, { passive: false });
-            document.addEventListener('touchend', onEnd);
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-            document.querySelectorAll('.arrastavel, #logoTNJ, #telefoneContainer').forEach(el => makeDraggable(el));
-        });
-
-        // =========================================================
-        // DOWNLOAD E ENVIO
-        // =========================================================
-        async function baixarBanner(formato) {
-            if (!fundoAtual) { alert('⚠️ Escolha um fundo na galeria!'); return; }
-            const area = document.getElementById('areaBanner');
-            const canvas = await html2canvas(area, { scale: 2, useCORS: true, logging: false,
-                backgroundColor: '#0f0f0f', allowTaint: true });
-            const link = document.createElement('a');
-            link.download = `BANNER-TNJ-${Date.now()}.${formato}`;
-            link.href = canvas.toDataURL(`image/${formato}`, 0.96);
-            link.click();
-        }
-
-        async function enviarVideoBanner() {
-            if (!fundoAtual || fundoAtual.type !== 'video') {
-                alert('⚠️ Primeiro aplique um vídeo no banner!');
-                return;
-            }
-            const area = document.getElementById('areaBanner');
-            if (!area.captureStream) {
-                alert('⚠️ Seu navegador não suporta captura de vídeo. Use Chrome ou Edge.');
-                return;
-            }
-            try {
-                const videoEl = document.getElementById('videoBanner');
-                if (videoEl.paused) {
-                    await videoEl.play().catch(e => console.log('Tentando reproduzir...'));
-                }
-                await new Promise(r => setTimeout(r, 300));
-
-                const stream = area.captureStream(30);
-                const recorder = new MediaRecorder(stream, {
-                    mimeType: 'video/webm;codecs=vp9,opus',
-                    videoBitsPerSecond: 2500000
-                });
-                const chunks = [];
-                recorder.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
-                recorder.onstop = () => {
-                    const blob = new Blob(chunks, { type: 'video/webm' });
-                    const url = URL.createObjectURL(blob);
-                    const link = document.createElement('a');
-                    link.download = `BANNER-TNJ-VIDEO-${Date.now()}.webm`;
-                    link.href = url;
-                    link.click();
-                    URL.revokeObjectURL(url);
-                };
-                recorder.start();
-                setTimeout(() => { recorder.stop(); }, 4000);
-            } catch (e) {
-                alert('Erro ao gravar vídeo: ' + e.message);
-            }
-        }
-
-        // =========================================================
-        // BUSCA UNIFICADA
-        // =========================================================
-        async function buscarUnificada() {
+        async function buscarImagens() {
             const termo = document.getElementById('campoBuscaUnificada').value.trim();
             if (!termo) { alert('Digite algo!'); return; }
-
             const fonte = document.getElementById('fonteBuscaUnificada').value;
             const carregando = document.getElementById('carregandoBuscaUnificada');
             const resultadosDiv = document.getElementById('resultadosBuscaUnificada');
             carregando.style.display = 'inline';
             resultadosDiv.innerHTML = '';
-
             try {
                 let dados = [];
                 if (fonte === 'omdb') {
@@ -2628,7 +2669,8 @@
                         carregando.style.display = 'none';
                         return;
                     }
-                    const res = await fetch(`https://www.omdbapi.com/?apikey=${CHAVE_OMDB}&s=${encodeURIComponent(termo)}&type=movie,series`);
+                    const res = await fetch(
+                        `https://www.omdbapi.com/?apikey=${CHAVE_OMDB}&s=${encodeURIComponent(termo)}&type=movie,series`);
                     const json = await res.json();
                     if (json.Response === "True") {
                         dados = json.Search.filter(item => item.Poster && item.Poster !== "N/A");
@@ -2636,43 +2678,62 @@
                         throw new Error(json.Error || 'Nada encontrado');
                     }
                 } else {
-                    // TVmaze
                     const res = await fetch(`https://api.tvmaze.com/search/shows?q=${encodeURIComponent(termo)}`);
                     const json = await res.json();
                     if (json.length) {
                         dados = json.map(item => ({
                             Title: item.show.name,
                             Year: item.show.premiered ? item.show.premiered.substr(0, 4) : '----',
-                            Poster: item.show.image ? item.show.image.medium : null
+                            Poster: item.show.image ? item.show.image.medium : null,
+                            imdbID: item.show.id,
+                            show: item.show
                         })).filter(item => item.Poster);
                     } else {
                         throw new Error('Nada encontrado');
                     }
                 }
-
                 carregando.style.display = 'none';
-
                 if (!dados.length) {
                     resultadosDiv.innerHTML = `<p class="col-span-full text-center text-gray-400 py-4">Nada encontrado 😕</p>`;
                     return;
                 }
-
                 resultadosDiv.innerHTML = '';
-                dados.forEach(item => {
+                for (const item of dados) {
+                    let genero = '',
+                        atores = '',
+                        nota = '',
+                        ano = item.Year || '',
+                        titulo = item.Title || '';
+                    if (fonte === 'omdb' && item.imdbID) {
+                        try {
+                            const detResp = await fetch(`https://www.omdbapi.com/?apikey=${CHAVE_OMDB}&i=${item.imdbID}`);
+                            const det = await detResp.json();
+                            if (det.Response === "True") {
+                                genero = det.Genre || '';
+                                atores = det.Actors || '';
+                                nota = det.imdbRating || '';
+                                ano = det.Year || ano;
+                                titulo = det.Title || titulo;
+                            }
+                        } catch (e) {}
+                    } else if (fonte === 'tvmaze' && item.show) {
+                        genero = item.show.genres ? item.show.genres.join(', ') : '';
+                        titulo = item.show.name;
+                        ano = item.show.premiered ? item.show.premiered.substr(0, 4) : '----';
+                    }
                     const cartaz = document.createElement('div');
                     cartaz.className = 'item-resultado';
-                    cartaz.innerHTML = `
-                        <img src="${item.Poster}" loading="lazy" alt="${item.Title}" />
-                        <div>
-                            <strong>${item.Title}</strong>
-                            <span>${item.Year}</span>
-                        </div>
-                    `;
+                    cartaz.innerHTML =
+                        `<img src="${item.Poster}" loading="lazy" alt="${titulo}" /><div><strong>${titulo}</strong><span>${ano}</span></div>`;
                     cartaz.onclick = function() {
-                        document.getElementById('texto1').value = item.Title.toUpperCase();
-                        document.getElementById('texto4').value = `Ano: ${item.Year}`;
-                        aplicarTexto();
-
+                        document.getElementById('texto1').value = titulo;
+                        document.getElementById('texto4').value = 'Sinopse: ' + (fonte === 'omdb' ? 'Clique para buscar' :
+                            'Disponível na página da série');
+                        document.getElementById('notaIMDB').value = nota;
+                        document.getElementById('anoLancamento').value = ano;
+                        document.getElementById('categoria').value = genero;
+                        document.getElementById('atores').value = atores;
+                        atualizarBanner();
                         const imgUrl = item.Poster;
                         const itemGaleria = { url: imgUrl, thumbnail: imgUrl, type: 'image' };
                         if (!imagensGaleria.some(i => i.url === imgUrl)) {
@@ -2684,128 +2745,126 @@
                         }
                         usarComoFundo(itemGaleria);
                         salvarGaleria();
+                        if (fonte === 'omdb' && item.imdbID) {
+                            (async () => {
+                                try {
+                                    const detResp = await fetch(
+                                        `https://www.omdbapi.com/?apikey=${CHAVE_OMDB}&i=${item.imdbID}&plot=full`
+                                        );
+                                    const det = await detResp.json();
+                                    if (det.Response === "True" && det.Plot) {
+                                        document.getElementById('texto4').value = det.Plot;
+                                        atualizarBanner();
+                                    }
+                                } catch (e) {}
+                            })();
+                        }
                     };
                     resultadosDiv.appendChild(cartaz);
-                });
-
+                }
             } catch (e) {
                 carregando.style.display = 'none';
-                resultadosDiv.innerHTML =
-                    `<p class="col-span-full text-center text-red-400 py-4">Erro: ${e.message}</p>`;
+                resultadosDiv.innerHTML = `<p class="col-span-full text-center text-red-400 py-4">Erro: ${e.message}</p>`;
             }
         }
 
         // =========================================================
-        // GERADOR DE VÍDEO
+        // DOWNLOAD: BANNER (IMAGEM)
         // =========================================================
-        let gravador = null,
-            pedacosMidia = [];
-        const tela = document.getElementById('telaGravacao');
-        const ctx = tela.getContext('2d');
+        async function baixarBanner() {
+            if (!fundoAtual) { alert('⚠️ Escolha uma capa na galeria!'); return; }
+            const formato = document.getElementById('formatoImagem').value;
+            const area = document.getElementById('previewBanner');
+            const canvas = await html2canvas(area, { scale: 2, useCORS: true, logging: false,
+                backgroundColor: '#050505', allowTaint: true });
 
-        async function iniciarGeracaoVideo() {
-            const areaBanner = document.getElementById('areaBanner');
-            const fundoImg = document.getElementById('fundoBanner');
-            if (!areaBanner || !fundoImg?.src) {
-                alert('⚠️ Monte o banner primeiro!');
-                return;
-            }
+            const mimeTypes = {
+                png: 'image/png',
+                jpeg: 'image/jpeg',
+                webp: 'image/webp',
+                bmp: 'image/bmp',
+                tiff: 'image/tiff',
+                gif: 'image/gif',
+                avif: 'image/avif',
+                ico: 'image/x-icon'
+            };
+            const mime = mimeTypes[formato] || 'image/png';
+            const ext = formato === 'jpeg' ? 'jpg' : formato;
 
-            const btn = document.getElementById('btnGerarVid');
-            const link = document.getElementById('linkDownloadVid');
-            link.style.display = 'none';
-            btn.disabled = true;
-            btn.innerText = 'PROCESSANDO...';
-            document.getElementById('barraProgressoVid').style.display = 'block';
-
-            const duracao = parseInt(document.getElementById('duracaoVid').value);
-            const efeito = document.getElementById('efeitoVid').value;
-            const totalQuadros = Math.round(duracao / 33);
-            let quadroAtual = 0;
-            pedacosMidia = [];
-
-            const fluxo = tela.captureStream(30);
-            gravador = new MediaRecorder(fluxo, { mimeType: 'video/webm;codecs=vp9' });
-            gravador.ondataavailable = e => { if (e.data.size > 0) pedacosMidia.push(e.data); };
-            gravador.onstop = finalizarVideo;
-            gravador.start();
-
-            const intervalo = setInterval(async () => {
-                quadroAtual++;
-                const pct = quadroAtual / totalQuadros;
-                document.getElementById('progressoVid').style.width = `${pct * 100}%`;
-                document.getElementById('textoStatusVid').innerText = `${Math.round(pct * 100)}% concluído`;
-
-                await desenharQuadro(areaBanner, pct, efeito);
-
-                if (quadroAtual >= totalQuadros) {
-                    clearInterval(intervalo);
-                    gravador.stop();
-                }
-            }, 33);
+            const link = document.createElement('a');
+            link.download = `BANNER-TNJ-${Date.now()}.${ext}`;
+            link.href = canvas.toDataURL(mime, 0.96);
+            link.click();
         }
 
-        async function desenharQuadro(el, prog, tipo) {
-            const copia = await html2canvas(el, {
-                scale: 1,
-                useCORS: true,
-                logging: false,
-                width: 1920,
-                height: 1080
-            });
-            ctx.clearRect(0, 0, 1920, 1080);
-            ctx.globalAlpha = 1;
-            if (tipo === 'fade') {
-                ctx.globalAlpha = prog < 0.2 ? prog / 0.2 : (prog > 0.8 ? 1 - ((prog - 0.8) / 0.2) : 1);
-            }
-            if (tipo === 'slide') {
-                const d = prog < 0.2 ? (1 - prog / 0.2) * 200 : (prog > 0.8 ? -(1 - (prog - 0.8) / 0.2) * 200 : 0);
-                ctx.drawImage(copia, d, 0, 1920, 1080);
-                return;
-            }
-            ctx.drawImage(copia, 0, 0, 1920, 1080);
+        // =========================================================
+        // DOWNLOAD: VÍDEO DO BANNER
+        // =========================================================
+        async function baixarVideoBanner() {
+            const formato = document.getElementById('formatoVideo').value;
+            await baixarVideoBannerFormatado(formato);
         }
 
-        function finalizarVideo() {
-            document.getElementById('textoStatusVid').innerText = 'Salvando arquivo...';
-            const blob = new Blob(pedacosMidia, { type: 'video/webm' });
-            const url = URL.createObjectURL(blob);
-            const link = document.getElementById('linkDownloadVid');
-            link.href = url;
-            link.download = `BANNER-TNJ-${Date.now()}.webm`;
-            link.style.display = 'block';
-            document.getElementById('btnGerarVid').disabled = false;
-            document.getElementById('btnGerarVid').innerText = 'GERAR VÍDEO 16:9';
-            document.getElementById('textoStatusVid').innerText = '✅ Pronto para baixar!';
+        async function baixarVideoBannerFormatado(formato) {
+            if (!fundoAtual) { alert('⚠️ Escolha uma capa na galeria!'); return; }
+            const area = document.getElementById('previewBanner');
+
+            const mimeTypes = {
+                mp4: 'video/mp4',
+                webm: 'video/webm',
+                avi: 'video/x-msvideo',
+                mov: 'video/quicktime',
+                mkv: 'video/x-matroska',
+                wmv: 'video/x-ms-wmv',
+                flv: 'video/x-flv',
+                gif: 'video/gif'
+            };
+            const mime = mimeTypes[formato] || 'video/webm';
+            const ext = formato;
+
+            try {
+                const canvas = await html2canvas(area, { scale: 1, useCORS: true, logging: false, width: 1920,
+                    height: 2400 });
+                const stream = canvas.captureStream(30);
+                const recorder = new MediaRecorder(stream, { mimeType: mime, videoBitsPerSecond: 2500000 });
+                const chunks = [];
+
+                recorder.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
+                recorder.onstop = () => {
+                    const blob = new Blob(chunks, { type: mime });
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.download = `BANNER-TNJ-VIDEO-${Date.now()}.${ext}`;
+                    link.href = url;
+                    link.click();
+                    URL.revokeObjectURL(url);
+                };
+
+                recorder.start();
+                setTimeout(() => { recorder.stop(); }, 5000);
+
+            } catch (e) {
+                alert('Erro ao gerar vídeo: ' + e.message + '\nTente usar WebM ou MP4.');
+            }
         }
 
         // =========================================================
         // INICIALIZAÇÃO
         // =========================================================
         document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('areaBanner').style.aspectRatio = '16 / 9';
-            const telSalvo = localStorage.getItem('tnj_telefone');
-            if (telSalvo) {
-                document.getElementById('telefoneLogoDisplay').innerText = telSalvo;
-                document.getElementById('telefoneContainer').style.display = 'flex';
-                document.getElementById('telefoneLogo').value = telSalvo;
-            } else {
-                document.getElementById('telefoneContainer').style.display = 'none';
-            }
             restaurarGaleria();
-            ['tamTitulo', 'tamDescricao'].forEach(id => {
-                const s = document.getElementById(id);
-                if (s) {
-                    s.addEventListener('input', function() {
-                        document.getElementById(id + 'Display').innerText = this.value;
-                        aplicarTexto();
-                    });
-                }
-            });
-            setTimeout(() => carregarPosicoesElementos(), 200);
-
-            // Iniciar slideshow no topo
+            document.getElementById('texto1').addEventListener('input', atualizarBanner);
+            document.getElementById('texto4').addEventListener('input', atualizarBanner);
+            document.getElementById('notaIMDB').addEventListener('input', atualizarBanner);
+            document.getElementById('anoLancamento').addEventListener('input', atualizarBanner);
+            document.getElementById('categoria').addEventListener('input', atualizarBanner);
+            document.getElementById('atores').addEventListener('input', atualizarBanner);
             iniciarSlideshowTopo();
+            aplicarFormato();
+
+            document.getElementById('palavraChaveVideo').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') iniciarBuscaVideo();
+            });
         });
     </script>
 
