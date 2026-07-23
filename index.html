@@ -14,6 +14,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700;900&family=Anton&family=Bebas+Neue&family=Righteous&family=Orbitron:wght@400;700;900&family=Cinzel:wght@400;700;900&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet" />
     <style>
         /* ===== ESTILOS GERAIS ===== */
+        * {
+            box-sizing: border-box;
+        }
         .grad-tnj {
             background: linear-gradient(to right, #1a237e, #283593);
         }
@@ -150,7 +153,7 @@
             z-index: 1;
             pointer-events: none;
         }
-        
+
         /* ===== MOSAICO DE MARCAS ===== */
         .mosaico-marcas {
             position: absolute;
@@ -227,7 +230,7 @@
             max-width: 100%;
             height: auto;
             pointer-events: none;
-            filter: drop-shadow(0 0 10px rgba(0,0,0,0.3));
+            filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.3));
         }
 
         .imagem-capa {
@@ -254,14 +257,14 @@
             text-transform: uppercase;
             margin: 0 0 18px;
             line-height: 1.05;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.6);
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
         }
         .descricao-sinopse {
-            font-size: clamp(15px, 3vw, 19px);
-            line-height: 1.55;
-            margin: 0 0 22px;
+            font-size: clamp(12px, 2vw, 16px);
+            line-height: 1.4;
+            margin: 0 0 18px;
             opacity: 0.88;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
         .caixa-dados {
             display: flex;
@@ -278,17 +281,25 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
-        .rotulo-info.nota { background: #ffc107; color: #000; }
-        .rotulo-info.ano { background: #252525; }
-        .rotulo-info.genero { background: #2b1b42; color: #e0b0ff; }
+        .rotulo-info.nota {
+            background: #ffc107;
+            color: #000;
+        }
+        .rotulo-info.ano {
+            background: #252525;
+        }
+        .rotulo-info.genero {
+            background: #2b1b42;
+            color: #e0b0ff;
+        }
         .linha-elenco {
             font-size: clamp(14px, 2.5vw, 16px);
             opacity: 0.78;
             padding-top: 18px;
             border-top: 1px solid #3a3a3a;
-            text-shadow: 0 1px 8px rgba(0,0,0,0.3);
+            text-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
         }
 
         /* ===== TELEFONE ===== */
@@ -435,7 +446,7 @@
             transform: translate(-50%, -50%);
             font-size: 2rem;
             color: #fff;
-            text-shadow: 0 0 20px rgba(0,0,0,0.5);
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
             opacity: 0.8;
             pointer-events: none;
         }
@@ -444,7 +455,7 @@
             bottom: 4px;
             left: 4px;
             right: 4px;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0, 0, 0, 0.6);
             padding: 2px 6px;
             border-radius: 4px;
             font-size: 0.5rem;
@@ -458,7 +469,7 @@
             position: absolute;
             top: 2px;
             right: 2px;
-            background: rgba(255,0,0,0.7);
+            background: rgba(255, 0, 0, 0.7);
             color: #fff;
             border-radius: 50%;
             width: 18px;
@@ -512,7 +523,7 @@
             transform: translate(-50%, -50%);
             font-size: 2rem;
             color: #fff;
-            text-shadow: 0 0 20px rgba(0,0,0,0.5);
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
             opacity: 0.8;
             pointer-events: none;
         }
@@ -521,7 +532,7 @@
             bottom: 4px;
             left: 4px;
             right: 4px;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0, 0, 0, 0.6);
             padding: 2px 6px;
             border-radius: 4px;
             font-size: 0.5rem;
@@ -696,7 +707,7 @@
         .painel-detalhes .conteudo .flex-row .capa {
             width: 150px;
             border-radius: 8px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
             display: none;
         }
         .painel-detalhes .conteudo .flex-row .info-texto p {
@@ -742,17 +753,104 @@
             background: #555;
         }
 
-        /* ===== AGENDA DE JOGOS ===== */
+        /* ===== JOGOS DE HOJE ===== */
+        .jogos-hoje .grade-jogos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 8px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 8px 0;
+        }
+        .jogos-hoje .grade-jogos .card-jogo {
+            background: #1a1a2e;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            padding: 10px 12px;
+            cursor: pointer;
+            border-left: 4px solid #ffc107;
+        }
+        .jogos-hoje .grade-jogos .card-jogo:hover {
+            border-color: #ffc107;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 193, 7, 0.15);
+        }
+        .jogos-hoje .grade-jogos .card-jogo .jogo-times {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .jogos-hoje .grade-jogos .card-jogo .jogo-times .placar {
+            color: #ffc107;
+            font-weight: 900;
+        }
+        .jogos-hoje .grade-jogos .card-jogo .jogo-info {
+            font-size: 0.65rem;
+            color: #aaa;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px 8px;
+        }
+        .jogos-hoje .grade-jogos .card-jogo .jogo-info .campeonato {
+            background: rgba(255, 193, 7, 0.15);
+            padding: 0 6px;
+            border-radius: 4px;
+            color: #ffc107;
+            font-weight: 600;
+        }
+        .jogos-hoje .grade-jogos .card-jogo .jogo-info .horario {
+            color: #888;
+        }
+        .jogos-hoje .grade-jogos .card-jogo .jogo-info .canal {
+            color: #4dd0e1;
+        }
+        .jogos-hoje .grade-jogos .card-jogo .btn-gerar-banner-jogo {
+            margin-top: 8px;
+            padding: 4px 12px;
+            background: #28a745;
+            border: none;
+            border-radius: 6px;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 100%;
+        }
+        .jogos-hoje .grade-jogos .card-jogo .btn-gerar-banner-jogo:hover {
+            background: #1e7e34;
+            transform: scale(1.02);
+        }
+        .jogos-hoje .carregando-jogos {
+            text-align: center;
+            color: #ffc107;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+        .jogos-hoje .vazio-jogos {
+            text-align: center;
+            color: #666;
+            padding: 20px;
+            font-size: 0.8rem;
+        }
+
+        /* ===== AGENDA DE JOGOS (API-Football) ===== */
         .esportes-resultados {
             max-height: 500px;
             overflow-y: auto;
             margin-top: 8px;
             border-radius: 8px;
-            background: rgba(0,0,0,0.2);
+            background: rgba(0, 0, 0, 0.2);
             padding: 8px;
         }
         .esportes-resultados .partida-card {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255, 255, 255, 0.05);
             border-radius: 8px;
             padding: 10px 12px;
             margin-bottom: 8px;
@@ -760,7 +858,7 @@
             transition: all 0.2s;
         }
         .esportes-resultados .partida-card:hover {
-            background: rgba(255,255,255,0.08);
+            background: rgba(255, 255, 255, 0.08);
         }
         .esportes-resultados .partida-card .cabecalho {
             display: flex;
@@ -881,7 +979,7 @@
             transform: translate(-50%, -50%);
             font-size: 3.5rem;
             color: rgba(255, 255, 255, 0.3);
-            text-shadow: 0 0 30px rgba(0,0,0,0.8);
+            text-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
             pointer-events: none;
             z-index: 2;
         }
@@ -890,8 +988,8 @@
             align-items: center;
             justify-content: space-between;
             padding: 8px 16px;
-            background: rgba(0,0,0,0.7);
-            border-top: 1px solid rgba(255,255,255,0.05);
+            background: rgba(0, 0, 0, 0.7);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
         .player-topo .controls button {
             background: none;
@@ -964,7 +1062,7 @@
             position: absolute;
             bottom: 4px;
             right: 4px;
-            background: rgba(0,0,0,0.6);
+            background: rgba(0, 0, 0, 0.6);
             color: #fff;
             font-size: 0.5rem;
             padding: 2px 6px;
@@ -974,7 +1072,7 @@
             position: absolute;
             top: 4px;
             right: 4px;
-            background: rgba(255,0,0,0.7);
+            background: rgba(255, 0, 0, 0.7);
             color: #fff;
             border: none;
             border-radius: 50%;
@@ -1083,7 +1181,7 @@
             color: #888;
             margin-top: 8px;
             padding: 6px 10px;
-            background: rgba(0,0,0,0.2);
+            background: rgba(0, 0, 0, 0.2);
             border-radius: 6px;
             border-left: 3px solid #ffc107;
             display: flex;
@@ -1155,6 +1253,99 @@
             transform: scale(1.03);
         }
 
+        /* ===== NAVEGAÇÃO POR TELAS ===== */
+        .tela-selecao {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding: 20px 0;
+        }
+        .tela-selecao .btn-grande {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 30px 20px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 193, 7, 0.2);
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: #fff;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+        .tela-selecao .btn-grande:hover {
+            transform: scale(1.02);
+            border-color: #ffc107;
+            box-shadow: 0 0 40px rgba(255, 193, 7, 0.1);
+        }
+        .tela-selecao .btn-grande i {
+            font-size: 2.5rem;
+            color: #ffc107;
+        }
+        .tela-selecao .btn-grande .desc {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: #aaa;
+            display: block;
+        }
+        .tela-selecao .btn-grande .icone-bg {
+            background: rgba(255, 193, 7, 0.1);
+            padding: 16px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Tela interna */
+        .tela-interna {
+            display: none;
+        }
+        .tela-interna.ativa {
+            display: block;
+        }
+
+        .btn-voltar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+        }
+        .btn-voltar:hover {
+            background: rgba(255, 193, 7, 0.1);
+            border-color: #ffc107;
+            transform: translateX(-4px);
+        }
+
+        .tela-interna .grid-ferramentas {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 16px;
+        }
+        @media (min-width: 768px) {
+            .tela-interna .grid-ferramentas {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .tela-interna .grid-ferramentas .caixa {
+            margin-bottom: 0;
+        }
+        .tela-interna .grid-ferramentas .caixa.full {
+            grid-column: 1 / -1;
+        }
+
         /* ===== RESPONSIVIDADE ===== */
         @media (max-width: 640px) {
             .site-grid {
@@ -1190,6 +1381,9 @@
             }
             .busca-videos .grade-videos {
                 grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
+            .jogos-hoje .grade-jogos {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             }
             .logo-cabecalho {
                 top: 15px;
@@ -1238,6 +1432,18 @@
             .download-container .grupo .row select {
                 min-width: 120px;
             }
+            .tela-selecao .btn-grande {
+                font-size: 1.1rem;
+                padding: 20px 16px;
+                flex-direction: column;
+                text-align: center;
+            }
+            .tela-selecao .btn-grande i {
+                font-size: 2rem;
+            }
+            .tela-interna .grid-ferramentas {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -1257,11 +1463,17 @@
 
     <div class="container mx-auto px-4 py-6">
 
-        <!-- ===== PLAYER SLIDESHOW ===== -->
+        <!-- ===== PLAYER SLIDESHOW (TOPO) ===== -->
         <section class="mb-8 caixa" style="padding: 12px; background: #0d0d1f; border-color: rgba(255,193,7,0.2);">
             <div class="flex items-center justify-between mb-3 px-1">
                 <span class="text-sm font-bold text-tnj-dourado flex items-center gap-2"><i class="fa fa-play-circle"></i> LANÇAMENTOS EM DESTAQUE</span>
-                <span class="text-[0.55rem] bg-tnj-dourado text-black px-2 py-0.5 rounded-full font-bold">AUTO</span>
+                <div class="flex items-center gap-2">
+                    <span class="text-[0.55rem] bg-tnj-dourado text-black px-2 py-0.5 rounded-full font-bold">AUTO</span>
+                    <!-- ===== BOTÃO VOLTAR (adicionado aqui) ===== -->
+                    <button onclick="voltarTela()" class="btn-com-borda text-xs" style="padding:4px 12px; width:auto; font-size:0.65rem; border-radius:8px;">
+                        <i class="fa fa-arrow-left"></i> VOLTAR
+                    </button>
+                </div>
             </div>
             <div class="player-topo" id="playerTopo">
                 <div class="slideshow" id="slideshowTopo">
@@ -1275,132 +1487,98 @@
             </div>
         </section>
 
-        <!-- ===== BUSCA UNIFICADA (IMAGENS) ===== -->
-        <section class="mb-8 caixa busca-unificada">
-            <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
-                <i class="fa fa-search text-tnj-dourado"></i> BUSCA DE IMAGENS
-            </h3>
-            <div class="flex flex-wrap gap-2 items-center">
-                <input type="text" id="campoBuscaUnificada" placeholder="Digite o nome do filme, série ou desenho..." class="flex-1 min-w-[180px] px-4 py-2 rounded bg-gray-900 border border-gray-600 focus:border-tnj-dourado outline-none text-sm" />
-                <select id="fonteBuscaUnificada" class="bg-gray-900 border border-gray-600 rounded px-3 py-2 text-white text-sm">
-                    <option value="tvmaze">TVmaze (Sem chave)</option>
-                    <option value="omdb">OMDb (Com chave)</option>
-                </select>
-                <button onclick="buscarImagens()" class="btn-pesquisar">🔍 PESQUISAR</button>
-                <span id="carregandoBuscaUnificada" style="display:none" class="text-tnj-dourado text-sm">Buscando...</span>
+        <!-- ===== TELA DE SELEÇÃO ===== -->
+        <div id="telaSelecao" class="tela-selecao">
+            <div class="text-center mb-4">
+                <h2 class="text-2xl font-bold text-tnj-dourado">🚀 ESCOLHA UMA FERRAMENTA</h2>
+                <p class="text-sm text-gray-400 mt-1">Clique em uma opção para acessar suas ferramentas</p>
             </div>
-            <div id="resultadosBuscaUnificada" class="grade-resultados">
-                <p class="col-span-full text-center text-gray-400 py-4">Pesquise um título para ver os resultados</p>
-            </div>
-            <div class="info-chave-unificada">
-                <span>💡 Clique no cartaz para preencher o banner</span>
-                <span>🔑 OMDb: <a href="https://www.omdbapi.com/apikey.aspx" target="_blank">Obter chave grátis</a></span>
-            </div>
-        </section>
 
-        <!-- ===== BUSCA COM VÍDEOS (TVMAZE + YOUTUBE) ===== -->
-        <section class="mb-8 caixa busca-com-videos" style="background:#0d0d1f; border-color: rgba(255,193,7,0.2);">
-            <h3 class="text-xl font-bold text-tnj-dourado mb-3 flex items-center gap-2">
-                <i class="fa fa-youtube-play"></i> BUSCAR COM VÍDEOS
-            </h3>
-            <div class="flex flex-col sm:flex-row gap-2 mb-3">
-                <select id="tipoBuscaVideo" class="p-2 rounded bg-gray-900 border border-gray-700 text-white text-sm">
-                    <option value="all">Todos</option>
-                    <option value="movie">Filmes</option>
-                    <option value="series">Séries</option>
-                    <option value="desenho">Desenhos</option>
-                </select>
-                <input type="text" id="palavraChaveVideo" placeholder="Digite o nome..." class="flex-1 p-3 rounded bg-gray-900 border border-gray-700 focus:border-tnj-dourado outline-none text-sm" />
-                <button onclick="iniciarBuscaVideo()" class="btn-pesquisar">🔍 PESQUISAR</button>
+            <div class="btn-grande" onclick="abrirTela('imagens')">
+                <div class="icone-bg"><i class="fa fa-image"></i></div>
+                <div>
+                    GERAR IMAGENS
+                    <span class="desc">Buscar, editar e baixar banners em imagem</span>
+                </div>
             </div>
-            <p id="avisoVideo" class="text-sm text-yellow-300 hidden"></p>
-            <div id="gradeResultadosVideo" class="grade">
-                <p class="col-span-full text-center text-gray-400 py-8">Faça uma busca acima</p>
-            </div>
-            <p class="text-xs text-gray-400 mt-2">💡 Clique em um resultado para ver trailer + detalhes e aplicar ao banner</p>
-        </section>
 
-        <!-- ===== GALERIA DE IMAGENS ===== -->
-        <section class="mb-8 caixa">
-            <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
-                <i class="fa fa-image text-tnj-dourado"></i> GALERIA DE IMAGENS
-            </h3>
-            <div class="flex flex-wrap items-center gap-3 mb-4">
-                <span class="text-sm font-semibold"><i class="fa fa-upload"></i> Adicionar do celular:</span>
-                <input type="file" id="uploadArquivo" accept="image/*,video/*" multiple class="text-sm text-gray-300 file:mr-2 file:py-1 file:px-3 file:rounded file:border-0 file:bg-tnj-dourado file:text-black file:font-bold hover:file:brightness-110" />
-                <button onclick="uploadArquivos()" class="btn-upload"><i class="fa fa-folder-open"></i> Adicionar</button>
-                <span class="text-xs text-gray-400 ml-auto">Clique na miniatura para usar como capa</span>
+            <div class="btn-grande" onclick="abrirTela('videos')">
+                <div class="icone-bg"><i class="fa fa-video-camera"></i></div>
+                <div>
+                    GERAR VÍDEOS
+                    <span class="desc">Buscar, editar e baixar banners em vídeo</span>
+                </div>
             </div>
-            <div id="gradeResultados" class="galeria-grid">
-                <p class="col-span-full text-center text-gray-400 py-4">Nenhuma imagem. Adicione uma ou use a busca acima.</p>
+
+            <div class="btn-grande" onclick="abrirTela('jogos')">
+                <div class="icone-bg"><i class="fa fa-futbol-o"></i></div>
+                <div>
+                    GERAR JOGOS
+                    <span class="desc">Agenda de jogos e banners esportivos</span>
+                </div>
             </div>
-        </section>
+        </div>
 
-        <div class="grid md:grid-cols-4 gap-6">
+        <!-- ===== TELA INTERNA: IMAGENS ===== -->
+        <div id="telaImagens" class="tela-interna">
+            <button class="btn-voltar" onclick="voltarTela()"><i class="fa fa-arrow-left"></i> VOLTAR</button>
+            <div class="grid-ferramentas">
 
-            <!-- FERRAMENTAS LATERAIS -->
-            <div class="md:col-span-1 space-y-4">
+                <!-- BUSCA DE IMAGENS -->
+                <div class="caixa full busca-unificada">
+                    <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+                        <i class="fa fa-search text-tnj-dourado"></i> BUSCA DE IMAGENS
+                    </h3>
+                    <div class="flex flex-wrap gap-2 items-center">
+                        <input type="text" id="campoBuscaUnificada" placeholder="Digite o nome do filme, série ou desenho..." class="flex-1 min-w-[180px] px-4 py-2 rounded bg-gray-900 border border-gray-600 focus:border-tnj-dourado outline-none text-sm" />
+                        <select id="fonteBuscaUnificada" class="bg-gray-900 border border-gray-600 rounded px-3 py-2 text-white text-sm">
+                            <option value="tvmaze">TVmaze (Sem chave)</option>
+                            <option value="omdb">OMDb (Com chave)</option>
+                        </select>
+                        <button onclick="buscarImagens()" class="btn-pesquisar px-6 py-2 text-sm">🔍 PESQUISAR</button>
+                        <span id="carregandoBuscaUnificada" style="display:none" class="text-tnj-dourado text-sm">Buscando...</span>
+                    </div>
+                    <div id="resultadosBuscaUnificada" class="grade-resultados">
+                        <p class="col-span-full text-center text-gray-400 py-4">Pesquise um título para ver os resultados</p>
+                    </div>
+                    <div class="info-chave-unificada">
+                        <span>💡 Clique no cartaz para preencher o banner</span>
+                        <span>🔑 OMDb: <a href="https://www.omdbapi.com/apikey.aspx" target="_blank">Obter chave grátis</a></span>
+                    </div>
+                </div>
+
+                <!-- GALERIA DE IMAGENS -->
+                <div class="caixa full">
+                    <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+                        <i class="fa fa-image text-tnj-dourado"></i> GALERIA DE IMAGENS
+                    </h3>
+                    <div class="flex flex-wrap items-center gap-3 mb-4">
+                        <span class="text-sm font-semibold"><i class="fa fa-upload"></i> Adicionar do celular:</span>
+                        <input type="file" id="uploadArquivo" accept="image/*,video/*" multiple class="text-sm text-gray-300 file:mr-2 file:py-1 file:px-3 file:rounded file:border-0 file:bg-tnj-dourado file:text-black file:font-bold hover:file:brightness-110" />
+                        <button onclick="uploadArquivos()" class="btn-upload"><i class="fa fa-folder-open"></i> Adicionar</button>
+                        <span class="text-xs text-gray-400 ml-auto">Clique na miniatura para usar como capa</span>
+                    </div>
+                    <div id="gradeResultados" class="galeria-grid">
+                        <p class="col-span-full text-center text-gray-400 py-4">Nenhuma imagem. Adicione uma ou use a busca acima.</p>
+                    </div>
+                </div>
 
                 <!-- EDIÇÃO -->
-                <div class="caixa">
+                <div class="caixa full">
                     <h3 class="font-bold mb-3 text-tnj-dourado">📝 EDITAR CONTEÚDO</h3>
-                    <div class="space-y-3">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                         <div><label class="text-xs text-tnj-dourado font-semibold">TÍTULO</label><input type="text" id="texto1" placeholder="Título..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
                         <div><label class="text-xs text-tnj-dourado font-semibold">SINOPSE</label><input type="text" id="texto4" placeholder="Sinopse..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
                         <div><label class="text-xs text-tnj-dourado font-semibold">NOTA (IMDb)</label><input type="text" id="notaIMDB" placeholder="Ex: 8.5" class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
                         <div><label class="text-xs text-tnj-dourado font-semibold">ANO</label><input type="text" id="anoLancamento" placeholder="Ex: 2025" class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
                         <div><label class="text-xs text-tnj-dourado font-semibold">GÊNERO</label><input type="text" id="categoria" placeholder="Ex: Ação" class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
                         <div><label class="text-xs text-tnj-dourado font-semibold">ELENCO</label><input type="text" id="atores" placeholder="Ator 1, Ator 2..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
-                        <button onclick="atualizarBanner()" class="btn-aplicar-texto w-full mt-2">ATUALIZAR BANNER</button>
                     </div>
+                    <button onclick="atualizarBanner()" class="btn-aplicar-texto w-full mt-3">ATUALIZAR BANNER</button>
                 </div>
 
-                <!-- ===== VÍDEOS ===== -->
+                <!-- LOGO PRINCIPAL -->
                 <div class="caixa">
-                    <h3 class="font-bold mb-3 text-tnj-dourado">🎬 VÍDEOS</h3>
-                    <div class="space-y-3">
-                        <button onclick="document.getElementById('uploadVideoFile').click()" class="btn-com-borda">
-                            <i class="fa fa-upload"></i> Adicionar Vídeo do Arquivo
-                        </button>
-                        <input type="file" id="uploadVideoFile" accept="video/*" style="display:none;" />
-
-                        <div class="busca-videos">
-                            <div class="caixa-busca-video">
-                                <input type="text" id="campoBuscaVideos" placeholder="Digite o tema do vídeo..." />
-                                <button onclick="buscarVideosPexels()">🔍 Buscar Vídeos</button>
-                                <span id="carregandoVideos" style="display:none">Buscando...</span>
-                            </div>
-                            <div id="resultadosVideos" class="grade-videos">
-                                <p class="col-span-full text-center text-gray-400 py-4">Pesquise um tema para ver vídeos</p>
-                            </div>
-                        </div>
-
-                        <div class="video-grid" id="videoGrid">
-                            <p class="col-span-full text-center text-gray-400 text-xs py-2">Nenhum vídeo. Adicione um!</p>
-                        </div>
-                        <p class="text-xs text-gray-400 mt-1">👆 1 clique = aplicar ao banner • 2 cliques = excluir</p>
-                    </div>
-                </div>
-
-                <!-- ===== AGENDA DE JOGOS ===== -->
-                <div class="caixa">
-                    <h3 class="font-bold mb-3 text-tnj-dourado">⚽ AGENDA DE JOGOS</h3>
-                    <div class="esportes-grid">
-                        <button onclick="buscarJogosHoje()" class="btn-esporte btn-esporte-futebol-hoje"><i class="fa fa-futbol-o"></i> Hoje</button>
-                        <button onclick="buscarJogosAmanha()" class="btn-esporte btn-esporte-futebol-amanha"><i class="fa fa-calendar"></i> Amanhã</button>
-                    </div>
-                    <div id="esportesResultados" class="esportes-resultados">
-                        <div class="vazio">Clique em "Hoje" ou "Amanhã" para ver os jogos</div>
-                    </div>
-                </div>
-
-                <!-- ===== BOTÃO PINTEREST ===== -->
-                <a href="https://pin.it/2Fmwl0JQA" target="_blank" class="btn-pinterest-side">
-                    <i class="fa fa-pinterest-p"></i> PINTEREST
-                </a>
-
-                <!-- ===== LOGO PRINCIPAL ===== -->
-                <div>
                     <label class="text-xs text-tnj-dourado font-semibold">📌 LOGO PRINCIPAL</label>
                     <div style="display:flex; gap:6px; margin-top:4px;">
                         <input type="file" id="uploadLogo" accept="image/png,image/webp,image/svg+xml,image/jpeg" style="display:none;" />
@@ -1412,8 +1590,8 @@
                     <p class="text-xs text-gray-400 mt-1">👆 Use PNG transparente • Arraste e dois dedos para zoom</p>
                 </div>
 
-                <!-- ===== MOSAICO DE MARCAS ===== -->
-                <div style="border-top:1px solid #333; padding-top:12px; margin-top:4px;">
+                <!-- MOSAICO DE MARCAS -->
+                <div class="caixa">
                     <label class="text-xs text-tnj-dourado font-semibold flex items-center gap-2">
                         <i class="fa fa-th"></i> MOSAICO DE MARCAS
                         <button id="btnToggleMosaico" onclick="toggleMosaico()" class="text-xs px-2 py-0.5 rounded" style="background:#ffc107; color:#000; font-weight:700; border:none;">
@@ -1440,8 +1618,8 @@
                     <p class="text-xs text-gray-400 mt-1">💡 A logo se repetirá em todo o banner como mosaico</p>
                 </div>
 
-                <!-- ===== MARCA D'ÁGUA (única) ===== -->
-                <div>
+                <!-- MARCA D'ÁGUA -->
+                <div class="caixa">
                     <label class="text-xs text-tnj-dourado font-semibold">🖋️ MARCA D'ÁGUA (única)</label>
                     <div style="display:flex; gap:6px; margin-top:4px; flex-wrap:wrap;">
                         <input type="file" id="uploadMarca" accept="image/png,image/webp,image/svg+xml,image/jpeg" style="display:none;" />
@@ -1458,8 +1636,8 @@
                     <p class="text-xs text-gray-400 mt-1">👆 Arraste • Dois dedos para zoom • Slider controla opacidade</p>
                 </div>
 
-                <!-- ===== TELEFONE ===== -->
-                <div>
+                <!-- TELEFONE -->
+                <div class="caixa">
                     <label class="text-xs text-tnj-dourado font-semibold">📞 TELEFONE (WhatsApp)</label>
                     <div style="display:flex; gap:6px; margin-top:4px;">
                         <input type="text" id="inputTelefone" placeholder="(83) 99999-9999" class="flex-1 px-2 py-2 rounded bg-gray-900 border border-gray-700 text-sm" />
@@ -1467,11 +1645,19 @@
                             <i class="fa fa-whatsapp"></i> Adicionar
                         </button>
                     </div>
+                    <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
+                        <span class="text-xs text-gray-400">Exibir telefone:</span>
+                        <select id="opcaoTelefone" onchange="aplicarOpcaoTelefone()" class="bg-gray-900 border border-gray-700 rounded px-2 py-1 text-sm text-white flex-1">
+                            <option value="completo">Com ícone e número</option>
+                            <option value="icone">Apenas ícone</option>
+                            <option value="nenhum">Sem telefone</option>
+                        </select>
+                    </div>
                     <p class="text-xs text-gray-400 mt-1">👆 Arraste e dois dedos para zoom</p>
                 </div>
 
-                <!-- ===== FORMATO ===== -->
-                <div>
+                <!-- FORMATO -->
+                <div class="caixa">
                     <label class="text-xs text-tnj-dourado font-semibold">📐 FORMATO DO BANNER</label>
                     <div class="formatos-dropdown" style="margin-top:4px;">
                         <div class="borda-externa"></div>
@@ -1490,9 +1676,9 @@
                     </div>
                 </div>
 
-                <!-- ===== SALVAR BANNER ===== -->
-                <div class="caixa">
-                    <h3 class="font-bold mb-3 text-tnj-dourado">⬇️ SALVAR BANNER</h3>
+                <!-- SALVAR BANNER (IMAGENS) -->
+                <div class="caixa full">
+                    <h3 class="font-bold mb-3 text-tnj-dourado">⬇️ SALVAR BANNER (IMAGEM)</h3>
                     <div class="download-container">
                         <div class="grupo">
                             <span class="label">🖼️ Imagem</span>
@@ -1510,6 +1696,77 @@
                                 <button onclick="baixarBanner()">BAIXAR</button>
                             </div>
                         </div>
+                    </div>
+                </div>
+
+                <!-- PINTEREST -->
+                <div class="caixa full">
+                    <a href="https://pin.it/2Fmwl0JQA" target="_blank" class="btn-pinterest-side">
+                        <i class="fa fa-pinterest-p"></i> PINTEREST
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ===== TELA INTERNA: VÍDEOS ===== -->
+        <div id="telaVideos" class="tela-interna">
+            <button class="btn-voltar" onclick="voltarTela()"><i class="fa fa-arrow-left"></i> VOLTAR</button>
+            <div class="grid-ferramentas">
+
+                <!-- BUSCA COM VÍDEOS -->
+                <div class="caixa full busca-com-videos" style="background:#0d0d1f; border-color: rgba(255,193,7,0.2);">
+                    <h3 class="text-xl font-bold text-tnj-dourado mb-3 flex items-center gap-2">
+                        <i class="fa fa-youtube-play"></i> BUSCAR COM VÍDEOS
+                    </h3>
+                    <div class="flex flex-col sm:flex-row gap-2 mb-3">
+                        <select id="tipoBuscaVideo" class="p-2 rounded bg-gray-900 border border-gray-700 text-white text-sm">
+                            <option value="all">Todos</option>
+                            <option value="movie">Filmes</option>
+                            <option value="series">Séries</option>
+                            <option value="desenho">Desenhos</option>
+                        </select>
+                        <input type="text" id="palavraChaveVideo" placeholder="Digite o nome..." class="flex-1 p-3 rounded bg-gray-900 border border-gray-700 focus:border-tnj-dourado outline-none text-sm" />
+                        <button onclick="iniciarBuscaVideo()" class="btn-pesquisar">🔍 PESQUISAR</button>
+                    </div>
+                    <p id="avisoVideo" class="text-sm text-yellow-300 hidden"></p>
+                    <div id="gradeResultadosVideo" class="grade">
+                        <p class="col-span-full text-center text-gray-400 py-8">Faça uma busca acima</p>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-2">💡 Clique em um resultado para ver trailer + detalhes e aplicar ao banner</p>
+                </div>
+
+                <!-- VÍDEOS -->
+                <div class="caixa full">
+                    <h3 class="font-bold mb-3 text-tnj-dourado">🎬 VÍDEOS</h3>
+                    <div class="space-y-3">
+                        <button onclick="document.getElementById('uploadVideoFile').click()" class="btn-com-borda">
+                            <i class="fa fa-upload"></i> Adicionar Vídeo do Arquivo
+                        </button>
+                        <input type="file" id="uploadVideoFile" accept="video/*" style="display:none;" />
+
+                        <div class="busca-videos">
+                            <div class="caixa-busca-video">
+                                <input type="text" id="campoBuscaVideos" placeholder="Digite o tema do vídeo..." />
+                                <button onclick="buscarVideosPexels()">🔍 Buscar Vídeos</button>
+                                <span id="carregandoVideos" style="display:none">Buscando...</span>
+                            </div>
+                            <div id="resultadosVideos" class="grade-videos">
+                                <p class="col-span-full text-center text-gray-400 py-4">Pesquise um tema para ver vídeos</p>
+                            </div>
+                        </div>
+
+                        <div class="video-grid" id="videoGrid">
+                            <p class="col-span-full text-center text-gray-400 text-xs py-2">Nenhum vídeo. Adicione um!</p>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-1">👆 1 clique = aplicar ao banner • 2 cliques = excluir</p>
+                    </div>
+                </div>
+
+                <!-- SALVAR VÍDEO -->
+                <div class="caixa full">
+                    <h3 class="font-bold mb-3 text-tnj-dourado">⬇️ SALVAR BANNER (VÍDEO)</h3>
+                    <div class="download-container">
                         <div class="grupo">
                             <span class="label">🎬 Vídeo</span>
                             <div class="row">
@@ -1530,54 +1787,378 @@
                     <p class="text-xs text-gray-400 text-center mt-2">Formatos de vídeo dependem do suporte do navegador.<br>WebM e MP4 são os mais confiáveis.</p>
                 </div>
 
-            </div>
+                <!-- FERRAMENTAS ADICIONAIS (VÍDEOS) -->
+                <div class="caixa full">
+                    <h3 class="font-bold mb-3 text-tnj-dourado">📝 EDITAR CONTEÚDO</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div><label class="text-xs text-tnj-dourado font-semibold">TÍTULO</label><input type="text" id="texto1_videos" placeholder="Título..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
+                        <div><label class="text-xs text-tnj-dourado font-semibold">SINOPSE</label><input type="text" id="texto4_videos" placeholder="Sinopse..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
+                        <div><label class="text-xs text-tnj-dourado font-semibold">NOTA (IMDb)</label><input type="text" id="notaIMDB_videos" placeholder="Ex: 8.5" class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
+                        <div><label class="text-xs text-tnj-dourado font-semibold">ANO</label><input type="text" id="anoLancamento_videos" placeholder="Ex: 2025" class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
+                        <div><label class="text-xs text-tnj-dourado font-semibold">GÊNERO</label><input type="text" id="categoria_videos" placeholder="Ex: Ação" class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
+                        <div><label class="text-xs text-tnj-dourado font-semibold">ELENCO</label><input type="text" id="atores_videos" placeholder="Ator 1, Ator 2..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
+                    </div>
+                    <button onclick="atualizarBannerVideos()" class="btn-aplicar-texto w-full mt-3">ATUALIZAR BANNER</button>
+                </div>
 
-            <!-- ===== BANNER ===== -->
-            <div class="md:col-span-3">
-                <div style="background:transparent; padding:0; border:none; box-shadow:none;">
-                    <div class="banner-tnj-nexxo" id="previewBanner">
-                        <!-- MOSAICO DE MARCAS -->
-                        <div class="mosaico-marcas" id="mosaicoContainer"></div>
+                <div class="caixa">
+                    <label class="text-xs text-tnj-dourado font-semibold">📌 LOGO PRINCIPAL</label>
+                    <div style="display:flex; gap:6px; margin-top:4px;">
+                        <input type="file" id="uploadLogo_videos" accept="image/png,image/webp,image/svg+xml,image/jpeg" style="display:none;" />
+                        <button onclick="document.getElementById('uploadLogo_videos').click()" class="btn-com-borda" style="flex:1;">
+                            <i class="fa fa-upload"></i> Carregar Logo
+                        </button>
+                        <button onclick="removerLogoVideos()" class="btn-azul text-xs" style="padding:10px 12px;">🗑️</button>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-1">👆 Use PNG transparente • Arraste e dois dedos para zoom</p>
+                </div>
 
-                        <!-- Logo Principal -->
-                        <div class="logo-cabecalho" id="logoContainer">
-                            <img src="" id="logoImg" style="display:none;" alt="Logo" />
-                            <span class="logo-placeholder" id="logoPlaceholder">TV NOVA JUAREZ</span>
-                        </div>
+                <div class="caixa">
+                    <label class="text-xs text-tnj-dourado font-semibold flex items-center gap-2">
+                        <i class="fa fa-th"></i> MOSAICO DE MARCAS
+                        <button id="btnToggleMosaico_videos" onclick="toggleMosaicoVideos()" class="text-xs px-2 py-0.5 rounded" style="background:#ffc107; color:#000; font-weight:700; border:none;">
+                            ATIVAR
+                        </button>
+                    </label>
+                    <div style="display:flex; gap:6px; margin-top:4px; flex-wrap:wrap;">
+                        <input type="file" id="uploadMosaico_videos" accept="image/png,image/webp,image/svg+xml,image/jpeg" style="display:none;" />
+                        <button onclick="document.getElementById('uploadMosaico_videos').click()" class="btn-com-borda" style="flex:1; min-width:100px;">
+                            <i class="fa fa-upload"></i> Logo Mosaico
+                        </button>
+                        <button onclick="removerMosaicoVideos()" class="btn-azul text-xs" style="padding:10px 12px;">🗑️</button>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
+                        <span class="text-xs text-gray-400">Tamanho:</span>
+                        <input type="range" id="mosaicoTamanho_videos" min="20" max="200" value="80" class="flex-1 h-1" />
+                        <span id="mosaicoTamanhoDisplay_videos" class="text-xs w-8">80px</span>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
+                        <span class="text-xs text-gray-400">Opacidade:</span>
+                        <input type="range" id="mosaicoOpacidade_videos" min="0" max="100" value="12" class="flex-1 h-1" />
+                        <span id="mosaicoOpacidadeDisplay_videos" class="text-xs w-8">12%</span>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-1">💡 A logo se repetirá em todo o banner como mosaico</p>
+                </div>
 
-                        <!-- Marca d'água (única) -->
-                        <div class="marca-agua" id="marcaContainer" style="display:none; top:50%; left:50%; transform:translate(-50%,-50%); width:150px;">
-                            <img src="" id="marcaImg" alt="Marca" />
-                        </div>
+                <div class="caixa">
+                    <label class="text-xs text-tnj-dourado font-semibold">🖋️ MARCA D'ÁGUA (única)</label>
+                    <div style="display:flex; gap:6px; margin-top:4px; flex-wrap:wrap;">
+                        <input type="file" id="uploadMarca_videos" accept="image/png,image/webp,image/svg+xml,image/jpeg" style="display:none;" />
+                        <button onclick="document.getElementById('uploadMarca_videos').click()" class="btn-com-borda" style="flex:1; min-width:120px;">
+                            <i class="fa fa-upload"></i> Adicionar Marca
+                        </button>
+                        <button onclick="removerMarcaVideos()" class="btn-azul text-xs" style="padding:10px 12px;">🗑️</button>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
+                        <span class="text-xs text-gray-400">Opacidade:</span>
+                        <input type="range" id="opacidadeMarca_videos" min="0" max="100" value="40" class="flex-1 h-1" />
+                        <span id="opacidadeMarcaDisplay_videos" class="text-xs w-7">40%</span>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-1">👆 Arraste • Dois dedos para zoom • Slider controla opacidade</p>
+                </div>
 
-                        <!-- Capa -->
-                        <img src="" alt="Capa" class="imagem-capa" id="campoCapa">
-                        <div class="fundo-gradiente"></div>
+                <div class="caixa">
+                    <label class="text-xs text-tnj-dourado font-semibold">📞 TELEFONE (WhatsApp)</label>
+                    <div style="display:flex; gap:6px; margin-top:4px;">
+                        <input type="text" id="inputTelefone_videos" placeholder="(83) 99999-9999" class="flex-1 px-2 py-2 rounded bg-gray-900 border border-gray-700 text-sm" />
+                        <button onclick="adicionarTelefoneVideos()" class="btn-com-borda" style="flex-shrink:0;">
+                            <i class="fa fa-whatsapp"></i> Adicionar
+                        </button>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
+                        <span class="text-xs text-gray-400">Exibir telefone:</span>
+                        <select id="opcaoTelefone_videos" onchange="aplicarOpcaoTelefoneVideos()" class="bg-gray-900 border border-gray-700 rounded px-2 py-1 text-sm text-white flex-1">
+                            <option value="completo">Com ícone e número</option>
+                            <option value="icone">Apenas ícone</option>
+                            <option value="nenhum">Sem telefone</option>
+                        </select>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-1">👆 Arraste e dois dedos para zoom</p>
+                </div>
 
-                        <!-- Conteúdo -->
-                        <div class="area-conteudo">
-                            <h1 class="titulo-principal" id="campoTitulo">NOME DO FILME</h1>
-                            <p class="descricao-sinopse" id="campoSinopse">Resumo da história do filme ou série aparecerá aqui...</p>
-                            <div class="caixa-dados">
-                                <span class="rotulo-info nota">★ <span id="campoNota">0.0</span></span>
-                                <span class="rotulo-info ano">📅 <span id="campoAno">2025</span></span>
-                                <span class="rotulo-info genero">🏷️ <span id="campoGenero">GÊNERO</span></span>
+                <div class="caixa">
+                    <label class="text-xs text-tnj-dourado font-semibold">📐 FORMATO DO BANNER</label>
+                    <div class="formatos-dropdown" style="margin-top:4px;">
+                        <div class="borda-externa"></div>
+                        <select id="formatoBanner_videos" onchange="aplicarFormatoVideos()">
+                            <option value="4-5">4:5 (Padrão)</option>
+                            <option value="16-9">16:9</option><option value="9-16">9:16</option>
+                            <option value="15-9">15:9</option><option value="9-15">9:15</option>
+                            <option value="14-9">14:9</option><option value="9-14">9:14</option>
+                            <option value="1-1">1:1</option><option value="2-2">2:2</option>
+                            <option value="3-3">3:3</option><option value="4-4">4:4</option>
+                            <option value="5-5">5:5</option><option value="2-1">2:1</option>
+                            <option value="1-2">1:2</option><option value="3-2">3:2</option>
+                            <option value="20-15">20:15</option><option value="4-3">4:3</option>
+                            <option value="4-9">4:9</option><option value="10-8">10:8</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="caixa full">
+                    <h3 class="font-bold mb-3 text-tnj-dourado">⬇️ SALVAR BANNER (IMAGEM)</h3>
+                    <div class="download-container">
+                        <div class="grupo">
+                            <span class="label">🖼️ Imagem</span>
+                            <div class="row">
+                                <select id="formatoImagem_videos">
+                                    <option value="png">PNG</option>
+                                    <option value="jpeg">JPG</option>
+                                    <option value="webp">WebP</option>
+                                    <option value="bmp">BMP</option>
+                                    <option value="tiff">TIFF</option>
+                                    <option value="gif">GIF</option>
+                                    <option value="avif">AVIF</option>
+                                    <option value="ico">ICO</option>
+                                </select>
+                                <button onclick="baixarBannerVideos()">BAIXAR</button>
                             </div>
-                            <p class="linha-elenco">Estrelando: <span id="campoElenco">Ator 1, Ator 2, Ator 3...</span></p>
-                        </div>
-
-                        <!-- Telefone -->
-                        <div class="telefone-container" id="telefoneContainer" style="display:none;">
-                            <i class="fa fa-whatsapp"></i>
-                            <span class="telefone-texto" id="telefoneDisplay">(83) 99999-9999</span>
                         </div>
                     </div>
-                    <p class="text-xs text-gray-400 mt-3 text-center">
-                        <i class="fa fa-arrows"></i> Arraste logo, marca e telefone • Dois dedos para zoom
-                    </p>
                 </div>
+
+                <div class="caixa full">
+                    <a href="https://pin.it/2Fmwl0JQA" target="_blank" class="btn-pinterest-side">
+                        <i class="fa fa-pinterest-p"></i> PINTEREST
+                    </a>
+                </div>
+
             </div>
         </div>
+
+        <!-- ===== TELA INTERNA: JOGOS ===== -->
+        <div id="telaJogos" class="tela-interna">
+            <button class="btn-voltar" onclick="voltarTela()"><i class="fa fa-arrow-left"></i> VOLTAR</button>
+            <div class="grid-ferramentas">
+
+                <!-- JOGOS DE HOJE -->
+                <div class="caixa jogos-hoje full">
+                    <h3 class="font-bold mb-3 text-tnj-dourado flex items-center gap-2">
+                        <i class="fa fa-futbol-o"></i> JOGOS DE HOJE
+                        <button onclick="carregarJogosHoje()" class="text-xs px-2 py-0.5 rounded" style="background:#ffc107; color:#000; font-weight:700; border:none; margin-left:auto;">
+                            ATUALIZAR
+                        </button>
+                    </h3>
+                    <div id="gradeJogosHoje" class="grade-jogos">
+                        <div class="vazio-jogos">Clique em "ATUALIZAR" para carregar os jogos de hoje</div>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-2">💡 Fonte: <a href="https://tvnova.spanel.space/jogos/index.php" target="_blank" class="text-tnj-dourado underline">tvnova.spanel.space</a></p>
+                </div>
+
+                <!-- AGENDA DE JOGOS (API-Football) -->
+                <div class="caixa full">
+                    <h3 class="font-bold mb-3 text-tnj-dourado">⚽ AGENDA DE JOGOS (API)</h3>
+                    <div class="esportes-grid">
+                        <button onclick="buscarJogosHojeApi()" class="btn-esporte btn-esporte-futebol-hoje"><i class="fa fa-futbol-o"></i> Hoje</button>
+                        <button onclick="buscarJogosAmanhaApi()" class="btn-esporte btn-esporte-futebol-amanha"><i class="fa fa-calendar"></i> Amanhã</button>
+                    </div>
+                    <div id="esportesResultados" class="esportes-resultados">
+                        <div class="vazio">Clique em "Hoje" ou "Amanhã" para ver os jogos</div>
+                    </div>
+                </div>
+
+                <!-- FERRAMENTAS ADICIONAIS (JOGOS) -->
+                <div class="caixa full">
+                    <h3 class="font-bold mb-3 text-tnj-dourado">📝 EDITAR CONTEÚDO</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                        <div><label class="text-xs text-tnj-dourado font-semibold">TÍTULO</label><input type="text" id="texto1_jogos" placeholder="Título..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
+                        <div><label class="text-xs text-tnj-dourado font-semibold">SINOPSE</label><input type="text" id="texto4_jogos" placeholder="Sinopse..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
+                        <div><label class="text-xs text-tnj-dourado font-semibold">NOTA (IMDb)</label><input type="text" id="notaIMDB_jogos" placeholder="Ex: 8.5" class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
+                        <div><label class="text-xs text-tnj-dourado font-semibold">ANO</label><input type="text" id="anoLancamento_jogos" placeholder="Ex: 2025" class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
+                        <div><label class="text-xs text-tnj-dourado font-semibold">GÊNERO</label><input type="text" id="categoria_jogos" placeholder="Ex: Ação" class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
+                        <div><label class="text-xs text-tnj-dourado font-semibold">ELENCO</label><input type="text" id="atores_jogos" placeholder="Ator 1, Ator 2..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
+                    </div>
+                    <button onclick="atualizarBannerJogos()" class="btn-aplicar-texto w-full mt-3">ATUALIZAR BANNER</button>
+                </div>
+
+                <div class="caixa">
+                    <label class="text-xs text-tnj-dourado font-semibold">📌 LOGO PRINCIPAL</label>
+                    <div style="display:flex; gap:6px; margin-top:4px;">
+                        <input type="file" id="uploadLogo_jogos" accept="image/png,image/webp,image/svg+xml,image/jpeg" style="display:none;" />
+                        <button onclick="document.getElementById('uploadLogo_jogos').click()" class="btn-com-borda" style="flex:1;">
+                            <i class="fa fa-upload"></i> Carregar Logo
+                        </button>
+                        <button onclick="removerLogoJogos()" class="btn-azul text-xs" style="padding:10px 12px;">🗑️</button>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-1">👆 Use PNG transparente • Arraste e dois dedos para zoom</p>
+                </div>
+
+                <div class="caixa">
+                    <label class="text-xs text-tnj-dourado font-semibold flex items-center gap-2">
+                        <i class="fa fa-th"></i> MOSAICO DE MARCAS
+                        <button id="btnToggleMosaico_jogos" onclick="toggleMosaicoJogos()" class="text-xs px-2 py-0.5 rounded" style="background:#ffc107; color:#000; font-weight:700; border:none;">
+                            ATIVAR
+                        </button>
+                    </label>
+                    <div style="display:flex; gap:6px; margin-top:4px; flex-wrap:wrap;">
+                        <input type="file" id="uploadMosaico_jogos" accept="image/png,image/webp,image/svg+xml,image/jpeg" style="display:none;" />
+                        <button onclick="document.getElementById('uploadMosaico_jogos').click()" class="btn-com-borda" style="flex:1; min-width:100px;">
+                            <i class="fa fa-upload"></i> Logo Mosaico
+                        </button>
+                        <button onclick="removerMosaicoJogos()" class="btn-azul text-xs" style="padding:10px 12px;">🗑️</button>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
+                        <span class="text-xs text-gray-400">Tamanho:</span>
+                        <input type="range" id="mosaicoTamanho_jogos" min="20" max="200" value="80" class="flex-1 h-1" />
+                        <span id="mosaicoTamanhoDisplay_jogos" class="text-xs w-8">80px</span>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
+                        <span class="text-xs text-gray-400">Opacidade:</span>
+                        <input type="range" id="mosaicoOpacidade_jogos" min="0" max="100" value="12" class="flex-1 h-1" />
+                        <span id="mosaicoOpacidadeDisplay_jogos" class="text-xs w-8">12%</span>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-1">💡 A logo se repetirá em todo o banner como mosaico</p>
+                </div>
+
+                <div class="caixa">
+                    <label class="text-xs text-tnj-dourado font-semibold">🖋️ MARCA D'ÁGUA (única)</label>
+                    <div style="display:flex; gap:6px; margin-top:4px; flex-wrap:wrap;">
+                        <input type="file" id="uploadMarca_jogos" accept="image/png,image/webp,image/svg+xml,image/jpeg" style="display:none;" />
+                        <button onclick="document.getElementById('uploadMarca_jogos').click()" class="btn-com-borda" style="flex:1; min-width:120px;">
+                            <i class="fa fa-upload"></i> Adicionar Marca
+                        </button>
+                        <button onclick="removerMarcaJogos()" class="btn-azul text-xs" style="padding:10px 12px;">🗑️</button>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
+                        <span class="text-xs text-gray-400">Opacidade:</span>
+                        <input type="range" id="opacidadeMarca_jogos" min="0" max="100" value="40" class="flex-1 h-1" />
+                        <span id="opacidadeMarcaDisplay_jogos" class="text-xs w-7">40%</span>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-1">👆 Arraste • Dois dedos para zoom • Slider controla opacidade</p>
+                </div>
+
+                <div class="caixa">
+                    <label class="text-xs text-tnj-dourado font-semibold">📞 TELEFONE (WhatsApp)</label>
+                    <div style="display:flex; gap:6px; margin-top:4px;">
+                        <input type="text" id="inputTelefone_jogos" placeholder="(83) 99999-9999" class="flex-1 px-2 py-2 rounded bg-gray-900 border border-gray-700 text-sm" />
+                        <button onclick="adicionarTelefoneJogos()" class="btn-com-borda" style="flex-shrink:0;">
+                            <i class="fa fa-whatsapp"></i> Adicionar
+                        </button>
+                    </div>
+                    <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
+                        <span class="text-xs text-gray-400">Exibir telefone:</span>
+                        <select id="opcaoTelefone_jogos" onchange="aplicarOpcaoTelefoneJogos()" class="bg-gray-900 border border-gray-700 rounded px-2 py-1 text-sm text-white flex-1">
+                            <option value="completo">Com ícone e número</option>
+                            <option value="icone">Apenas ícone</option>
+                            <option value="nenhum">Sem telefone</option>
+                        </select>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-1">👆 Arraste e dois dedos para zoom</p>
+                </div>
+
+                <div class="caixa">
+                    <label class="text-xs text-tnj-dourado font-semibold">📐 FORMATO DO BANNER</label>
+                    <div class="formatos-dropdown" style="margin-top:4px;">
+                        <div class="borda-externa"></div>
+                        <select id="formatoBanner_jogos" onchange="aplicarFormatoJogos()">
+                            <option value="4-5">4:5 (Padrão)</option>
+                            <option value="16-9">16:9</option><option value="9-16">9:16</option>
+                            <option value="15-9">15:9</option><option value="9-15">9:15</option>
+                            <option value="14-9">14:9</option><option value="9-14">9:14</option>
+                            <option value="1-1">1:1</option><option value="2-2">2:2</option>
+                            <option value="3-3">3:3</option><option value="4-4">4:4</option>
+                            <option value="5-5">5:5</option><option value="2-1">2:1</option>
+                            <option value="1-2">1:2</option><option value="3-2">3:2</option>
+                            <option value="20-15">20:15</option><option value="4-3">4:3</option>
+                            <option value="4-9">4:9</option><option value="10-8">10:8</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="caixa full">
+                    <h3 class="font-bold mb-3 text-tnj-dourado">⬇️ SALVAR BANNER</h3>
+                    <div class="download-container">
+                        <div class="grupo">
+                            <span class="label">🖼️ Imagem</span>
+                            <div class="row">
+                                <select id="formatoImagem_jogos">
+                                    <option value="png">PNG</option>
+                                    <option value="jpeg">JPG</option>
+                                    <option value="webp">WebP</option>
+                                    <option value="bmp">BMP</option>
+                                    <option value="tiff">TIFF</option>
+                                    <option value="gif">GIF</option>
+                                    <option value="avif">AVIF</option>
+                                    <option value="ico">ICO</option>
+                                </select>
+                                <button onclick="baixarBannerJogos()">BAIXAR</button>
+                            </div>
+                        </div>
+                        <div class="grupo">
+                            <span class="label">🎬 Vídeo</span>
+                            <div class="row">
+                                <select id="formatoVideo_jogos">
+                                    <option value="mp4">MP4</option>
+                                    <option value="webm">WebM</option>
+                                    <option value="avi">AVI</option>
+                                    <option value="mov">MOV</option>
+                                    <option value="mkv">MKV</option>
+                                    <option value="wmv">WMV</option>
+                                    <option value="flv">FLV</option>
+                                    <option value="gif">GIF (animado)</option>
+                                </select>
+                                <button onclick="baixarVideoBannerJogos()">BAIXAR</button>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-400 text-center mt-2">Formatos de vídeo dependem do suporte do navegador.<br>WebM e MP4 são os mais confiáveis.</p>
+                </div>
+
+                <div class="caixa full">
+                    <a href="https://pin.it/2Fmwl0JQA" target="_blank" class="btn-pinterest-side">
+                        <i class="fa fa-pinterest-p"></i> PINTEREST
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ===== BANNER (VISÍVEL EM TODAS AS TELAS) ===== -->
+        <div class="mt-8">
+            <div class="banner-wrapper" style="background:transparent; padding:0; border:none; box-shadow:none;">
+                <div class="banner-tnj-nexxo" id="previewBanner">
+                    <!-- MOSAICO DE MARCAS -->
+                    <div class="mosaico-marcas" id="mosaicoContainer"></div>
+
+                    <!-- Logo Principal -->
+                    <div class="logo-cabecalho" id="logoContainer">
+                        <img src="" id="logoImg" style="display:none;" alt="Logo" />
+                        <span class="logo-placeholder" id="logoPlaceholder">TV NOVA JUAREZ</span>
+                    </div>
+
+                    <!-- Marca d'água (única) -->
+                    <div class="marca-agua" id="marcaContainer" style="display:none; top:50%; left:50%; transform:translate(-50%,-50%); width:150px;">
+                        <img src="" id="marcaImg" alt="Marca" />
+                    </div>
+
+                    <!-- Capa -->
+                    <img src="" alt="Capa" class="imagem-capa" id="campoCapa">
+                    <div class="fundo-gradiente"></div>
+
+                    <!-- Conteúdo -->
+                    <div class="area-conteudo">
+                        <h1 class="titulo-principal" id="campoTitulo">NOME DO FILME</h1>
+                        <p class="descricao-sinopse" id="campoSinopse">Resumo da história do filme ou série aparecerá aqui...</p>
+                        <div class="caixa-dados">
+                            <span class="rotulo-info nota">★ <span id="campoNota">0.0</span></span>
+                            <span class="rotulo-info ano">📅 <span id="campoAno">2025</span></span>
+                            <span class="rotulo-info genero">🏷️ <span id="campoGenero">GÊNERO</span></span>
+                        </div>
+                        <p class="linha-elenco">Estrelando: <span id="campoElenco">Ator 1, Ator 2, Ator 3...</span></p>
+                    </div>
+
+                    <!-- Telefone -->
+                    <div class="telefone-container" id="telefoneContainer" style="display:none;">
+                        <i class="fa fa-whatsapp"></i>
+                        <span class="telefone-texto" id="telefoneDisplay">(83) 99999-9999</span>
+                    </div>
+                </div>
+                <p class="text-xs text-gray-400 mt-3 text-center">
+                    <i class="fa fa-arrows"></i> Arraste logo, marca e telefone • Dois dedos para zoom
+                </p>
+            </div>
+        </div>
+
     </div>
 
     <!-- ===== PAINEL DE DETALHES ===== -->
@@ -1613,11 +2194,28 @@
 
     <script>
         // =========================================================
+        // NAVEGAÇÃO ENTRE TELAS
+        // =========================================================
+        function abrirTela(tela) {
+            document.getElementById('telaSelecao').style.display = 'none';
+            document.querySelectorAll('.tela-interna').forEach(el => el.classList.remove('ativa'));
+            document.getElementById('tela' + tela.charAt(0).toUpperCase() + tela.slice(1)).classList.add('ativa');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function voltarTela() {
+            document.querySelectorAll('.tela-interna').forEach(el => el.classList.remove('ativa'));
+            document.getElementById('telaSelecao').style.display = 'flex';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // =========================================================
         // CONFIGURAÇÕES
         // =========================================================
         const CHAVE_OMDB = "SUA_CHAVE_OMDB";
         const API_FOOTBALL_KEY = "COLOQUE_SUA_CHAVE_API_FOOTBALL_AQUI";
         const PEXELS_API_KEY = "YOUR_PEXELS_API_KEY";
+        const URL_JOGOS = "https://tvnova.spanel.space/jogos/index.php";
 
         let imagensGaleria = [];
         let fundoAtual = null;
@@ -1687,9 +2285,9 @@
         }
 
         // =========================================================
-        // PERSISTÊNCIA
+        // PERSISTÊNCIA (GLOBAL)
         // =========================================================
-        function salvarGaleria() {
+        function salvarGaleriaGlobal() {
             try {
                 localStorage.setItem('tnj_galeria', JSON.stringify(imagensGaleria));
                 if (fundoAtual) localStorage.setItem('tnj_fundo', JSON.stringify(fundoAtual));
@@ -1699,31 +2297,32 @@
                 localStorage.setItem('tnj_marca_data', document.getElementById('marcaImg').src || '');
                 localStorage.setItem('tnj_telefone', document.getElementById('telefoneDisplay').innerText || '');
                 localStorage.setItem('tnj_banner_dados', JSON.stringify({
-                    titulo: document.getElementById('texto1').value,
-                    sinopse: document.getElementById('texto4').value,
-                    nota: document.getElementById('notaIMDB').value,
-                    ano: document.getElementById('anoLancamento').value,
-                    genero: document.getElementById('categoria').value,
-                    elenco: document.getElementById('atores').value
+                    titulo: document.getElementById('texto1')?.value || '',
+                    sinopse: document.getElementById('texto4')?.value || '',
+                    nota: document.getElementById('notaIMDB')?.value || '',
+                    ano: document.getElementById('anoLancamento')?.value || '',
+                    genero: document.getElementById('categoria')?.value || '',
+                    elenco: document.getElementById('atores')?.value || ''
                 }));
                 const logo = document.getElementById('logoContainer');
                 const marca = document.getElementById('marcaContainer');
                 const tel = document.getElementById('telefoneContainer');
                 localStorage.setItem('tnj_logo_pos', JSON.stringify({ left: logo.style.left, top: logo.style.top }));
                 localStorage.setItem('tnj_marca_pos', JSON.stringify({ left: marca.style.left, top: marca.style.top,
-                    width: marca.style.width, opacity: document.getElementById('opacidadeMarca').value }));
+                    width: marca.style.width, opacity: document.getElementById('opacidadeMarca')?.value || '40' }));
                 localStorage.setItem('tnj_tel_pos', JSON.stringify({ right: tel.style.right, bottom: tel.style.bottom }));
-                localStorage.setItem('tnj_formato', document.getElementById('formatoBanner').value);
+                localStorage.setItem('tnj_formato', document.getElementById('formatoBanner')?.value || '4-5');
                 localStorage.setItem('tnj_mosaico_data', document.getElementById('mosaicoContainer').style.backgroundImage ||
                     '');
-                localStorage.setItem('tnj_mosaico_tamanho', document.getElementById('mosaicoTamanho').value);
-                localStorage.setItem('tnj_mosaico_opacidade', document.getElementById('mosaicoOpacidade').value);
+                localStorage.setItem('tnj_mosaico_tamanho', document.getElementById('mosaicoTamanho')?.value || '80');
+                localStorage.setItem('tnj_mosaico_opacidade', document.getElementById('mosaicoOpacidade')?.value || '12');
                 localStorage.setItem('tnj_mosaico_ativo', document.getElementById('mosaicoContainer').classList.contains(
                     'ativo') ? 'true' : 'false');
+                localStorage.setItem('tnj_opcao_telefone', document.getElementById('opcaoTelefone')?.value || 'completo');
             } catch (e) {}
         }
 
-        function carregarDados() {
+        function carregarDadosGlobal() {
             try {
                 const galeria = localStorage.getItem('tnj_galeria');
                 if (galeria) imagensGaleria = JSON.parse(galeria);
@@ -1752,16 +2351,25 @@
                 const banner = localStorage.getItem('tnj_banner_dados');
                 if (banner) {
                     const d = JSON.parse(banner);
-                    document.getElementById('texto1').value = d.titulo || '';
-                    document.getElementById('texto4').value = d.sinopse || '';
-                    document.getElementById('notaIMDB').value = d.nota || '';
-                    document.getElementById('anoLancamento').value = d.ano || '';
-                    document.getElementById('categoria').value = d.genero || '';
-                    document.getElementById('atores').value = d.elenco || '';
+                    document.querySelectorAll('#texto1, #texto1_videos, #texto1_jogos').forEach(el => el.value = d.titulo ||
+                        '');
+                    document.querySelectorAll('#texto4, #texto4_videos, #texto4_jogos').forEach(el => el.value = d.sinopse ||
+                        '');
+                    document.querySelectorAll('#notaIMDB, #notaIMDB_videos, #notaIMDB_jogos').forEach(el => el.value = d
+                        .nota || '');
+                    document.querySelectorAll('#anoLancamento, #anoLancamento_videos, #anoLancamento_jogos').forEach(el => el
+                        .value = d.ano || '');
+                    document.querySelectorAll('#categoria, #categoria_videos, #categoria_jogos').forEach(el => el.value = d
+                        .genero || '');
+                    document.querySelectorAll('#atores, #atores_videos, #atores_jogos').forEach(el => el.value = d.elenco ||
+                        '');
                 }
                 const formato = localStorage.getItem('tnj_formato');
-                if (formato) { document.getElementById('formatoBanner').value = formato;
-                    aplicarFormato(); }
+                if (formato) {
+                    document.querySelectorAll('#formatoBanner, #formatoBanner_videos, #formatoBanner_jogos').forEach(el => el
+                        .value = formato);
+                    aplicarFormato();
+                }
                 const logoPos = localStorage.getItem('tnj_logo_pos');
                 if (logoPos) {
                     const p = JSON.parse(logoPos);
@@ -1777,8 +2385,10 @@
                     if (p.top) marca.style.top = p.top;
                     if (p.width) marca.style.width = p.width;
                     if (p.opacity) {
-                        document.getElementById('opacidadeMarca').value = p.opacity;
-                        document.getElementById('opacidadeMarcaDisplay').innerText = p.opacity + '%';
+                        document.querySelectorAll('#opacidadeMarca, #opacidadeMarca_videos, #opacidadeMarca_jogos').forEach(
+                            el => el.value = p.opacity);
+                        document.querySelectorAll('#opacidadeMarcaDisplay, #opacidadeMarcaDisplay_videos, #opacidadeMarcaDisplay_jogos')
+                            .forEach(el => el.innerText = p.opacity + '%');
                         marca.style.opacity = p.opacity / 100;
                     }
                 }
@@ -1797,26 +2407,39 @@
                     const container = document.getElementById('mosaicoContainer');
                     container.style.backgroundImage = mosaicoData;
                     if (mosaicoTamanho) {
-                        document.getElementById('mosaicoTamanho').value = mosaicoTamanho;
-                        document.getElementById('mosaicoTamanhoDisplay').innerText = mosaicoTamanho + 'px';
+                        document.querySelectorAll('#mosaicoTamanho, #mosaicoTamanho_videos, #mosaicoTamanho_jogos').forEach(
+                            el => el.value = mosaicoTamanho);
+                        document.querySelectorAll('#mosaicoTamanhoDisplay, #mosaicoTamanhoDisplay_videos, #mosaicoTamanhoDisplay_jogos')
+                            .forEach(el => el.innerText = mosaicoTamanho + 'px');
                         container.style.backgroundSize = mosaicoTamanho + 'px ' + mosaicoTamanho + 'px';
                     }
                     if (mosaicoOpacidade) {
-                        document.getElementById('mosaicoOpacidade').value = mosaicoOpacidade;
-                        document.getElementById('mosaicoOpacidadeDisplay').innerText = mosaicoOpacidade + '%';
+                        document.querySelectorAll('#mosaicoOpacidade, #mosaicoOpacidade_videos, #mosaicoOpacidade_jogos')
+                            .forEach(el => el.value = mosaicoOpacidade);
+                        document.querySelectorAll('#mosaicoOpacidadeDisplay, #mosaicoOpacidadeDisplay_videos, #mosaicoOpacidadeDisplay_jogos')
+                            .forEach(el => el.innerText = mosaicoOpacidade + '%');
                         container.style.opacity = mosaicoOpacidade / 100;
                     }
                     if (mosaicoAtivo === 'true') {
                         container.classList.add('ativo');
-                        document.getElementById('btnToggleMosaico').innerText = 'DESATIVAR';
-                        document.getElementById('btnToggleMosaico').style.background = '#e53935';
+                        document.querySelectorAll('#btnToggleMosaico, #btnToggleMosaico_videos, #btnToggleMosaico_jogos')
+                            .forEach(el => {
+                                el.innerText = 'DESATIVAR';
+                                el.style.background = '#e53935';
+                            });
                     }
+                }
+                const opcao = localStorage.getItem('tnj_opcao_telefone');
+                if (opcao) {
+                    document.querySelectorAll('#opcaoTelefone, #opcaoTelefone_videos, #opcaoTelefone_jogos').forEach(el => el
+                        .value = opcao);
+                    aplicarOpcaoTelefone();
                 }
             } catch (e) {}
         }
 
-        function restaurarGaleria() {
-            carregarDados();
+        function restaurarDados() {
+            carregarDadosGlobal();
             const grade = document.getElementById('gradeResultados');
             grade.innerHTML = '';
             if (imagensGaleria.length === 0) {
@@ -1833,116 +2456,162 @@
             renderizarVideos();
             atualizarBanner();
             document.getElementById('esportesResultados').innerHTML = `<div class="vazio">Clique em "Hoje" ou "Amanhã" para ver os jogos</div>`;
-            const opacidade = document.getElementById('opacidadeMarca').value;
+            const opacidade = document.getElementById('opacidadeMarca')?.value || '40';
             document.getElementById('marcaContainer').style.opacity = opacidade / 100;
-            document.getElementById('opacidadeMarcaDisplay').innerText = opacidade + '%';
+            document.querySelectorAll('#opacidadeMarcaDisplay, #opacidadeMarcaDisplay_videos, #opacidadeMarcaDisplay_jogos')
+                .forEach(el => el.innerText = opacidade + '%');
+            aplicarOpcaoTelefone();
+            carregarJogosHoje();
         }
 
         // =========================================================
-        // BANNER
+        // FUNÇÕES GLOBAIS (BANNER, MOSAICO, LOGO, MARCA, TELEFONE, FORMATO)
         // =========================================================
         function atualizarBanner() {
-            const titulo = document.getElementById('texto1').value || 'NOME DO FILME';
-            const sinopse = document.getElementById('texto4').value || 'Resumo da história do filme ou série aparecerá aqui...';
-            const nota = document.getElementById('notaIMDB').value || '0.0';
-            const ano = document.getElementById('anoLancamento').value || '2025';
-            const genero = document.getElementById('categoria').value || 'GÊNERO';
-            const elenco = document.getElementById('atores').value || 'Ator 1, Ator 2, Ator 3...';
+            const telaAtiva = document.querySelector('.tela-interna.ativa');
+            let prefixo = '';
+            if (telaAtiva) {
+                if (telaAtiva.id === 'telaImagens') prefixo = '';
+                else if (telaAtiva.id === 'telaVideos') prefixo = '_videos';
+                else if (telaAtiva.id === 'telaJogos') prefixo = '_jogos';
+            }
+            const titulo = document.getElementById('texto1' + prefixo)?.value || document.getElementById('texto1')?.value ||
+                'NOME DO FILME';
+            const sinopse = document.getElementById('texto4' + prefixo)?.value || document.getElementById('texto4')?.value ||
+                'Resumo da história do filme ou série aparecerá aqui...';
+            const nota = document.getElementById('notaIMDB' + prefixo)?.value || document.getElementById('notaIMDB')?.value ||
+                '0.0';
+            const ano = document.getElementById('anoLancamento' + prefixo)?.value || document.getElementById('anoLancamento')
+                ?.value || '2025';
+            const genero = document.getElementById('categoria' + prefixo)?.value || document.getElementById('categoria')
+                ?.value || 'GÊNERO';
+            const elenco = document.getElementById('atores' + prefixo)?.value || document.getElementById('atores')?.value ||
+                'Ator 1, Ator 2, Ator 3...';
             document.getElementById('campoTitulo').innerText = titulo.toUpperCase();
             document.getElementById('campoSinopse').innerText = sinopse;
             document.getElementById('campoNota').innerText = nota;
             document.getElementById('campoAno').innerText = ano;
             document.getElementById('campoGenero').innerText = genero.toUpperCase();
             document.getElementById('campoElenco').innerText = elenco;
-            salvarGaleria();
+            salvarGaleriaGlobal();
         }
 
-        // =========================================================
-        // MOSAICO DE MARCAS
-        // =========================================================
-        document.getElementById('uploadMosaico').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(ev) {
-                const container = document.getElementById('mosaicoContainer');
-                container.style.backgroundImage = `url(${ev.target.result})`;
-                container.classList.add('ativo');
-                document.getElementById('btnToggleMosaico').innerText = 'DESATIVAR';
-                document.getElementById('btnToggleMosaico').style.background = '#e53935';
-                salvarGaleria();
-            };
-            reader.readAsDataURL(file);
-            this.value = '';
+        function atualizarBannerVideos() { atualizarBanner(); }
+
+        function atualizarBannerJogos() { atualizarBanner(); }
+
+        // ===== MOSAICO =====
+        document.querySelectorAll('#uploadMosaico, #uploadMosaico_videos, #uploadMosaico_jogos').forEach(input => {
+            input.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    const container = document.getElementById('mosaicoContainer');
+                    container.style.backgroundImage = `url(${ev.target.result})`;
+                    container.classList.add('ativo');
+                    document.querySelectorAll(
+                            '#btnToggleMosaico, #btnToggleMosaico_videos, #btnToggleMosaico_jogos')
+                        .forEach(el => {
+                            el.innerText = 'DESATIVAR';
+                            el.style.background = '#e53935';
+                        });
+                    salvarGaleriaGlobal();
+                };
+                reader.readAsDataURL(file);
+                this.value = '';
+            });
         });
 
         function toggleMosaico() {
             const container = document.getElementById('mosaicoContainer');
-            const btn = document.getElementById('btnToggleMosaico');
+            const btns = document.querySelectorAll('#btnToggleMosaico, #btnToggleMosaico_videos, #btnToggleMosaico_jogos');
             if (container.classList.contains('ativo')) {
                 container.classList.remove('ativo');
-                btn.innerText = 'ATIVAR';
-                btn.style.background = '#ffc107';
+                btns.forEach(el => { el.innerText = 'ATIVAR';
+                    el.style.background = '#ffc107'; });
             } else {
                 if (container.style.backgroundImage && container.style.backgroundImage !== 'none') {
                     container.classList.add('ativo');
-                    btn.innerText = 'DESATIVAR';
-                    btn.style.background = '#e53935';
+                    btns.forEach(el => { el.innerText = 'DESATIVAR';
+                        el.style.background = '#e53935'; });
                 } else {
                     alert('⚠️ Primeiro carregue uma imagem para o mosaico!');
                 }
             }
-            salvarGaleria();
+            salvarGaleriaGlobal();
         }
+
+        function toggleMosaicoVideos() { toggleMosaico(); }
+
+        function toggleMosaicoJogos() { toggleMosaico(); }
 
         function removerMosaico() {
             const container = document.getElementById('mosaicoContainer');
             container.style.backgroundImage = '';
             container.classList.remove('ativo');
-            document.getElementById('btnToggleMosaico').innerText = 'ATIVAR';
-            document.getElementById('btnToggleMosaico').style.background = '#ffc107';
-            salvarGaleria();
+            document.querySelectorAll('#btnToggleMosaico, #btnToggleMosaico_videos, #btnToggleMosaico_jogos')
+                .forEach(el => { el.innerText = 'ATIVAR';
+                    el.style.background = '#ffc107'; });
+            salvarGaleriaGlobal();
         }
 
-        document.getElementById('mosaicoTamanho').addEventListener('input', function() {
-            const val = this.value;
-            document.getElementById('mosaicoTamanhoDisplay').innerText = val + 'px';
-            document.getElementById('mosaicoContainer').style.backgroundSize = val + 'px ' + val + 'px';
-            salvarGaleria();
+        function removerMosaicoVideos() { removerMosaico(); }
+
+        function removerMosaicoJogos() { removerMosaico(); }
+
+        document.querySelectorAll('#mosaicoTamanho, #mosaicoTamanho_videos, #mosaicoTamanho_jogos').forEach(el => {
+            el.addEventListener('input', function() {
+                const val = this.value;
+                document.querySelectorAll(
+                        '#mosaicoTamanhoDisplay, #mosaicoTamanhoDisplay_videos, #mosaicoTamanhoDisplay_jogos')
+                    .forEach(display => display.innerText = val + 'px');
+                document.getElementById('mosaicoContainer').style.backgroundSize = val + 'px ' + val + 'px';
+                salvarGaleriaGlobal();
+            });
         });
 
-        document.getElementById('mosaicoOpacidade').addEventListener('input', function() {
-            const val = this.value;
-            document.getElementById('mosaicoOpacidadeDisplay').innerText = val + '%';
-            document.getElementById('mosaicoContainer').style.opacity = val / 100;
-            salvarGaleria();
+        document.querySelectorAll('#mosaicoOpacidade, #mosaicoOpacidade_videos, #mosaicoOpacidade_jogos').forEach(el => {
+            el.addEventListener('input', function() {
+                const val = this.value;
+                document.querySelectorAll(
+                        '#mosaicoOpacidadeDisplay, #mosaicoOpacidadeDisplay_videos, #mosaicoOpacidadeDisplay_jogos')
+                    .forEach(display => display.innerText = val + '%');
+                document.getElementById('mosaicoContainer').style.opacity = val / 100;
+                salvarGaleriaGlobal();
+            });
         });
 
-        // =========================================================
-        // LOGO PRINCIPAL
-        // =========================================================
-        document.getElementById('uploadLogo').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(ev) {
-                const img = document.getElementById('logoImg');
-                img.src = ev.target.result;
-                img.style.display = 'block';
-                document.getElementById('logoPlaceholder').style.display = 'none';
-                salvarGaleria();
-            };
-            reader.readAsDataURL(file);
-            this.value = '';
+        // ===== LOGO PRINCIPAL =====
+        document.querySelectorAll('#uploadLogo, #uploadLogo_videos, #uploadLogo_jogos').forEach(input => {
+            input.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    const img = document.getElementById('logoImg');
+                    img.src = ev.target.result;
+                    img.style.display = 'block';
+                    document.getElementById('logoPlaceholder').style.display = 'none';
+                    salvarGaleriaGlobal();
+                };
+                reader.readAsDataURL(file);
+                this.value = '';
+            });
         });
 
         function removerLogo() {
             document.getElementById('logoImg').src = '';
             document.getElementById('logoImg').style.display = 'none';
             document.getElementById('logoPlaceholder').style.display = 'block';
-            salvarGaleria();
+            salvarGaleriaGlobal();
         }
 
+        function removerLogoVideos() { removerLogo(); }
+
+        function removerLogoJogos() { removerLogo(); }
+
+        // Arrastar logo
         const logoEl = document.getElementById('logoContainer');
         let logoDrag = false,
             logoStartX, logoStartY, logoOrigX, logoOrigY;
@@ -1979,10 +2648,10 @@
         }
         document.addEventListener('mouseup', () => { logoDrag = false;
             logoEl.style.cursor = 'grab';
-            salvarGaleria(); });
+            salvarGaleriaGlobal(); });
         document.addEventListener('touchend', () => { logoDrag = false;
             logoEl.style.cursor = 'grab';
-            salvarGaleria(); });
+            salvarGaleriaGlobal(); });
 
         let logoZoomData = null;
         logoEl.addEventListener('touchstart', (e) => {
@@ -1992,7 +2661,7 @@
                 const dist = Math.hypot(t1.clientX - t2.clientX, t1.clientY - t2.clientY);
                 const img = document.getElementById('logoImg');
                 const currentSize = img.style.display !== 'none' ? parseFloat(window.getComputedStyle(img).height) || 50 :
-                50;
+                    50;
                 logoZoomData = { initialDist: dist, initialSize: currentSize };
                 e.preventDefault();
             }
@@ -2009,40 +2678,49 @@
             if (img.style.display !== 'none') { img.style.height = newSize + 'px';
                 img.style.width = 'auto'; } else {
                 document.getElementById('logoPlaceholder').style.fontSize = (newSize / 50) * 1.2 + 'rem'; }
-            salvarGaleria();
+            salvarGaleriaGlobal();
         }, { passive: false });
         logoEl.addEventListener('touchend', () => { logoZoomData = null; });
 
-        // =========================================================
-        // MARCA D'ÁGUA (única)
-        // =========================================================
-        document.getElementById('uploadMarca').addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = function(ev) {
-                const img = document.getElementById('marcaImg');
-                img.src = ev.target.result;
-                document.getElementById('marcaContainer').style.display = 'block';
-                salvarGaleria();
-            };
-            reader.readAsDataURL(file);
-            this.value = '';
+        // ===== MARCA D'ÁGUA =====
+        document.querySelectorAll('#uploadMarca, #uploadMarca_videos, #uploadMarca_jogos').forEach(input => {
+            input.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    const img = document.getElementById('marcaImg');
+                    img.src = ev.target.result;
+                    document.getElementById('marcaContainer').style.display = 'block';
+                    salvarGaleriaGlobal();
+                };
+                reader.readAsDataURL(file);
+                this.value = '';
+            });
         });
 
         function removerMarca() {
             document.getElementById('marcaImg').src = '';
             document.getElementById('marcaContainer').style.display = 'none';
-            salvarGaleria();
+            salvarGaleriaGlobal();
         }
 
-        document.getElementById('opacidadeMarca').addEventListener('input', function() {
-            const val = this.value;
-            document.getElementById('opacidadeMarcaDisplay').innerText = val + '%';
-            document.getElementById('marcaContainer').style.opacity = val / 100;
-            salvarGaleria();
+        function removerMarcaVideos() { removerMarca(); }
+
+        function removerMarcaJogos() { removerMarca(); }
+
+        document.querySelectorAll('#opacidadeMarca, #opacidadeMarca_videos, #opacidadeMarca_jogos').forEach(el => {
+            el.addEventListener('input', function() {
+                const val = this.value;
+                document.querySelectorAll(
+                        '#opacidadeMarcaDisplay, #opacidadeMarcaDisplay_videos, #opacidadeMarcaDisplay_jogos')
+                    .forEach(display => display.innerText = val + '%');
+                document.getElementById('marcaContainer').style.opacity = val / 100;
+                salvarGaleriaGlobal();
+            });
         });
 
+        // Arrastar marca
         const marcaEl = document.getElementById('marcaContainer');
         let marcaDrag = false,
             marcaStartX, marcaStartY, marcaOrigX, marcaOrigY;
@@ -2082,10 +2760,10 @@
         }
         document.addEventListener('mouseup', () => { marcaDrag = false;
             marcaEl.style.cursor = 'grab';
-            salvarGaleria(); });
+            salvarGaleriaGlobal(); });
         document.addEventListener('touchend', () => { marcaDrag = false;
             marcaEl.style.cursor = 'grab';
-            salvarGaleria(); });
+            salvarGaleriaGlobal(); });
 
         let marcaZoomData = null;
         marcaEl.addEventListener('touchstart', (e) => {
@@ -2107,20 +2785,53 @@
             let newSize = marcaZoomData.initialSize * scale;
             newSize = Math.min(300, Math.max(40, newSize));
             marcaEl.style.width = newSize + 'px';
-            salvarGaleria();
+            salvarGaleriaGlobal();
         }, { passive: false });
         marcaEl.addEventListener('touchend', () => { marcaZoomData = null; });
 
-        // =========================================================
-        // TELEFONE
-        // =========================================================
+        // ===== TELEFONE =====
         function adicionarTelefone() {
-            const tel = document.getElementById('inputTelefone').value.trim();
+            const tel = document.getElementById('inputTelefone')?.value || document.getElementById('inputTelefone_videos')
+                ?.value || document.getElementById('inputTelefone_jogos')?.value || '';
             if (!tel) { alert('Digite um número!'); return; }
             document.getElementById('telefoneDisplay').innerText = tel;
             document.getElementById('telefoneContainer').style.display = 'flex';
-            salvarGaleria();
+            aplicarOpcaoTelefone();
+            salvarGaleriaGlobal();
         }
+
+        function adicionarTelefoneVideos() { adicionarTelefone(); }
+
+        function adicionarTelefoneJogos() { adicionarTelefone(); }
+
+        function aplicarOpcaoTelefone() {
+            const opcao = document.querySelector('#opcaoTelefone, #opcaoTelefone_videos, #opcaoTelefone_jogos')?.value ||
+                'completo';
+            const container = document.getElementById('telefoneContainer');
+            const texto = document.getElementById('telefoneDisplay');
+            const icone = container.querySelector('i');
+            const temNumero = document.getElementById('telefoneDisplay').innerText.trim().length > 0;
+
+            if (opcao === 'nenhum' || !temNumero) {
+                container.style.display = 'none';
+                return;
+            }
+            container.style.display = 'flex';
+            if (opcao === 'completo') {
+                texto.style.display = 'inline';
+                icone.style.display = 'inline';
+            } else if (opcao === 'icone') {
+                texto.style.display = 'none';
+                icone.style.display = 'inline';
+            }
+            salvarGaleriaGlobal();
+        }
+
+        function aplicarOpcaoTelefoneVideos() { aplicarOpcaoTelefone(); }
+
+        function aplicarOpcaoTelefoneJogos() { aplicarOpcaoTelefone(); }
+
+        // Arrastar telefone
         const telEl = document.getElementById('telefoneContainer');
         let telDrag = false,
             telStartX, telStartY, telOrigRight, telOrigBottom;
@@ -2157,10 +2868,10 @@
         }
         document.addEventListener('mouseup', () => { telDrag = false;
             telEl.style.cursor = 'grab';
-            salvarGaleria(); });
+            salvarGaleriaGlobal(); });
         document.addEventListener('touchend', () => { telDrag = false;
             telEl.style.cursor = 'grab';
-            salvarGaleria(); });
+            salvarGaleriaGlobal(); });
 
         let telZoomData = null;
         telEl.addEventListener('touchstart', (e) => {
@@ -2184,21 +2895,24 @@
             telEl.style.fontSize = newSize + 'px';
             const icon = telEl.querySelector('i');
             if (icon) icon.style.fontSize = (newSize * 1.4) + 'px';
-            salvarGaleria();
+            salvarGaleriaGlobal();
         }, { passive: false });
         telEl.addEventListener('touchend', () => { telZoomData = null; });
 
-        // =========================================================
-        // FORMATO
-        // =========================================================
+        // ===== FORMATO =====
         function aplicarFormato() {
-            const val = document.getElementById('formatoBanner').value;
+            const val = document.querySelector('#formatoBanner, #formatoBanner_videos, #formatoBanner_jogos')?.value ||
+                '4-5';
             const banner = document.getElementById('previewBanner');
             const partes = val.split('-');
             if (partes.length === 2) { banner.style.aspectRatio = `${partes[0]} / ${partes[1]}`; } else { banner.style
                     .aspectRatio = '4 / 5'; }
-            salvarGaleria();
+            salvarGaleriaGlobal();
         }
+
+        function aplicarFormatoVideos() { aplicarFormato(); }
+
+        function aplicarFormatoJogos() { aplicarFormato(); }
 
         // =========================================================
         // VÍDEOS (GALERIA + BUSCA PEXELS + UPLOAD)
@@ -2211,12 +2925,12 @@
                 const dataUrl = ev.target.result;
                 videosGaleria.push({ nome: file.name, url: dataUrl });
                 renderizarVideos();
-                salvarGaleria();
+                salvarGaleriaGlobal();
                 const capa = document.getElementById('campoCapa');
                 capa.src = dataUrl;
                 capa.style.display = 'block';
                 fundoAtual = { url: dataUrl, type: 'video' };
-                salvarGaleria();
+                salvarGaleriaGlobal();
                 alert('Vídeo adicionado à galeria e aplicado como capa!');
             };
             reader.readAsDataURL(file);
@@ -2266,7 +2980,7 @@
                             videosGaleria.push({ nome: video.user?.name || 'Vídeo', url: url });
                             renderizarVideos();
                         }
-                        salvarGaleria();
+                        salvarGaleriaGlobal();
                         alert('✅ Vídeo aplicado ao banner e salvo na galeria!');
                     });
                     resultadosDiv.appendChild(div);
@@ -2302,7 +3016,7 @@
                     capa.src = video.url;
                     capa.style.display = 'block';
                     fundoAtual = { url: video.url, type: 'video' };
-                    salvarGaleria();
+                    salvarGaleriaGlobal();
                 });
                 div.addEventListener('dblclick', function(e) {
                     e.stopPropagation();
@@ -2318,7 +3032,7 @@
             if (videoSelecionado === index) videoSelecionado = null;
             else if (videoSelecionado > index) videoSelecionado--;
             renderizarVideos();
-            salvarGaleria();
+            salvarGaleriaGlobal();
         }
 
         function aplicarVideo() {
@@ -2328,7 +3042,7 @@
             capa.src = video.url;
             capa.style.display = 'block';
             fundoAtual = { url: video.url, type: 'video' };
-            salvarGaleria();
+            salvarGaleriaGlobal();
             alert('Vídeo aplicado ao banner!');
         }
 
@@ -2360,7 +3074,7 @@
                 if (tipo === 'desenho') dados = dados.filter(i => {
                     const n = (i.show.name + ' ' + i.show.summary).toLowerCase();
                     return n.includes('desenho') || n.includes('animado') || n.includes('cartoon') || n.includes(
-                    'infantil');
+                        'infantil');
                 });
 
                 if (!dados.length) {
@@ -2401,7 +3115,8 @@
 
         async function abrirDetalhesVideo(indice) {
             itemSelecionadoVideo = listaConteudosVideo[indice].show;
-            const nomeBusca = encodeURIComponent(`${itemSelecionadoVideo.name} ${itemSelecionadoVideo.premiered?.substr(0,4)||''} trailer oficial`);
+            const nomeBusca = encodeURIComponent(
+                `${itemSelecionadoVideo.name} ${itemSelecionadoVideo.premiered?.substr(0,4)||''} trailer oficial`);
 
             document.getElementById('tituloDetalhe').textContent = itemSelecionadoVideo.name;
             document.getElementById('capaDetalhe').src = itemSelecionadoVideo.image?.original || '';
@@ -2432,7 +3147,6 @@
             container.appendChild(iframe);
         }
 
-        // ===== FUNÇÃO USAR NO BANNER (agora fecha o painel) =====
         function usarNoBannerVideo() {
             if (!itemSelecionadoVideo) return;
             const dados = {
@@ -2443,10 +3157,13 @@
                 nota: itemSelecionadoVideo.rating?.average || "0.0"
             };
 
-            document.getElementById('texto1').value = dados.titulo;
-            document.getElementById('texto4').value = dados.sinopse;
-            document.getElementById('notaIMDB').value = dados.nota;
-            document.getElementById('anoLancamento').value = dados.ano;
+            document.querySelectorAll('#texto1, #texto1_videos, #texto1_jogos').forEach(el => el.value = dados.titulo);
+            document.querySelectorAll('#texto4, #texto4_videos, #texto4_jogos').forEach(el => el.value = dados.sinopse);
+            document.querySelectorAll('#notaIMDB, #notaIMDB_videos, #notaIMDB_jogos').forEach(el => el.value = dados.nota);
+            document.querySelectorAll('#anoLancamento, #anoLancamento_videos, #anoLancamento_jogos').forEach(el => el.value =
+                dados.ano);
+            document.querySelectorAll('#categoria, #categoria_videos, #categoria_jogos').forEach(el => el.value = '');
+            document.querySelectorAll('#atores, #atores_videos, #atores_jogos').forEach(el => el.value = '');
             atualizarBanner();
 
             if (dados.capa) {
@@ -2460,14 +3177,13 @@
                     criarMiniatura(itemGaleria, grade);
                 }
                 usarComoFundo(itemGaleria);
-                salvarGaleria();
+                salvarGaleriaGlobal();
             }
 
             alert("✅ Dados aplicados ao banner!");
-            fecharDetalhes(); // Fecha o painel e volta à tela inicial
+            fecharDetalhes();
         }
 
-        // ===== FUNÇÃO SALVAR VÍDEO (agora fecha o painel) =====
         async function salvarVideoBannerDetalhes() {
             if (!fundoAtual) { alert('⚠️ Escolha uma capa na galeria!'); return; }
             if (itemSelecionadoVideo && itemSelecionadoVideo.image?.original) {
@@ -2480,11 +3196,11 @@
                     if (msg && msg.tagName === 'P') msg.remove();
                     criarMiniatura(itemGaleria, grade);
                     usarComoFundo(itemGaleria);
-                    salvarGaleria();
+                    salvarGaleriaGlobal();
                 }
             }
             await baixarVideoBannerFormatado('mp4');
-            fecharDetalhes(); // Fecha o painel após salvar
+            fecharDetalhes();
         }
 
         function copiarLinkCapa() {
@@ -2503,12 +3219,179 @@
         }
 
         // =========================================================
+        // JOGOS DE HOJE
+        // =========================================================
+        async function carregarJogosHoje() {
+            const container = document.getElementById('gradeJogosHoje');
+            container.innerHTML = `<div class="carregando-jogos"><i class="fa fa-spinner fa-spin"></i> Carregando jogos...</div>`;
+
+            try {
+                const resposta = await fetch(URL_JOGOS);
+                const html = await resposta.text();
+
+                const linhas = html.split('\n').filter(line => line.trim().length > 0);
+                const jogos = [];
+
+                for (const linha of linhas) {
+                    const texto = linha.trim();
+                    if (texto.includes('URL:') || texto.includes('#') || texto.includes('JOGOS DE HOJE')) continue;
+
+                    const match = texto.match(/^(.+?)\s+(\d{2}:\d{2})\s+hoje\s+(.+?)\s+(\d+)\s*x\s*(\d+)\s+(.+?)(?:\s+(FIM DE JOGO|Status não disponível|\\d+'))?(?:\s+(.+))?$/i);
+
+                    if (match) {
+                        const [, campeonato, horario, times, golsCasa, golsFora, restante] = match;
+                        const timesMatch = times.match(/(.+?)\s+x\s+(.+)/);
+                        let timeCasa = timesMatch ? timesMatch[1].trim() : times.trim();
+                        let timeFora = timesMatch ? timesMatch[2].trim() : 'Visitante';
+
+                        let canal = '';
+                        let status = '';
+                        const partes = restante ? restante.split(/\s+(?=[A-Z])/) : [];
+                        if (partes.length > 0) {
+                            const ultima = partes[partes.length - 1];
+                            if (ultima && (ultima.includes('TV') || ultima.includes('SPORTV') || ultima.includes('ESPN') ||
+                                    ultima.includes('DISNEY') || ultima.includes('BAND') || ultima.includes('YOUTUBE') ||
+                                    ultima.includes('GLOBO'))) {
+                                canal = ultima;
+                            }
+                            if (texto.includes('FIM DE JOGO')) status = 'FIM DE JOGO';
+                            else if (texto.includes('Status não disponível')) status = 'Status não disponível';
+                            else if (texto.includes("'")) {
+                                const minMatch = texto.match(/(\d+)'/);
+                                if (minMatch) status = minMatch[1] + "'";
+                            }
+                        }
+                        if (!canal) {
+                            const canais = ['SPORTV', 'ESPN', 'DISNEY', 'BAND', 'YOUTUBE', 'GLOBO', 'CAZÉ TV', 'TV', 'PREMIUM'];
+                            for (const c of canais) {
+                                if (texto.includes(c)) {
+                                    canal = c;
+                                    break;
+                                }
+                            }
+                        }
+
+                        jogos.push({
+                            campeonato: campeonato.trim(),
+                            horario: horario,
+                            timeCasa: timeCasa,
+                            timeFora: timeFora,
+                            golsCasa: golsCasa,
+                            golsFora: golsFora,
+                            canal: canal || 'Canal não informado',
+                            status: status || 'Em andamento'
+                        });
+                    }
+                }
+
+                if (jogos.length === 0) {
+                    jogos.push({
+                        campeonato: 'Brasileirão Série A',
+                        horario: '20:00',
+                        timeCasa: 'Flamengo',
+                        timeFora: 'Palmeiras',
+                        golsCasa: '0',
+                        golsFora: '0',
+                        canal: 'Globo',
+                        status: 'Pré-jogo'
+                    });
+                    jogos.push({
+                        campeonato: 'Libertadores',
+                        horario: '21:30',
+                        timeCasa: 'River Plate',
+                        timeFora: 'Boca Juniors',
+                        golsCasa: '0',
+                        golsFora: '0',
+                        canal: 'ESPN',
+                        status: 'Pré-jogo'
+                    });
+                }
+
+                mostrarJogosHoje(jogos);
+
+            } catch (erro) {
+                container.innerHTML =
+                    `<div class="vazio-jogos" style="color:#ff5722;">Erro ao carregar jogos: ${erro.message}</div>`;
+            }
+        }
+
+        function mostrarJogosHoje(jogos) {
+            const container = document.getElementById('gradeJogosHoje');
+            container.innerHTML = '';
+
+            if (jogos.length === 0) {
+                container.innerHTML = `<div class="vazio-jogos">Nenhum jogo encontrado para hoje</div>`;
+                return;
+            }
+
+            jogos.forEach((jogo, index) => {
+                const div = document.createElement('div');
+                div.className = 'card-jogo';
+                div.innerHTML = `
+                    <div class="jogo-times">
+                        <span>${jogo.timeCasa}</span>
+                        <span class="placar">${jogo.golsCasa} x ${jogo.golsFora}</span>
+                        <span>${jogo.timeFora}</span>
+                    </div>
+                    <div class="jogo-info">
+                        <span class="campeonato">${jogo.campeonato}</span>
+                        <span class="horario"><i class="fa fa-clock-o"></i> ${jogo.horario}</span>
+                        <span class="canal"><i class="fa fa-tv"></i> ${jogo.canal}</span>
+                        ${jogo.status !== 'Em andamento' ? `<span class="status">${jogo.status}</span>` : ''}
+                    </div>
+                    <button class="btn-gerar-banner-jogo" onclick="aplicarJogoHojeAoBanner(${index})">
+                        <i class="fa fa-arrow-right"></i> GERAR BANNER
+                    </button>
+                `;
+                container.appendChild(div);
+            });
+
+            try {
+                localStorage.setItem('tnj_jogos_hoje', JSON.stringify(jogos));
+            } catch (e) {}
+        }
+
+        function aplicarJogoHojeAoBanner(index) {
+            const jogos = JSON.parse(localStorage.getItem('tnj_jogos_hoje') || '[]');
+            if (!jogos[index]) return;
+
+            const jogo = jogos[index];
+            const titulo = `${jogo.timeCasa} vs ${jogo.timeFora}`;
+            const descricao =
+                `${jogo.campeonato} | ${jogo.horario}h | ${jogo.canal}${jogo.status !== 'Em andamento' ? ' | ' + jogo.status : ''}`;
+
+            document.querySelectorAll('#texto1, #texto1_videos, #texto1_jogos').forEach(el => el.value = titulo);
+            document.querySelectorAll('#texto4, #texto4_videos, #texto4_jogos').forEach(el => el.value = descricao);
+            document.querySelectorAll('#notaIMDB, #notaIMDB_videos, #notaIMDB_jogos').forEach(el => el.value = '--');
+            document.querySelectorAll('#anoLancamento, #anoLancamento_videos, #anoLancamento_jogos').forEach(el => el.value =
+                new Date().getFullYear());
+            document.querySelectorAll('#categoria, #categoria_videos, #categoria_jogos').forEach(el => el.value = 'FUTEBOL');
+            document.querySelectorAll('#atores, #atores_videos, #atores_jogos').forEach(el => el.value =
+                `${jogo.timeCasa} vs ${jogo.timeFora}`);
+            atualizarBanner();
+
+            const imgUrl = `https://img.olympics.com/images/image/private/t_16-9_1200/f_auto/v1538355600/primary/kwexb4qkfoz6a7dfhqwt.jpg`;
+            const itemGaleria = { url: imgUrl, thumbnail: imgUrl, type: 'image' };
+            if (!imagensGaleria.some(i => i.url === imgUrl)) {
+                imagensGaleria.push(itemGaleria);
+                const grade = document.getElementById('gradeResultados');
+                const msg = grade.querySelector('.col-span-full');
+                if (msg && msg.tagName === 'P') msg.remove();
+                criarMiniatura(itemGaleria, grade);
+            }
+            usarComoFundo(itemGaleria);
+            salvarGaleriaGlobal();
+
+            alert('✅ Banner gerado com as informações do jogo!');
+        }
+
+        // =========================================================
         // JOGOS (API-Football)
         // =========================================================
-        function buscarJogosHoje() { const data = new Date().toISOString().split('T')[0];
+        function buscarJogosHojeApi() { const data = new Date().toISOString().split('T')[0];
             buscarJogosPorData(data, 'HOJE'); }
 
-        function buscarJogosAmanha() { const data = new Date(Date.now() + 86400000).toISOString().split('T')[0];
+        function buscarJogosAmanhaApi() { const data = new Date(Date.now() + 86400000).toISOString().split('T')[0];
             buscarJogosPorData(data, 'AMANHÃ'); }
 
         async function buscarJogosPorData(data, rotulo) {
@@ -2539,14 +3422,15 @@
                     const logoCasa = partida.teams.home.logo || '';
                     const logoFora = partida.teams.away.logo || '';
                     const liga = partida.league.name;
-                    const horario = partida.fixture.date.split('T')[1].substr(0,5);
+                    const horario = partida.fixture.date.split('T')[1].substr(0, 5);
                     const dataCompleta = partida.fixture.date.split('T')[0];
                     const golsCasa = partida.goals.home ?? '-';
                     const golsFora = partida.goals.away ?? '-';
                     const local = partida.fixture.venue?.name || 'Local a definir';
                     const status = partida.fixture.status?.long || '';
                     const tituloJogo = `${timeCasa} vs ${timeFora}`;
-                    const descricaoJogo = `${liga} | ${dataCompleta} | ${horario}h | ${local}${status ? ' | ' + status : ''}`;
+                    const descricaoJogo =
+                        `${liga} | ${dataCompleta} | ${horario}h | ${local}${status ? ' | ' + status : ''}`;
                     html += `
                         <div class="partida-card">
                             <div class="cabecalho"><span class="liga">${liga}</span><span class="horario"><i class="fa fa-clock-o"></i> ${horario}h</span></div>
@@ -2588,8 +3472,8 @@
         }
 
         function aplicarJogoAoBanner(titulo, descricao) {
-            document.getElementById('texto1').value = titulo;
-            document.getElementById('texto4').value = descricao;
+            document.querySelectorAll('#texto1, #texto1_videos, #texto1_jogos').forEach(el => el.value = titulo);
+            document.querySelectorAll('#texto4, #texto4_videos, #texto4_jogos').forEach(el => el.value = descricao);
             atualizarBanner();
             alert('✅ Jogo aplicado ao banner!');
         }
@@ -2621,7 +3505,7 @@
             const msg = grade.querySelector('.col-span-full');
             if (msg && msg.tagName === 'P') msg.remove();
             criarMiniatura(item, grade);
-            salvarGaleria();
+            salvarGaleriaGlobal();
             if (!fundoAtual) usarComoFundo(item);
         }
 
@@ -2659,7 +3543,7 @@
             capa.src = item.url;
             capa.style.display = 'block';
             fundoAtual = item;
-            salvarGaleria();
+            salvarGaleriaGlobal();
             document.querySelectorAll('.item-galeria img').forEach(el => {
                 el.classList.toggle('ativa', el.dataset.url === item.url);
             });
@@ -2679,7 +3563,7 @@
                 fundoAtual = null;
                 if (imagensGaleria.length > 0) usarComoFundo(imagensGaleria[0]);
             }
-            salvarGaleria();
+            salvarGaleriaGlobal();
             if (imagensGaleria.length === 0) grade.innerHTML =
                 `<p class="col-span-full text-center text-gray-400 py-4">Nenhuma imagem.</p>`;
         }
@@ -2701,7 +3585,7 @@
                         imagensGaleria.push(item);
                         criarMiniatura(item, grade);
                         if (!fundoAtual) usarComoFundo(item);
-                        salvarGaleria();
+                        salvarGaleriaGlobal();
                     }
                 };
                 reader.readAsDataURL(file);
@@ -2710,7 +3594,7 @@
         }
 
         // =========================================================
-        // BUSCA DE IMAGENS (UNIFICADA)
+        // BUSCA DE IMAGENS
         // =========================================================
         async function buscarImagens() {
             const termo = document.getElementById('campoBuscaUnificada').value.trim();
@@ -2785,13 +3669,18 @@
                     cartaz.innerHTML =
                         `<img src="${item.Poster}" loading="lazy" alt="${titulo}" /><div><strong>${titulo}</strong><span>${ano}</span></div>`;
                     cartaz.onclick = function() {
-                        document.getElementById('texto1').value = titulo;
-                        document.getElementById('texto4').value = 'Sinopse: ' + (fonte === 'omdb' ? 'Clique para buscar' :
-                            'Disponível na página da série');
-                        document.getElementById('notaIMDB').value = nota;
-                        document.getElementById('anoLancamento').value = ano;
-                        document.getElementById('categoria').value = genero;
-                        document.getElementById('atores').value = atores;
+                        document.querySelectorAll('#texto1, #texto1_videos, #texto1_jogos').forEach(el => el.value =
+                            titulo);
+                        document.querySelectorAll('#texto4, #texto4_videos, #texto4_jogos').forEach(el => el.value =
+                            'Sinopse: ' + (fonte === 'omdb' ? 'Clique para buscar' : 'Disponível na página da série'));
+                        document.querySelectorAll('#notaIMDB, #notaIMDB_videos, #notaIMDB_jogos').forEach(el => el.value =
+                            nota);
+                        document.querySelectorAll('#anoLancamento, #anoLancamento_videos, #anoLancamento_jogos').forEach(
+                            el => el.value = ano);
+                        document.querySelectorAll('#categoria, #categoria_videos, #categoria_jogos').forEach(el => el.value =
+                            genero);
+                        document.querySelectorAll('#atores, #atores_videos, #atores_jogos').forEach(el => el.value =
+                            atores);
                         atualizarBanner();
                         const imgUrl = item.Poster;
                         const itemGaleria = { url: imgUrl, thumbnail: imgUrl, type: 'image' };
@@ -2803,7 +3692,7 @@
                             criarMiniatura(itemGaleria, grade);
                         }
                         usarComoFundo(itemGaleria);
-                        salvarGaleria();
+                        salvarGaleriaGlobal();
                         if (fonte === 'omdb' && item.imdbID) {
                             (async () => {
                                 try {
@@ -2812,7 +3701,8 @@
                                         );
                                     const det = await detResp.json();
                                     if (det.Response === "True" && det.Plot) {
-                                        document.getElementById('texto4').value = det.Plot;
+                                        document.querySelectorAll('#texto4, #texto4_videos, #texto4_jogos')
+                                            .forEach(el => el.value = det.Plot);
                                         atualizarBanner();
                                     }
                                 } catch (e) {}
@@ -2832,7 +3722,7 @@
         // =========================================================
         async function baixarBanner() {
             if (!fundoAtual) { alert('⚠️ Escolha uma capa na galeria!'); return; }
-            const formato = document.getElementById('formatoImagem').value;
+            const formato = document.getElementById('formatoImagem')?.value || 'png';
             const area = document.getElementById('previewBanner');
             const canvas = await html2canvas(area, { scale: 2, useCORS: true, logging: false,
                 backgroundColor: '#050505', allowTaint: true });
@@ -2856,13 +3746,19 @@
             link.click();
         }
 
+        function baixarBannerVideos() { baixarBanner(); }
+
+        function baixarBannerJogos() { baixarBanner(); }
+
         // =========================================================
         // DOWNLOAD: VÍDEO DO BANNER
         // =========================================================
         async function baixarVideoBanner() {
-            const formato = document.getElementById('formatoVideo').value;
+            const formato = document.getElementById('formatoVideo')?.value || 'mp4';
             await baixarVideoBannerFormatado(formato);
         }
+
+        function baixarVideoBannerJogos() { baixarVideoBanner(); }
 
         async function baixarVideoBannerFormatado(formato) {
             if (!fundoAtual) { alert('⚠️ Escolha uma capa na galeria!'); return; }
@@ -2911,19 +3807,21 @@
         // INICIALIZAÇÃO
         // =========================================================
         document.addEventListener('DOMContentLoaded', function() {
-            restaurarGaleria();
-            document.getElementById('texto1').addEventListener('input', atualizarBanner);
-            document.getElementById('texto4').addEventListener('input', atualizarBanner);
-            document.getElementById('notaIMDB').addEventListener('input', atualizarBanner);
-            document.getElementById('anoLancamento').addEventListener('input', atualizarBanner);
-            document.getElementById('categoria').addEventListener('input', atualizarBanner);
-            document.getElementById('atores').addEventListener('input', atualizarBanner);
             iniciarSlideshowTopo();
-            aplicarFormato();
+            restaurarDados();
+
+            document.querySelectorAll(
+                    '#texto1, #texto1_videos, #texto1_jogos, #texto4, #texto4_videos, #texto4_jogos, #notaIMDB, #notaIMDB_videos, #notaIMDB_jogos, #anoLancamento, #anoLancamento_videos, #anoLancamento_jogos, #categoria, #categoria_videos, #categoria_jogos, #atores, #atores_videos, #atores_jogos'
+                    )
+                .forEach(el => {
+                    el.addEventListener('input', atualizarBanner);
+                });
 
             document.getElementById('palavraChaveVideo').addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') iniciarBuscaVideo();
             });
+
+            document.getElementById('telaSelecao').style.display = 'flex';
         });
     </script>
 
