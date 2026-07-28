@@ -339,7 +339,7 @@
             white-space: nowrap;
         }
 
-        /* ===== PLAYER SLIDESHOW ===== */
+        /* ===== PLAYER SLIDESHOW (16:9) ===== */
         .player-topo {
             background: #0a0a16;
             border-radius: 12px;
@@ -349,7 +349,7 @@
         }
         .player-topo .slideshow {
             position: relative;
-            aspect-ratio: 16/9;
+            aspect-ratio: 16 / 9;
             width: 100%;
         }
         .player-topo .slideshow .slide {
@@ -756,7 +756,7 @@
 
     <div class="container mx-auto px-4 py-6">
 
-        <!-- ===== PLAYER SLIDESHOW (TOPO) ===== -->
+        <!-- ===== PLAYER SLIDESHOW (TOPO) - 16:9 com 4 imagens ===== -->
         <section class="mb-8 caixa" style="padding: 12px; background: #0d0d1f; border-color: rgba(255,193,7,0.2);">
             <div class="flex items-center justify-between mb-3 px-1">
                 <span class="text-sm font-bold text-tnj-dourado flex items-center gap-2"><i class="fa fa-play-circle"></i> LANÇAMENTOS EM DESTAQUE</span>
@@ -837,7 +837,7 @@
                     </div>
                 </div>
 
-                <!-- ===== BUSCA DE IMAGENS (RESTAURADA) ===== -->
+                <!-- ===== BUSCA DE IMAGENS ===== -->
                 <div class="caixa busca-imagens">
                     <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
                         <i class="fa fa-search text-tnj-dourado"></i> BUSCA DE IMAGENS
@@ -1018,11 +1018,13 @@
         const CHAVE_OMDB = "SUA_CHAVE_OMDB"; // <-- COLOQUE SUA CHAVE AQUI
 
         // =========================================================
-        // NOVAS IMAGENS DO SLIDESHOW
+        // SLIDESHOW - AGORA COM 4 IMAGENS (16:9)
         // =========================================================
         const imagensSlideshow = [
             "https://i.postimg.cc/5YjrJvsQ/1785027864787.jpg",
-            "https://i.postimg.cc/9wZJXBTS/lv-0-20260616101447.png"
+            "https://i.postimg.cc/9wZJXBTS/lv-0-20260616101447.png",
+            "https://i.postimg.cc/MnyHQSFn/Screenshot-20260726-122648-2.jpg",
+            "https://i.postimg.cc/mPfVgpBV/file-000000004d3c820e8adfd6427228854b.png"
         ];
 
         // =========================================================
@@ -1281,7 +1283,7 @@
         }
 
         // =========================================================
-        // BUSCA DE IMAGENS (RESTAURADA)
+        // BUSCA DE IMAGENS
         // =========================================================
         async function buscarImagens() {
             const termo = document.getElementById('campoBusca').value.trim();
