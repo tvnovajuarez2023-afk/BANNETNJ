@@ -162,6 +162,21 @@
             opacity: 0.78;
             z-index: 0;
         }
+        /* Vídeo no banner */
+        #videoBanner {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+            z-index: 0;
+            display: none;
+        }
+        #videoBanner.ativo {
+            display: block;
+        }
+
         .area-conteudo {
             position: absolute;
             bottom: 0;
@@ -564,7 +579,181 @@
             text-decoration: underline;
         }
 
-        /* ===== GALERIA ===== */
+        /* ===== VÍDEOS (GALERIA) ===== */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+        }
+        .video-grid .video-item {
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            position: relative;
+            aspect-ratio: 16/9;
+            background: #1a1a2e;
+        }
+        .video-grid .video-item:hover {
+            transform: scale(1.02);
+            border-color: rgba(255, 193, 7, 0.3);
+        }
+        .video-grid .video-item.selecionado {
+            border-color: #ffc107;
+            box-shadow: 0 0 20px rgba(255, 193, 7, 0.2);
+        }
+        .video-grid .video-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+        .video-grid .video-item .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            opacity: 0.8;
+            pointer-events: none;
+        }
+        .video-grid .video-item .video-nome {
+            position: absolute;
+            bottom: 4px;
+            left: 4px;
+            right: 4px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.5rem;
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .video-grid .video-item .delete-icon {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background: rgba(255, 0, 0, 0.7);
+            color: #fff;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+            z-index: 5;
+        }
+        .video-grid .video-item:hover .delete-icon {
+            opacity: 1;
+        }
+
+        /* ===== BUSCA DE VÍDEOS (PEXELS) ===== */
+        .busca-videos .grade-videos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 8px 0;
+        }
+        .busca-videos .grade-videos .item-video {
+            background: #1a1a2e;
+            border-radius: 8px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            position: relative;
+            aspect-ratio: 16/9;
+        }
+        .busca-videos .grade-videos .item-video:hover {
+            border-color: #ffc107;
+            transform: scale(1.02);
+        }
+        .busca-videos .grade-videos .item-video video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            pointer-events: none;
+        }
+        .busca-videos .grade-videos .item-video .play-icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            color: #fff;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            opacity: 0.8;
+            pointer-events: none;
+        }
+        .busca-videos .grade-videos .item-video .video-titulo {
+            position: absolute;
+            bottom: 4px;
+            left: 4px;
+            right: 4px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.5rem;
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .busca-videos .caixa-busca-video {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .busca-videos .caixa-busca-video input {
+            flex: 1;
+            min-width: 150px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            background: #1a1a2e;
+            border: 2px solid #333;
+            color: #fff;
+            outline: none;
+            transition: border 0.2s;
+        }
+        .busca-videos .caixa-busca-video input:focus {
+            border-color: #ffc107;
+        }
+        .busca-videos .caixa-busca-video button {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            background: linear-gradient(135deg, #ffc107, #ff9800);
+            color: #000;
+            font-weight: 900;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 4px 10px rgba(255, 193, 7, 0.2);
+        }
+        .busca-videos .caixa-busca-video button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 14px rgba(255, 193, 7, 0.4);
+        }
+        .busca-videos .caixa-busca-video #carregandoVideos {
+            color: #ffc107;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* ===== GALERIA DE IMAGENS ===== */
         .galeria-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
@@ -737,6 +926,12 @@
             .busca-imagens .caixa-busca select {
                 width: 100%;
             }
+            .video-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .busca-videos .grade-videos {
+                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            }
         }
     </style>
 </head>
@@ -756,7 +951,7 @@
 
     <div class="container mx-auto px-4 py-6">
 
-        <!-- ===== PLAYER SLIDESHOW (TOPO) - 16:9 com 4 imagens ===== -->
+        <!-- ===== PLAYER SLIDESHOW (TOPO) ===== -->
         <section class="mb-8 caixa" style="padding: 12px; background: #0d0d1f; border-color: rgba(255,193,7,0.2);">
             <div class="flex items-center justify-between mb-3 px-1">
                 <span class="text-sm font-bold text-tnj-dourado flex items-center gap-2"><i class="fa fa-play-circle"></i> LANÇAMENTOS EM DESTAQUE</span>
@@ -774,234 +969,263 @@
             </div>
         </section>
 
-        <!-- ===== ÁREA DO BANNER ===== -->
-        <div class="mb-8">
-            <div class="banner-tnj-nexxo" id="previewBanner">
-                <!-- MOSAICO DE MARCAS -->
-                <div class="mosaico-marcas" id="mosaicoContainer"></div>
+        <!-- ============================================================ -->
+        <!-- ===== FERRAMENTAS (AGORA EM CIMA) ===== -->
+        <!-- ============================================================ -->
+        <div class="mb-8 space-y-6">
 
-                <!-- Logo Principal -->
-                <div class="logo-cabecalho" id="logoContainer">
-                    <img src="" id="logoImg" style="display:none;" alt="Logo" />
-                    <span class="logo-placeholder" id="logoPlaceholder">TV NOVA JUAREZ</span>
+            <!-- EDIÇÃO -->
+            <div class="caixa">
+                <h3 class="font-bold mb-3 text-tnj-dourado">📝 EDITAR CONTEÚDO</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <div><label class="text-xs text-tnj-dourado font-semibold">TÍTULO</label><input type="text" id="texto1" placeholder="Título..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
+                    <div><label class="text-xs text-tnj-dourado font-semibold">SINOPSE</label><input type="text" id="texto4" placeholder="Sinopse..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
+                    <div><label class="text-xs text-tnj-dourado font-semibold">NOTA (IMDb)</label><input type="text" id="notaIMDB" placeholder="Ex: 8.5" class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
+                    <div><label class="text-xs text-tnj-dourado font-semibold">ANO</label><input type="text" id="anoLancamento" placeholder="Ex: 2025" class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
+                    <div><label class="text-xs text-tnj-dourado font-semibold">GÊNERO</label><input type="text" id="categoria" placeholder="Ex: Ação" class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
+                    <div><label class="text-xs text-tnj-dourado font-semibold">ELENCO</label><input type="text" id="atores" placeholder="Ator 1, Ator 2..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
                 </div>
+                <button onclick="atualizarBanner()" class="btn-aplicar-texto w-full mt-3">ATUALIZAR BANNER</button>
+            </div>
 
-                <!-- Marca d'água -->
-                <div class="marca-agua" id="marcaContainer" style="display:none; top:50%; left:50%; transform:translate(-50%,-50%); width:150px;">
-                    <img src="" id="marcaImg" alt="Marca" />
+            <!-- BUSCA DE IMAGENS -->
+            <div class="caixa busca-imagens">
+                <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+                    <i class="fa fa-search text-tnj-dourado"></i> BUSCA DE IMAGENS
+                </h3>
+                <div class="caixa-busca">
+                    <input type="text" id="campoBusca" placeholder="Digite o nome do filme, série ou desenho..." />
+                    <select id="fonteBusca">
+                        <option value="tvmaze">TVmaze (Sem chave)</option>
+                        <option value="omdb">OMDb (Com chave)</option>
+                    </select>
+                    <button onclick="buscarImagens()" class="btn-pesquisar">🔍 PESQUISAR</button>
+                    <span id="carregandoBusca" style="display:none">Buscando...</span>
                 </div>
-
-                <!-- Capa -->
-                <img src="" alt="Capa" class="imagem-capa" id="campoCapa">
-                <div class="fundo-gradiente"></div>
-
-                <!-- Conteúdo -->
-                <div class="area-conteudo">
-                    <h1 class="titulo-principal" id="campoTitulo">NOME DO FILME</h1>
-                    <p class="descricao-sinopse" id="campoSinopse">Resumo da história do filme ou série aparecerá aqui...</p>
-                    <div class="caixa-dados">
-                        <span class="rotulo-info nota">★ <span id="campoNota">0.0</span></span>
-                        <span class="rotulo-info ano">📅 <span id="campoAno">2025</span></span>
-                        <span class="rotulo-info genero">🏷️ <span id="campoGenero">GÊNERO</span></span>
-                    </div>
-                    <p class="linha-elenco">Estrelando: <span id="campoElenco">Ator 1, Ator 2, Ator 3...</span></p>
+                <div id="resultadosBusca" class="grade-resultados">
+                    <p class="col-span-full text-center text-gray-400 py-4">Pesquise um título para ver os resultados</p>
                 </div>
-
-                <!-- Telefone -->
-                <div class="telefone-container" id="telefoneContainer" style="display:none;">
-                    <i class="fa fa-whatsapp"></i>
-                    <span class="telefone-texto" id="telefoneDisplay">(83) 99999-9999</span>
+                <div class="info-chave">
+                    💡 Clique no cartaz para preencher o banner e adicionar à galeria
+                    <span style="display:block; margin-top:4px;">🔑 OMDb: <a href="https://www.omdbapi.com/apikey.aspx" target="_blank">Obter chave grátis</a> | Cole em CHAVE_OMDB no script</span>
                 </div>
             </div>
-            <p class="text-xs text-gray-400 mt-3 text-center">
-                <i class="fa fa-arrows"></i> Arraste logo, marca e telefone • Dois dedos para zoom
-            </p>
-        </div>
 
-        <!-- ===== FERRAMENTAS LATERAIS ===== -->
-        <div class="grid md:grid-cols-4 gap-6">
-
-            <div class="md:col-span-1 space-y-4">
-
-                <!-- EDIÇÃO -->
-                <div class="caixa">
-                    <h3 class="font-bold mb-3 text-tnj-dourado">📝 EDITAR CONTEÚDO</h3>
-                    <div class="space-y-3">
-                        <div><label class="text-xs text-tnj-dourado font-semibold">TÍTULO</label><input type="text" id="texto1" placeholder="Título..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
-                        <div><label class="text-xs text-tnj-dourado font-semibold">SINOPSE</label><input type="text" id="texto4" placeholder="Sinopse..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
-                        <div><label class="text-xs text-tnj-dourado font-semibold">NOTA (IMDb)</label><input type="text" id="notaIMDB" placeholder="Ex: 8.5" class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
-                        <div><label class="text-xs text-tnj-dourado font-semibold">ANO</label><input type="text" id="anoLancamento" placeholder="Ex: 2025" class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
-                        <div><label class="text-xs text-tnj-dourado font-semibold">GÊNERO</label><input type="text" id="categoria" placeholder="Ex: Ação" class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
-                        <div><label class="text-xs text-tnj-dourado font-semibold">ELENCO</label><input type="text" id="atores" placeholder="Ator 1, Ator 2..." class="w-full px-2 py-1 mt-1 rounded bg-gray-800 border border-gray-600 text-sm" /></div>
-                        <button onclick="atualizarBanner()" class="btn-aplicar-texto w-full mt-2">ATUALIZAR BANNER</button>
-                    </div>
+            <!-- GALERIA DE IMAGENS -->
+            <div class="caixa">
+                <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
+                    <i class="fa fa-image text-tnj-dourado"></i> GALERIA DE IMAGENS
+                </h3>
+                <div class="flex flex-wrap items-center gap-3 mb-4">
+                    <span class="text-sm font-semibold"><i class="fa fa-upload"></i> Adicionar do celular:</span>
+                    <input type="file" id="uploadArquivo" accept="image/*,video/*" multiple class="hidden" />
+                    <button onclick="document.getElementById('uploadArquivo').click()" class="btn-upload-arquivo">
+                        <i class="fa fa-folder-open"></i> Escolher Arquivos
+                    </button>
+                    <span class="text-xs text-gray-400 ml-auto">Clique na miniatura para usar como capa</span>
                 </div>
-
-                <!-- ===== BUSCA DE IMAGENS ===== -->
-                <div class="caixa busca-imagens">
-                    <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
-                        <i class="fa fa-search text-tnj-dourado"></i> BUSCA DE IMAGENS
-                    </h3>
-                    <div class="caixa-busca">
-                        <input type="text" id="campoBusca" placeholder="Digite o nome do filme, série ou desenho..." />
-                        <select id="fonteBusca">
-                            <option value="tvmaze">TVmaze (Sem chave)</option>
-                            <option value="omdb">OMDb (Com chave)</option>
-                        </select>
-                        <button onclick="buscarImagens()" class="btn-pesquisar">🔍 PESQUISAR</button>
-                        <span id="carregandoBusca" style="display:none">Buscando...</span>
-                    </div>
-                    <div id="resultadosBusca" class="grade-resultados">
-                        <p class="col-span-full text-center text-gray-400 py-4">Pesquise um título para ver os resultados</p>
-                    </div>
-                    <div class="info-chave">
-                        💡 Clique no cartaz para preencher o banner e adicionar à galeria
-                        <span style="display:block; margin-top:4px;">🔑 OMDb: <a href="https://www.omdbapi.com/apikey.aspx" target="_blank">Obter chave grátis</a> | Cole em CHAVE_OMDB no script</span>
-                    </div>
+                <div id="gradeResultados" class="galeria-grid">
+                    <p class="col-span-full text-center text-gray-400 py-4">Nenhuma imagem. Adicione uma!</p>
                 </div>
+            </div>
 
-                <!-- GALERIA DE IMAGENS -->
-                <div class="caixa">
-                    <h3 class="text-lg font-bold mb-3 flex items-center gap-2">
-                        <i class="fa fa-image text-tnj-dourado"></i> GALERIA DE IMAGENS
-                    </h3>
-                    <div class="flex flex-wrap items-center gap-3 mb-4">
-                        <span class="text-sm font-semibold"><i class="fa fa-upload"></i> Adicionar do celular:</span>
-                        <input type="file" id="uploadArquivo" accept="image/*,video/*" multiple class="hidden" />
-                        <button onclick="document.getElementById('uploadArquivo').click()" class="btn-upload-arquivo">
-                            <i class="fa fa-folder-open"></i> Escolher Arquivos
-                        </button>
-                        <span class="text-xs text-gray-400 ml-auto">Clique na miniatura para usar como capa</span>
-                    </div>
-                    <div id="gradeResultados" class="galeria-grid">
-                        <p class="col-span-full text-center text-gray-400 py-4">Nenhuma imagem. Adicione uma!</p>
-                    </div>
-                </div>
+            <!-- VÍDEOS -->
+            <div class="caixa">
+                <h3 class="font-bold mb-3 text-tnj-dourado">🎬 VÍDEOS</h3>
+                <div class="space-y-3">
+                    <button onclick="document.getElementById('uploadVideoFile').click()" class="btn-com-borda">
+                        <i class="fa fa-upload"></i> Adicionar Vídeo do Arquivo
+                    </button>
+                    <input type="file" id="uploadVideoFile" accept="video/*" style="display:none;" />
 
-                <!-- LOGO PRINCIPAL -->
-                <div class="caixa">
-                    <label class="text-xs text-tnj-dourado font-semibold">📌 LOGO PRINCIPAL</label>
-                    <div style="display:flex; gap:6px; margin-top:4px;">
-                        <input type="file" id="uploadLogo" accept="image/png,image/webp,image/svg+xml,image/jpeg" style="display:none;" />
-                        <button onclick="document.getElementById('uploadLogo').click()" class="btn-com-borda" style="flex:1;">
-                            <i class="fa fa-upload"></i> Carregar Logo
-                        </button>
-                        <button onclick="removerLogo()" class="btn-azul text-xs" style="padding:10px 12px;">🗑️</button>
-                    </div>
-                    <p class="text-xs text-gray-400 mt-1">👆 Use PNG transparente • Arraste e dois dedos para zoom</p>
-                </div>
-
-                <!-- MOSAICO DE MARCAS -->
-                <div class="caixa">
-                    <label class="text-xs text-tnj-dourado font-semibold flex items-center gap-2">
-                        <i class="fa fa-th"></i> MOSAICO DE MARCAS
-                        <button id="btnToggleMosaico" onclick="toggleMosaico()" class="text-xs px-2 py-0.5 rounded" style="background:#ffc107; color:#000; font-weight:700; border:none;">
-                            ATIVAR
-                        </button>
-                    </label>
-                    <div style="display:flex; gap:6px; margin-top:4px; flex-wrap:wrap;">
-                        <input type="file" id="uploadMosaico" accept="image/png,image/webp,image/svg+xml,image/jpeg" style="display:none;" />
-                        <button onclick="document.getElementById('uploadMosaico').click()" class="btn-com-borda" style="flex:1; min-width:100px;">
-                            <i class="fa fa-upload"></i> Logo Mosaico
-                        </button>
-                        <button onclick="removerMosaico()" class="btn-azul text-xs" style="padding:10px 12px;">🗑️</button>
-                    </div>
-                    <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
-                        <span class="text-xs text-gray-400">Tamanho:</span>
-                        <input type="range" id="mosaicoTamanho" min="20" max="200" value="80" class="flex-1 h-1" />
-                        <span id="mosaicoTamanhoDisplay" class="text-xs w-8">80px</span>
-                    </div>
-                    <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
-                        <span class="text-xs text-gray-400">Opacidade:</span>
-                        <input type="range" id="mosaicoOpacidade" min="0" max="100" value="15" class="flex-1 h-1" />
-                        <span id="mosaicoOpacidadeDisplay" class="text-xs w-8">15%</span>
-                    </div>
-                    <p class="text-xs text-gray-400 mt-1">💡 A logo se repetirá em todo o banner como mosaico</p>
-                </div>
-
-                <!-- MARCA D'ÁGUA -->
-                <div class="caixa">
-                    <label class="text-xs text-tnj-dourado font-semibold">🖋️ MARCA D'ÁGUA (única)</label>
-                    <div style="display:flex; gap:6px; margin-top:4px; flex-wrap:wrap;">
-                        <input type="file" id="uploadMarca" accept="image/png,image/webp,image/svg+xml,image/jpeg" style="display:none;" />
-                        <button onclick="document.getElementById('uploadMarca').click()" class="btn-com-borda" style="flex:1; min-width:120px;">
-                            <i class="fa fa-upload"></i> Adicionar Marca
-                        </button>
-                        <button onclick="removerMarca()" class="btn-azul text-xs" style="padding:10px 12px;">🗑️</button>
-                    </div>
-                    <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
-                        <span class="text-xs text-gray-400">Opacidade:</span>
-                        <input type="range" id="opacidadeMarca" min="0" max="100" value="40" class="flex-1 h-1" />
-                        <span id="opacidadeMarcaDisplay" class="text-xs w-7">40%</span>
-                    </div>
-                    <p class="text-xs text-gray-400 mt-1">👆 Arraste • Dois dedos para zoom • Slider controla opacidade</p>
-                </div>
-
-                <!-- TELEFONE -->
-                <div class="caixa">
-                    <label class="text-xs text-tnj-dourado font-semibold">📞 TELEFONE (WhatsApp)</label>
-                    <div style="display:flex; gap:6px; margin-top:4px;">
-                        <input type="text" id="inputTelefone" placeholder="(83) 99999-9999" class="flex-1 px-2 py-2 rounded bg-gray-900 border border-gray-700 text-sm" />
-                        <button onclick="adicionarTelefone()" class="btn-com-borda" style="flex-shrink:0;">
-                            <i class="fa fa-whatsapp"></i> Adicionar
-                        </button>
-                    </div>
-                    <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
-                        <span class="text-xs text-gray-400">Exibir telefone:</span>
-                        <select id="opcaoTelefone" onchange="aplicarOpcaoTelefone()" class="bg-gray-900 border border-gray-700 rounded px-2 py-1 text-sm text-white flex-1">
-                            <option value="completo">Com ícone e número</option>
-                            <option value="icone">Apenas ícone</option>
-                            <option value="nenhum">Sem telefone</option>
-                        </select>
-                    </div>
-                    <p class="text-xs text-gray-400 mt-1">👆 Arraste e dois dedos para zoom</p>
-                </div>
-
-                <!-- FORMATO -->
-                <div class="caixa">
-                    <label class="text-xs text-tnj-dourado font-semibold">📐 FORMATO DO BANNER</label>
-                    <div class="formatos-dropdown" style="margin-top:4px;">
-                        <div class="borda-externa"></div>
-                        <select id="formatoBanner" onchange="aplicarFormato()">
-                            <option value="4-5">4:5 (Padrão)</option>
-                            <option value="16-9">16:9</option><option value="9-16">9:16</option>
-                            <option value="1-1">1:1</option><option value="3-2">3:2</option>
-                            <option value="4-3">4:3</option><option value="21-9">21:9</option>
-                        </select>
-                    </div>
-                </div>
-
-                <!-- DOWNLOAD -->
-                <div class="caixa">
-                    <h3 class="font-bold mb-3 text-tnj-dourado">⬇️ SALVAR</h3>
-                    <div class="flex flex-col gap-2">
-                        <div class="flex gap-2">
-                            <select id="formatoImagem" class="flex-1 bg-gray-900 border border-gray-700 rounded px-2 py-1 text-sm">
-                                <option value="png">PNG</option>
-                                <option value="jpeg">JPEG</option>
-                                <option value="webp">WebP</option>
-                            </select>
-                            <button onclick="baixarBanner()" class="btn-com-borda" style="width:auto; padding:8px 16px;">BAIXAR</button>
+                    <div class="busca-videos">
+                        <div class="caixa-busca-video">
+                            <input type="text" id="campoBuscaVideos" placeholder="Digite o tema do vídeo..." />
+                            <button onclick="buscarVideosPexels()">🔍 Buscar Vídeos</button>
+                            <span id="carregandoVideos" style="display:none">Buscando...</span>
                         </div>
-                        <button onclick="baixarVideoBanner()" class="btn-com-borda">📹 BAIXAR VÍDEO (MP4)</button>
+                        <div id="resultadosVideos" class="grade-videos">
+                            <p class="col-span-full text-center text-gray-400 py-4">Pesquise um tema para ver vídeos</p>
+                        </div>
                     </div>
-                </div>
 
-                <!-- PINTEREST -->
-                <div class="caixa">
-                    <a href="https://pin.it/2Fmwl0JQA" target="_blank" class="btn-pinterest-side" style="display:flex; align-items:center; justify-content:center; gap:8px; background:linear-gradient(135deg, #e60023, #b3001a); color:#fff; padding:10px 16px; border-radius:12px; font-weight:700; font-size:0.85rem; transition:all 0.2s; border:3px solid transparent; background-clip:padding-box; cursor:pointer; box-shadow:0 4px 15px rgba(230,0,35,0.3); width:100%; text-decoration:none; position:relative; z-index:1;">
-                        <i class="fa fa-pinterest-p"></i> PINTEREST
-                    </a>
+                    <div class="video-grid" id="videoGrid">
+                        <p class="col-span-full text-center text-gray-400 text-xs py-2">Nenhum vídeo. Adicione um!</p>
+                    </div>
+                    <p class="text-xs text-gray-400 mt-1">👆 1 clique = aplicar ao banner • 2 cliques = excluir</p>
                 </div>
-
             </div>
 
-            <!-- ÁREA VAZIA PARA COMPLETAR O LAYOUT -->
-            <div class="md:col-span-3">
-                <!-- Espaço reservado para futuras ferramentas -->
+            <!-- LOGO PRINCIPAL -->
+            <div class="caixa">
+                <label class="text-xs text-tnj-dourado font-semibold">📌 LOGO PRINCIPAL</label>
+                <div style="display:flex; gap:6px; margin-top:4px;">
+                    <input type="file" id="uploadLogo" accept="image/png,image/webp,image/svg+xml,image/jpeg" style="display:none;" />
+                    <button onclick="document.getElementById('uploadLogo').click()" class="btn-com-borda" style="flex:1;">
+                        <i class="fa fa-upload"></i> Carregar Logo
+                    </button>
+                    <button onclick="removerLogo()" class="btn-azul text-xs" style="padding:10px 12px;">🗑️</button>
+                </div>
+                <p class="text-xs text-gray-400 mt-1">👆 Use PNG transparente • Arraste e dois dedos para zoom</p>
+            </div>
+
+            <!-- MOSAICO DE MARCAS -->
+            <div class="caixa">
+                <label class="text-xs text-tnj-dourado font-semibold flex items-center gap-2">
+                    <i class="fa fa-th"></i> MOSAICO DE MARCAS
+                    <button id="btnToggleMosaico" onclick="toggleMosaico()" class="text-xs px-2 py-0.5 rounded" style="background:#ffc107; color:#000; font-weight:700; border:none;">
+                        ATIVAR
+                    </button>
+                </label>
+                <div style="display:flex; gap:6px; margin-top:4px; flex-wrap:wrap;">
+                    <input type="file" id="uploadMosaico" accept="image/png,image/webp,image/svg+xml,image/jpeg" style="display:none;" />
+                    <button onclick="document.getElementById('uploadMosaico').click()" class="btn-com-borda" style="flex:1; min-width:100px;">
+                        <i class="fa fa-upload"></i> Logo Mosaico
+                    </button>
+                    <button onclick="removerMosaico()" class="btn-azul text-xs" style="padding:10px 12px;">🗑️</button>
+                </div>
+                <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
+                    <span class="text-xs text-gray-400">Tamanho:</span>
+                    <input type="range" id="mosaicoTamanho" min="20" max="200" value="80" class="flex-1 h-1" />
+                    <span id="mosaicoTamanhoDisplay" class="text-xs w-8">80px</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
+                    <span class="text-xs text-gray-400">Opacidade:</span>
+                    <input type="range" id="mosaicoOpacidade" min="0" max="100" value="15" class="flex-1 h-1" />
+                    <span id="mosaicoOpacidadeDisplay" class="text-xs w-8">15%</span>
+                </div>
+                <p class="text-xs text-gray-400 mt-1">💡 A logo se repetirá em todo o banner como mosaico</p>
+            </div>
+
+            <!-- MARCA D'ÁGUA -->
+            <div class="caixa">
+                <label class="text-xs text-tnj-dourado font-semibold">🖋️ MARCA D'ÁGUA (única)</label>
+                <div style="display:flex; gap:6px; margin-top:4px; flex-wrap:wrap;">
+                    <input type="file" id="uploadMarca" accept="image/png,image/webp,image/svg+xml,image/jpeg" style="display:none;" />
+                    <button onclick="document.getElementById('uploadMarca').click()" class="btn-com-borda" style="flex:1; min-width:120px;">
+                        <i class="fa fa-upload"></i> Adicionar Marca
+                    </button>
+                    <button onclick="removerMarca()" class="btn-azul text-xs" style="padding:10px 12px;">🗑️</button>
+                </div>
+                <div style="display:flex; align-items:center; gap:8px; margin-top:6px;">
+                    <span class="text-xs text-gray-400">Opacidade:</span>
+                    <input type="range" id="opacidadeMarca" min="0" max="100" value="40" class="flex-1 h-1" />
+                    <span id="opacidadeMarcaDisplay" class="text-xs w-7">40%</span>
+                </div>
+                <p class="text-xs text-gray-400 mt-1">👆 Arraste • Dois dedos para zoom • Slider controla opacidade</p>
+            </div>
+
+            <!-- TELEFONE -->
+            <div class="caixa">
+                <label class="text-xs text-tnj-dourado font-semibold">📞 TELEFONE (WhatsApp)</label>
+                <div style="display:flex; gap:6px; margin-top:4px;">
+                    <input type="text" id="inputTelefone" placeholder="(83) 99999-9999" class="flex-1 px-2 py-2 rounded bg-gray-900 border border-gray-700 text-sm" />
+                    <button onclick="adicionarTelefone()" class="btn-com-borda" style="flex-shrink:0;">
+                        <i class="fa fa-whatsapp"></i> Adicionar
+                    </button>
+                </div>
+                <div style="display:flex; align-items:center; gap:8px; margin-top:4px;">
+                    <span class="text-xs text-gray-400">Exibir telefone:</span>
+                    <select id="opcaoTelefone" onchange="aplicarOpcaoTelefone()" class="bg-gray-900 border border-gray-700 rounded px-2 py-1 text-sm text-white flex-1">
+                        <option value="completo">Com ícone e número</option>
+                        <option value="icone">Apenas ícone</option>
+                        <option value="nenhum">Sem telefone</option>
+                    </select>
+                </div>
+                <p class="text-xs text-gray-400 mt-1">👆 Arraste e dois dedos para zoom</p>
+            </div>
+
+            <!-- FORMATO -->
+            <div class="caixa">
+                <label class="text-xs text-tnj-dourado font-semibold">📐 FORMATO DO BANNER</label>
+                <div class="formatos-dropdown" style="margin-top:4px;">
+                    <div class="borda-externa"></div>
+                    <select id="formatoBanner" onchange="aplicarFormato()">
+                        <option value="4-5">4:5 (Padrão)</option>
+                        <option value="16-9">16:9</option><option value="9-16">9:16</option>
+                        <option value="1-1">1:1</option><option value="3-2">3:2</option>
+                        <option value="4-3">4:3</option><option value="21-9">21:9</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- SALVAR -->
+            <div class="caixa">
+                <h3 class="font-bold mb-3 text-tnj-dourado">⬇️ SALVAR</h3>
+                <div class="flex flex-col gap-2">
+                    <div class="flex gap-2">
+                        <select id="formatoImagem" class="flex-1 bg-gray-900 border border-gray-700 rounded px-2 py-1 text-sm">
+                            <option value="png">PNG</option>
+                            <option value="jpeg">JPEG</option>
+                            <option value="webp">WebP</option>
+                        </select>
+                        <button onclick="baixarBanner()" class="btn-com-borda" style="width:auto; padding:8px 16px;">BAIXAR</button>
+                    </div>
+                    <button onclick="baixarVideoBannerComAudio()" class="btn-com-borda">📹 BAIXAR VÍDEO (COM ÁUDIO)</button>
+                </div>
+            </div>
+
+            <!-- PINTEREST -->
+            <div class="caixa">
+                <a href="https://pin.it/2Fmwl0JQA" target="_blank" class="btn-pinterest-side" style="display:flex; align-items:center; justify-content:center; gap:8px; background:linear-gradient(135deg, #e60023, #b3001a); color:#fff; padding:10px 16px; border-radius:12px; font-weight:700; font-size:0.85rem; transition:all 0.2s; border:3px solid transparent; background-clip:padding-box; cursor:pointer; box-shadow:0 4px 15px rgba(230,0,35,0.3); width:100%; text-decoration:none; position:relative; z-index:1;">
+                    <i class="fa fa-pinterest-p"></i> PINTEREST
+                </a>
             </div>
 
         </div>
+        <!-- ============================================================ -->
+        <!-- ===== FIM DAS FERRAMENTAS ===== -->
+        <!-- ============================================================ -->
+
+        <!-- ============================================================ -->
+        <!-- ===== BANNER (AGORA EM BAIXO) ===== -->
+        <!-- ============================================================ -->
+        <div class="banner-tnj-nexxo" id="previewBanner">
+            <!-- MOSAICO DE MARCAS -->
+            <div class="mosaico-marcas" id="mosaicoContainer"></div>
+
+            <!-- Logo Principal -->
+            <div class="logo-cabecalho" id="logoContainer">
+                <img src="" id="logoImg" style="display:none;" alt="Logo" />
+                <span class="logo-placeholder" id="logoPlaceholder">TV NOVA JUAREZ</span>
+            </div>
+
+            <!-- Marca d'água -->
+            <div class="marca-agua" id="marcaContainer" style="display:none; top:50%; left:50%; transform:translate(-50%,-50%); width:150px;">
+                <img src="" id="marcaImg" alt="Marca" />
+            </div>
+
+            <!-- Capa ou Vídeo -->
+            <img src="" alt="Capa" class="imagem-capa" id="campoCapa">
+            <video id="videoBanner" loop muted playsinline></video>
+
+            <div class="fundo-gradiente"></div>
+
+            <!-- Conteúdo -->
+            <div class="area-conteudo">
+                <h1 class="titulo-principal" id="campoTitulo">NOME DO FILME</h1>
+                <p class="descricao-sinopse" id="campoSinopse">Resumo da história do filme ou série aparecerá aqui...</p>
+                <div class="caixa-dados">
+                    <span class="rotulo-info nota">★ <span id="campoNota">0.0</span></span>
+                    <span class="rotulo-info ano">📅 <span id="campoAno">2025</span></span>
+                    <span class="rotulo-info genero">🏷️ <span id="campoGenero">GÊNERO</span></span>
+                </div>
+                <p class="linha-elenco">Estrelando: <span id="campoElenco">Ator 1, Ator 2, Ator 3...</span></p>
+            </div>
+
+            <!-- Telefone -->
+            <div class="telefone-container" id="telefoneContainer" style="display:none;">
+                <i class="fa fa-whatsapp"></i>
+                <span class="telefone-texto" id="telefoneDisplay">(83) 99999-9999</span>
+            </div>
+        </div>
+        <!-- ============================================================ -->
+        <!-- ===== FIM DO BANNER ===== -->
+        <!-- ============================================================ -->
+
+        <p class="text-xs text-gray-400 mt-3 text-center">
+            <i class="fa fa-arrows"></i> Arraste logo, marca e telefone • Dois dedos para zoom
+        </p>
 
     </div>
 
@@ -1016,9 +1240,10 @@
         // CONFIGURAÇÕES
         // =========================================================
         const CHAVE_OMDB = "SUA_CHAVE_OMDB"; // <-- COLOQUE SUA CHAVE AQUI
+        const PEXELS_API_KEY = "YOUR_PEXELS_API_KEY";
 
         // =========================================================
-        // SLIDESHOW - AGORA COM 4 IMAGENS (16:9)
+        // SLIDESHOW (TOPO)
         // =========================================================
         const imagensSlideshow = [
             "https://i.postimg.cc/5YjrJvsQ/1785027864787.jpg",
@@ -1027,9 +1252,6 @@
             "https://i.postimg.cc/mPfVgpBV/file-000000004d3c820e8adfd6427228854b.png"
         ];
 
-        // =========================================================
-        // SLIDESHOW (TOPO)
-        // =========================================================
         let slideAtualTopo = 0,
             intervaloSlidesTopo = null,
             slidesPausadoTopo = false;
@@ -1118,6 +1340,7 @@
                 localStorage.setItem('tnj_galeria', JSON.stringify(imagensGaleria));
                 if (fundoAtual) localStorage.setItem('tnj_fundo', JSON.stringify(fundoAtual));
                 else localStorage.removeItem('tnj_fundo');
+                localStorage.setItem('tnj_videos', JSON.stringify(videosGaleria));
                 localStorage.setItem('tnj_logo_data', document.getElementById('logoImg').src || '');
                 localStorage.setItem('tnj_marca_data', document.getElementById('marcaImg').src || '');
                 localStorage.setItem('tnj_telefone', document.getElementById('telefoneDisplay').innerText || '');
@@ -1154,6 +1377,8 @@
                 if (galeria) imagensGaleria = JSON.parse(galeria);
                 const fundo = localStorage.getItem('tnj_fundo');
                 if (fundo) fundoAtual = JSON.parse(fundo);
+                const videos = localStorage.getItem('tnj_videos');
+                if (videos) videosGaleria = JSON.parse(videos);
                 const logoData = localStorage.getItem('tnj_logo_data');
                 if (logoData) {
                     const img = document.getElementById('logoImg');
@@ -1258,8 +1483,8 @@
                 else { fundoAtual = null;
                     localStorage.removeItem('tnj_fundo'); if (imagensGaleria.length > 0) usarComoFundo(imagensGaleria[0]); }
             } else if (imagensGaleria.length > 0) usarComoFundo(imagensGaleria[0]);
+            renderizarVideos();
             atualizarBanner();
-            // Iniciar slideshow
             iniciarSlideshowTopo();
         }
 
@@ -1373,7 +1598,6 @@
                         </div>
                     `;
                     cartaz.onclick = function() {
-                        // Preencher campos do banner
                         document.getElementById('texto1').value = titulo;
                         document.getElementById('texto4').value = `Sinopse: ${titulo}`;
                         document.getElementById('notaIMDB').value = nota;
@@ -1382,7 +1606,6 @@
                         document.getElementById('atores').value = atores;
                         atualizarBanner();
 
-                        // Adicionar à galeria
                         const imgUrl = item.Poster;
                         const itemGaleria = { url: imgUrl, thumbnail: imgUrl, type: 'image' };
                         if (!imagensGaleria.some(i => i.url === imgUrl)) {
@@ -1395,7 +1618,6 @@
                         usarComoFundo(itemGaleria);
                         salvarGaleria();
 
-                        // Buscar sinopse completa se for OMDb
                         if (fonte === 'omdb' && item.imdbID) {
                             (async () => {
                                 try {
@@ -1423,7 +1645,7 @@
         }
 
         // =========================================================
-        // GALERIA (UPLOAD)
+        // GALERIA DE IMAGENS
         // =========================================================
         document.getElementById('uploadArquivo').addEventListener('change', function(e) {
             const files = e.target.files;
@@ -1451,19 +1673,6 @@
             this.value = '';
         });
 
-        function adicionarItemGaleria(item) {
-            imagensGaleria.push(item);
-            const grade = document.getElementById('gradeResultados');
-            const msg = grade.querySelector('.col-span-full');
-            if (msg && msg.tagName === 'P') msg.remove();
-            criarMiniatura(item, grade);
-            salvarGaleria();
-            if (!fundoAtual) usarComoFundo(item);
-        }
-
-        // =========================================================
-        // MINIATURAS
-        // =========================================================
         function criarMiniatura(item, container) {
             const div = document.createElement('div');
             div.className = 'item-galeria';
@@ -1497,9 +1706,22 @@
 
         function usarComoFundo(item) {
             const capa = document.getElementById('campoCapa');
-            capa.src = item.url;
-            capa.style.display = 'block';
-            fundoAtual = item;
+            const video = document.getElementById('videoBanner');
+            if (item.type === 'image') {
+                capa.src = item.url;
+                capa.style.display = 'block';
+                video.classList.remove('ativo');
+                video.pause();
+                fundoAtual = item;
+            } else {
+                // Vídeo
+                capa.style.display = 'none';
+                video.src = item.url;
+                video.load();
+                video.play().catch(e => console.log('Autoplay bloqueado'));
+                video.classList.add('ativo');
+                fundoAtual = item;
+            }
             salvarGaleria();
             document.querySelectorAll('.item-galeria img').forEach(el => {
                 el.classList.toggle('ativa', el.dataset.url === item.url);
@@ -1516,13 +1738,143 @@
             });
             if (fundoAtual && fundoAtual.url === url) {
                 document.getElementById('campoCapa').src = '';
-                document.getElementById('campoCapa').style.display = 'none';
+                document.getElementById('campoCapa').style.display = 'block';
+                document.getElementById('videoBanner').classList.remove('ativo');
+                document.getElementById('videoBanner').pause();
                 fundoAtual = null;
                 if (imagensGaleria.length > 0) usarComoFundo(imagensGaleria[0]);
             }
             salvarGaleria();
             if (imagensGaleria.length === 0) grade.innerHTML =
                 `<p class="col-span-full text-center text-gray-400 py-4">Nenhuma imagem.</p>`;
+        }
+
+        // =========================================================
+        // VÍDEOS (GALERIA + UPLOAD + PEXELS)
+        // =========================================================
+        document.getElementById('uploadVideoFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                const dataUrl = ev.target.result;
+                videosGaleria.push({ nome: file.name, url: dataUrl });
+                renderizarVideos();
+                salvarGaleria();
+                // Aplicar automaticamente ao banner (1 clique simulado)
+                const index = videosGaleria.length - 1;
+                aplicarVideoIndex(index);
+            };
+            reader.readAsDataURL(file);
+            this.value = '';
+        });
+
+        async function buscarVideosPexels() {
+            const termo = document.getElementById('campoBuscaVideos').value.trim();
+            if (!termo) { alert('Digite um tema!'); return; }
+            if (!PEXELS_API_KEY || PEXELS_API_KEY === 'YOUR_PEXELS_API_KEY') {
+                alert('⚠️ Configure sua chave Pexels no código (PEXELS_API_KEY) para buscar vídeos.');
+                return;
+            }
+            const carregando = document.getElementById('carregandoVideos');
+            const resultadosDiv = document.getElementById('resultadosVideos');
+            carregando.style.display = 'inline';
+            resultadosDiv.innerHTML = '';
+            try {
+                const res = await fetch(
+                    `https://api.pexels.com/videos/search?query=${encodeURIComponent(termo)}&per_page=12&size=medium`, {
+                        headers: { Authorization: PEXELS_API_KEY }
+                    });
+                const dados = await res.json();
+                carregando.style.display = 'none';
+                if (!dados.videos || dados.videos.length === 0) {
+                    resultadosDiv.innerHTML = `<p class="col-span-full text-center text-gray-400 py-4">Nenhum vídeo encontrado.</p>`;
+                    return;
+                }
+                resultadosDiv.innerHTML = '';
+                dados.videos.forEach(video => {
+                    const vf = video.video_files.find(f => f.quality === 'hd') || video.video_files[0];
+                    if (!vf) return;
+                    const url = vf.link;
+                    const div = document.createElement('div');
+                    div.className = 'item-video';
+                    div.innerHTML = `
+                        <video src="${url}" muted playsinline></video>
+                        <div class="play-icon"><i class="fa fa-play-circle"></i></div>
+                        <div class="video-titulo">${video.user?.name || 'Vídeo'}</div>
+                    `;
+                    div.addEventListener('click', function() {
+                        const index = videosGaleria.length;
+                        videosGaleria.push({ nome: video.user?.name || 'Vídeo', url: url });
+                        renderizarVideos();
+                        salvarGaleria();
+                        aplicarVideoIndex(index);
+                    });
+                    resultadosDiv.appendChild(div);
+                });
+            } catch (e) {
+                carregando.style.display = 'none';
+                resultadosDiv.innerHTML = `<p class="col-span-full text-center text-red-400 py-4">Erro: ${e.message}</p>`;
+            }
+        }
+
+        function renderizarVideos() {
+            const grid = document.getElementById('videoGrid');
+            grid.innerHTML = '';
+            if (videosGaleria.length === 0) {
+                grid.innerHTML = `<p class="col-span-full text-center text-gray-400 text-xs py-2">Nenhum vídeo. Adicione um!</p>`;
+                return;
+            }
+            videosGaleria.forEach((video, index) => {
+                const div = document.createElement('div');
+                div.className = 'video-item' + (videoSelecionado === index ? ' selecionado' : '');
+                div.innerHTML = `
+                    <video src="${video.url}" muted playsinline></video>
+                    <div class="play-icon"><i class="fa fa-play-circle"></i></div>
+                    <div class="video-nome">${video.nome || 'Vídeo ' + (index+1)}</div>
+                    <div class="delete-icon" onclick="event.stopPropagation(); removerVideo(${index})"><i class="fa fa-times"></i></div>
+                `;
+                // 1 clique => aplicar ao banner
+                div.addEventListener('click', function(e) {
+                    if (e.target.closest('.delete-icon')) return;
+                    videoSelecionado = index;
+                    aplicarVideoIndex(index);
+                });
+                // 2 cliques => excluir
+                div.addEventListener('dblclick', function(e) {
+                    e.stopPropagation();
+                    removerVideo(index);
+                });
+                grid.appendChild(div);
+            });
+        }
+
+        function aplicarVideoIndex(index) {
+            const video = videosGaleria[index];
+            if (!video) return;
+            const capa = document.getElementById('campoCapa');
+            const videoEl = document.getElementById('videoBanner');
+            capa.style.display = 'none';
+            videoEl.src = video.url;
+            videoEl.load();
+            videoEl.play().catch(e => console.log('Autoplay bloqueado'));
+            videoEl.classList.add('ativo');
+            fundoAtual = { url: video.url, type: 'video' };
+            videoSelecionado = index;
+            salvarGaleria();
+            // Atualizar visual da grade
+            document.querySelectorAll('.video-item').forEach(el => el.classList.remove('selecionado'));
+            const items = document.querySelectorAll('.video-item');
+            if (items[index]) items[index].classList.add('selecionado');
+        }
+
+        function removerVideo(index) {
+            if (!confirm('Excluir este vídeo permanentemente?')) return;
+            videosGaleria.splice(index, 1);
+            if (videoSelecionado === index) videoSelecionado = null;
+            else if (videoSelecionado > index) videoSelecionado--;
+            renderizarVideos();
+            salvarGaleria();
         }
 
         // =========================================================
@@ -1920,16 +2272,52 @@
         }
 
         // =========================================================
-        // DOWNLOAD (VÍDEO)
+        // DOWNLOAD (VÍDEO COM ÁUDIO)
         // =========================================================
-        async function baixarVideoBanner() {
+        async function baixarVideoBannerComAudio() {
             if (!fundoAtual) { alert('⚠️ Escolha uma capa na galeria!'); return; }
             const area = document.getElementById('previewBanner');
+            const videoEl = document.getElementById('videoBanner');
+
             try {
+                // Capturar o banner como canvas (vídeo)
                 const canvas = await html2canvas(area, { scale: 1, useCORS: true, logging: false, width: 1920,
                     height: 2400 });
-                const stream = canvas.captureStream(30);
-                const recorder = new MediaRecorder(stream, { mimeType: 'video/mp4', videoBitsPerSecond: 2500000 });
+                const canvasStream = canvas.captureStream(30);
+
+                // Se houver vídeo ativo, capturar seu áudio
+                let audioStream = null;
+                if (videoEl.classList.contains('ativo') && videoEl.src) {
+                    try {
+                        // Forçar o vídeo a tocar para capturar áudio
+                        await videoEl.play();
+                        const videoStream = videoEl.captureStream();
+                        // Pegar apenas a faixa de áudio
+                        const audioTracks = videoStream.getAudioTracks();
+                        if (audioTracks.length > 0) {
+                            // Criar um novo stream só com áudio
+                            audioStream = new MediaStream(audioTracks);
+                        }
+                    } catch (e) {
+                        console.warn('Não foi possível capturar áudio do vídeo:', e);
+                    }
+                }
+
+                // Combinar streams
+                const combinedStream = new MediaStream();
+                // Adicionar faixas de vídeo do canvas
+                canvasStream.getVideoTracks().forEach(track => combinedStream.addTrack(track));
+                // Adicionar faixas de áudio do vídeo (se houver)
+                if (audioStream) {
+                    audioStream.getAudioTracks().forEach(track => combinedStream.addTrack(track));
+                }
+
+                // Gravar com MediaRecorder
+                const recorder = new MediaRecorder(combinedStream, {
+                    mimeType: 'video/mp4',
+                    videoBitsPerSecond: 2500000,
+                    audioBitsPerSecond: 128000
+                });
                 const chunks = [];
 
                 recorder.ondataavailable = (e) => { if (e.data.size > 0) chunks.push(e.data); };
@@ -1944,10 +2332,11 @@
                 };
 
                 recorder.start();
+                // Gravar por 5 segundos (ou duração desejada)
                 setTimeout(() => { recorder.stop(); }, 5000);
 
             } catch (e) {
-                alert('Erro ao gerar vídeo: ' + e.message);
+                alert('Erro ao gerar vídeo com áudio: ' + e.message);
             }
         }
 
@@ -1955,10 +2344,8 @@
         // INICIALIZAÇÃO
         // =========================================================
         document.addEventListener('DOMContentLoaded', function() {
-            // Restaurar dados da galeria
             restaurarGaleria();
 
-            // Event listeners para atualizar banner
             document.getElementById('texto1').addEventListener('input', atualizarBanner);
             document.getElementById('texto4').addEventListener('input', atualizarBanner);
             document.getElementById('notaIMDB').addEventListener('input', atualizarBanner);
@@ -1966,10 +2353,8 @@
             document.getElementById('categoria').addEventListener('input', atualizarBanner);
             document.getElementById('atores').addEventListener('input', atualizarBanner);
 
-            // Aplicar formato inicial
             aplicarFormato();
 
-            // Se não houver imagens na galeria, adicionar uma imagem padrão
             if (imagensGaleria.length === 0) {
                 const imgPadrao = {
                     url: 'https://i.postimg.cc/5YjrJvsQ/1785027864787.jpg',
